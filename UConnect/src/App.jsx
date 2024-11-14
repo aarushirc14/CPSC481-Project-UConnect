@@ -6,7 +6,7 @@ import LoginForm from "./components/LoginForm";
 import logo from "./assets/uconnect-full-logo.webp";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);// Set to true to load login page by default
 
   const handleToggle = () => {
     setIsLogin(!isLogin);
@@ -18,16 +18,16 @@ function App() {
       <div className="w-full max-w-md">
         <div className="flex justify-center space-x-8 mb-4 text-lg font-semibold">
           <h2
-            className={`cursor-pointer ${!isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
-            onClick={() => setIsLogin(false)}
-          >
-            SIGN UP
-          </h2>
-          <h2
             className={`cursor-pointer ${isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
             onClick={() => setIsLogin(true)}
           >
             LOGIN
+          </h2>
+          <h2
+            className={`cursor-pointer ${!isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
+            onClick={() => setIsLogin(false)}
+          >
+            SIGNUP
           </h2>
         </div>
         {isLogin ? <LoginForm /> : <SignupForm />}
