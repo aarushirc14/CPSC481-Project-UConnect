@@ -1,8 +1,8 @@
 // src/App.jsx
 import React, { useState } from "react";
-import SignupForm from "./components/SignupForm";
-import LoginForm from "./components/LoginForm";
-import HomePage from "./components/HomePage";
+import SignupForm from "./components/Pages/SignupPage";
+import LoginForm from "./components/Pages/LoginPage";
+import HomePage from "./components/Pages/HomePage";
 import logo from "./assets/logo/uconnect-full-logo.webp";
 
 function App() {

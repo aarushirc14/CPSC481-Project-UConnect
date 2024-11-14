@@ -1,7 +1,7 @@
 // src/components/HomePage.jsx
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import SearchBar from "./SearchBar";
+import Sidebar from "../Sidebar";
+import SearchBar from "../SearchBar";
 
 export default function HomePage() {
   const [activeItem, setActiveItem] = useState("home"); // State to track the active sidebar item

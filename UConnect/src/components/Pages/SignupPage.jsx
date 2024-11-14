@@ -1,6 +1,6 @@
 // src/components/SignupForm.jsx
 import { useState } from "react";
-import InputField from "./InputField";
+import InputField from "../InputField";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);

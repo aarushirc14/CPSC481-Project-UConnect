@@ -1,6 +1,6 @@
 // src/components/LoginForm.jsx
 import React, { useState } from "react";
-import InputField from "./InputField";
+import InputField from "../InputField";
 
 export default function LoginForm({ onLogin }) {
   const [showPassword, setShowPassword] = useState(false);
