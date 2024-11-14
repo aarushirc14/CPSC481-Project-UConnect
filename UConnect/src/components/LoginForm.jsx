@@ -1,30 +1,23 @@
-// src/components/SignupForm.jsx
-import { useState } from "react";
+// src/components/LoginForm.jsx
+import React, { useState } from "react";
 import InputField from "./InputField";
 
-export default function SignupForm() {
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword(!showPassword);
 
   return (
     <div className="w-full max-w-md text-center">
       <div className="text-left">
-        <InputField label="First Name" type="text" />
-        <InputField label="Last Name" type="text" />
         <InputField label="School Email" type="email" />
         <InputField
           label="Password"
           type={showPassword ? "text" : "password"}
           togglePassword={togglePassword}
         />
-        <InputField
-          label="Confirm Password"
-          type={showPassword ? "text" : "password"}
-          togglePassword={togglePassword}
-        />
       </div>
       <button className="login_signup_button w-full mt-6">
-        SIGN UP
+        LOGIN
       </button>
     </div>
   );
