@@ -23,15 +23,15 @@ label {
 
 /* Label styling for login and signup form fields */
 .login_signup_form_label {
-  color: #B3B3B3; /* Light gray color for labels */
+  color: #C6C3C3; /* Light gray color for labels */
   font-family: 'Sarala', sans-serif; /* Apply the Sarala font */
 }
 
 /* Input field styling */
 .login_signup_input_field {
-  border-bottom: 1px solid #B3B3B3; /* Light gray underline */
+  border-bottom: 1px solid #C6C3C3; /* Light gray underline */
   background-color: transparent;
-  color: #B3B3B3; 
+  color: #C6C3C3; 
   padding: 8px 0;
   outline: none;
 } 

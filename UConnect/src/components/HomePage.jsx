@@ -1,6 +1,7 @@
 // src/components/HomePage.jsx
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
+import SearchBar from "./SearchBar";
 
 export default function HomePage() {
   const [activeItem, setActiveItem] = useState("home"); // State to track the active sidebar item
@@ -13,12 +14,10 @@ export default function HomePage() {
       {/* Main Content */}
       <div className="flex-1 p-6">
         {/* Search Bar */}
-        <div className="mb-8">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full bg-[#222222] text-white p-3 rounded-full outline-none"
-          />
+        <div className="flex justify-center mb-8">
+          <div className="w-3/4 max-w-xl">
+            <SearchBar />
+          </div>
         </div>
 
         {/* Featured Users */}
