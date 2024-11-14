@@ -1,16 +1,22 @@
-
 // src/App.jsx
 import React, { useState } from "react";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
-import logo from "./assets/uconnect-full-logo.webp";
+import HomePage from "./components/HomePage";
+import logo from "./assets/logo/uconnect-full-logo.webp";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);// Set to true to load login page by default
+  const [isLogin, setIsLogin] = useState(true); // Tracks whether LOGIN or SIGN UP form is shown
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Tracks whether the user is logged in
 
-  const handleToggle = () => {
-    setIsLogin(!isLogin);
+  // Function to handle login
+  const handleLogin = () => {
+    setIsLoggedIn(true);
   };
+
+  if (isLoggedIn) {
+    return <HomePage />;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#131313]">
@@ -18,23 +24,22 @@ function App() {
       <div className="w-full max-w-md">
         <div className="flex justify-center space-x-8 mb-4 text-lg font-semibold">
           <h2
+            className={`cursor-pointer ${!isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
+            onClick={() => setIsLogin(false)}
+          >
+            SIGN UP
+          </h2>
+          <h2
             className={`cursor-pointer ${isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
             onClick={() => setIsLogin(true)}
           >
             LOGIN
           </h2>
-          <h2
-            className={`cursor-pointer ${!isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
-            onClick={() => setIsLogin(false)}
-          >
-            SIGNUP
-          </h2>
         </div>
-        {isLogin ? <LoginForm /> : <SignupForm />}
+        {isLogin ? <LoginForm onLogin={handleLogin} /> : <SignupForm />}
       </div>
     </div>
   );
 }
 
 export default App;
-

@@ -11,7 +11,7 @@ export default function SignupForm() {
       <div className="text-left">
         <InputField label="First Name" type="text" />
         <InputField label="Last Name" type="text" />
-        <InputField label="School Email" type="email" />
+        <InputField label="UCalgary Email" type="email" />
         <InputField
           label="Password"
           type={showPassword ? "text" : "password"}
