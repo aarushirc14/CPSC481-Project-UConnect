@@ -1,11 +1,11 @@
 // src/components/Sidebar.jsx
 import React from "react";
-import { FaHome, FaComments, FaBell, FaPenSquare, FaUser, FaCog} from "react-icons/fa";
+import { FaHome, FaComments, FaBell, FaPenSquare, FaUser, FaCog } from "react-icons/fa";
 import logo from "../assets/logo/uconnectSmallLogo.png";
 
 export default function Sidebar({ activeItem, onSelectItem }) {
   return (
-    <div className="w-100 bg-[#1D1C1C] h-screen p-4 flex flex-col items-center lg:w-40 md:w-24 w-16">
+    <div className="fixed top-0 left-0 bg-[#1D1C1C] h-screen p-4 flex flex-col items-center lg:w-40 md:w-24 w-16 z-10">
       {/* Logo */}
       <div className="flex items-center mb-8">
         <img src={logo} alt="UConnect Logo" className="w-10 h-10 lg:w-20 lg:h-20" />
@@ -16,7 +16,7 @@ export default function Sidebar({ activeItem, onSelectItem }) {
         <SidebarItem icon={<FaHome />} label="Home" active={activeItem === "home"} onClick={() => onSelectItem("home")} />
         <SidebarItem icon={<FaComments />} label="Chats" badge="3" active={activeItem === "chats"} onClick={() => onSelectItem("chats")} />
         <SidebarItem icon={<FaBell />} label="Notifications" active={activeItem === "notifications"} onClick={() => onSelectItem("notifications")} />
-        <SidebarItem icon={<FaPenSquare />} label="Create Post" active={activeItem === "create-post"} onClick={() => onSelectItem("create-post")} /> 
+        <SidebarItem icon={<FaPenSquare />} label="Create Post" active={activeItem === "create-post"} onClick={() => onSelectItem("create-post")} />
         <SidebarItem icon={<FaUser />} label="My Profile" active={activeItem === "profile"} onClick={() => onSelectItem("profile")} />
       </nav>
 

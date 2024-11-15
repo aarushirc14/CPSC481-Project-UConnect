@@ -39,6 +39,30 @@ const featuredUsers = [
     major: "Biology",
     image: davidSingh,
   },
+
+  {
+    name: "Tracy Smith",
+    major: "Fine Arts",
+    image: tracySmith,
+  },
+
+  {
+    name: "Alex Jones",
+    major: "Physics",
+    image: alexJones,
+  },
+
+  {
+    name: "Sofia Martinez",
+    major: "Environmental Science",
+    image: sofiaMartinez,
+  },
+
+  {
+    name: "Shirley Lee",
+    major: "Chemical Engineering",
+    image: shirleyLee,
+  },
 ];
 
 // Define featured posts array
@@ -86,12 +110,11 @@ export default function HomePage() {
       <Sidebar activeItem={activeItem} onSelectItem={setActiveItem} />
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 mt-10 ml-40">
+        
         {/* Search Bar */}
-        <div className="flex justify-center mb-8">
-          <div className="w-3/4 max-w-xl">
-            <SearchBar />
-          </div>
+        <div className="mb-6">
+          <SearchBar />     
         </div>
 
          {/* Featured Users */}
@@ -145,31 +168,3 @@ export default function HomePage() {
   );
 }
 
-//border-2 border-[#131313]
-
-// Featured Posts
-//         <div className="grid grid-cols-2 gap-6">
-//           <div className="bg-[#414040] p-4 rounded-lg">
-//               {/* Profile Section */}
-//               <div className="flex items-center space-x-4 mb-4">
-//                 {/* Profile Image */}
-//                 <img
-//                   src={tracySmith}
-//                   className="w-16 h-16 rounded-full border-2 border-[#131313] object-cover"
-//                 />
-//                 <div className="flex flex-col justify-center">
-//                   <h4 className="text-lg font-semibold text-[#FFFFFF]">Tracy Smith</h4>
-//                   <p className="text-[#C6C3C3]">Fine Arts</p>
-//                 </div>
-//               </div>
-//               {/* Post Content Section */}
-//               <div>
-//                 <p className="font-semibold text-[#FC9D04]">Photography Enthusiasts</p>
-//                 <p className="text-[#FFFFFF]">
-//                   Any photography enthusiasts here? Would love to connect with fellow photographers for
-//                   some campus shots this weekend.
-//                 </p>
-//               </div>
-//             </div>
-
-//         </div>
