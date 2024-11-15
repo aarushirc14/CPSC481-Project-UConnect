@@ -18,13 +18,13 @@ img {
 
 label {
   color: #FFBFB;
-  font-family: 'Sarala', sans-serif;
+  
 }
 
 /* Label styling for login and signup form fields */
 .login_signup_form_label {
   color: #C6C3C3; /* Light gray color for labels */
-  font-family: 'Sarala', sans-serif; /* Apply the Sarala font */
+  
 }
 
 /* Input field styling */
