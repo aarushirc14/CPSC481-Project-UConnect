@@ -1,6 +1,8 @@
 // src/components/HomePage.jsx
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import Sidebar from "../Sidebar";
 import SearchBar from "../SearchBar";
 
@@ -95,7 +97,7 @@ export default function HomePage() {
          {/* Featured Users */}
          <div className="grid grid-cols-4 gap-6 mb-8">
           {featuredUsers.map((user, index) => (
-            <div key={index} className="bg-[#414040] p-4 rounded-lg text-center">
+             <Link to={`/profile/${user.id}`} key={user.id} className="bg-[#414040] p-4 rounded-lg text-center hover:bg-[#515151] transition">
               {/* User Image */}
               <img
                 src={user.image}
@@ -110,13 +112,13 @@ export default function HomePage() {
               <button className="mt-4 px-4 py-2 border border-[#FC9D04] text-[#FFFFFF] rounded-full hover:bg-[#FC9D04] hover:text-black">
                 Chat
               </button>
-            </div>
+            </Link>
           ))}
         </div>
         {/* Featured Posts */}
         <div className="grid grid-cols-2 gap-6">
             {featuredPosts.map((post, index) => (
-              <div key={index} className="bg-[#414040] p-4 rounded-lg">
+              <Link to={`/post/${post.id}`} key={post.id} className="bg-[#414040] p-4 rounded-lg hover:bg-[#515151] transition">
                 <div className="flex items-center space-x-4 mb-4">
                   {/* User Image */}
                   <img
@@ -134,7 +136,7 @@ export default function HomePage() {
                   {/* Post Content */}
                   <p className="mt-4 font-semibold text-[#FC9D04]">{post.postTitle}</p>
                   <p className="text-[#FFFFFF]">{post.postContent}</p>
-                </div>
+                </Link>
               
               ))}
               </div>
