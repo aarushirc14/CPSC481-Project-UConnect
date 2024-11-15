@@ -1,7 +1,7 @@
 // src/components/Sidebar.jsx
 import React from "react";
 import { FaHome, FaComments, FaBell, FaPenSquare, FaUser, FaCog} from "react-icons/fa";
-import logo from "../assets/logo/uconnect-small-logo.png";
+import logo from "../assets/logo/uconnectSmallLogo.png";
 
 export default function Sidebar({ activeItem, onSelectItem }) {
   return (

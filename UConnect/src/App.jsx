@@ -1,9 +1,9 @@
 // src/App.jsx
 import React, { useState } from "react";
-import SignupForm from "./components/Pages/SignupPage";
-import LoginForm from "./components/Pages/LoginPage";
-import HomePage from "./components/Pages/HomePage";
-import logo from "./assets/logo/uconnect-full-logo.webp";
+import SignupForm from "./components/pages/SignupPage";
+import LoginForm from "./components/pages/LoginPage";
+import HomePage from "./components/pages/HomePage";
+import logo from "./assets/logo/uconnectFullLogo.webp";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true); // Tracks whether LOGIN or SIGN UP form is shown
