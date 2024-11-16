@@ -13,6 +13,7 @@ import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePa
 import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage";
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
 
+
 function AuthPage({ isLogin, setIsLogin, handleLogin }) {
   return (
     <div className="w-full max-w-md text-center">
