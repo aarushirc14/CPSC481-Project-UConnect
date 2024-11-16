@@ -1,9 +1,21 @@
 // src/components/Sidebar.jsx
 import React from "react";
-import { FaHome, FaComments, FaBell, FaPenSquare, FaUser, FaCog } from "react-icons/fa";
+import { FaHome, FaComments, FaBell, FaPenSquare, FaUser} from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo/uconnectSmallLogo.png";
 
-export default function Sidebar({ activeItem, onSelectItem }) {
+export default function Sidebar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const routes = [
+    { path: "/home", label: "Home", icon: <FaHome /> },
+    { path: "/chats", label: "Chats", icon: <FaComments />, badge: "3" },
+    { path: "/notifications", label: "Notifications", icon: <FaBell /> },
+    { path: "/create-post", label: "Create Post", icon: <FaPenSquare /> },
+    { path: "/my-profile", label: "My Profile", icon: <FaUser /> }
+  ];
+
   return (
     <div className="fixed top-0 left-0 bg-[#1D1C1C] h-screen p-4 flex flex-col items-center lg:w-40 md:w-24 w-16 z-10">
       {/* Logo */}
@@ -13,17 +25,17 @@ export default function Sidebar({ activeItem, onSelectItem }) {
 
       {/* Navigation Links */}
       <nav className="space-y-4">
-        <SidebarItem icon={<FaHome />} label="Home" active={activeItem === "home"} onClick={() => onSelectItem("home")} />
-        <SidebarItem icon={<FaComments />} label="Chats" badge="3" active={activeItem === "chats"} onClick={() => onSelectItem("chats")} />
-        <SidebarItem icon={<FaBell />} label="Notifications" active={activeItem === "notifications"} onClick={() => onSelectItem("notifications")} />
-        <SidebarItem icon={<FaPenSquare />} label="Create Post" active={activeItem === "create-post"} onClick={() => onSelectItem("create-post")} />
-        <SidebarItem icon={<FaUser />} label="My Profile" active={activeItem === "profile"} onClick={() => onSelectItem("profile")} />
+        {routes.map((route) => (
+          <SidebarItem
+            key={route.path}
+            icon={route.icon}
+            label={route.label}
+            badge={route.badge}
+            active={location.pathname === route.path}
+            onClick={() => navigate(route.path)}
+          />
+        ))}
       </nav>
-
-      {/* Settings Link */}
-      <div className="mt-auto w-full">
-        <SidebarItem icon={<FaCog />} label="Settings" active={activeItem === "settings"} onClick={() => onSelectItem("settings")} />
-      </div>
     </div>
   );
 }
@@ -32,7 +44,9 @@ function SidebarItem({ icon, label, active, onClick, badge }) {
   return (
     <div
       onClick={onClick}
-      className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer ${active ? "bg-[#414040] text-[#FC9D04]" : "text-[#C6C3C3] hover:text-[#FFFFFF]"}`}
+      className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer ${
+        active ? "bg-[#414040] text-[#FC9D04]" : "text-[#C6C3C3] hover:text-[#FFFFFF]"
+      }`}
     >
       <div className="relative">
         <span className="text-xl">{icon}</span>

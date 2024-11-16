@@ -1,7 +1,7 @@
 // src/components/HomePage.jsx
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 
 import Sidebar from "../Sidebar";
 import SearchBar from "../SearchBar";
@@ -103,6 +103,11 @@ const featuredPosts = [
 
 export default function HomePage() {
   const [activeItem, setActiveItem] = useState("home"); // State to track the active sidebar item
+  const navigate = useNavigate();
+
+  const handleChatClick = () => {
+    navigate("/chats");
+  };
 
   return (
     <div className="flex min-h-screen bg-[#131313] text-white">
@@ -118,24 +123,33 @@ export default function HomePage() {
         </div>
 
          {/* Featured Users */}
-         <div className="grid grid-cols-4 gap-6 mb-8">
-          {featuredUsers.map((user, index) => (
-             <Link to={`/profile/${user.id}`} key={user.id} className="bg-[#414040] p-4 rounded-lg text-center hover:bg-[#515151] transition">
-              {/* User Image */}
-              <img
-                src={user.image}
-                alt={`${user.name}`}
-                className="mb-4 w-28 h-28 mx-auto rounded-full border-2 border-[#131313] object-cover"
-              />
-              {/* User Name */}
-              <h3 className="text-xl font-semibold text-[#FC9D04]">{user.name}</h3>
-              {/* User Major  */}
-              <p className="text-[#FFFFFF]">{user.major}</p>
+        <div className="grid grid-cols-4 gap-6 mb-8">
+          {featuredUsers.map((user) => (
+            <div key={user.id} className="bg-[#414040] p-4 rounded-lg text-center hover:bg-[#515151] transition relative">
+              {/* Profile Link */}
+              <Link to={`/profile/${user.id}`} className="block">
+                {/* User Image */}
+                <img
+                  src={user.image}
+                  alt={`${user.name}`}
+                  className="mb-4 w-28 h-28 mx-auto rounded-full border-2 border-[#131313] object-cover"
+                />
+                {/* User Name */}
+                <h3 className="text-xl font-semibold text-[#FC9D04]">{user.name}</h3>
+                {/* User Major */}
+                <p className="text-[#FFFFFF]">{user.major}</p>
+              </Link>
               {/* Chat Button */}
-              <button className="mt-4 px-4 py-2 border border-[#FC9D04] text-[#FFFFFF] rounded-full hover:bg-[#FC9D04] hover:text-black">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent the click from propagating to the parent Link
+                  handleChatClick();
+                }}
+                className="mt-4 px-4 py-2 border border-[#FC9D04] text-[#FFFFFF] rounded-full hover:bg-[#FC9D04] hover:text-black"
+              >
                 Chat
               </button>
-            </Link>
+            </div>
           ))}
         </div>
         {/* Featured Posts */}
