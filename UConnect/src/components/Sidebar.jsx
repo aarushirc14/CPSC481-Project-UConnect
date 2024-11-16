@@ -3,6 +3,7 @@ import React from "react";
 import { FaHome, FaComments, FaBell, FaPenSquare, FaUser} from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo/uconnectSmallLogo.png";
+import sofiaMartinez from "../assets/profilePics/sofiaMartinez.jpg";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -13,7 +14,19 @@ export default function Sidebar() {
     { path: "/chats", label: "Chats", icon: <FaComments />, badge: "3" },
     { path: "/notifications", label: "Notifications", icon: <FaBell /> },
     { path: "/create-post", label: "Create Post", icon: <FaPenSquare /> },
-    { path: "/my-profile", label: "My Profile", icon: <FaUser /> }
+    {
+      path: "/my-profile",
+      label: "My Profile",
+      icon: (
+        <div className="w-8 h-8 rounded-full overflow-hidden ">
+          <img
+            src={sofiaMartinez}
+            alt="Sofia Martinez"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      ),
+    },
   ];
 
   return (
