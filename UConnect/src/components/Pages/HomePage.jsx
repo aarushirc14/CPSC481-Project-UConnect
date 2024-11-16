@@ -118,7 +118,7 @@ export default function HomePage() {
       <div className="flex-1 p-6 mt-10 ml-40">
         
         {/* Search Bar */}
-        <div className="mb-6">
+        <div className="sticky top-0 z-10 mb-6 mb-6">
           <SearchBar />     
         </div>
 
