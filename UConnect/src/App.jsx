@@ -7,7 +7,7 @@ import LoginForm from "./components/pages/LoginPage";
 import HomePage from "./components/pages/HomePage";
 import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePage";
 import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage";
-import CreateProfile from "./components/pages/CreateProfile";
+import CreateProfile from "./components/pages/CreateProfilePage";
 
 function AuthPage({ isLogin, setIsLogin, handleLogin }) {
   const navigate = useNavigate();

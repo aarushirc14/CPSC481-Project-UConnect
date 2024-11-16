@@ -18,27 +18,6 @@ export default function CreateProfile() {
     profileImage: null,
   });
 
-//   const majorOptions = [
-//     { value: "accounting", label: "Accounting" },
-//     { value: "actuarial_science", label: "Actuarial Science" },
-//   ];
-//   const yearOptions = [
-//     { value: "1st", label: "1st" },
-//     { value: "2nd", label: "2nd" },
-//     { value: "3rd", label: "3rd" },
-//     { value: "4th", label: "4th" },
-//     { value: "5th", label: "5th" },
-//     { value: "internship", label: "Internship" },
-//     { value: "other", label: "Other" },
-//   ];
-//   const courseOptions = [
-//     { value: "acwr_201", label: "ACWR 201" },
-//     { value: "acwr_203", label: "ACWR 203" },
-//   ];
-//   const interestOptions = [
-//     { value: "astrology", label: "Astrology" },
-//     { value: "acroyoga", label: "Acroyoga" },
-//   ];
 
   const [profileImage, setProfileImage] = useState(null); // State to store the image URL
 
