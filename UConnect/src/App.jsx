@@ -48,6 +48,11 @@ function App() {
     setIsLoggedIn(true);
   };
 
+  // Function to handle profile creation
+  const handleProfileCreated = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <Router>
       <div className="flex flex-col items-center justify-center min-h-screen bg-[#131313]">
@@ -62,16 +67,20 @@ function App() {
               path="/signup"
               element={<AuthPage isLogin={isLogin} setIsLogin={setIsLogin} handleLogin={handleLogin} />}
             />
-            <Route path="/create-profile" element={<CreateProfile />} />
+            <Route
+              path="/create-profile"
+              element={<CreateProfile onProfileCreated={handleProfileCreated} />}
+            />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         ) : (
           // Protected routes for logged-in users
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/profile/:userId" element={<OtherUserProfilePage />} />
             <Route path="/post/:postId" element={<DetailedPostViewPage />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/create-profile" element={<CreateProfile onProfileCreated={handleProfileCreated} />} />
+            <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         )}
       </div>

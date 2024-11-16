@@ -5,11 +5,12 @@ import MultiSelectDropdown from "../MultiSelectDropdown";
 import SingleSelectDropdown from "../SingleSelectDropdown";
 import { majorOptions, yearOptions, courseOptions, interestOptions } from "../../data/dropdownOptions";
 
-export default function CreateProfile() {
+export default function CreateProfile({ onProfileCreated }) {
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({
     firstName: "",
+    lastName: "",
     major: [],
     year: null,
     courses: [],
@@ -42,10 +43,23 @@ export default function CreateProfile() {
     setProfileData({ ...profileData, courses: selectedCourses });
   const handleInterestsChange = (selectedInterests) =>
     setProfileData({ ...profileData, interests: selectedInterests });
-//   const handleImageChange = (e) =>
-//     setProfileData({ ...profileData, profileImage: e.target.files[0] });
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    // Check if some fields are filled out - this part is buggy, only demo with either name, bio, or year missing
+    if (
+      !profileData.firstName.trim() || // Check if the name field is empty
+      !profileData.lastName.trim() || // Check if the name field is empty
+      !profileData.bio.trim() || // Check if the bio field is empty
+      !profileData.year // Check if the year is not selected
+    ) {
+      alert("All fields are required. Please fill out all fields.");
+      return;
+    }
+     // Notify App that the profile is created
+    onProfileCreated();
+  
+    // If all validations pass, navigate to the HomePage
     navigate("/home");
   };
   
@@ -84,17 +98,25 @@ export default function CreateProfile() {
         />
       </div>
 
-      {/* Name Input */}
-      <div>
-        <input
-          type="text"
-          name="name"
-          value={profileData.name}
-          onChange={handleChange}
-          placeholder="Name"
-          className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none placeholder:text-[#000000]"
-        />
-      </div>
+       {/* Name Input */}
+       <div className="flex space-x-4">
+            <input
+              type="text"
+              name="firstName"
+              value={profileData.firstName}
+              onChange={handleChange}
+              placeholder="First Name"
+              className="flex-1 p-3 rounded bg-[#C6C3C3] text-black outline-none placeholder:text-[#000000]"
+            />
+            <input
+              type="text"
+              name="lastName"
+              value={profileData.lastName}
+              onChange={handleChange}
+              placeholder="Last Name"
+              className="flex-1 p-3 rounded bg-[#C6C3C3] text-black outline-none placeholder:text-[#000000]"
+            />
+          </div>
 
       {/* Bio Input */}
       <div>
