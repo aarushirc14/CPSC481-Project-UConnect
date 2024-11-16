@@ -1,7 +1,8 @@
 import React from "react";
-import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "../../SearchBar";
 import { FaEdit } from "react-icons/fa";
+import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 
 export default function MyProfilePage() {
   const user = {
@@ -22,6 +23,12 @@ export default function MyProfilePage() {
           "Our community garden project is coming along great! Thanks to everyone who helped out last weekend.",
       },
     ],
+  };
+
+  const navigate = useNavigate();
+
+  const handleEditProfileClick = () => {
+    navigate("/edit-profile"); // Navigate to EditProfilePage
   };
 
   return (
@@ -53,7 +60,7 @@ export default function MyProfilePage() {
             {/* Year */}
             <p className="text-md text-[#FFFFFF]">{user.year}</p>
             {/* Edit Profile Button */}
-            <button className="mt-6 py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full inline-flex items-center justify-center gap-2 hover:bg-[#FC9D04] hover:text-black transition">
+            <button onClick={handleEditProfileClick} className="mt-6 py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full inline-flex items-center justify-center gap-2 hover:bg-[#FC9D04] hover:text-black transition">
             <FaEdit className="text-lg" /> {/* Edit Icon */}
               Edit Profile
             </button>
