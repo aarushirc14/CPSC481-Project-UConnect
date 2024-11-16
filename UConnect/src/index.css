@@ -133,13 +133,29 @@ label {
 
 .dropdown-search {
   width: 100%;
-  padding: 8px;
+  padding: 0px;
   border: none;
   outline: none;
   background-color: #e0e0e0;
   color: #000;
   margin-bottom: 5px;
 }
+
+.dropdown-search-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.dropdown-search-wrapper .dropdown-search {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
 
 .dropdown-options {
   list-style: none;
@@ -177,6 +193,12 @@ label {
   border: 1px solid #000;
   background-color: #fff;
   cursor: pointer;
+}
+.major-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100px; /* Set minimum height to accommodate selected tags */
 }
 
 /*dropdowns end*/

@@ -1,6 +1,8 @@
 // src/components/MultiSelectDropdown.jsx
 
 import React, { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+
 
 export default function MultiSelectDropdown({ options, label }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,14 +61,17 @@ export default function MultiSelectDropdown({ options, label }) {
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="dropdown-menu">
-          <input
-            type="text"
-            className="dropdown-search"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+         <div className="dropdown-menu">
+          <div className="dropdown-search-wrapper flex items-center bg-[#E0E0E0] p-2 rounded">
+            <FaSearch className="text-gray-500" />
+            <input
+              type="text"
+              className="dropdown-search flex-1 bg-transparent border-none outline-none text-black"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
           <ul className="dropdown-options">
             {filteredOptions.map((option) => (
