@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineAddAPhoto } from "react-icons/md";
-import MultiSelectDropdown from "../MultiSelectDropdown";
-import SingleSelectDropdown from "../SingleSelectDropdown";
-import { majorOptions, yearOptions, courseOptions, interestOptions } from "../../data/dropdownOptions";
+import MultiSelectDropdown from "../../MultiSelectDropdown";
+import SingleSelectDropdown from "../../SingleSelectDropdown";
+import { majorOptions, yearOptions, courseOptions, interestOptions } from "../../../data/dropdownOptions";
 
 export default function CreateProfile({ onProfileCreated }) {
   const navigate = useNavigate();
