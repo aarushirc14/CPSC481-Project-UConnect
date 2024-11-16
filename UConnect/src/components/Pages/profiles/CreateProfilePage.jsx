@@ -1,9 +1,12 @@
+// src/components/pages/profiles/CreateProfilePage.jsx
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineAddAPhoto } from "react-icons/md";
 import MultiSelectDropdown from "../../MultiSelectDropdown";
 import SingleSelectDropdown from "../../SingleSelectDropdown";
 import { majorOptions, yearOptions, courseOptions, interestOptions } from "../../../data/dropdownOptions";
+import Notification from "../../PopupMessage";
 
 export default function CreateProfile({ onProfileCreated }) {
   const navigate = useNavigate();
@@ -21,6 +24,8 @@ export default function CreateProfile({ onProfileCreated }) {
 
 
   const [profileImage, setProfileImage] = useState(null); // State to store the image URL
+
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -53,7 +58,7 @@ export default function CreateProfile({ onProfileCreated }) {
       !profileData.bio.trim() || // Check if the bio field is empty
       !profileData.year // Check if the year is not selected
     ) {
-      alert("All fields are required. Please fill out all fields.");
+      setShowNotification(true);
       return;
     }
      // Notify App that the profile is created
@@ -71,6 +76,14 @@ export default function CreateProfile({ onProfileCreated }) {
     <h2 className="text-3xl font-semibold text-center text-[#C6C3C3] mb-6">
       Create Your Profile
     </h2>
+    {/* Notification Popup */}
+    {showNotification && (
+          <Notification
+            message="Please fill out all fields!"
+            type="error"
+            onClose={() => setShowNotification(false)}
+          />
+    )}
 
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Profile Picture Upload */}
@@ -139,7 +152,7 @@ export default function CreateProfile({ onProfileCreated }) {
         <div className="flex flex-col items-center">
           <MultiSelectDropdown
             options={majorOptions}
-            label="Select Majors"
+            label="Select Major"
             selectedOptions={profileData.major}
             onChange={handleMajorChange}
           />

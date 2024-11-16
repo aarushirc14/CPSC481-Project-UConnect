@@ -1,10 +1,13 @@
-import React from "react";
+// src/components/pages/profiles/AfterEditingProfilePage.jsx
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Notification from "../../PopupMessage";
 import SearchBar from "../../SearchBar";
 import { FaEdit } from "react-icons/fa";
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 
-export default function MyProfilePage() {
+export default function AfterEditingProfilePage() {
   const user = {
     profileImage: sofiaMartinez,
     firstName: "Sofia",
@@ -12,10 +15,9 @@ export default function MyProfilePage() {
     major: "Environmental Science",
     year: "1st Year",
     bio: "I love field research, learning about climate change solutions, and volunteering in conservation efforts. In my free time, you’ll find me hiking, attending eco-workshops, or experimenting with DIY eco-friendly projects.",
-    courses: ["BIOL 241", "CHEM 201", "MATH 211", "PHYS 211", "ENSC 201"],
-    interests: ["Camping", "Hiking", "Photography","Reading"],
+    courses: ["BIOL 241", "CHEM 201", "CHEM 203", "MATH 211", "PHYS 211"],
+    interests: ["Camping", "Hiking", "Photography", "Reading"],
     posts: [
-      
       {
         id: 1,
         title: "Community Garden Initiative",
@@ -27,12 +29,23 @@ export default function MyProfilePage() {
 
   const navigate = useNavigate();
 
+  // Add useState for notification visibility
+  const [showNotification, setShowNotification] = useState(true);
+
   const handleEditProfileClick = () => {
     navigate("/edit-profile"); // Navigate to EditProfilePage
   };
 
   return (
     <div className="min-h-screen bg-[#000000] text-[#FFFFFF] flex">
+      {/* Show Notification on Page Load */}
+      {showNotification && (
+        <Notification
+          message="Changes Saved"
+          type="success"
+          onClose={() => setShowNotification(false)}
+        />
+      )}
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
@@ -60,8 +73,11 @@ export default function MyProfilePage() {
             {/* Year */}
             <p className="text-md text-[#FFFFFF]">{user.year}</p>
             {/* Edit Profile Button */}
-            <button onClick={handleEditProfileClick} className="mt-6 py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full inline-flex items-center justify-center gap-2 hover:bg-[#FC9D04] hover:text-black transition">
-            <FaEdit className="text-lg" /> {/* Edit Icon */}
+            <button
+              onClick={handleEditProfileClick}
+              className="mt-6 py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full inline-flex items-center justify-center gap-2 hover:bg-[#FC9D04] hover:text-black transition"
+            >
+              <FaEdit className="text-lg" /> {/* Edit Icon */}
               Edit Profile
             </button>
           </div>
@@ -111,10 +127,7 @@ export default function MyProfilePage() {
           <h2 className="text-lg font-semibold text-[#FC9D04] mb-4">My Posts</h2>
           <div className="flex flex-col gap-4">
             {user.posts.map((post) => (
-              <div
-                key={post.id}
-                className="bg-[#C6C3C3] rounded-lg p-4"
-              >
+              <div key={post.id} className="bg-[#C6C3C3] rounded-lg p-4">
                 <h3 className="text-md font-semibold text-[#000000]">
                   {post.title}
                 </h3>

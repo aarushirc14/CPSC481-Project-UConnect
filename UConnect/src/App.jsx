@@ -8,6 +8,7 @@ import HomePage from "./components/pages/HomePage";
 import ChatPage from "./components/pages/ChatPage";
 import MyProfilePage from "./components/pages/profiles/MyProfilePage";
 import EditProfilePage from "./components/pages/profiles/EditProfilePage";
+import AfterEditingProfilePage from "./components/pages/profiles/AfterEditingProfilePage";
 import NotificationsPage from "./components/pages/NotificationsPage";
 import CreatePostPage from "./components/pages/posts/CreatePostPage";
 import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePage";
@@ -67,7 +68,8 @@ function App() {
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
-                <Route path="/edit-profile" element={<EditProfilePage />} />
+                <Route path="/edit-profile" element={<EditProfilePage/>} />
+                <Route path="/edited-profile" element={<AfterEditingProfilePage />} />
                 <Route path="/profile/:userId" element={<OtherUserProfilePage />} />
                 <Route path="/post/:postId" element={<DetailedPostViewPage />} />
                 <Route path="/create-profile" element={<CreateProfile onProfileCreated={handleProfileCreated} />} />
