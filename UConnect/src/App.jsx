@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-import SignupForm from "./components/pages/SignupPage";
-import LoginForm from "./components/pages/LoginPage";
+import SignupPage from "./components/pages/SignupPage";
+import LoginPage from "./components/pages/LoginPage";
 import HomePage from "./components/pages/HomePage";
 import ChatPage from "./components/pages/ChatPage";
 import MyProfilePage from "./components/pages/profiles/MyProfilePage";
@@ -33,7 +33,7 @@ function AuthPage({ isLogin, setIsLogin, handleLogin }) {
           LOGIN
         </h2>
       </div>
-      {isLogin ? <LoginForm onLogin={handleLogin} /> : <SignupForm />}
+      {isLogin ? <LoginPage onLogin={handleLogin} /> : <SignupPage />}
     </div>
   );
 }
