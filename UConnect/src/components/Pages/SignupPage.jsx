@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputField from "../InputField";
-import Notification from "../PopupMessage"; // Import notification component
+import Notification from "../PopupMessage"; 
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,6 +50,7 @@ export default function SignupPage() {
           onClose={() => setShowNotification(false)} // Allow manual close
         />
       )}
+      
       <div className="text-left">
         <InputField
           label="UCalgary Email"

@@ -1,4 +1,5 @@
 // src/App.jsx
+
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -14,11 +15,15 @@ import CreatePostPage from "./components/pages/posts/CreatePostPage";
 import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePage";
 import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage";
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
-
+import uconnectFullLogo from "./assets/logo/uconnectFullLogo.webp";
 
 function AuthPage({ isLogin, setIsLogin, handleLogin }) {
   return (
     <div className="w-full max-w-md text-center">
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <img src={uconnectFullLogo} alt="UConnect Logo" className="w-60" />
+      </div>
       <div className="flex justify-center space-x-8 mb-4 text-lg font-semibold">
         <h2
           className={`cursor-pointer ${!isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}

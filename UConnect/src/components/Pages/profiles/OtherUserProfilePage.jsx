@@ -1,6 +1,5 @@
 // src/components/pages/profiles/OtherUserProfilePage.jsx
 
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../PopupMessage";

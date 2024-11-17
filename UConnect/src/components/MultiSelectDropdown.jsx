@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-
 export default function MultiSelectDropdown({ options, label }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);

@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
-
-import Sidebar from "../Sidebar";
 import SearchBar from "../SearchBar";
 
 //profile pic imports
@@ -13,7 +11,6 @@ import aaronPatel from "../../assets/profilePics/aaronPatel.jpg";
 import alexJones from "../../assets/profilePics/alexJones.jpg";
 import tracySmith from "../../assets/profilePics/tracySmith.jpeg";
 import shirleyLee from "../../assets/profilePics/shirleyLee.webp";
-import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
 import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
 

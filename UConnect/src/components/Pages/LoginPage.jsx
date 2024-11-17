@@ -1,7 +1,8 @@
 // src/components/LoginForm.jsx
+
 import React, { useState } from "react";
 import InputField from "../InputField";
-import Notification from "../PopupMessage"; // Import the notification component
+import Notification from "../PopupMessage"; 
 
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");
