@@ -15,7 +15,7 @@ export default function AfterEditingProfilePage() {
     major: "Environmental Science",
     year: "1st Year",
     bio: "I love field research, learning about climate change solutions, and volunteering in conservation efforts. In my free time, you’ll find me hiking, attending eco-workshops, or experimenting with DIY eco-friendly projects.",
-    courses: ["BIOL 241", "CHEM 201", "CHEM 203", "MATH 211", "PHYS 211"],
+    courses: ["BIOL 241", "CHEM 201", "CHEM 203", "MATH 211"],
     interests: ["Camping", "Hiking", "Photography", "Reading"],
     posts: [
       {

@@ -15,34 +15,35 @@ import tracySmith from "../../assets/profilePics/tracySmith.jpeg";
 import shirleyLee from "../../assets/profilePics/shirleyLee.webp";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
 import davidSingh from "../../assets/profilePics/davidSingh.jpg";
+import landonStone from "../../assets/profilePics/landonStone.jpg";
 
 // Define featured users array
 const featuredUsers = [
   {
     name: "Rashida Williams",
-    major: "Software Engineering",
+    major: "Biochemistry",
     image: rashidaWilliams, 
   },
   {
     name: "Saul Alvarez",
-    major: "Computer Science",
+    major: "Energy Science",
     image: saulAlvarez,
   },
   {
     name: "Aaron Patel",
-    major: "Mechanical Engineering",
+    major: "Natural Science",
     image: aaronPatel,
   },
 
   {
     name: "David Singh",
-    major: "Biology",
+    major: "Bioinformatics",
     image: davidSingh,
   },
 
   {
     name: "Tracy Smith",
-    major: "Fine Arts",
+    major: "Urban Studies",
     image: tracySmith,
   },
 
@@ -53,14 +54,14 @@ const featuredUsers = [
   },
 
   {
-    name: "Sofia Martinez",
-    major: "Environmental Science",
-    image: sofiaMartinez,
+    name: "Landon Stone",
+    major: "Geology",
+    image: landonStone,
   },
 
   {
     name: "Shirley Lee",
-    major: "Chemical Engineering",
+    major: "Plant Biology",
     image: shirleyLee,
   },
 ];
@@ -70,7 +71,7 @@ const featuredPosts = [
   
   {
     userName: "Tracy Smith",
-    userMajor: "Fine Arts",
+    userMajor: "Urban Studies",
     userImage: tracySmith,
     postTitle: "Photography Enthusiasts",
     postContent: "Any photography enthusiasts here? Would love to connect with fellow photographers for some campus shots this weekend.",
@@ -85,18 +86,18 @@ const featuredPosts = [
 
   {
     userName: "Shirley Lee",
-    userMajor: "Chemical Engineering",
+    userMajor: "Plant Biology",
     userImage: shirleyLee,
-    postTitle: "Internship Opportunties at Suncor",
-    postContent: "I'm currently interning at Suncor and they are recruiting for the next cycle. I'd be happy to chat if anyone wants to learn more!",
+    postTitle: "Plant Swap and Care Tips!",
+    postContent: "I've got some thriving spider plants, pothos, and jade cuttings up for grabs. If you've got anything interesting to swap (succulents, ferns, or even propagation tips), let's connect🌿",
   },
 
   {
-    userName: "Sofia Martinez",
-    userMajor: "Environmental Science",
-    userImage: sofiaMartinez,
-    postTitle: "Community Garden",
-    postContent: "Looking for some volunteers to join a UofC Community Garden intiative.",
+    userName: "David Singh",
+    userMajor: "Bioinformatics",
+    userImage: davidSingh,
+    postTitle: "Research Participants in Bioinformatics",
+    postContent: "I’m currently working on a bioinformatics research project exploring the genetic markers associated with sleep patterns. I’m looking for participants who are willing to fill out a short survey.",
   },
 ];
 
