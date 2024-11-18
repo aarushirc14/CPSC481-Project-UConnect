@@ -37,7 +37,7 @@ export default function AfterEditingProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#FFFFFF] flex">
+    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-[#FFFFFF] flex">
       {/* Show Notification on Page Load */}
       {showNotification && (
         <Notification
@@ -57,7 +57,7 @@ export default function AfterEditingProfilePage() {
           {/* Left Section */}
           <div className="flex-[2] bg-[#414040] rounded-lg p-8 flex flex-col items-center">
             {/* Profile Image */}
-            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#000000] mb-4">
+            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-uConnectDark-textMain dark:border-uConnectLight-textMain mb-4">
               <img
                 src={user.profileImage}
                 alt={`${user.firstName} ${user.lastName}`}
@@ -86,13 +86,13 @@ export default function AfterEditingProfilePage() {
           <div className="flex-[3] bg-[#414040] rounded-lg p-6">
             {/* Bio Section */}
             <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-[#000000]">Bio</h2>
-              <p className="text-[#000000] mt-2">{user.bio}</p>
+              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">Bio</h2>
+              <p className="text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">{user.bio}</p>
             </div>
 
             {/* Courses Section */}
             <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-[#000000]">Courses</h2>
+              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">Courses</h2>
               <div className="grid grid-cols-5 gap-2 mt-2">
                 {user.courses.map((course, index) => (
                   <span
@@ -107,7 +107,7 @@ export default function AfterEditingProfilePage() {
 
             {/* Interests Section */}
             <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-[#000000]">Interests</h2>
+              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">Interests</h2>
               <div className="flex flex-wrap gap-2 mt-2">
                 {user.interests.map((interest, index) => (
                   <span
@@ -128,10 +128,10 @@ export default function AfterEditingProfilePage() {
           <div className="flex flex-col gap-4">
             {user.posts.map((post) => (
               <div key={post.id} className="bg-[#C6C3C3] rounded-lg p-4">
-                <h3 className="text-md font-semibold text-[#000000]">
+                <h3 className="text-md font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
                   {post.title}
                 </h3>
-                <p className="text-sm text-[#000000] mt-2">{post.content}</p>
+                <p className="text-sm text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">{post.content}</p>
               </div>
             ))}
           </div>

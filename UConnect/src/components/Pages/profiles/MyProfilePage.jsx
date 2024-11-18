@@ -13,9 +13,8 @@ export default function MyProfilePage() {
     year: "1st Year",
     bio: "I love field research, learning about climate change solutions, and volunteering in conservation efforts. In my free time, you’ll find me hiking, attending eco-workshops, or experimenting with DIY eco-friendly projects.",
     courses: ["BIOL 241", "CHEM 201", "MATH 211", "PHYS 211", "ENSC 201"],
-    interests: ["Camping", "Hiking", "Photography","Reading"],
+    interests: ["Camping", "Hiking", "Photography", "Reading"],
     posts: [
-      
       {
         id: 1,
         title: "Community Garden Initiative",
@@ -32,7 +31,7 @@ export default function MyProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#FFFFFF] flex">
+    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-[#FFFFFF] flex">
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
@@ -44,7 +43,7 @@ export default function MyProfilePage() {
           {/* Left Section */}
           <div className="flex-[2] bg-[#414040] rounded-lg p-8 flex flex-col items-center">
             {/* Profile Image */}
-            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#000000] mb-4">
+            <div className="w-48 h-48 rounded-full overflow-hidden border-4 bg-uConnectDark-textMain dark:bg-uConnectLight-textMain mb-4">
               <img
                 src={user.profileImage}
                 alt={`${user.firstName} ${user.lastName}`}
@@ -60,8 +59,11 @@ export default function MyProfilePage() {
             {/* Year */}
             <p className="text-md text-[#FFFFFF]">{user.year}</p>
             {/* Edit Profile Button */}
-            <button onClick={handleEditProfileClick} className="mt-6 py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full inline-flex items-center justify-center gap-2 hover:bg-[#FC9D04] hover:text-black transition">
-            <FaEdit className="text-lg" /> {/* Edit Icon */}
+            <button
+              onClick={handleEditProfileClick}
+              className="mt-6 py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full inline-flex items-center justify-center gap-2 hover:bg-[#FC9D04] hover:text-black transition"
+            >
+              <FaEdit className="text-lg" /> {/* Edit Icon */}
               Edit Profile
             </button>
           </div>
@@ -70,13 +72,13 @@ export default function MyProfilePage() {
           <div className="flex-[3] bg-[#414040] rounded-lg p-6">
             {/* Bio Section */}
             <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-[#000000]">Bio</h2>
-              <p className="text-[#000000] mt-2">{user.bio}</p>
+              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">Bio</h2>
+              <p className="text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">{user.bio}</p>
             </div>
 
             {/* Courses Section */}
             <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-[#000000]">Courses</h2>
+              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">Courses</h2>
               <div className="grid grid-cols-5 gap-2 mt-2">
                 {user.courses.map((course, index) => (
                   <span
@@ -91,7 +93,11 @@ export default function MyProfilePage() {
 
             {/* Interests Section */}
             <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-[#000000]">Interests</h2>
+              <h2
+                className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain"
+              >
+                Interests
+              </h2>
               <div className="flex flex-wrap gap-2 mt-2">
                 {user.interests.map((interest, index) => (
                   <span
@@ -108,17 +114,16 @@ export default function MyProfilePage() {
 
         {/* My Posts Section */}
         <div className="w-full max-w-7xl bg-[#414040] rounded-lg p-6 mt-8">
-          <h2 className="text-lg font-semibold text-[#FC9D04] mb-4">My Posts</h2>
+          <h2 className="text-lg font-semibold text-[#FC9D04] mb-4">
+            My Posts
+          </h2>
           <div className="flex flex-col gap-4">
             {user.posts.map((post) => (
-              <div
-                key={post.id}
-                className="bg-[#C6C3C3] rounded-lg p-4"
-              >
-                <h3 className="text-md font-semibold text-[#000000]">
+              <div key={post.id} className="bg-[#C6C3C3] rounded-lg p-4">
+                <h3 className="text-md font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
                   {post.title}
                 </h3>
-                <p className="text-sm text-[#000000] mt-2">{post.content}</p>
+                <p className="text-sm text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">{post.content}</p>
               </div>
             ))}
           </div>

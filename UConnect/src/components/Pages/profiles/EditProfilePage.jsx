@@ -1,4 +1,3 @@
-
 // src/components/pages/profiles/EditProfilePage.jsx
 
 import React, { useState } from "react";
@@ -17,7 +16,7 @@ export default function EditProfilePage() {
     year: "1st Year",
     bio: "I love field research, learning about climate change solutions, and volunteering in conservation efforts. In my free time, you’ll find me hiking, attending eco-workshops, or experimenting with DIY eco-friendly projects.",
     courses: ["BIOL 241", "CHEM 201", "MATH 211", "PHYS 211", "ENSC 201"],
-    interests: ["Camping", "Hiking", "Photography","Reading"],
+    interests: ["Camping", "Hiking", "Photography", "Reading"],
   };
 
   const [profileData, setProfileData] = useState({
@@ -69,33 +68,31 @@ export default function EditProfilePage() {
 
         {/* Edit Profile Form */}
         <div className="flex flex-col items-center justify-center py-8">
-          <form
-            className="w-full max-w-3xl bg-[#414040] p-8 rounded-lg space-y-6"
-          >
-           {/* Profile Picture Upload */}
-          <div className="flex flex-col items-center relative">
-            <label htmlFor="profileImage" className="cursor-pointer relative">
-              <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#000000] mb-4">
-                <img
-                  src={profileData.profileImage}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              {/* Pencil Icon */}
-              <div className="absolute bottom-6 right-1 bg-[#FC9D04] text-black p-2 rounded-full shadow-lg">
-                <FaPencilAlt className="text-lg" />
-              </div>
-            </label>
-            <input
-              type="file"
-              id="profileImage"
-              name="profileImage"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="hidden"
-            />
-          </div>
+          <form className="w-full max-w-3xl bg-[#414040] p-8 rounded-lg space-y-6">
+            {/* Profile Picture Upload */}
+            <div className="flex flex-col items-center relative">
+              <label htmlFor="profileImage" className="cursor-pointer relative">
+                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-uConnectDark-textMain dark:border-uConnectLight-textMain mb-4">
+                  <img
+                    src={profileData.profileImage}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* Pencil Icon */}
+                <div className="absolute bottom-6 right-1 bg-[#FC9D04] text-black p-2 rounded-full shadow-lg">
+                  <FaPencilAlt className="text-lg" />
+                </div>
+              </label>
+              <input
+                type="file"
+                id="profileImage"
+                name="profileImage"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </div>
 
             {/* First and Last Name */}
             <div className="grid grid-cols-2 gap-4">
@@ -202,7 +199,7 @@ export default function EditProfilePage() {
             <div className="flex justify-center">
               <button
                 onClick={saveChangesClick}
-                className="px-6 py-3 bg-[#FC9D04] text-[#000000] font-semibold rounded-full hover:bg-[#e08c03] transition"
+                className="px-6 py-3 bg-[#FC9D04] text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
               >
                 Save Changes
               </button>
