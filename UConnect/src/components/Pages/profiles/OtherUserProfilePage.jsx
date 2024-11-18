@@ -59,7 +59,7 @@ export default function OtherUserProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-[#FFFFFF] flex">
+    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex">
       {/* Notification */}
       {showNotification && (
         <Notification
@@ -71,13 +71,13 @@ export default function OtherUserProfilePage() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
-        <div className="sticky top-0 z-10 w-full max-w-7xl bg-[#131313] p-4 mb-14">
+        <div className="sticky top-0 z-10 w-full max-w-7xl bg-uConnectLight-background dark:bg-uConnectDark-background p-4 mb-14">
           <SearchBar />
         </div>
         {/* Top Section */}
         <div className="flex flex-wrap w-full max-w-7xl gap-6">
           {/* Left Section */}
-          <div className="flex-[2] bg-[#414040] rounded-lg p-8 flex flex-col items-center">
+          <div className="flex-[2] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-8 flex flex-col items-center">
             {/* Profile Image */}
             <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-uConnectDark-textMain dark:border-uConnectLight-textMain mb-4">
               <img
@@ -87,24 +87,28 @@ export default function OtherUserProfilePage() {
               />
             </div>
             {/* Name */}
-            <h1 className="text-3xl font-semibold text-[#FC9D04]">
+            <h1 className="text-3xl font-semibold text-uConnectDark-accent">
               {user.firstName} {user.lastName}
             </h1>
             {/* Major */}
-            <p className="text-lg text-[#FFFFFF]">{user.major}</p>
+            <p className="text-lg text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+              {user.major}
+            </p>
             {/* Year */}
-            <p className="text-md text-[#FFFFFF]">{user.year}</p>
+            <p className="text-md text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+              {user.year}
+            </p>
             {/* Chat and Follow Buttons */}
             <div className="flex mt-6 gap-4">
               <button
                 onClick={handleChatClick}
-                className="py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full hover:bg-[#FC9D04] hover:text-black transition text-center w-[100px]"
+                className="py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition text-center w-[100px]"
               >
                 Chat
               </button>
               <button
                 onClick={handleFollowClick}
-                className="py-1 px-4 bg-transparent border-2 border-[#FC9D04] text-[#FFFFFF] rounded-full hover:bg-[#FC9D04] hover:text-black transition text-center w-[100px]"
+                className="py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition text-center w-[100px]"
               >
                 Follow
               </button>
@@ -112,9 +116,9 @@ export default function OtherUserProfilePage() {
           </div>
 
           {/* Right Section */}
-          <div className="flex-[3] bg-[#414040] rounded-lg p-6">
+          <div className="flex-[3] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
             {/* Bio Section */}
-            <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
+            <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
               <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
                 Bio
               </h2>
@@ -124,7 +128,7 @@ export default function OtherUserProfilePage() {
             </div>
 
             {/* Courses Section */}
-            <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
+            <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
               <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
                 Courses
               </h2>
@@ -132,7 +136,7 @@ export default function OtherUserProfilePage() {
                 {user.courses.map((course, index) => (
                   <span
                     key={index}
-                    className="bg-[#414040] border-2 border-[#FC9D04] text-[#FFFFFF] px-4 py-1 rounded-full text-center"
+                    className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 py-1 rounded-full text-center"
                   >
                     {course}
                   </span>
@@ -141,7 +145,7 @@ export default function OtherUserProfilePage() {
             </div>
 
             {/* Interests Section */}
-            <div className="bg-[#C6C3C3] rounded-lg p-6 mb-6">
+            <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
               <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
                 Interests
               </h2>
@@ -149,7 +153,7 @@ export default function OtherUserProfilePage() {
                 {user.interests.map((interest, index) => (
                   <span
                     key={index}
-                    className="bg-[#414040] border-2 border-[#FC9D04] text-[#FFFFFF] px-4 py-1 rounded-full"
+                    className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 py-1 rounded-full"
                   >
                     {interest}
                   </span>
@@ -160,11 +164,16 @@ export default function OtherUserProfilePage() {
         </div>
 
         {/* My Posts Section */}
-        <div className="w-full max-w-7xl bg-[#414040] rounded-lg p-6 mt-8">
-          <h2 className="text-lg font-semibold text-[#FC9D04] mb-4">Posts</h2>
+        <div className="w-full max-w-7xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6 mt-8">
+          <h2 className="text-lg font-semibold text-uConnectDark-accent mb-4">
+            Posts
+          </h2>
           <div className="flex flex-col gap-4">
             {user.posts.map((post) => (
-              <div key={post.id} className="bg-[#C6C3C3] rounded-lg p-4">
+              <div
+                key={post.id}
+                className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-4"
+              >
                 <h3 className="text-md font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
                   {post.title}
                 </h3>

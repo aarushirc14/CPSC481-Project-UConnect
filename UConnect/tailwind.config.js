@@ -13,6 +13,7 @@ module.exports = {
           textMain: "#FFFFFF",
           textSub: "#C6C3C3",
           accent: "#FC9D04",
+          background: "#131313",
         },
         uConnectLight: {
           layer1: "#FFFFFF",
@@ -22,6 +23,7 @@ module.exports = {
           textMain: "#000000",
           textSub: "#6B7280",
           accent: "#FC9D04",
+          background: "#F9FAFB",
         },
       },
     },

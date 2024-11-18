@@ -73,10 +73,10 @@ export default function CreateProfile({ onProfileCreated }) {
   };
 
   return (
-    <div className="flex w-full justify-center items-center min-h-screen bg-[#131313] px-4">
+    <div className="flex w-full justify-center items-center min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background px-4">
       {/* Outer Gray Box */}
-      <div className="w-full max-w-5xl bg-[#414040] p-12 rounded-lg mt-8 mb-8">
-        <h2 className="text-3xl font-semibold text-center text-[#C6C3C3] mb-6">
+      <div className="w-full max-w-5xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-12 rounded-lg mt-8 mb-8">
+        <h2 className="text-3xl font-semibold text-center text-uConnectLight-layer3 dark:text-uConnectDark-layer3 mb-6">
           Create Your Profile
         </h2>
         {/* Notification Popup */}
@@ -92,7 +92,7 @@ export default function CreateProfile({ onProfileCreated }) {
           {/* Profile Picture Upload */}
           <div className="flex justify-center">
             <label htmlFor="profileImage" className="cursor-pointer">
-              <div className="w-40 h-40 rounded-full bg-[#C6C3C3] flex justify-center items-center overflow-hidden relative border-2 border-black">
+              <div className="w-40 h-40 rounded-full bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 flex justify-center items-center overflow-hidden relative border-2 border-black">
                 {profileImage ? (
                   <img
                     src={profileImage}
@@ -100,7 +100,7 @@ export default function CreateProfile({ onProfileCreated }) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <MdOutlineAddAPhoto className="text-black text-4xl" />
+                  <MdOutlineAddAPhoto className="text-uConnectDark-textMain dark:text-uConnectLight-textMain text-4xl" />
                 )}
               </div>
             </label>
@@ -122,7 +122,7 @@ export default function CreateProfile({ onProfileCreated }) {
               value={profileData.firstName}
               onChange={handleChange}
               placeholder="First Name"
-              className="flex-1 p-3 rounded bg-[#C6C3C3] text-black outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
             />
             <input
               type="text"
@@ -130,7 +130,7 @@ export default function CreateProfile({ onProfileCreated }) {
               value={profileData.lastName}
               onChange={handleChange}
               placeholder="Last Name"
-              className="flex-1 p-3 rounded bg-[#C6C3C3] text-black outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
             />
           </div>
 
@@ -141,7 +141,7 @@ export default function CreateProfile({ onProfileCreated }) {
               value={profileData.bio}
               onChange={handleChange}
               placeholder="Bio"
-              className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               rows="4"
               style={{
                 resize: "both", // Allow resizing
@@ -196,7 +196,7 @@ export default function CreateProfile({ onProfileCreated }) {
           <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="w-1/4 py-3 bg-[#FC9D04] text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
+              className="w-1/4 py-3 bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
             >
               Create Profile
             </button>

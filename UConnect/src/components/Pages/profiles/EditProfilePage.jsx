@@ -55,20 +55,20 @@ export default function EditProfilePage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#131313] text-white">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Search Bar */}
-        <div className="sticky top-0 bg-[#131313] z-10">
+        <div className="sticky top-0 bg-uConnectLight-background dark:bg-uConnectDark-background z-10">
           <SearchBar />
         </div>
 
         {/* Edit Profile Form */}
         <div className="flex flex-col items-center justify-center py-8">
-          <form className="w-full max-w-3xl bg-[#414040] p-8 rounded-lg space-y-6">
+          <form className="w-full max-w-3xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-8 rounded-lg space-y-6">
             {/* Profile Picture Upload */}
             <div className="flex flex-col items-center relative">
               <label htmlFor="profileImage" className="cursor-pointer relative">
@@ -80,7 +80,7 @@ export default function EditProfilePage() {
                   />
                 </div>
                 {/* Pencil Icon */}
-                <div className="absolute bottom-6 right-1 bg-[#FC9D04] text-black p-2 rounded-full shadow-lg">
+                <div className="absolute bottom-6 right-1 bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain p-2 rounded-full shadow-lg">
                   <FaPencilAlt className="text-lg" />
                 </div>
               </label>
@@ -97,25 +97,29 @@ export default function EditProfilePage() {
             {/* First and Last Name */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-[#FFFFFF] mb-2">First Name</label>
+                <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                  First Name
+                </label>
                 <input
                   type="text"
                   name="firstName"
                   value={profileData.firstName}
                   onChange={handleChange}
                   placeholder="First Name"
-                  className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
                 />
               </div>
               <div>
-                <label className="block text-[#FFFFFF] mb-2">Last Name</label>
+                <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   name="lastName"
                   value={profileData.lastName}
                   onChange={handleChange}
                   placeholder="Last Name"
-                  className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
                 />
               </div>
             </div>
@@ -123,45 +127,53 @@ export default function EditProfilePage() {
             {/* Major and Year */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-[#FFFFFF] mb-2">Major</label>
+                <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                  Major
+                </label>
                 <input
                   type="text"
                   name="major"
                   value={profileData.major}
                   onChange={handleChange}
                   placeholder="Major"
-                  className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
                 />
               </div>
               <div>
-                <label className="block text-[#FFFFFF] mb-2">Year</label>
+                <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                  Year
+                </label>
                 <input
                   type="text"
                   name="year"
                   value={profileData.year}
                   onChange={handleChange}
                   placeholder="Year"
-                  className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
                 />
               </div>
             </div>
 
             {/* Bio */}
             <div>
-              <label className="block text-[#FFFFFF] mb-2">Bio</label>
+              <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                Bio
+              </label>
               <textarea
                 name="bio"
                 value={profileData.bio}
                 onChange={handleChange}
                 placeholder="Bio"
-                className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
                 rows="4"
               />
             </div>
 
             {/* Courses */}
             <div>
-              <label className="block text-[#FFFFFF] mb-2">Courses</label>
+              <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                Courses
+              </label>
               <input
                 type="text"
                 name="courses"
@@ -173,13 +185,15 @@ export default function EditProfilePage() {
                   })
                 }
                 placeholder="Enter courses separated by commas"
-                className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
               />
             </div>
 
             {/* Interests */}
             <div>
-              <label className="block text-[#FFFFFF] mb-2">Interests</label>
+              <label className="block text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-2">
+                Interests
+              </label>
               <input
                 type="text"
                 name="interests"
@@ -191,7 +205,7 @@ export default function EditProfilePage() {
                   })
                 }
                 placeholder="Enter interests separated by commas"
-                className="w-full p-3 rounded bg-[#C6C3C3] text-black outline-none"
+                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
               />
             </div>
 
@@ -199,7 +213,7 @@ export default function EditProfilePage() {
             <div className="flex justify-center">
               <button
                 onClick={saveChangesClick}
-                className="px-6 py-3 bg-[#FC9D04] text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
+                className="px-6 py-3 bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
               >
                 Save Changes
               </button>
