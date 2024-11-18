@@ -6,7 +6,10 @@
 - check installs:
     - ```node -v```
     - ```npm -v``` if missing run ```npm install```
-- ```npm run dev``` to run app on localhost
+    - Inside the Uconnect folder, run ```npm install vite --save-dev``` to install vite and tailwind
+- Still inside the Uconnect folder, do ```npm run dev``` to run app on localhost
+- Copy localhost link and paste the link to a Web Browser to see and interact the app
+
 
 # App Theme
 - Layer 1 dark screen background #000000
