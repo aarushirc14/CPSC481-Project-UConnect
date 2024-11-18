@@ -72,7 +72,7 @@ export default function EditProfilePage() {
             {/* Profile Picture Upload */}
             <div className="flex flex-col items-center relative">
               <label htmlFor="profileImage" className="cursor-pointer relative">
-                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-uConnectDark-textMain dark:border-uConnectLight-textMain mb-4">
+                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-uConnectLight-textMain mb-4">
                   <img
                     src={profileData.profileImage}
                     alt="Profile"
@@ -80,7 +80,7 @@ export default function EditProfilePage() {
                   />
                 </div>
                 {/* Pencil Icon */}
-                <div className="absolute bottom-6 right-1 bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain p-2 rounded-full shadow-lg">
+                <div className="absolute bottom-6 right-1 bg-uConnectDark-accent text-uConnectLight-textMain p-2 rounded-full shadow-lg">
                   <FaPencilAlt className="text-lg" />
                 </div>
               </label>
@@ -106,7 +106,7 @@ export default function EditProfilePage() {
                   value={profileData.firstName}
                   onChange={handleChange}
                   placeholder="First Name"
-                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
                 />
               </div>
               <div>
@@ -119,7 +119,7 @@ export default function EditProfilePage() {
                   value={profileData.lastName}
                   onChange={handleChange}
                   placeholder="Last Name"
-                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function EditProfilePage() {
                   value={profileData.major}
                   onChange={handleChange}
                   placeholder="Major"
-                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
                 />
               </div>
               <div>
@@ -149,7 +149,7 @@ export default function EditProfilePage() {
                   value={profileData.year}
                   onChange={handleChange}
                   placeholder="Year"
-                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                  className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
                 />
               </div>
             </div>
@@ -164,7 +164,7 @@ export default function EditProfilePage() {
                 value={profileData.bio}
                 onChange={handleChange}
                 placeholder="Bio"
-                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
                 rows="4"
               />
             </div>
@@ -185,7 +185,7 @@ export default function EditProfilePage() {
                   })
                 }
                 placeholder="Enter courses separated by commas"
-                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
               />
             </div>
 
@@ -205,7 +205,7 @@ export default function EditProfilePage() {
                   })
                 }
                 placeholder="Enter interests separated by commas"
-                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none"
+                className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none"
               />
             </div>
 

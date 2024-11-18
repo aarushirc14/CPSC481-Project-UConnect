@@ -178,7 +178,7 @@ export default function HomePage() {
                   <h3 className="text-xl font-semibold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
                     {post.userName}
                   </h3>
-                  <p className="text-uConnectLight-layer3 dark:text-uConnectDark-layer3">
+                  <p className="text-uConnectLight-textSub dark:text-uConnectDark-layer3">
                     {post.userMajor}
                   </p>
                 </div>

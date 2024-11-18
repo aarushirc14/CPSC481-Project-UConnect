@@ -10,7 +10,7 @@ export default function SearchBar() {
       <input
         type="text"
         placeholder="Search"
-        className="bg-transparent placeholder-uConnectLight-layer3 dark:placeholder-uConnectDark-layer3 outline-none flex-1"
+        className="bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
       />
     </div>
   );

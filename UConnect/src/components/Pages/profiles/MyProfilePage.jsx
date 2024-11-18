@@ -76,17 +76,17 @@ export default function MyProfilePage() {
           <div className="flex-[3] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
             {/* Bio Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+              <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Bio
               </h2>
-              <p className="text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">
+              <p className="text-uConnectLight-textMain mt-2">
                 {user.bio}
               </p>
             </div>
 
             {/* Courses Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+              <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Courses
               </h2>
               <div className="grid grid-cols-5 gap-2 mt-2">
@@ -103,7 +103,7 @@ export default function MyProfilePage() {
 
             {/* Interests Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+              <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Interests
               </h2>
               <div className="flex flex-wrap gap-2 mt-2">
@@ -131,10 +131,10 @@ export default function MyProfilePage() {
                 key={post.id}
                 className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-4"
               >
-                <h3 className="text-md font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+                <h3 className="text-md font-semibold text-uConnectLight-textMain">
                   {post.title}
                 </h3>
-                <p className="text-sm text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">
+                <p className="text-sm text-uConnectLight-textMain mt-2">
                   {post.content}
                 </p>
               </div>
