@@ -486,7 +486,7 @@ function ChatHeader({ chatName }) {
 
 function ChatSideBar({ active, setIsActive }) {
   return (
-    <div className="fixed ml-16 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary min-h-screen w-56 z-10">
+    <div className="fixed ml-20 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary min-h-screen w-56 z-10">
       <div className="flex border-2 rounded-full border-uConnectDark-accent m-5">
         <div className="m-3 flex items-center ">
           <FaSearch className="text-uConnectDark-accent" /> {/* Search Icon */}
