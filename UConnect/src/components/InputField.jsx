@@ -26,7 +26,7 @@ export default function InputField({ label, type, name, value, onChange }) {
         {type === "password" && (
           <span
             onClick={handleTogglePasswordVisibility} // Toggle visibility
-            className="absolute right-3 top-3 cursor-pointer text-[#FC9D04]"
+            className="absolute right-3 top-3 cursor-pointer text-uConnectDark-accent"
           >
             {isPasswordVisible ? <FaEye /> : <FaEyeSlash />} {/* Fix eye icon logic */}
           </span>
