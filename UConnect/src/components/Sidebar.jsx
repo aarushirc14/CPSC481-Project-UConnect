@@ -91,7 +91,7 @@ export default function Sidebar() {
             className={`relative group flex items-center w-16 h-8 rounded-full cursor-pointer transition-colors duration-300 ${
               isDarkMode
                 ? "bg-uConnectDark-layer2Primary"
-                : "bg-uConnectLight-layer2Primary"
+                : "bg-uConnectLight-textSub"
             } relative p-1`}
           >
             <div
@@ -119,7 +119,7 @@ export default function Sidebar() {
               <span
                 className={`${
                   isDarkMode
-                    ? "text-uConnectDark-layer3"
+                    ? "text-uConnectDark-textSub"
                     : "text-uConnectLight-accent"
                 }`}
               >
@@ -129,7 +129,7 @@ export default function Sidebar() {
                 className={`${
                   isDarkMode
                     ? "text-uConnectDark-accent"
-                    : "text-uConnectLight-layer3"
+                    : "text-uConnectLight-textSub"
                 }`}
               >
                 Dark
