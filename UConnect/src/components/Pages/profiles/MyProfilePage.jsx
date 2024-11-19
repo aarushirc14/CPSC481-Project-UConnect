@@ -43,7 +43,7 @@ export default function MyProfilePage() {
           {/* Left Section */}
           <div className="flex-[2] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-8 flex flex-col items-center">
             {/* Profile Image */}
-            <div className="w-48 h-48 rounded-full overflow-hidden border-4 bg-uConnectDark-textMain dark:bg-uConnectLight-textMain mb-4">
+            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-uConnectDark-layer1 bg-uConnectDark-textMain dark:bg-uConnectLight-textMain mb-4">
               <img
                 src={user.profileImage}
                 alt={`${user.firstName} ${user.lastName}`}
@@ -79,9 +79,7 @@ export default function MyProfilePage() {
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Bio
               </h2>
-              <p className="text-uConnectLight-textMain mt-2">
-                {user.bio}
-              </p>
+              <p className="text-uConnectLight-textMain mt-2">{user.bio}</p>
             </div>
 
             {/* Courses Section */}

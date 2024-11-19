@@ -79,7 +79,7 @@ export default function OtherUserProfilePage() {
           {/* Left Section */}
           <div className="flex-[2] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-8 flex flex-col items-center">
             {/* Profile Image */}
-            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-uConnectDark-textMain dark:border-uConnectLight-textMain mb-4">
+            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-uConnectLight-textMain mb-4">
               <img
                 src={user.profileImage}
                 alt={`${user.firstName} ${user.lastName}`}
@@ -119,17 +119,17 @@ export default function OtherUserProfilePage() {
           <div className="flex-[3] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
             {/* Bio Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+              <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Bio
               </h2>
-              <p className="text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">
+              <p className="text-uConnectLight-textMain mt-2">
                 {user.bio}
               </p>
             </div>
 
             {/* Courses Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+              <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Courses
               </h2>
               <div className="grid grid-cols-5 gap-2 mt-2">
@@ -146,7 +146,7 @@ export default function OtherUserProfilePage() {
 
             {/* Interests Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
-              <h2 className="text-lg font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+              <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Interests
               </h2>
               <div className="flex flex-wrap gap-2 mt-2">
@@ -174,10 +174,10 @@ export default function OtherUserProfilePage() {
                 key={post.id}
                 className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-4"
               >
-                <h3 className="text-md font-semibold text-uConnectDark-textMain dark:text-uConnectLight-textMain">
+                <h3 className="text-md font-semibold text-uConnectLight-textMain">
                   {post.title}
                 </h3>
-                <p className="text-sm text-uConnectDark-textMain dark:text-uConnectLight-textMain mt-2">
+                <p className="text-sm text-uConnectLight-textMain mt-2">
                   {post.content}
                 </p>
               </div>
