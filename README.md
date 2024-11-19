@@ -15,4 +15,4 @@
 - Layer 3 background #C6C3C3 
 - Main text is #FFFFFF or #000000, sub-text is #C6C3C3
 - Accent color #FC9D04 used for emphasis, borders and headings and some button backgrounds
-- Default React fonts are used. You can adjust bold, semi-bold etc. But no need to change the Font.
+- Default React fonts are used. You can adjust bold, semi-bold etc. But no need to change the font.
