@@ -33,14 +33,20 @@ export default function Sidebar() {
     { path: "/my-profile", label: "My Profile", icon: <FaUser /> },
   ];
 
+  const navBarSize = location.pathname === "/chats" ? "lg:w-16" : "lg:w-40";
+  const iconSize =
+    location.pathname === "/chats" ? "lg:w-7 lg:h-7" : "lg:w-20 lg:h-20";
+
   return (
-    <div className="fixed top-0 left-0 bg-uConnectLight-layer2Secondary dark:bg-uConnectDark-layer2Secondary h-screen p-4 flex flex-col items-center lg:w-40 md:w-24 w-16 z-10">
+    <div
+      className={`fixed top-0 left-0 bg-uConnectLight-layer2Secondary dark:bg-uConnectDark-layer2Secondary h-screen p-4 flex flex-col items-center ${navBarSize} w-16 z-10`}
+    >
       {/* Logo */}
-      <div className="flex items-center mb-8">
+      <div className="flex items-center mb-8 min-h-20">
         <img
           src={logo}
           alt="UConnect Logo"
-          className="w-10 h-10 lg:w-20 lg:h-20"
+          className={`w-7 h-7 ${iconSize}`}
         />
       </div>
 
@@ -59,7 +65,7 @@ export default function Sidebar() {
           ))}
         </nav>
         <div className="flex justify-center items-center flex-col gap-2">
-          <span className="text-uConnectLight-textSub dark:text-uConnectDark-layer3">
+          <span className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 text-xs">
             Dark Mode
           </span>
           <div
@@ -75,16 +81,18 @@ export default function Sidebar() {
 }
 
 function SidebarItem({ icon, label, active, onClick, badge }) {
+  const disableLabel = location.pathname === "/chats";
+
   return (
     <div
       onClick={onClick}
-      className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer ${
+      className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer justify-center ${
         active
           ? "bg-uConnectLight-layer2Primary text-uConnectLight-accent dark:bg-uConnectDark-layer2Primary dark:text-uConnectDark-accent"
           : "text-uConnectLight-textSub hover:text-uConnectLight-textMain dark:text-uConnectDark-layer3 dark:hover:text-uConnectDark-textMain"
       }`}
     >
-      <div className="relative">
+      <div className="relative min-h-6 flex items-center justify-center">
         <span className="text-xl">{icon}</span>
         {badge && (
           <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-uConnectLight-accent dark:bg-uConnectDark-accent text-xs text-uConnectLight-layer1 dark:text-uConnectDark-layer1 rounded-full px-2">
@@ -92,7 +100,9 @@ function SidebarItem({ icon, label, active, onClick, badge }) {
           </span>
         )}
       </div>
-      <span className="flex-1 hidden lg:block">{label}</span>
+      {disableLabel ? null : (
+        <span className="flex-1 hidden lg:block">{label}</span>
+      )}
     </div>
   );
 }
