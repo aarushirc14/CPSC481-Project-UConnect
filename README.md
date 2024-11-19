@@ -6,7 +6,10 @@
 - check installs:
     - ```node -v```
     - ```npm -v``` if missing run ```npm install```
-- ```npm run dev``` to run app on localhost
+- ```npm install vite --save-dev``` to install vite
+-  ```npm run dev``` to run app on localhost
+- Copy localhost link and paste the link to a Web Browser to see and interact with the app
+
 
 # App Theme
 - Layer 1 dark screen background #000000

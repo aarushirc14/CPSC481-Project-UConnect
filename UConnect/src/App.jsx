@@ -1,7 +1,12 @@
 // src/App.jsx
 
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SignupPage from "./components/pages/SignupPage";
 import LoginPage from "./components/pages/LoginPage";
@@ -26,13 +31,21 @@ function AuthPage({ isLogin, setIsLogin, handleLogin }) {
       </div>
       <div className="flex justify-center space-x-8 mb-4 text-lg font-semibold">
         <h2
-          className={`cursor-pointer ${!isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
+          className={`cursor-pointer ${
+            !isLogin
+              ? "login_signup_form_label border-b-2 border-uConnectDark-accent"
+              : "text-gray-500"
+          }`}
           onClick={() => setIsLogin(false)}
         >
           SIGN UP
         </h2>
         <h2
-          className={`cursor-pointer ${isLogin ? "login_signup_form_label border-b-2 border-[#FC9D04]" : "text-gray-500"}`}
+          className={`cursor-pointer ${
+            isLogin
+              ? "login_signup_form_label border-b-2 border-uConnectDark-accent"
+              : "text-gray-500"
+          }`}
           onClick={() => setIsLogin(true)}
         >
           LOGIN
@@ -59,12 +72,13 @@ function App() {
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-[#131313]">
+      <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background">
         {isLoggedIn ? (
           <>
             {/* Sidebar for logged-in users */}
             <Sidebar
-              activeItem={activeItem} onSelectItem={setActiveItem} // Replace with actual logic
+              activeItem={activeItem}
+              onSelectItem={setActiveItem} // Replace with actual logic
             />
             <main className="flex-1">
               <Routes>
@@ -73,11 +87,25 @@ function App() {
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
-                <Route path="/edit-profile" element={<EditProfilePage/>} />
-                <Route path="/edited-profile" element={<AfterEditingProfilePage />} />
-                <Route path="/profile/:userId" element={<OtherUserProfilePage />} />
-                <Route path="/post/:postId" element={<DetailedPostViewPage />} />
-                <Route path="/create-profile" element={<CreateProfile onProfileCreated={handleProfileCreated} />} />
+                <Route path="/edit-profile" element={<EditProfilePage />} />
+                <Route
+                  path="/edited-profile"
+                  element={<AfterEditingProfilePage />}
+                />
+                <Route
+                  path="/profile/:userId"
+                  element={<OtherUserProfilePage />}
+                />
+                <Route
+                  path="/post/:postId"
+                  element={<DetailedPostViewPage />}
+                />
+                <Route
+                  path="/create-profile"
+                  element={
+                    <CreateProfile onProfileCreated={handleProfileCreated} />
+                  }
+                />
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
             </main>
@@ -87,15 +115,29 @@ function App() {
             <Routes>
               <Route
                 path="/login"
-                element={<AuthPage isLogin={isLogin} setIsLogin={setIsLogin} handleLogin={handleLogin} />}
+                element={
+                  <AuthPage
+                    isLogin={isLogin}
+                    setIsLogin={setIsLogin}
+                    handleLogin={handleLogin}
+                  />
+                }
               />
               <Route
                 path="/signup"
-                element={<AuthPage isLogin={isLogin} setIsLogin={setIsLogin} handleLogin={handleLogin} />}
+                element={
+                  <AuthPage
+                    isLogin={isLogin}
+                    setIsLogin={setIsLogin}
+                    handleLogin={handleLogin}
+                  />
+                }
               />
               <Route
                 path="/create-profile"
-                element={<CreateProfile onProfileCreated={handleProfileCreated} />}
+                element={
+                  <CreateProfile onProfileCreated={handleProfileCreated} />
+                }
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

@@ -53,19 +53,19 @@ export default function MultiSelectDropdown({ options, label }) {
         role="button"
       >
         <span>{label}</span>
-        <span
-          className={`caret ${isOpen ? "caret-open" : "caret-closed"}`}
-        >&#9662;</span>
+        <span className={`caret ${isOpen ? "caret-open" : "caret-closed"}`}>
+          &#9662;
+        </span>
       </div>
 
       {/* Dropdown menu */}
       {isOpen && (
-         <div className="dropdown-menu">
+        <div className="dropdown-menu">
           <div className="dropdown-search-wrapper flex items-center bg-[#E0E0E0] p-2 rounded">
             <FaSearch className="text-gray-500" />
             <input
               type="text"
-              className="dropdown-search flex-1 bg-transparent border-none outline-none text-black"
+              className="dropdown-search flex-1 bg-transparent border-none outline-none text-uConnectDark-textMain dark:text-uConnectLight-textMain"
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
