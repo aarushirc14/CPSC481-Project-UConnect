@@ -3,10 +3,18 @@
 import React, { useState } from "react";
 import { FaSearch, FaPlusCircle } from "react-icons/fa";
 
-export default function MultiSelectDropdown({ options, label }) {
+export default function MultiSelectDropdown({
+  options,
+  label,
+  existingSelectedOptions,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(
+    existingSelectedOptions || []
+  );
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log(existingSelectedOptions + " Hi");
 
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())

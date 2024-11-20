@@ -13,21 +13,24 @@ import {
 } from "../../../data/dropdownOptions";
 import Notification from "../../PopupMessage";
 
-export default function CreateProfile({ onProfileCreated }) {
+export default function CreateProfile({
+  onProfileCreated,
+  existingProfileData,
+}) {
   const navigate = useNavigate();
 
-  const [profileData, setProfileData] = useState({
-    firstName: "",
-    lastName: "",
-    major: [],
-    year: null,
-    courses: [],
-    interests: [],
-    bio: "",
-    profileImage: null,
-  });
-
-  const [profileImage, setProfileImage] = useState(null); // State to store the image URL
+  const [profileData, setProfileData] = useState(
+    existingProfileData || {
+      firstName: "",
+      lastName: "",
+      major: [],
+      year: null,
+      courses: [],
+      interests: [],
+      bio: "",
+      profileImage: null,
+    }
+  );
 
   const [showNotification, setShowNotification] = useState(false);
 
@@ -35,7 +38,8 @@ export default function CreateProfile({ onProfileCreated }) {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => setProfileImage(reader.result); // Convert image to base64
+      reader.onload = () =>
+        setProfileData({ ...profileData, profileImage: reader.result }); // Convert image to base64
       reader.readAsDataURL(file);
     }
   };
@@ -72,12 +76,14 @@ export default function CreateProfile({ onProfileCreated }) {
     navigate("/home");
   };
 
+  const editing = existingProfileData;
+
   return (
     <div className="flex w-full justify-center items-center min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background px-4">
       {/* Outer Gray Box */}
       <div className="w-full max-w-5xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-12 rounded-lg mt-8 mb-8">
         <h2 className="text-3xl font-semibold text-center text-uConnectLight-layer3 dark:text-uConnectDark-layer3 mb-6">
-          Create Your Profile
+          {editing ? "Edit Your Profile" : "Create Your Profile"}
         </h2>
         {/* Notification Popup */}
         {showNotification && (
@@ -93,9 +99,9 @@ export default function CreateProfile({ onProfileCreated }) {
           <div className="flex justify-center">
             <label htmlFor="profileImage" className="cursor-pointer">
               <div className="w-40 h-40 rounded-full bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 flex justify-center items-center overflow-hidden relative border-2 border-black">
-                {profileImage ? (
+                {profileData.profileImage ? (
                   <img
-                    src={profileImage}
+                    src={profileData.profileImage}
                     alt="Profile"
                     className="w-full h-full object-cover"
                   />
@@ -201,7 +207,7 @@ export default function CreateProfile({ onProfileCreated }) {
                   className="flex-1"
                   options={majorOptions}
                   label="Select Major"
-                  selectedOptions={profileData.major}
+                  existingSelectedOptions={profileData.major}
                   onChange={handleMajorChange}
                 />
                 <span className="text-end w-full text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
@@ -219,7 +225,7 @@ export default function CreateProfile({ onProfileCreated }) {
                 <MultiSelectDropdown
                   options={courseOptions}
                   label="Select Courses"
-                  selectedOptions={profileData.courses}
+                  existingSelectedOptions={profileData.courses}
                   onChange={handleCoursesChange}
                 />
                 <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
@@ -237,7 +243,7 @@ export default function CreateProfile({ onProfileCreated }) {
                 <MultiSelectDropdown
                   options={interestOptions}
                   label="Select Interests"
-                  selectedOptions={profileData.interests}
+                  existingSelectedOptions={profileData.interests}
                   onChange={handleInterestsChange}
                 />
                 <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
@@ -253,7 +259,7 @@ export default function CreateProfile({ onProfileCreated }) {
               type="submit"
               className="w-1/4 py-3 bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
             >
-              Create Profile
+              {editing ? "Save Edit Changes" : "Create Profile"}
             </button>
           </div>
         </form>

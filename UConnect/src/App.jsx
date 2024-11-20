@@ -22,6 +22,8 @@ import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage"
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
 import uconnectFullLogo from "./assets/logo/uconnectFullLogo.webp";
 
+import sofiaMartinez from "../src/assets/profilePics/sofiaMartinez.jpg";
+
 function AuthPage({ isLogin, setIsLogin, handleLogin }) {
   return (
     <div className="w-full max-w-md text-center">
@@ -87,7 +89,41 @@ function App() {
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
-                <Route path="/edit-profile" element={<EditProfilePage />} />
+                <Route
+                  path="/edit-profile"
+                  element={
+                    <CreateProfile
+                      onProfileCreated={handleProfileCreated}
+                      existingProfileData={{
+                        firstName: "Sofia",
+                        lastName: "Martinez",
+                        major: [
+                          {
+                            value: "environmental_science",
+                            label: "Environmental Science",
+                          },
+                        ],
+                        year: { value: "1st", label: "1st" },
+                        courses: [
+                          { value: "BIOL 241", label: "BIOL 241" },
+                          { value: "CHEM 201", label: "CHEM 201" },
+                          { value: "MATH 211", label: "MATH 211" },
+                          { value: "PHYS 211", label: "PHYS 211" },
+                          { value: "ENSC 201", label: "ENME 495" },
+                        ],
+                        interests: [
+                          { value: "camping", label: "Camping" },
+                          ,
+                          { value: "hiking", label: "Hiking" },
+                          { value: "photography", label: "Photography" },
+                          { value: "reading", label: "Reading" },
+                        ],
+                        bio: "I love field research, learning about climate change solutions, and volunteering in conservation efforts. In my free time, you’ll find me hiking, attending eco-workshops, or experimenting with DIY eco-friendly projects.",
+                        profileImage: sofiaMartinez,
+                      }}
+                    />
+                  }
+                />
                 <Route
                   path="/edited-profile"
                   element={<AfterEditingProfilePage />}
@@ -103,7 +139,10 @@ function App() {
                 <Route
                   path="/create-profile"
                   element={
-                    <CreateProfile onProfileCreated={handleProfileCreated} />
+                    <CreateProfile
+                      onProfileCreated={handleProfileCreated}
+                      existingProfileData={null}
+                    />
                   }
                 />
                 <Route path="*" element={<Navigate to="/home" />} />
