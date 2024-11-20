@@ -1,12 +1,13 @@
 // src/components/MultiSelectDropdown.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch, FaPlusCircle } from "react-icons/fa";
 
 export default function MultiSelectDropdown({
   options,
   label,
   existingSelectedOptions,
+  onChange,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptions, setSelectedOptions] = useState(
@@ -14,7 +15,12 @@ export default function MultiSelectDropdown({
   );
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(existingSelectedOptions + " Hi");
+  // Notify the parent component when selectedOptions changes
+  useEffect(() => {
+    if (onChange) {
+      onChange(selectedOptions);
+    }
+  }, [selectedOptions, existingSelectedOptions]);
 
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())

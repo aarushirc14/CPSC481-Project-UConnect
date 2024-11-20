@@ -48,8 +48,9 @@ export default function CreateProfile({
     const { name, value } = e.target;
     setProfileData({ ...profileData, [name]: value });
   };
-  const handleMajorChange = (selectedMajors) =>
+  const handleMajorChange = (selectedMajors) => {
     setProfileData({ ...profileData, major: selectedMajors });
+  };
   const handleYearChange = (selectedYear) =>
     setProfileData({ ...profileData, year: selectedYear });
   const handleCoursesChange = (selectedCourses) =>
@@ -59,12 +60,24 @@ export default function CreateProfile({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if some fields are filled out - this part is buggy, only demo with either name, bio, or year missing
+    const isFirstNameEmpty = !profileData.firstName.trim(); // no first name
+    const isLastNameEmpty = !profileData.lastName.trim(); // no last name
+    const isBioEmpty = !profileData.bio.trim(); // no bio
+    const isYearNotSelected = !profileData.year; // no year
+    const isProfileImageMissing = !profileData.profileImage; // no pfp
+    const isMajorEmpty = profileData.major.length <= 0; // empty major
+    const isCoursesEmpty = profileData.courses.length <= 0; // empty courses
+    const isInterestsEmpty = profileData.interests.length <= 0; // empty interst
+
     if (
-      !profileData.firstName.trim() || // Check if the name field is empty
-      !profileData.lastName.trim() || // Check if the name field is empty
-      !profileData.bio.trim() || // Check if the bio field is empty
-      !profileData.year // Check if the year is not selected
+      isFirstNameEmpty ||
+      isLastNameEmpty ||
+      isBioEmpty ||
+      isYearNotSelected ||
+      isProfileImageMissing ||
+      isMajorEmpty ||
+      isCoursesEmpty ||
+      isInterestsEmpty
     ) {
       setShowNotification(true);
       return;
@@ -97,7 +110,10 @@ export default function CreateProfile({
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Profile Picture Upload */}
           <div className="flex justify-center">
-            <label htmlFor="profileImage" className="cursor-pointer">
+            <label
+              htmlFor="profileImage"
+              className="cursor-pointer w-full flex justify-center flex-col items-center"
+            >
               <div className="w-40 h-40 rounded-full bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 flex justify-center items-center overflow-hidden relative border-2 border-black">
                 {profileData.profileImage ? (
                   <img
@@ -109,6 +125,9 @@ export default function CreateProfile({
                   <MdOutlineAddAPhoto className="text-uConnectDark-textMain dark:text-uConnectLight-textMain text-4xl" />
                 )}
               </div>
+              <span className="text-center w-full text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                Required Profile Picture*
+              </span>
             </label>
             <input
               type="file"
