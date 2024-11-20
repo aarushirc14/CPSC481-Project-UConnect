@@ -115,80 +115,135 @@ export default function CreateProfile({ onProfileCreated }) {
           </div>
 
           {/* Name Input */}
-          <div className="flex space-x-4">
-            <input
-              type="text"
-              name="firstName"
-              value={profileData.firstName}
-              onChange={handleChange}
-              placeholder="First Name"
-              className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
-            />
-            <input
-              type="text"
-              name="lastName"
-              value={profileData.lastName}
-              onChange={handleChange}
-              placeholder="Last Name"
-              className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
-            />
+          <div className="flex gap-4">
+            <div className="flex flex-col w-full">
+              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+                First Name:
+              </span>
+              <input
+                type="text"
+                name="firstName"
+                value={profileData.firstName}
+                onChange={handleChange}
+                placeholder="First Name"
+                className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              />
+              <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                Required Field*
+              </span>
+            </div>
+            <div className="flex flex-col w-full">
+              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+                Last Name:
+              </span>
+              <input
+                type="text"
+                name="lastName"
+                value={profileData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+                className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              />
+              <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                Required Field*
+              </span>
+            </div>
           </div>
 
           {/* Bio Input */}
-          <div>
+          <div className="flex flex-col">
+            <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+              Bio:
+            </span>
             <textarea
               name="bio"
               value={profileData.bio}
               onChange={handleChange}
               placeholder="Bio"
-              className="w-full p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              className="p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               rows="4"
               style={{
-                resize: "both", // Allow resizing
+                resize: "none", // Dont allow resizing?
               }}
             />
+            <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+              Required Field*
+            </span>
           </div>
 
           {/* Dropdown Fields */}
-          <div className="space-y-6">
-            {/* Major Dropdown */}
-            <div className="flex flex-col items-center">
-              <MultiSelectDropdown
-                options={majorOptions}
-                label="Select Major"
-                selectedOptions={profileData.major}
-                onChange={handleMajorChange}
-              />
+          <div className="flex flex-col gap-5 pb-20">
+            {/* Year Dropdown */}
+            <div>
+              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+                Year:
+              </span>
+              <div className="flex flex-col h-fit">
+                <SingleSelectDropdown
+                  options={yearOptions}
+                  label="Select Year"
+                  selectedOption={profileData.year}
+                  onChange={handleYearChange}
+                />
+                <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                  Required Field*
+                </span>
+              </div>
             </div>
 
-            {/* Year Dropdown */}
-            <div className="flex flex-col items-center">
-              <SingleSelectDropdown
-                options={yearOptions}
-                label="Select Year"
-                selectedOption={profileData.year}
-                onChange={handleYearChange}
-              />
+            {/* Major Dropdown */}
+            <div>
+              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+                Major:
+              </span>
+              <div className="flex flex-col h-fit">
+                <MultiSelectDropdown
+                  className="flex-1"
+                  options={majorOptions}
+                  label="Select Major"
+                  selectedOptions={profileData.major}
+                  onChange={handleMajorChange}
+                />
+                <span className="text-end w-full text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                  Required Field*
+                </span>
+              </div>
             </div>
 
             {/* Courses Dropdown */}
-            <div className="flex flex-col items-center">
-              <MultiSelectDropdown
-                options={courseOptions}
-                label="Select Courses"
-                selectedOptions={profileData.courses}
-                onChange={handleCoursesChange}
-              />
+            <div>
+              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+                Courses:
+              </span>
+              <div className="flex flex-col h-fit">
+                <MultiSelectDropdown
+                  options={courseOptions}
+                  label="Select Courses"
+                  selectedOptions={profileData.courses}
+                  onChange={handleCoursesChange}
+                />
+                <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                  Required Field*
+                </span>
+              </div>
             </div>
 
             {/* Interests Dropdown */}
-            <div className="flex flex-col items-center">
-              <MultiSelectDropdown
-                options={interestOptions}
-                label="Select Interests"
-                selectedOptions={profileData.interests}
-                onChange={handleInterestsChange}
-              />
+            <div>
+              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+                Interests:
+              </span>
+              <div className="flex flex-col h-fit">
+                <MultiSelectDropdown
+                  options={interestOptions}
+                  label="Select Interests"
+                  selectedOptions={profileData.interests}
+                  onChange={handleInterestsChange}
+                />
+                <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                  Required Field*
+                </span>
+              </div>
             </div>
           </div>
 

@@ -2,7 +2,12 @@
 
 import React, { useState } from "react";
 
-export default function SingleSelectDropdown({ options, label, selectedOption, onChange }) {
+export default function SingleSelectDropdown({
+  options,
+  label,
+  selectedOption,
+  onChange,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionChange = (option) => {
@@ -11,17 +16,15 @@ export default function SingleSelectDropdown({ options, label, selectedOption, o
   };
 
   return (
-    <div className="single-select-dropdown">
+    <div className="single-select-dropdown w-full">
       {/* Selected option */}
       <div
-        className="dropdown-label"
+        className="dropdown-label rounded"
         onClick={() => setIsOpen(!isOpen)}
         role="button"
       >
         <span>{selectedOption ? selectedOption.label : label}</span>
-        <span
-          className={`caret ${isOpen ? "caret-open" : "caret-closed"}`}
-        >
+        <span className={`caret ${isOpen ? "caret-open" : "caret-closed"}`}>
           &#9662;
         </span>
       </div>

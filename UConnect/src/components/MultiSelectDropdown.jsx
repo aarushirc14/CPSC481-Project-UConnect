@@ -1,7 +1,7 @@
 // src/components/MultiSelectDropdown.jsx
 
 import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaPlusCircle } from "react-icons/fa";
 
 export default function MultiSelectDropdown({ options, label }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,12 +27,16 @@ export default function MultiSelectDropdown({ options, label }) {
   };
 
   const renderTags = () => {
+    if (selectedOptions.length <= 0) return null;
     return selectedOptions.map((option) => (
-      <span key={option.value} className="tag">
+      <span
+        key={option.value}
+        className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 py-1 rounded-full"
+      >
         {option.label}
         <button
           type="button"
-          className="tag-remove"
+          className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
           onClick={() => removeOption(option)}
         >
           &#x2715;
@@ -42,18 +46,19 @@ export default function MultiSelectDropdown({ options, label }) {
   };
 
   return (
-    <div className="multi-select-dropdown">
+    <div className="multi-select-dropdown w-full">
       {/* Selected tags */}
-      <div className="selected-tags">{renderTags()}</div>
 
       {/* Dropdown label */}
       <div
-        className="dropdown-label"
+        className="dropdown-label flex rounded"
         onClick={() => setIsOpen(!isOpen)}
         role="button"
       >
-        <span>{label}</span>
-        <span className={`caret ${isOpen ? "caret-open" : "caret-closed"}`}>
+        <span className="flex flex-wrap gap-2">{renderTags() || label}</span>
+        <span
+          className={`caret self-end ${isOpen ? "caret-open" : "caret-closed"}`}
+        >
           &#9662;
         </span>
       </div>

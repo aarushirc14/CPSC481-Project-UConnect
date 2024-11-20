@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   margin: 0;
   padding: 0;
   background-color: #131313; /* Dark background  */
-  
 }
 
 img {
@@ -15,33 +13,30 @@ img {
   height: auto;
 }
 
-
 label {
   color: #FFBFB;
-  
 }
 
 /* Label styling for login and signup form fields */
 .login_signup_form_label {
-  color: #C6C3C3; /* Light gray color for labels */
-  
+  color: #c6c3c3; /* Light gray color for labels */
 }
 
 /* Input field styling */
 .login_signup_input_field {
-  border-bottom: 1px solid #C6C3C3; /* Light gray underline */
+  border-bottom: 1px solid #c6c3c3; /* Light gray underline */
   background-color: transparent;
-  color: #C6C3C3; 
+  color: #c6c3c3;
   padding: 8px 0;
   outline: none;
-} 
+}
 
 .login_signup_input_field:focus {
-  border-bottom-color: #FC9D04; /* Yellow underline on focus */
+  border-bottom-color: #fc9d04; /* Yellow underline on focus */
 }
 
 .login_signup_button {
-  background-color: #FC9D04;
+  background-color: #fc9d04;
   color: #131313; /* Dark text color */
   font-weight: 600;
   padding: 0.5rem;
@@ -50,9 +45,8 @@ label {
 }
 
 .login_signup_button:hover {
-  background-color: #E08C03;
+  background-color: #e08c03;
 }
-
 
 /*dropdowns start*/
 .caret {
@@ -71,23 +65,21 @@ label {
 
 .multi-select-dropdown {
   position: relative;
-  width: 300px;
 }
 
 .single-select-dropdown {
   position: relative;
-  width: 300px;
 }
 
 .dropdown-label {
   padding: 10px;
-  background-color:#c6c3c3 ;
-  color:#000;
+  background-color: #c6c3c3;
+  color: #000;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px; /* Ensure consistent height */
+  min-height: 48px; /* Ensure consistent height */
   line-height: 1.5;
 }
 
@@ -95,8 +87,6 @@ label {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .tag {
@@ -155,7 +145,6 @@ label {
   border: none;
   outline: none;
 }
-
 
 .dropdown-options {
   list-style: none;
