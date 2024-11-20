@@ -1,5 +1,5 @@
 // src/components/pages/ChatPage.jsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   FaSearch,
   FaPlusCircle,
@@ -7,7 +7,7 @@ import {
   FaPaperclip,
   FaPaperPlane,
 } from "react-icons/fa";
-import { useNavigate, useLocation } from "react-router-dom";
+import MultiSelectDropdown from "../MultiSelectDropdown";
 
 //profile pic imports
 import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";
@@ -20,6 +20,7 @@ import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
 
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
+import { majorOptions } from "../../data/dropdownOptions";
 
 // Define featured users array
 const chatNameData = [
@@ -397,7 +398,7 @@ export default function ChatPage() {
         setIsActive={setIsActive}
       />
       <ChatHeader chatName={chatNameData[active].chatName} />
-      <div className="mb-32">
+      <div className="pb-32 pt-28 flex justify-end min-h-screen flex-col">
         {chatNameData[active].conversationData && (
           <Conversation
             conversationData={chatNameData[active].conversationData}
@@ -429,6 +430,13 @@ function SendText() {
 }
 
 function Conversation({ conversationData }) {
+  const endOfMessagesRef = useRef(null);
+
+  useEffect(() => {
+    // Scroll to the bottom of the messages
+    endOfMessagesRef.current?.scrollIntoView();
+  }, [conversationData]);
+
   return conversationData.map((conversation) => {
     return (
       <div className="ml-72 pt-10">
@@ -448,6 +456,7 @@ function Conversation({ conversationData }) {
             <span>{conversation.message}</span>
           </div>
         </div>
+        <div ref={endOfMessagesRef} />
       </div>
     );
   });
