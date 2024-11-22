@@ -49,8 +49,10 @@ export default function Sidebar() {
     <div
       className={`fixed top-0 left-0 bg-uConnectLight-layer2Secondary dark:bg-uConnectDark-layer2Secondary h-screen p-4 flex flex-col items-center ${navBarSize} w-16 z-10`}
     >
-      {/* Logo */}
-      <div className="flex items-center mb-8 min-h-20">
+      <div
+        className="flex items-center mb-8 min-h-20 cursor-pointer"
+        onClick={() => navigate("/home")}
+      >
         <img
           src={logo}
           alt="UConnect Logo"

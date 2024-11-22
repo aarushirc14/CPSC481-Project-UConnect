@@ -13,6 +13,7 @@
     - ```npm install @tiptap/core @tiptap/react @tiptap/starter-kit```
     - ```npm install @tiptap/extension-color @tiptap/extension-underline @tiptap/extension-image @tiptap/extension-link @tiptap/extension-placeholder @tiptap/extension-text-style @tiptap/extension-list-item @tailwindcss/typography```
     - ```npm install react-icons```
+    - ```npm install typography```
 
 
 # App Theme

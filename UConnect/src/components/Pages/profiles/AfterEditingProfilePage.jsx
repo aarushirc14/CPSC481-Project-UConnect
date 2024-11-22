@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Notification from "../../PopupMessage";
 import SearchBar from "../../SearchBar";
-import { FaEdit } from "react-icons/fa";
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 
 export default function AfterEditingProfilePage() {
@@ -81,7 +80,6 @@ export default function AfterEditingProfilePage() {
               onClick={handleEditProfileClick}
               className="mt-6 py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full inline-flex items-center justify-center gap-2 hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition"
             >
-              <FaEdit className="text-lg" /> {/* Edit Icon */}
               Edit Profile
             </button>
           </div>
