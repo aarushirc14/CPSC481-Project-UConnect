@@ -13,11 +13,11 @@ import {
 } from "../../../data/dropdownOptions";
 import Notification from "../../PopupMessage";
 
-export default function CreateProfile({
-  onProfileCreated,
-  existingProfileData,
-}) {
+export default function CreateProfile({ onProfileCreated, existingProfileData,}) 
+{
   const navigate = useNavigate();
+
+  const editing = existingProfileData;
 
   const [profileData, setProfileData] = useState(
     existingProfileData || {
@@ -85,17 +85,18 @@ export default function CreateProfile({
     // Notify App that the profile is created
     onProfileCreated();
 
-    // If all validations pass, navigate to the HomePage
-    navigate("/home");
+    // If all validations pass, navigate to AfterEditingProfilePage (if editing) or HomePage (if creating profile)
+   
+    {editing ? navigate("/edited-profile") : navigate("/home")}
   };
 
-  const editing = existingProfileData;
+  
 
   return (
     <div className="flex w-full justify-center items-center min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background px-4">
       {/* Outer Gray Box */}
       <div className="w-full max-w-5xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-12 rounded-lg mt-8 mb-8">
-        <h2 className="text-3xl font-semibold text-center text-uConnectLight-layer3 dark:text-uConnectDark-layer3 mb-6">
+        <h2 className="text-3xl font-semibold text-center text-uConnectLight-layer2 dark:text-uConnectDark-layer3 mb-6">
           {editing ? "Edit Your Profile" : "Create Your Profile"}
         </h2>
         {/* Notification Popup */}
@@ -126,7 +127,7 @@ export default function CreateProfile({
                 )}
               </div>
               <span className="text-center w-full text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                Required Profile Picture*
+                Required Field*
               </span>
             </label>
             <input
@@ -142,7 +143,7 @@ export default function CreateProfile({
           {/* Name Input */}
           <div className="flex gap-4">
             <div className="flex flex-col w-full">
-              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+              <span className="text-uConnectLight-textMain dark:text-uConnectDark-textMain">
                 First Name:
               </span>
               <input
@@ -151,14 +152,14 @@ export default function CreateProfile({
                 value={profileData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+                className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
                 Required Field*
               </span>
             </div>
             <div className="flex flex-col w-full">
-              <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+              <span className="text-uConnectLight-textMain dark:text-uConnectDark-textMain">
                 Last Name:
               </span>
               <input
@@ -167,7 +168,7 @@ export default function CreateProfile({
                 value={profileData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="flex-1 p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+                className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
                 Required Field*
@@ -177,7 +178,7 @@ export default function CreateProfile({
 
           {/* Bio Input */}
           <div className="flex flex-col">
-            <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
+            <span className="text-uConnectLight-textMain dark:text-uConnectDark-textMain">
               Bio:
             </span>
             <textarea
@@ -185,7 +186,7 @@ export default function CreateProfile({
               value={profileData.bio}
               onChange={handleChange}
               placeholder="Bio"
-              className="p-3 rounded bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 text-uConnectDark-textMain dark:text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              className="p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               rows="4"
               style={{
                 resize: "none", // Dont allow resizing?
@@ -276,9 +277,9 @@ export default function CreateProfile({
           <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="w-1/4 py-3 bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
+              className="w-1/4 py-3 bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
             >
-              {editing ? "Save Edit Changes" : "Create Profile"}
+              {editing ? "Save Changes" : "Create Profile"}
             </button>
           </div>
         </form>

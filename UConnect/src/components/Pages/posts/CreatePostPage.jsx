@@ -23,7 +23,7 @@ export default function CreatePostPage() {
               e.stopPropagation(); // Prevent the click from propagating to the parent Link
               handlePostClick();
             }}
-            className="mt-5 px-10 py-2 border border-[#FC9D04] text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-lg hover:bg-[#FC9D04] hover:text-black"
+            className="post_button mt-5 px-10 py-2 bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
           >
              Post
           </button>
