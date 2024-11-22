@@ -304,7 +304,7 @@ const content = ``
 
 export default function TipTap() {
   return (
-    <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain">
+    <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain transition">
         <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}> </EditorProvider>
     </div>
   )
