@@ -89,6 +89,7 @@ function App() {
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
+                <Route path="/sent-viewresult" element={<DetailedPostViewPage />} />
                 <Route
                   path="/edit-profile"
                   element={

@@ -58,6 +58,7 @@ const MenuBar = () => {
     fileInput.click();
   }, [editor]);
 
+
   const setLink = useCallback(() => {
     const previousUrl = editor.getAttributes('link').href
     const url = window.prompt('URL', previousUrl)
@@ -89,121 +90,121 @@ const MenuBar = () => {
   }
 
   return (
-    <div className="control-group">
-      <div className="button-group">
-        <button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleBold()
-              .run()
-          }
-          className={editor.isActive('bold') ? 'is-active' : ''}
-        >
-          <RiBold />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleItalic()
-              .run()
-          }
-          className={editor.isActive('italic') ? 'is-active' : ''}
-        >
-          <RiItalic />
-        </button>
-        <button
-            onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={editor.isActive('underline') ? 'is-active' : ''}
-        >
-            <RiUnderline />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleStrike()
-              .run()
-          }
-          className={editor.isActive('strike') ? 'is-active' : ''}
-        >
-          <RiStrikethrough />
-        </button>
-        <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-          <RiFormatClear />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive('bulletList') ? 'is-active' : ''}
-        >
-          <BsListUl />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive('orderedList') ? 'is-active' : ''}
-        >
-          <BsListOl />
-        </button>
-        <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-          <MdHorizontalRule />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .undo()
-              .run()
-          }
-        >
-          <MdOutlineUndo />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .redo()
-              .run()
-          }
-        >
-          <MdOutlineRedo />
-        </button>
-        <input
-            type="color"
-            onInput={event => editor.chain().focus().setColor(event.target.value).run()}
-            value={editor.getAttributes('textStyle').color}
-            data-testid="setColor"
-          />
-        <button
-          onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-          className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
-        >
-          <RiFontColor />
-        </button>
-        <button onClick={addImage}>
-            <IoImagesSharp />
-        </button>
-        <button onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''}>
-           <IoMdLink/>
-          </button>
-      </div>
+    <div className="pb-2 flex items-center justify-center">
+        <div className="button-group">
+            <button
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            disabled={
+                !editor.can()
+                .chain()
+                .focus()
+                .toggleBold()
+                .run()
+            }
+            className={editor.isActive('bold') ? 'is-active' : ''}
+            >
+            <RiBold />
+            </button>
+            <button
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            disabled={
+                !editor.can()
+                .chain()
+                .focus()
+                .toggleItalic()
+                .run()
+            }
+            className={editor.isActive('italic') ? 'is-active' : ''}
+            >
+            <RiItalic />
+            </button>
+            <button
+                onClick={() => editor.chain().focus().toggleUnderline().run()}
+                className={editor.isActive('underline') ? 'is-active' : ''}
+            >
+                <RiUnderline />
+            </button>
+            <button
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            disabled={
+                !editor.can()
+                .chain()
+                .focus()
+                .toggleStrike()
+                .run()
+            }
+            className={editor.isActive('strike') ? 'is-active' : ''}
+            >
+            <RiStrikethrough />
+            </button>
+            <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
+            <RiFormatClear />
+            </button>
+            <button
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            className={editor.isActive('bulletList') ? 'is-active' : ''}
+            >
+            <BsListUl />
+            </button>
+            <button
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            className={editor.isActive('orderedList') ? 'is-active' : ''}
+            >
+            <BsListOl />
+            </button>
+            <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+            <MdHorizontalRule />
+            </button>
+            <button
+            onClick={() => editor.chain().focus().undo().run()}
+            disabled={
+                !editor.can()
+                .chain()
+                .focus()
+                .undo()
+                .run()
+            }
+            >
+            <MdOutlineUndo />
+            </button>
+            <button
+            onClick={() => editor.chain().focus().redo().run()}
+            disabled={
+                !editor.can()
+                .chain()
+                .focus()
+                .redo()
+                .run()
+            }
+            >
+            <MdOutlineRedo />
+            </button>
+            <input
+                type="color"
+                onInput={event => editor.chain().focus().setColor(event.target.value).run()}
+                value={editor.getAttributes('textStyle').color}
+                data-testid="setColor"
+            />
+            <button
+            onClick={() => editor.chain().focus().setColor('#958DF1').run()}
+            className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
+            >
+            <RiFontColor />
+            </button>
+            <button onClick={addImage}>
+                <IoImagesSharp />
+            </button>
+            <button onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''}>
+            <IoMdLink/>
+            </button>
+        </div>
     </div>
   )
 }
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  Underline.configure({ types: [ListItem.name] }),
+  Underline,
   TextStyle.configure({ types: [ListItem.name] }),
   Image.configure({inline: true,}),
   Placeholder.configure({
@@ -222,10 +223,16 @@ const extensions = [
     bulletList: {
       keepMarks: true,
       keepAttributes: true, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      HTMLAttributes: {
+        class: 'list-disc'
+      }
     },
     orderedList: {
       keepMarks: true,
       keepAttributes: true, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      HTMLAttributes: {
+        class: 'list-decimal'
+      }
     },
   }),
   Link.configure({
@@ -297,7 +304,7 @@ const content = ``
 
 export default function TipTap() {
   return (
-    <div className = "text-editor">
+    <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain">
         <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}> </EditorProvider>
     </div>
   )

@@ -16,6 +16,7 @@ module.exports = {
           textSub: "#C6C3C3",
           accent: "#FC9D04",
           background: "#131313",
+          textBox: "#3F3F3F"
         },
         uConnectLight: {
           layer1: "#FFFFFF",
@@ -26,9 +27,10 @@ module.exports = {
           textSub: "#6B7280",
           accent: "#FC9D04",
           background: "#F9FAFB",
+          textBox: "#a1a1aa"
         },
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography'),],
 };
