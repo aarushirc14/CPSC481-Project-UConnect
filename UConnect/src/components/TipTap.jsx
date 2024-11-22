@@ -209,7 +209,7 @@ const extensions = [
   Image.configure({inline: true,}),
   Placeholder.configure({
     // Use a placeholder:
-    placeholder: 'Enter text here...',
+    placeholder: 'Content...',
     // Use different placeholders depending on the node type:
     // placeholder: ({ node }) => {
     //   if (node.type.name === 'heading') {

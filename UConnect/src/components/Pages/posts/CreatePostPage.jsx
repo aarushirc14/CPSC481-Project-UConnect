@@ -4,7 +4,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import TipTap from "../../TipTap";
 
-import { IoMdSend } from "react-icons/io";
 
 
 export default function CreatePostPage() {
@@ -20,7 +19,7 @@ export default function CreatePostPage() {
         <div className="TextEditor">
           <input
           type="text"
-          placeholder="Enter a Headline..."
+          placeholder="Title..."
           className=" p-8 text-xl font-semibold bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
         />
           <TipTap/>
@@ -29,9 +28,9 @@ export default function CreatePostPage() {
                 e.stopPropagation(); // Prevent the click from propagating to the parent Link
                 handlePostClick();
               }}
-              className="font-semibold mt-5 px-14 py-4 border-2 border-[#FC9D04] text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-[#FC9D04] hover:text-black flex items-center gap-2 text-xl float-end"
+             className="post_button mt-5 px-10 py-2 bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
             >
-              <IoMdSend /> Post
+              Post
             </button>
         </div>
       </div>
