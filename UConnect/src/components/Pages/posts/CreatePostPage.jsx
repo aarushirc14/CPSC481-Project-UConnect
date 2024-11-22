@@ -25,7 +25,7 @@ export default function CreatePostPage() {
             }}
             className="mt-5 px-10 py-2 border border-[#FC9D04] text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-lg hover:bg-[#FC9D04] hover:text-black"
           >
-            <IoMdSend /> Post
+             Post
           </button>
       </div>
     );

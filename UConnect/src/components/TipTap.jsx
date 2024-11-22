@@ -38,12 +38,25 @@ const MenuBar = () => {
   }
 
   const addImage = useCallback(() => {
-    const url = window.prompt('URL')
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
 
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run()
-    }
-  }, [editor])
+    fileInput.onchange = () => {
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        editor.chain().focus().setImage({ src: reader.result }).run();
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    };
+
+    fileInput.click();
+  }, [editor]);
 
   const setLink = useCallback(() => {
     const previousUrl = editor.getAttributes('link').href
@@ -195,7 +208,7 @@ const extensions = [
   Image.configure({inline: true,}),
   Placeholder.configure({
     // Use a placeholder:
-    placeholder: 'Write the text here...',
+    placeholder: 'Enter text here...',
     // Use different placeholders depending on the node type:
     // placeholder: ({ node }) => {
     //   if (node.type.name === 'heading') {
