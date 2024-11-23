@@ -17,11 +17,15 @@ export default function CreatePostPage() {
     return (
       <div className=" dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain m-auto max-w-5xl transition">
         <div className="TextEditor">
-          <input
-          type="text"
-          placeholder="Title..."
-          className=" p-8 text-xl font-semibold bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
-        />
+          <div className="top-0 left-0 px-4 py-1 flex items-center w-full mt-4 lg:mt-0">
+            <input
+            type="text"
+            placeholder="Enter a Headline..."
+            className=" p-4 text-xl font-semibold bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
+          />
+          </div>
+          <hr class="w-11/12 mx-auto bg-white border-1">
+          </hr>
           <TipTap/>
           <button
               onClick={(e) => {

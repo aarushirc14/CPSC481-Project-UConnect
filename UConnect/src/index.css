@@ -205,9 +205,10 @@ label {
 
 /* TipTap css */
 .TextEditor { 
-  
+  padding-top: 10px;
   max-width: 1024px;
   margin: 5rem auto;
+  margin-bottom: 130px;
   display: flexbox; /* fix/check later*/
 }
 
@@ -253,8 +254,7 @@ button.is-active{
   padding-right: 60px;
   padding-top: 40px;
   padding-bottom: 40px;
-  min-height: 500px;
-  border-top: 2px solid grey;
+  min-height: 480px;
 
   border-radius: 0 0 5px 5px;
     :first-child {

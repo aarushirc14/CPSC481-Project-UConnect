@@ -90,7 +90,7 @@ const MenuBar = () => {
   }
 
   return (
-    <div className="pb-2 flex items-center justify-center">
+    <div className="p-2 flex items-center justify-center">
         <div className="button-group">
             <button
             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -305,7 +305,7 @@ const content = ``
 export default function TipTap() {
   return (
     <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain transition">
-        <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}> </EditorProvider>
+        <EditorProvider slotBefore={<div><MenuBar /><hr class="w-9/12 mx-auto bg-white border-1" /></div>} extensions={extensions} content={content}> </EditorProvider>
     </div>
   )
 }
