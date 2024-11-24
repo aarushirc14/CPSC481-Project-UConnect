@@ -102,7 +102,7 @@ export default function DetailedPostViewPage() {
               </button>
             </div>
             <div className="flex mx-20 my-4 text-uConnectLight-textSub dark:text-uConnectDark-layer3 place-content-between">
-              1 People Have Commented
+              2 People Have Commented
               <button className="flex items-center gap-1">
                 <FaSort className="text-2xl"/> Sort By
               </button>

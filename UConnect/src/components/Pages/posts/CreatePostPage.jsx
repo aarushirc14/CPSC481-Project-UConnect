@@ -21,7 +21,7 @@ export default function CreatePostPage() {
             <input
             type="text"
             placeholder="Title..."
-            className=" p-4 text-xl font-semibold bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
+            className=" placeholder:italic p-4 text-xl font-semibold bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
           />
           </div>
           <hr class="w-11/12 mx-auto bg-white border-1">
