@@ -7,6 +7,7 @@ import aaronPatel from "../../assets/profilePics/aaronPatel.jpg";
 import jordanLi from "../../assets/profilePics/shirleyLee.webp";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
 
+// Notifications Data
 const notificationsData = [
   {
     category: "Today",
@@ -109,67 +110,69 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="block min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-      {/* Search Bar */}
-      <div className="flex items-center border-2 rounded-full border-uConnectDark-accent m-10 mx-20 p-3 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
-        <FaSearch className="text-uConnectDark-accent mr-3" />
-        <input
-          type="text"
-          placeholder="Search Notifications"
-          className="bg-transparent outline-none w-full placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-textSub"
-        />
-      </div>
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+      {/* Content Offset to Avoid Overlap */}
+      <div className="ml-64 w-full">
+        {/* Search Bar */}
+        <div className="flex items-center border-2 rounded-full border-uConnectDark-accent m-10 mx-20 p-3 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
+          <FaSearch className="text-uConnectDark-accent mr-3" />
+          <input
+            type="text"
+            placeholder="Search Notifications"
+            className="bg-transparent outline-none w-full placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-textSub"
+          />
+        </div>
 
-      {/* Notifications Content */}
-      <div className="px-20">
-        {notificationsData.map((section) => (
-          <div key={section.category} className="mb-12">
-            {/* Section Header */}
-            <h2 className="text-lg font-semibold mb-4 dark:text-uConnectDark-accent text-uConnectLight-accent">
-              {section.category}
-            </h2>
+        {/* Notifications Content */}
+        <div className="px-20">
+          {notificationsData.map((section) => (
+            <div key={section.category} className="mb-12">
+              {/* Section Header */}
+              <h2 className="text-lg font-semibold mb-4 dark:text-uConnectDark-accent text-uConnectLight-accent">
+                {section.category}
+              </h2>
 
-            {/* Notifications List */}
-            <ul className="space-y-4">
-              {section.items.map((item) => (
-                <li
-                  key={item.id}
-                  className="flex items-center justify-between border-b border-uConnectLight-layer3 dark:border-uConnectDark-layer3 pb-4"
-                >
-                  {/* Left Side: Profile Picture and Message */}
-                  <div className="flex items-center">
-                    <img
-                      src={item.profilePic}
-                      alt={item.name}
-                      className="w-12 h-12 rounded-full object-cover mr-4"
-                    />
-                    <div>
-                      <p>
-                        <span className="font-bold">{item.name}</span>{" "}
-                        <span className="text-uConnectDark-accent dark:text-uConnectLight-accent">
-                          {item.message}
-                        </span>
-                      </p>
-                      <span className="text-xs text-uConnectLight-textSub dark:text-uConnectDark-textSub">
-                        {item.time}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Right Side: Action Button */}
-                  <button
-                    onClick={() => handleButtonClick(item.route)}
-                    className="text-sm font-semibold px-4 py-2 bg-uConnectLight-accent text-white rounded-lg hover:opacity-90"
+              {/* Notifications List */}
+              <ul className="space-y-4">
+                {section.items.map((item) => (
+                  <li
+                    key={item.id}
+                    className="flex items-center justify-between border-b border-uConnectLight-layer3 dark:border-uConnectDark-layer3 pb-4"
                   >
-                    {item.action}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+                    {/* Left Side: Profile Picture and Message */}
+                    <div className="flex items-center">
+                      <img
+                        src={item.profilePic}
+                        alt={item.name}
+                        className="w-12 h-12 rounded-full object-cover mr-4"
+                      />
+                      <div>
+                        <p>
+                          <span className="font-bold">{item.name}</span>{" "}
+                          <span className="text-uConnectDark-accent dark:text-uConnectLight-accent">
+                            {item.message}
+                          </span>
+                        </p>
+                        <span className="text-xs text-uConnectLight-textSub dark:text-uConnectDark-textSub">
+                          {item.time}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Right Side: Action Button */}
+                    <button
+                      onClick={() => handleButtonClick(item.route)}
+                      className="text-sm font-semibold px-4 py-2 bg-uConnectLight-accent text-white rounded-lg hover:opacity-90"
+                    >
+                      {item.action}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
-
