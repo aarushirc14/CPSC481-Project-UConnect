@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { MdOutlineInsertComment } from "react-icons/md";
@@ -13,6 +14,17 @@ import {
 
 import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
+import tracySmith from "../../../assets/profilePics/tracySmith.jpeg";
+
+const poster = {
+    name: "Tracy Smith",
+    title: "Photography Enthusiasts",
+    content: "Any photography enthusiasts here? Would love to connect with fellow photographers for some campus shots this weekend.",
+    image: tracySmith,
+    time: "12/3/2024 - 9:24 pm",
+    likes: 2,
+    dislike: 0,
+}; 
 
 const commentedusers = [
   {
@@ -30,6 +42,37 @@ const commentedusers = [
 ];
 
 export default function DetailedPostViewPage() {
+  const [likeStyle, setLikeStyle] = useState("inactive");
+  const [dislikeStyle, setDislikeStyle] = useState("inactive");
+
+  const [likes, setLikes] = useState(poster.likes); // Initial likes count
+  const [dislikes, setDislikes] = useState(poster.dislike); // Initial dislikes count
+
+  const dislikeChangeStyle = () => {
+      if (dislikeStyle === "inactive") {
+        setDislikeStyle("disliked")
+        setDislikes((prevDislikes) => prevDislikes + 1); // Increment dislikes by 1
+        if (likes > 0 && likes > poster.likes) setLikes(likes - 1); // Decrement likes if there are any
+      } else if ( dislikeStyle !== "inactive") {
+          setDislikeStyle("inactive")
+          if (dislikes > 0) setDislikes((prevDislikes) => prevDislikes - 1); // subract dislikes by 1
+      }
+    setLikeStyle("inactive")
+  };
+
+  const likeChangeStyle = () => {
+
+    if (likeStyle === "inactive") {
+      setLikeStyle("disliked")
+      setLikes((prevLikes) => prevLikes + 1); // Increment likes by 1
+      if (dislikes > 0 && dislikes > poster.dislike) setDislikes(dislikes - 1); // Decrement dislikes if there are any
+    } else if ( likeStyle !== "inactive") {
+        setLikeStyle("inactive")
+        if (likes > 0) setLikes((prevLikes) => prevLikes - 1); // subract likes by 1
+    }
+    setDislikeStyle("inactive")
+};
+
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -46,26 +89,26 @@ export default function DetailedPostViewPage() {
               e.stopPropagation(); // Prevent the click from propagating to the parent Link
               handleBackClick();
             }}
-          className=" px-4 dark:text-uConnectDark-textSub text-uConnectLight-textSub text-4xl h-full"
-          >
+            className=" px-4 dark:text-uConnectDark-textSub text-uConnectLight-textSub text-4xl h-full"
+            >
             <IoMdArrowBack />
           </button>
           <div className = "flex-col detail_page mx-8">
             <div className=" bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-11">
               <h1 className="text-4xl font-semibold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-                Photography Enthusiasts
+                {poster.title}
               </h1>
               <h2 className="flex items-center mt-4 mx-4 text-xl font-semibold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
                 Posted by: 
-                <img src="/src/assets/profilePics/tracySmith.jpeg" alt="Tracy Smith" class="w-12 h-12 rounded-full border-2 border-[#131313] object-cover mx-2" />
-                <span className="text-uConnectDark-accent"> Tracy Smith </span>
+                <img src={poster.image} alt={`${poster.name}`} class="w-12 h-12 rounded-full border-2 border-[#131313] object-cover mx-2" />
+                <span className="text-uConnectDark-accent"> {poster.name} </span>
               </h2>
               <h3 className="italic font-thin text-lg mx-4 mt-2 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-                12/3/2024 - 9:24 pm
+                {poster.time}
               </h3>
               <hr class="w-11/12 mx-auto my-5 border-uConnectLight-textMain dark:border-uConnectDark-textSub border-1"></hr>
               <p className="text-lg mx-4 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-              Any photography enthusiasts here? Would love to connect with fellow photographers for some campus shots this weekend.
+              {poster.content}
               </p>
             </div>
             <div className = "flex-row text-lg">
@@ -73,13 +116,22 @@ export default function DetailedPostViewPage() {
                   >
                     <MdOutlineInsertComment /> Comment
               </button>
-              <button className="mt-4 px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-                  >
-                    <BiLike />
+              <button className={`${
+                          likeStyle === "inactive" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                        } mt-4 px-4 py-2 inline-flex items-center gap-2`}
+                  onClick={likeChangeStyle}>
+                    {likes} <BiLike />
               </button>
-              <button className="mt-4 px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+              <button className={`${
+                          dislikeStyle === "inactive" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                        } mt-4 px-4 py-2 inline-flex gap-2 items-center`}
+                  onClick={dislikeChangeStyle}
                   >
-                    <BiDislike />
+                    {dislikes} <BiDislike />
               </button>
             </div>
             <div className="flex mt-10 items-center">
@@ -107,7 +159,7 @@ export default function DetailedPostViewPage() {
                 <FaSort className="text-2xl"/> Sort By
               </button>
             </div>
-            <div className= "">
+            <div>
               {commentedusers.map((user, index) => (
                 <div className="flex-col flex ">
                   <div className="flex mx-16 items-center space-x-4">
@@ -122,15 +174,15 @@ export default function DetailedPostViewPage() {
                   </div>
                     <span className="ml-36 mb-1 mr-8 dark:text-uConnectDark-textMain text-uConnectLight-textMain">{user.comment}</span>
                     <div className = "flex-row text-lg mb-4 ml-36">
-                      <button className="font-semibold px-4 py-2 inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                      <button className="font-semibold px-4 py-2 inline-flex items-center gap-2 rounded-xl border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
                           >
                             <MdOutlineInsertComment /> Comment
                       </button>
-                      <button className="px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                      <button className="px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
                           >
                             <BiLike />
                       </button>
-                      <button className="px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                      <button className="px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
                           >
                             <BiDislike />
                       </button>
