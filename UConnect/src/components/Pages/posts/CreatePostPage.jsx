@@ -5,18 +5,17 @@ import { useNavigate } from "react-router-dom";
 import TipTap from "../../TipTap";
 
 
-
 export default function CreatePostPage() {
   const navigate = useNavigate();
 
   const handlePostClick = () => {
-    // Add code here where it collects input text data 
     navigate("/sent-viewresult");      // After posting either return to home or go straight to Post view, for now it's home
   };
   
     return (
       <div className=" dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain m-auto max-w-5xl transition">
         <div className="TextEditor">
+          {/* Input Title */}
           <div className="top-0 left-0 px-4 py-1 flex items-center w-full mt-4 lg:mt-0 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
             <input
             type="text"
@@ -26,7 +25,9 @@ export default function CreatePostPage() {
           </div>
           <hr class="w-11/12 mx-auto bg-white border-1">
           </hr>
+          {/* Input Content, The Text Editor */}
           <TipTap/>
+          {/* Post Button */}
           <button
               onClick={(e) => {
                 e.stopPropagation(); // Prevent the click from propagating to the parent Link
