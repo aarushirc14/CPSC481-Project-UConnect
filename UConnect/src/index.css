@@ -336,3 +336,9 @@ button.is-active{
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+.detail_page {
+  width: 90%;
+  margin: 0 auto;
+
+}
