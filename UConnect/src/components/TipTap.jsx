@@ -91,7 +91,7 @@ const MenuBar = () => {
 
   return (
     <div className="p-2 flex items-center justify-center">
-        <div className="button-group">
+        <div className="button-group dark:text-uConnectDark-textSub text-uConnectLight-textSub transition">
             <button
             onClick={() => editor.chain().focus().toggleBold().run()}
             disabled={
@@ -209,6 +209,7 @@ const extensions = [
   Image.configure({inline: true,}),
   Placeholder.configure({
     // Use a placeholder:
+    emptyEditorClass: "before:content-[attr(data-placeholder)] before:float-left text-uConnectLight-textSub dark:text-uConnectDark-layer3 before:h-0 before:pointer-events-none",
     placeholder: 'Content...',
     // Use different placeholders depending on the node type:
     // placeholder: ({ node }) => {
@@ -224,14 +225,14 @@ const extensions = [
       keepMarks: true,
       keepAttributes: true, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
       HTMLAttributes: {
-        class: 'list-disc'
+        class: 'list-disc pl-4 my-5 mr-4 ml-1.5'
       }
     },
     orderedList: {
       keepMarks: true,
       keepAttributes: true, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
       HTMLAttributes: {
-        class: 'list-decimal'
+        class: 'list-decimal pl-4 my-5 mr-4 ml-1.5'
       }
     },
   }),
@@ -304,7 +305,7 @@ const content = ``
 
 export default function TipTap() {
   return (
-    <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain transition">
+    <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textMain text-uConnectLight-textMain transition">
         <EditorProvider slotBefore={<div><MenuBar /><hr class="w-9/12 mx-auto bg-white border-1" /></div>} extensions={extensions} content={content}> </EditorProvider>
     </div>
   )

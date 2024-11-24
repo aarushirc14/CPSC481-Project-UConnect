@@ -208,18 +208,19 @@ label {
   padding-top: 10px;
   max-width: 1024px;
   margin: 5rem auto;
-  margin-bottom: 130px;
+  margin-bottom: 80px;
   display: flexbox; /* fix/check later*/
 }
 
 
 
-
+/* Remove later
 .text-editor {
   background: #3F3F3F;
   border-radius: 5px;
   color: rgb(238, 238, 238);
 }
+*/
 
 .control-group {
   padding-bottom: 5px;
@@ -328,9 +329,9 @@ button.is-active{
     }
   }
   .post_button {
-    margin: 0;
-    position: absolute;
-    top: 80%;
+    float: left;
+    position: relative;
+    margin-top: 50px;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
