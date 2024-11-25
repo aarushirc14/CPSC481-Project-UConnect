@@ -393,6 +393,7 @@ export default function ChatPage() {
   ]);
 
   const [search, setSearch] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
     <div className="block min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
@@ -405,14 +406,22 @@ export default function ChatPage() {
         chatName={chatNameData[active].chatName}
         setSearch={setSearch}
         search={search}
+        message={message}
+        setMessage={setMessage}
       />
       <div className="flex justify-center">
-        <div className="pb-32 pt-28 flex justify-end min-h-screen flex-col w-1/2">
+        <div
+          className={`pb-32 pt-28 flex min-h-screen flex-col w-1/2 ${
+            !search ? "justify-end" : ""
+          }`}
+        >
           {chatNameData[active].conversationData && (
             <Conversation
               conversationData={chatNameData[active].conversationData}
               chatNameData={chatNameData}
               search={search}
+              setSearch={setSearch}
+              setMessage={setMessage}
             />
           )}
         </div>
@@ -434,11 +443,24 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   const handleSendMessage = () => {
     if (message.trim() === "") return; // Prevent empty messages
 
+    const date = new Date();
+
+    const timeOptions = {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true, // Ensures 12-hour format with am/pm
+    };
+    
+    let formattedTime = date
+      .toLocaleTimeString([], timeOptions)
+      .replace(" AM", "am")
+      .replace(" PM", "pm");
+
     const newMessage = {
       name: "You",
       message: message,
       profile: sofiaMartinez,
-      timestamp: new Date().toLocaleString(), // Current time
+      timestamp: "Today at " + formattedTime,
     };
 
     // Update the chat data for the active chat
@@ -479,7 +501,13 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   );
 }
 
-function Conversation({ conversationData, chatNameData, search }) {
+function Conversation({
+  conversationData,
+  chatNameData,
+  search,
+  setSearch,
+  setMessage,
+}) {
   const endOfMessagesRef = useRef(null);
 
   useEffect(() => {
@@ -511,7 +539,17 @@ function Conversation({ conversationData, chatNameData, search }) {
     .map((conversation) => {
       return (
         <div className="pt-10">
-          <div className="flex flex-row gap-5 max-w-7xl m-auto ">
+          <div
+            className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
+              search
+                ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary"
+                : ""
+            }`}
+            onClick={() => {
+              setSearch("");
+              setMessage("");
+            }}
+          >
             <img
               src={conversation.profile}
               alt={`${conversation.name}`}
@@ -533,8 +571,7 @@ function Conversation({ conversationData, chatNameData, search }) {
     });
 }
 
-function ChatHeader({ chatName, setSearch, search }) {
-  const [message, setMessage] = useState("");
+function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
   const handleSearchMessage = () => {
     if (message.trim() === "") return; // Prevent empty messages
     setSearch(message);
