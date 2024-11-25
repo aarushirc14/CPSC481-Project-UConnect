@@ -127,7 +127,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                 )}
               </div>
               <span className="text-center w-full text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                Required Field*
+                Required*
               </span>
             </label>
             <input
@@ -155,7 +155,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                 className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                Required Field*
+                Required*
               </span>
             </div>
             <div className="flex flex-col w-full">
@@ -171,7 +171,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                 className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                Required Field*
+                Required*
               </span>
             </div>
           </div>
@@ -193,7 +193,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
               }}
             />
             <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-              Required Field*
+              Required*
             </span>
           </div>
 
@@ -212,7 +212,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                   onChange={handleYearChange}
                 />
                 <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                  Required Field*
+                  Required*
                 </span>
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                   onChange={handleMajorChange}
                 />
                 <span className="text-end w-full text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                  Required Field*
+                  Required*
                 </span>
               </div>
             </div>
@@ -249,7 +249,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                   onChange={handleCoursesChange}
                 />
                 <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                  Required Field*
+                  Required*
                 </span>
               </div>
             </div>
@@ -267,7 +267,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                   onChange={handleInterestsChange}
                 />
                 <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                  Required Field*
+                  Required*
                 </span>
               </div>
             </div>
