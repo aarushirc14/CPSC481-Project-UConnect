@@ -130,7 +130,7 @@ export default function NotificationsPage() {
                   <li
                     key={item.id}
                     onClick={() => handleNotificationClick(item.route)}
-                    className="flex items-center justify-start gap-4 border-b pb-4 border-uConnectLight-layer3 dark:border-uConnectDark-layer3 cursor-pointer hover:bg-uConnectLight-layer2Primary dark:hover:bg-uConnectDark-layer2Primary rounded-md px-3 py-2"
+                    className="flex items-center justify-start gap-4 border-b pb-4 border-uConnectLight-layer3 dark:border-uConnectDark-layer3 cursor-pointer hover:bg-uConnectLight-layer2Primary dark:hover:bg-uConnectDark-layer2Primary px-3 py-2"
                   >
                     {/* Left Side: Profile Picture */}
                     <img
