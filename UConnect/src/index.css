@@ -206,21 +206,11 @@ label {
 /* TipTap css */
 .TextEditor { 
   padding-top: 10px;
-  max-width: 1024px;
-  margin: 5rem auto;
-  margin-bottom: 80px;
+  margin: 3rem auto;
+  margin-bottom: 90px;
   display: flexbox; /* fix/check later*/
 }
 
-
-
-/* Remove later
-.text-editor {
-  background: #3F3F3F;
-  border-radius: 5px;
-  color: rgb(238, 238, 238);
-}
-*/
 
 .control-group {
   padding-bottom: 5px;
@@ -259,7 +249,7 @@ button.is-active{
 
   border-radius: 0 0 5px 5px;
     :first-child {
-      margin-top: 0;
+      margin-top: 10px;
     }
 
     /* Link styles */

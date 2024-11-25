@@ -299,7 +299,25 @@ const extensions = [
   }),
 ]
 
-const content = ``
+const content = `
+        <p>
+          <b>Several new Summer Tech Internships has open for 2025! Companies offering these internships are listed below:</b>
+        </p>
+        <ul>
+          <li>Apple - software and hardware engineering</li>
+          <li>Microsoft - software engineering, data science, and cloud computing roles</li>
+          <li>Goldman Sachs - Summer Analyst</li>
+          <li>NVIDIA - AI research, autonomous vehicle development, and gaming technology</li>
+          <li>JPMorgan - quantitative analysis and fintech development</li>
+          <li>Cenovus Energy - Process Data Operations, OT Integrity and Integration and Automation Support</li>
+          <li>Lockheed Martin Corporation - Software Development Intern, work primarily in C++</li>
+          <li>Propra - Operations Intern</li>
+          <li>liTAQA - IT Service Delivery Summer Student</li>
+        </ul>
+        <p>
+          Good Luck!
+        </p>
+        `
 
 
 
