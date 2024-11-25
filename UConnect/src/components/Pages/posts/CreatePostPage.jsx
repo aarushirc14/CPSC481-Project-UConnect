@@ -1,6 +1,6 @@
 // src/components/pages/posts/CreatePostPage.jsx
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TipTap from "../../TipTap";
 
@@ -11,6 +11,8 @@ export default function CreatePostPage() {
   const handlePostClick = () => {
     navigate("/sent-viewresult");      // After posting either return to home or go straight to Post view, for now it's home
   };
+
+  const [inputValue, setInputValue] = useState("SUMMER TECH INTERNSHIPS AVAILABLE");
   
     return (
       <div className="flex-1 p-6 mt-10 ml-40">
@@ -20,8 +22,9 @@ export default function CreatePostPage() {
             <div className="top-0 left-0 px-4 py-1 flex items-center w-full mt-4 lg:mt-0 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
               <input
               type="text"
-              value="SUMMER TECH INTERNSHIPS AVAILABLE"
+              value={inputValue}
               placeholder="Title..."
+              onChange={(e) => setInputValue(e.target.value)}
               className=" placeholder:italic pt-4 px-4 pb-2 text-2xl font-semibold bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
             />
             </div>
