@@ -38,7 +38,7 @@ const poster = {
       </div>
   ),
     image: sofiaMartinez,
-    time: "1/21/2025 - 10:05 pam",
+    time: "1/21/2025 - 10:05 am",
     likes: 0,
     dislike: 0,
 };
