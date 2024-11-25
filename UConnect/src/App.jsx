@@ -19,6 +19,7 @@ import NotificationsPage from "./components/pages/NotificationsPage";
 import CreatePostPage from "./components/pages/posts/CreatePostPage";
 import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePage";
 import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage";
+import DetailedPostViewPageNewpost from "./components/pages/posts/DetailedPostViewPageNewpost";
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
 import uconnectFullLogo from "./assets/logo/uconnectFullLogo.webp";
 
@@ -89,7 +90,7 @@ function App() {
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
-                <Route path="/sent-viewresult" element={<DetailedPostViewPage />} />
+                <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
                 <Route
                   path="/edit-profile"
                   element={
