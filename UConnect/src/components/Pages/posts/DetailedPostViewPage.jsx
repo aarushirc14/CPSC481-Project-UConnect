@@ -17,11 +17,19 @@ import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
 import tracySmith from "../../../assets/profilePics/tracySmith.jpeg";
 
+
 // Define the Poster
 const poster = {
     name: "Tracy Smith",
     title: "Photography Enthusiasts",
-    content: "Any photography enthusiasts here? Would love to connect with fellow photographers for some campus shots this weekend.",
+    content: (
+      <div className="mt-2.5">
+        <p className="mb-6">
+          Any photography enthusiasts here? Would love to connect with fellow photographers for some campus shots this weekend.
+        </p>
+        <img src="/src/assets/calgaryPhotography.jpg" alt="Calgary"></img>
+      </div>
+  ),
     image: tracySmith,
     time: "12/3/2024 - 9:24 pm",
     likes: 2,
@@ -40,13 +48,17 @@ const commentedusers = [
     name: "Rashida Williams",
     comment: "Hi Tracy! I'm a photography enthusiast too! I'd love to join you for some campus shots this weekend. What time were you thinking of meeting up?",
     image: rashidaWilliams,
-    time: "15 mins ago"
+    time: "15 mins ago",
+    likes: 0,
+    dislike: 0,
   },
   {
     name: "Shirley Lee",
     comment: "Hey there! I'm into photography as well. I’ve been wanting to capture some sunrise or golden hour shots around campus.",
     image: shirleyLee,
-    time: "30 mins ago"
+    time: "30 mins ago",
+    likes: 1,
+    dislike: 0,
   },
 ];
 
@@ -195,15 +207,15 @@ export default function DetailedPostViewPage() {
                     <div className = "flex-row text-lg mb-4 ml-36">
                       <button className="font-semibold px-4 py-2 inline-flex items-center gap-2 rounded-xl border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
                           >
-                            <MdOutlineInsertComment /> Comment
+                            <MdOutlineInsertComment /> Reply
                       </button>
-                      <button className="px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
+                      <button className="px-4 py-2 inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
                           >
-                            <BiLike />
+                            {user.likes} <BiLike />
                       </button>
-                      <button className="px-4 py-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
+                      <button className="px-4 py-2 inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
                           >
-                            <BiDislike />
+                            {user.dislike} <BiDislike />
                       </button>
                     </div>
                 </div>
