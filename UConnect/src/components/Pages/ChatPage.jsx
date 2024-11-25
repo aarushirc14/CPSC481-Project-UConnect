@@ -426,6 +426,7 @@ export default function ChatPage() {
         setMessage={setMessage}
         chatNameData={chatNameData}
         setChatNameData={setChatNameData}
+        active={active}
       />
       <div className="flex justify-center">
         <div
@@ -550,11 +551,12 @@ function Conversation({
     );
   };
 
-  return conversationData
-    .filter((conversation) =>
-      conversation.message.toLowerCase().includes(search.toLowerCase())
-    )
-    .map((conversation) => {
+  const filteredConversations = conversationData.filter((conversation) =>
+    conversation.message.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return filteredConversations.length > 0 || !search ? (
+    filteredConversations.map((conversation, index) => {
       return (
         <div className="pt-10">
           <div
@@ -586,7 +588,12 @@ function Conversation({
           <div ref={endOfMessagesRef} />
         </div>
       );
-    });
+    })
+  ) : (
+    <div className="text-uConnectDark-accent text-2xl ml-72 text-center font-bold tracking-wider pt-10">
+      No results found
+    </div>
+  );
 }
 
 function ChatHeader({
@@ -597,6 +604,7 @@ function ChatHeader({
   setMessage,
   chatNameData,
   setChatNameData,
+  active,
 }) {
   const handleSearchMessage = () => {
     if (message.trim() === "") return; // Prevent empty messages
@@ -643,7 +651,7 @@ function ChatHeader({
           <div className="m-3 flex items-center "></div>
           <MultiSelectDropdown
             className="p-4"
-            options={chatNameData}
+            options={chatNameData.filter((chat) => chat.chatName !== chatName)}
             label="Add Members"
             existingSelectedOptions={null}
           />
