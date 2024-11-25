@@ -30,6 +30,8 @@ export default function ChatPage() {
   const [chatNameData, setChatNameData] = useState([
     {
       chatName: "Rashida Williams",
+      label: "Rashida Williams",
+      value: "rashida_williams",
       image: rashidaWilliams,
       notification: 2,
       conversationData: [
@@ -69,6 +71,8 @@ export default function ChatPage() {
     },
     {
       chatName: "Saul Alvarez",
+      label: "Saul Alvarez",
+      value: "saul_alvarez",
       image: saulAlvarez,
       notification: 1,
       conversationData: [
@@ -111,6 +115,8 @@ export default function ChatPage() {
     },
     {
       chatName: "Aaron Patel",
+      label: "Aaron Patel",
+      value: "aaron_patel",
       image: aaronPatel,
       conversationData: [
         {
@@ -242,6 +248,8 @@ export default function ChatPage() {
     },
     {
       chatName: "David Singh",
+      label: "David Singh",
+      value: "david_singh",
       image: davidSingh,
       conversationData: [
         {
@@ -266,6 +274,8 @@ export default function ChatPage() {
     },
     {
       chatName: "Tracy Smith",
+      label: "Tracy Smith",
+      value: "tracy_smith",
       image: tracySmith,
       conversationData: [
         {
@@ -293,6 +303,8 @@ export default function ChatPage() {
     },
     {
       chatName: "Alex Jones",
+      label: "Alex Jones",
+      value: "alex_jones",
       image: alexJones,
       conversationData: [
         {
@@ -323,6 +335,8 @@ export default function ChatPage() {
     },
     {
       chatName: "Landon Stone",
+      label: "Landon Stone",
+      value: "landon_stone",
       image: landonStone,
       conversationData: [
         {
@@ -354,6 +368,8 @@ export default function ChatPage() {
     },
     {
       chatName: "Bio 101 Students",
+      label: "Bio 101 Students",
+      value: "bio_101_students",
       image: [shirleyLee, landonStone],
       memberCount: 3,
       conversationData: [
@@ -408,6 +424,8 @@ export default function ChatPage() {
         search={search}
         message={message}
         setMessage={setMessage}
+        chatNameData={chatNameData}
+        setChatNameData={setChatNameData}
       />
       <div className="flex justify-center">
         <div
@@ -450,7 +468,7 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
       minute: "numeric",
       hour12: true, // Ensures 12-hour format with am/pm
     };
-    
+
     let formattedTime = date
       .toLocaleTimeString([], timeOptions)
       .replace(" AM", "am")
@@ -571,7 +589,15 @@ function Conversation({
     });
 }
 
-function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
+function ChatHeader({
+  chatName,
+  setSearch,
+  search,
+  message,
+  setMessage,
+  chatNameData,
+  setChatNameData,
+}) {
   const handleSearchMessage = () => {
     if (message.trim() === "") return; // Prevent empty messages
     setSearch(message);
@@ -613,12 +639,31 @@ function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
             )}
           </div>
         </div>
-        <div className="flex border-2 rounded-full border-uConnectDark-accent mr-8 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
-          <div className="m-3 flex items-center ">
+        <div className="flex border-2 rounded-full w-1/4 border-uConnectDark-accent mr-8 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
+          <div className="m-3 flex items-center "></div>
+          <MultiSelectDropdown
+            className="p-4"
+            options={chatNameData}
+            label="Add Members"
+            existingSelectedOptions={null}
+          />
+          <button
+            className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 w-10 items-center"
+            onClick={() => {
+              const newEntry = {
+                chatName: "CPSC 481",
+                label: "CPSC 481",
+                value: "cpsc_481",
+                image: [tracySmith, alexJones],
+                memberCount: 4,
+                conversationData: [],
+              };
+
+              // Update the chatNameData state with the new entry
+              setChatNameData((prevData) => [...prevData, newEntry]);
+            }}
+          >
             <FaPlusCircle className="text-uConnectDark-accent" />{" "}
-          </div>
-          <button className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 w-52 text-start">
-            Add Members
           </button>
         </div>
       </div>

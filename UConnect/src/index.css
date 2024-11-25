@@ -73,7 +73,7 @@ label {
 
 .dropdown-label {
   padding: 10px;
-  background-color: #c6c3c3;
+  background: #c6c3c3;
   color: #000;
   cursor: pointer;
   display: flex;
