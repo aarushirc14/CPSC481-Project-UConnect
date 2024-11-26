@@ -10,10 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@tiptap/core": "^2.10.1",
+    "@tiptap/extension-color": "^2.10.1",
+    "@tiptap/extension-image": "^2.10.1",
+    "@tiptap/extension-link": "^2.10.1",
+    "@tiptap/extension-list-item": "^2.10.1",
+    "@tiptap/extension-placeholder": "^2.10.1",
+    "@tiptap/extension-text-style": "^2.10.1",
+    "@tiptap/extension-underline": "^2.10.1",
+    "@tiptap/react": "^2.10.1",
+    "@tiptap/starter-kit": "^2.10.1",
+    "emoji-picker-react": "^4.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "typography": "^0.16.24"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

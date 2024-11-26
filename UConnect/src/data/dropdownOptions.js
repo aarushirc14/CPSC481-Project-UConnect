@@ -206,7 +206,7 @@ export const yearOptions = [
     { value: "ENME 485", label: "ENME 485" },
     { value: "ENME 493", label: "ENME 493" },
     { value: "ENME 495", label: "ENME 495" },
-    { value: "ENSC 201", label: "ENME 495" },
+    { value: "ENSC 201", label: "ENSC 201" },
     { value: "FILM 201", label: "FILM 201" },
     { value: "FNCE 317", label: "FNCE 317" },
     { value: "FNCE 341", label: "FNCE 341" },
