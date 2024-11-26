@@ -6,6 +6,7 @@ import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { MdOutlineInsertComment } from "react-icons/md";
+import EmojiPicker from "emoji-picker-react";
 import {
   FaSmile,
   FaPaperPlane,
@@ -142,6 +143,13 @@ export default function DetailedPostViewPage() {
 
   const [numberOfComments, setNumberComments] = useState(2);
   const [inputValue, setInputValue] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const onEmojiClick = (emojiData, event) => {
+    setInputValue((prevInput) => prevInput + emojiData.emoji);
+    setShowEmojiPicker(false);
+  };
+
   const onSubmitComment = () => {
     if (!inputValue.trim()) return; // Prevent submitting empty comments
     setComments((prevComment) => [{
@@ -240,15 +248,30 @@ export default function DetailedPostViewPage() {
                 />
                 <hr class=" ml-3 w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
               </div>
-              <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
-                  >
-                    <FaSmile />
-              </button>
+              {/* Set the Emoji Picker */}
+              <div className="Emoji_Picker">
+                <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
+                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                    >
+                      <FaSmile />
+                </button>
+                      {showEmojiPicker &&(
+                        <div className="rounded-lg absolute z-auto right-20 pt-1.5"
+                        
+                        >
+                          <EmojiPicker onEmojiClick={onEmojiClick}
+                          theme="auto"
+                          />
+                        </div>
+                      )}
+              </div>
+              {/* Set the Submit Button */}
               <button onClick={onSubmitComment} className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
                   >
                     <FaPaperPlane />
               </button>
             </div>
+            {/* Show number of people have commented counter */}
             <div className="flex mx-20 my-4 text-uConnectLight-textSub dark:text-uConnectDark-layer3 place-content-between">
               {numberOfComments} People Have Commented
               <button className="flex items-center gap-1">
