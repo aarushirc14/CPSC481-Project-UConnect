@@ -140,6 +140,7 @@ export default function DetailedPostViewPage() {
     navigate("/home");      // After posting go straight to Post view
   };
 
+  const [numberOfComments, setNumberComments] = useState(2);
   const [inputValue, setInputValue] = useState("");
   const onSubmitComment = () => {
     if (!inputValue.trim()) return; // Prevent submitting empty comments
@@ -159,6 +160,7 @@ export default function DetailedPostViewPage() {
       })),
     ]);
 
+    setNumberComments(numberOfComments+1);
     setInputValue("");
   };
 
@@ -248,7 +250,7 @@ export default function DetailedPostViewPage() {
               </button>
             </div>
             <div className="flex mx-20 my-4 text-uConnectLight-textSub dark:text-uConnectDark-layer3 place-content-between">
-              2 People Have Commented
+              {numberOfComments} People Have Commented
               <button className="flex items-center gap-1">
                 <FaSort className="text-2xl"/> Sort By
               </button>
