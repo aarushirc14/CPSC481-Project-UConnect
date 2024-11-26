@@ -270,7 +270,7 @@ export default function DetailedPostViewPage() {
                     </Link>
                     <span className="tracking-wider font-thin italic text-sm dark:text-uConnectDark-textSub text-uConnectLight-textSub"> {user.time} </span> 
                   </div>
-                    <span className="ml-36 mb-1 mr-8 dark:text-uConnectDark-textMain text-uConnectLight-textMain whitespace-pre-wrap break-normal">{user.comment}</span>
+                    <span className="ml-36 mb-1 mr-24 dark:text-uConnectDark-textMain text-uConnectLight-textMain whitespace-pre-wrap break-normal">{user.comment}</span>
                     <div className = "flex-row text-lg mb-4 ml-36">
                       <button className="font-semibold px-4 py-2 inline-flex items-center gap-2 rounded-xl border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
                           >
