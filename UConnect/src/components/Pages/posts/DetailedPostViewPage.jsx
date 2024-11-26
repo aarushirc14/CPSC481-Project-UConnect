@@ -45,34 +45,74 @@ const currentUser = {
 // Define the commentators array
 const commentedusers = [
   {
+    id: 1,
     name: "Rashida Williams",
     comment: "Hi Tracy! I'm a photography enthusiast too! I'd love to join you for some campus shots this weekend. What time were you thinking of meeting up?",
     image: rashidaWilliams,
     time: "15 mins ago",
-    likes: 0,
-    dislike: 0,
+    likeStatus: "inactive",
+    likes: 1,
+    dislikeStatus: "inactive",
+    dislikes: 0,
   },
   {
+    id: 2,
     name: "Shirley Lee",
     comment: "Hey there! I'm into photography as well. I’ve been wanting to capture some sunrise or golden hour shots around campus.",
     image: shirleyLee,
     time: "30 mins ago",
-    likes: 1,
-    dislike: 0,
+    likeStatus: "inactive",
+    likes: 0,
+    dislikeStatus: "inactive",
+    dislikes: 0,
   },
 ];
 
 export default function DetailedPostViewPage() {
-  {/* Update Likes and Dislikes */}
-  const [likeStyle, setLikeStyle] = useState("inactive");
-  const [dislikeStyle, setDislikeStyle] = useState("inactive");
+  {/* Update Likes and Dislikes From each Comments */}
+  const [comments, setComments] = useState(commentedusers);
 
+  const handleCommentLike = (id) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === id
+          ? {
+              ...comment,
+              likes: comment.likes + (comment.likeStatus === "active" ? -1 : 1),
+              dislikes: comment.dislikeStatus === "active" ? comment.dislikes - 1 : comment.dislikes,
+              likeStatus: comment.likeStatus === "active" ? "inactive" : "active",
+              dislikeStatus: "inactive",
+            }
+          : comment
+      )
+    );
+  };
+  
+  const handleCommentDislike = (id) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === id
+          ? {
+              ...comment,
+              dislikes: comment.dislikes + (comment.dislikeStatus === "active" ? -1 : 1),
+              likes: comment.likeStatus === "active" ? comment.likes - 1 : comment.likes,
+              dislikeStatus: comment.dislikeStatus === "active" ? "inactive" : "active",
+              likeStatus: "inactive",
+            }
+          : comment
+      )
+    );
+  };
+
+  {/* Update Likes and Dislikes From the Post*/}
+  const [likeStyle, setLikeStyle] = useState("inactive"); // Initialize the like status be inactive
+  const [dislikeStyle, setDislikeStyle] = useState("inactive"); // Initialize the dislike status to be inactive
   const [likes, setLikes] = useState(poster.likes); // Initial likes count
   const [dislikes, setDislikes] = useState(poster.dislike); // Initial dislikes count
 
   const dislikeChangeStyle = () => {
       if (dislikeStyle === "inactive") {
-        setDislikeStyle("disliked")
+        setDislikeStyle("active")
         setDislikes((prevDislikes) => prevDislikes + 1); // Increment dislikes by 1
         if (likes > 0 && likes > poster.likes) setLikes(likes - 1); // Decrement likes if there are any
       } else if ( dislikeStyle !== "inactive") {
@@ -84,7 +124,7 @@ export default function DetailedPostViewPage() {
 
   const likeChangeStyle = () => {
     if (likeStyle === "inactive") {
-      setLikeStyle("disliked")
+      setLikeStyle("active")
       setLikes((prevLikes) => prevLikes + 1); // Increment likes by 1
       if (dislikes > 0 && dislikes > poster.dislike) setDislikes(dislikes - 1); // Decrement dislikes if there are any
     } else if ( likeStyle !== "inactive") {
@@ -92,12 +132,34 @@ export default function DetailedPostViewPage() {
         if (likes > 0) setLikes((prevLikes) => prevLikes - 1); // subract likes by 1
     }
     setDislikeStyle("inactive")
-};
+  };
 
   const navigate = useNavigate();
 
   const handleBackClick = () => {
     navigate("/home");      // After posting go straight to Post view
+  };
+
+  const [inputValue, setInputValue] = useState("");
+  const onSubmitComment = () => {
+    if (!inputValue.trim()) return; // Prevent submitting empty comments
+    setComments((prevComment) => [{
+      id: 1,
+      name: currentUser.name,
+      comment: inputValue,
+      image: currentUser.image,
+      time: "now",
+      likeStatus: "inactive",
+      likes: 0,
+      dislikeStatus: "inactive",
+      dislikes: 0,
+      } , ...prevComment.map((comment) => ({
+        ...comment,
+        id: comment.id + 1, // Increment IDs of all existing comments
+      })),
+    ]);
+
+    setInputValue("");
   };
 
   return (
@@ -164,18 +226,23 @@ export default function DetailedPostViewPage() {
             <div className="flex mt-10 items-center">
               <img src={currentUser.image} alt={`${currentUser.name}`} class=" w-14 h-14 rounded-full border-2 border-[#131313] object-cover" />
               <div className=" flex-col top-0 left-0 py-1 flex w-full mt-4 lg:mt-0  text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-                <input
+                <textarea
                   type="text"
+                  value={inputValue}
                   placeholder="Comment here..."
-                  className="placeholder:italic p-3 text-xl bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="placeholder:italic px-3 text-xl bg-transparent mb-1.5 placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
+                  style={{
+                    height: "30px"
+                  }}
                 />
                 <hr class=" ml-3 w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
               </div>
-              <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+              <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
                   >
                     <FaSmile />
               </button>
-              <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+              <button onClick={onSubmitComment} className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
                   >
                     <FaPaperPlane />
               </button>
@@ -188,7 +255,7 @@ export default function DetailedPostViewPage() {
             </div>
             {/* Comment Section */}
             <div>
-              {commentedusers.map((user, index) => (
+              {comments.map((user, index) => (
                 <div className="flex-col flex ">
                   <div className="flex mx-16 items-center space-x-4">
                     {/* User Image */}
@@ -203,19 +270,27 @@ export default function DetailedPostViewPage() {
                     </Link>
                     <span className="tracking-wider font-thin italic text-sm dark:text-uConnectDark-textSub text-uConnectLight-textSub"> {user.time} </span> 
                   </div>
-                    <span className="ml-36 mb-1 mr-8 dark:text-uConnectDark-textMain text-uConnectLight-textMain">{user.comment}</span>
+                    <span className="ml-36 mb-1 mr-8 dark:text-uConnectDark-textMain text-uConnectLight-textMain whitespace-pre-wrap break-normal">{user.comment}</span>
                     <div className = "flex-row text-lg mb-4 ml-36">
                       <button className="font-semibold px-4 py-2 inline-flex items-center gap-2 rounded-xl border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
                           >
                             <MdOutlineInsertComment /> Reply
                       </button>
-                      <button className="px-4 py-2 inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          >
+                      <button className={`${
+                          user.likeStatus === "inactive" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          } px-4 py-2 inline-flex items-center gap-2`}
+                          onClick={() => handleCommentLike(user.id)}>
                             {user.likes} <BiLike />
                       </button>
-                      <button className="px-4 py-2 inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          >
-                            {user.dislike} <BiDislike />
+                      <button className={`${
+                          user.dislikeStatus === "inactive" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          } px-4 py-2 inline-flex items-center gap-2`}
+                          onClick={() => handleCommentDislike(user.id)}>
+                            {user.dislikes} <BiDislike />
                       </button>
                     </div>
                 </div>
