@@ -22,6 +22,8 @@ import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage"
 import DetailedPostViewPageNewpost from "./components/pages/posts/DetailedPostViewPageNewpost";
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
 import uconnectFullLogo from "./assets/logo/uconnectFullLogo.webp";
+import SearchResultsPage from "./components/Pages/SearchResultsPage";
+import SearchResultsPostsPage from "./components/Pages/SearchResultsPostsPage";
 
 import sofiaMartinez from "../src/assets/profilePics/sofiaMartinez.jpg";
 
@@ -90,6 +92,8 @@ function App() {
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
+                <Route path="/search-results" element={<SearchResultsPage />} />
+                <Route path="/search-results-posts" element={<SearchResultsPostsPage />} />
                 <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
                 <Route
                   path="/edit-profile"
@@ -179,6 +183,14 @@ function App() {
                 element={
                   <CreateProfile onProfileCreated={handleProfileCreated} />
                 }
+              />
+              <Route 
+                path="/search-results" 
+                element={<SearchResultsPage/>}
+              />
+              <Route 
+                path="/search-results-posts" 
+                element={<SearchResultsPostsPage/>}
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
