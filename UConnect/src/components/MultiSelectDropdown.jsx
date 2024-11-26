@@ -45,7 +45,7 @@ export default function MultiSelectDropdown({
     return selectedOptions.map((option) => (
       <span
         key={option.value}
-        className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 py-1 rounded-full"
+        className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
       >
         {option.label}
         <button
@@ -64,8 +64,12 @@ export default function MultiSelectDropdown({
       {/* Selected tags */}
 
       {/* Dropdown label */}
-      <div
-        className="dropdown-label flex rounded"
+      <div // this is VERY hardcoded lol...
+        className={`dropdown-label flex rounded ${
+          label === "Add Members"
+            ? "dark:text-uConnectDark-textSub text-uConnectLight-textSub !bg-transparent"
+            : ""
+        }`}
         onClick={() => setIsOpen(!isOpen)}
         role="button"
       >

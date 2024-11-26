@@ -15,6 +15,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(4); // Example initial count
   const disableLabel = window.location.pathname === "/chats";
 
   // Sync dark mode state with the document
@@ -37,7 +38,12 @@ export default function Sidebar() {
   const routes = [
     { path: "/home", label: "Home", icon: <FaHome /> },
     { path: "/chats", label: "Chats", icon: <FaComments />, badge: "3" },
-    { path: "/notifications", label: "Notifications", icon: <FaBell /> },
+    {
+      path: "/notifications",
+      label: "Notifications",
+      icon: <FaBell />,
+      badge: notificationCount > 0 ? notificationCount : null, // Show badge only if count > 0
+    },
     { path: "/create-post", label: "Create Post", icon: <FaPenSquare /> },
     { path: "/my-profile", label: "My Profile", icon: <FaUser /> },
   ];
@@ -49,8 +55,10 @@ export default function Sidebar() {
     <div
       className={`fixed top-0 left-0 bg-uConnectLight-layer2Secondary dark:bg-uConnectDark-layer2Secondary h-screen p-4 flex flex-col items-center ${navBarSize} w-16 z-10`}
     >
-      {/* Logo */}
-      <div className="flex items-center mb-8 min-h-20">
+      <div
+        className="flex items-center mb-8 min-h-20 cursor-pointer"
+        onClick={() => navigate("/home")}
+      >
         <img
           src={logo}
           alt="UConnect Logo"
@@ -107,7 +115,7 @@ export default function Sidebar() {
                 <FaSun className="text-uConnectLight-accent" />
               )}
             </div>
-            {/* Theme tooltip for chat page smaller width sidebar*/}
+            {/* Theme tooltip for chat page smaller width sidebar */}
             {disableLabel && (
               <div className="absolute bottom-full mb-2 hidden group-hover:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
                 Theme
@@ -172,4 +180,3 @@ function SidebarItem({ icon, label, active, onClick, badge }) {
     </div>
   );
 }
-

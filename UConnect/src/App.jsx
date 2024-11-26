@@ -13,12 +13,13 @@ import LoginPage from "./components/pages/LoginPage";
 import HomePage from "./components/pages/HomePage";
 import ChatPage from "./components/pages/ChatPage";
 import MyProfilePage from "./components/pages/profiles/MyProfilePage";
-import EditProfilePage from "./components/pages/profiles/EditProfilePage";
+//import EditProfilePage from "./components/pages/profiles/EditProfilePage";
 import AfterEditingProfilePage from "./components/pages/profiles/AfterEditingProfilePage";
 import NotificationsPage from "./components/pages/NotificationsPage";
 import CreatePostPage from "./components/pages/posts/CreatePostPage";
 import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePage";
 import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage";
+import DetailedPostViewPageNewpost from "./components/pages/posts/DetailedPostViewPageNewpost";
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
 import uconnectFullLogo from "./assets/logo/uconnectFullLogo.webp";
 import SearchResultsPage from "./components/Pages/SearchResultsPage";
@@ -93,6 +94,7 @@ function App() {
                 <Route path="/my-profile" element={<MyProfilePage />} />
                 <Route path="/search-results" element={<SearchResultsPage />} />
                 <Route path="/search-results-posts" element={<SearchResultsPostsPage />} />
+                <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
                 <Route
                   path="/edit-profile"
                   element={
@@ -113,7 +115,7 @@ function App() {
                           { value: "CHEM 201", label: "CHEM 201" },
                           { value: "MATH 211", label: "MATH 211" },
                           { value: "PHYS 211", label: "PHYS 211" },
-                          { value: "ENSC 201", label: "ENME 495" },
+                          { value: "ENSC 201", label: "ENSC 201" },
                         ],
                         interests: [
                           { value: "camping", label: "Camping" },
