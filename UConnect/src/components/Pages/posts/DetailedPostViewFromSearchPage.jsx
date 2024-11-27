@@ -1,4 +1,4 @@
-// src/components/pages/posts/DetailedPostViewPageNewpost.jsx
+// src/components/pages/posts/DetailedPostViewFromSearchPage.jsx
 
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,34 +14,27 @@ import {
 } from "react-icons/fa";
 
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
+import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
+import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
+import leoCarter from "../../../assets/profilePics/leoCarter.png";
+
 
 // Define the Poster
 const poster = {
-    name: "Sofia Martinez",
-    title: "SUMMER INTERNSHIPS AVAILABLE",
+    name: "Leo Carter",
+    title: "Call For CPSC 481 Study Group ",
     content: (
       <div className="mt-2.5">
-          <p>
-              <b>Several new Summer Tech Internships are open for 2025! Companies offering these internships are listed below:</b>
-          </p>
-          <ul className="list-disc pl-4 my-5 mr-4 ml-1.5">
-              <li className="mt-2.5">Apple - software and hardware engineering</li>
-              <li className="mt-2.5">Microsoft - software engineering, data science, and cloud computing roles</li>
-              <li className="mt-2.5">Goldman Sachs - Summer Analyst</li>
-              <li className="mt-2.5">NVIDIA - AI research, autonomous vehicle development, and gaming technology</li>
-              <li className="mt-2.5">JPMorgan - quantitative analysis and fintech development</li>
-              <li className="mt-2.5">Cenovus Energy - Process Data Operations, OT Integrity and Integration and Automation Support</li>
-              <li className="mt-2.5">Lockheed Martin Corporation - Software Development Intern, work primarily in C++</li>
-              <li className="mt-2.5">Propra - Operations Intern</li>
-              <li className="mt-2.5">liTAQA - IT Service Delivery Summer Student</li>
-          </ul>
-          <p>Good Luck!</p>
+        <p className="mb-6">
+            Hey everyone! I am a new student at UofC and I am currently looking for other students who are interested in joining a study group for CPSC 481.
+        </p>
+        <img src="/src/assets/leoCarterPost.png" alt="Person wearing a VR headset"></img>
       </div>
   ),
-    image: sofiaMartinez,
-    time: "1/21/2025 - 10:05 am",
-    likes: 0,
-    dislike: 0,
+    image: leoCarter,
+    time: "Today - 2:59 pm",
+    likes: 12,
+    dislike: 2,
 };
 
 // Define the Current User
@@ -50,11 +43,34 @@ const currentUser = {
   image: sofiaMartinez,
 };
 
-// Initialize list for potential comments
-const commentedusers = [];
+// Define the commentators array
+const commentedusers = [
+  {
+    id: 1,
+    name: "Rashida Williams",
+    comment: "Hi Tracy! I'm a photography enthusiast too! I'd love to join you for some campus shots this weekend. What time were you thinking of meeting up?",
+    image: rashidaWilliams,
+    time: "15 mins ago",
+    likeStatus: "inactive",
+    likes: 1,
+    dislikeStatus: "inactive",
+    dislikes: 0,
+  },
+  {
+    id: 2,
+    name: "Shirley Lee",
+    comment: "Hey there! I'm into photography as well. I’ve been wanting to capture some sunrise or golden hour shots around campus.",
+    image: shirleyLee,
+    time: "30 mins ago",
+    likeStatus: "inactive",
+    likes: 0,
+    dislikeStatus: "inactive",
+    dislikes: 0,
+  },
+];
 
 export default function DetailedPostViewPage() {
-  {/* Update Likes and Dislikes from each Comments */}
+  {/* Update Likes and Dislikes From each Comments */}
   const [comments, setComments] = useState(commentedusers);
 
   const handleCommentLike = (id) => {
@@ -119,17 +135,21 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate("/home");      // After posting go straight to Post view
+  };
+
   const [numberOfComments, setNumberComments] = useState(2);
   const [inputValue, setInputValue] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
-  {/* Update Comment Input to include Emoji */}
   const onEmojiClick = (emojiData, event) => {
     setInputValue((prevInput) => prevInput + emojiData.emoji);
     setShowEmojiPicker(false);
   };
 
-  {/* Update the comment Section after submitting a post */}
   const onSubmitComment = () => {
     if (!inputValue.trim()) return; // Prevent submitting empty comments
     setComments((prevComment) => [{
@@ -150,13 +170,6 @@ export default function DetailedPostViewPage() {
 
     setNumberComments(numberOfComments+1);
     setInputValue("");
-    setShowComments(true);
-  };
-  const [showComments, setShowComments] = useState(true); // choose if user want to open or close the comment section
-
-  const navigate = useNavigate();
-  const handleBackClick = () => {
-    navigate("/home");      // Go back to home
   };
 
   return (
@@ -197,12 +210,8 @@ export default function DetailedPostViewPage() {
             </div>
             {/* Comment, Like and Dislike Buttons */}
             <div className = "flex-row text-lg">
-              <button className={`font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 
-                  ${ showComments === true 
-                    ? "bg-uConnectDark-accent border-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain rounded-full hover:bg-transparent hover:dark:text-uConnectDark-textMain hover:text-uConnectLight-textMain"
-                    : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-                  }`}
-                  onClick={() => setShowComments(!showComments)}>
+              <button className="font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                  >
                     <MdOutlineInsertComment /> Comment
               </button>
               <button className={`${
@@ -247,7 +256,9 @@ export default function DetailedPostViewPage() {
                       <FaSmile />
                 </button>
                       {showEmojiPicker &&(
-                        <div className="rounded-lg absolute z-auto right-20 pt-1.5">
+                        <div className="rounded-lg absolute z-auto right-20 pt-1.5"
+                        
+                        >
                           <EmojiPicker onEmojiClick={onEmojiClick}
                           theme="auto"
                           />
@@ -268,7 +279,6 @@ export default function DetailedPostViewPage() {
               </button>
             </div>
             {/* Comment Section */}
-            {showComments &&(
             <div>
               {comments.map((user, index) => (
                 <div className="flex-col flex ">
@@ -311,10 +321,11 @@ export default function DetailedPostViewPage() {
                 </div>
               ))}
             </div>
-            )}
           </div>
         </div> 
       </div>
     </div>
   );
 }
+
+
