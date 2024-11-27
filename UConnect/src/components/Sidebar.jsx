@@ -7,11 +7,12 @@ import {
   FaUser,
   FaSun,
   FaMoon,
+  FaSignOutAlt, // Import the logout icon
 } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo/uconnectSmallLogo.png";
 
-export default function Sidebar() {
+export default function Sidebar({ onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -33,6 +34,11 @@ export default function Sidebar() {
       document.documentElement.classList.add("dark");
       setIsDarkMode(true);
     }
+  };
+
+  const handleLogout = () => {
+    onLogout(); // Trigger the parent logout function
+    navigate("/login"); // Explicitly navigate to the login page
   };
 
   const routes = [
@@ -115,35 +121,15 @@ export default function Sidebar() {
                 <FaSun className="text-uConnectLight-accent" />
               )}
             </div>
-            {/* Theme tooltip for chat page smaller width sidebar */}
-            {disableLabel && (
-              <div className="absolute bottom-full mb-2 hidden group-hover:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
-                Theme
-              </div>
-            )}
           </div>
-          {!disableLabel && (
-            <div className="flex justify-between w-full mt-2 px-2">
-              <span
-                className={`${
-                  isDarkMode
-                    ? "text-uConnectDark-textSub"
-                    : "text-uConnectLight-accent"
-                }`}
-              >
-                Light
-              </span>
-              <span
-                className={`${
-                  isDarkMode
-                    ? "text-uConnectDark-accent"
-                    : "text-uConnectLight-textSub"
-                }`}
-              >
-                Dark
-              </span>
-            </div>
-          )}
+
+          {/* Logout Button */}
+          <SidebarItem
+            icon={<FaSignOutAlt />} // Correct logout icon
+            label="Logout"
+            onClick={handleLogout}
+            active={false} // Logout should not be active
+          />
         </div>
       </div>
     </div>

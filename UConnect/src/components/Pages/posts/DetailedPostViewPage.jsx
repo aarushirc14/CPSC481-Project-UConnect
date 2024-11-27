@@ -70,7 +70,7 @@ const commentedusers = [
 ];
 
 export default function DetailedPostViewPage() {
-  {/* Update Likes and Dislikes From each Comments */}
+  {/* Update Likes and Dislikes from each Comments */}
   const [comments, setComments] = useState(commentedusers);
 
   const handleCommentLike = (id) => {
@@ -135,21 +135,17 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate("/home");      // After posting go straight to Post view
-  };
-
   const [numberOfComments, setNumberComments] = useState(2);
   const [inputValue, setInputValue] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  {/* Update Comment Input to include Emoji */}
   const onEmojiClick = (emojiData, event) => {
     setInputValue((prevInput) => prevInput + emojiData.emoji);
     setShowEmojiPicker(false);
   };
 
+  {/* Update the comment Section after submitting a post */}
   const onSubmitComment = () => {
     if (!inputValue.trim()) return; // Prevent submitting empty comments
     setComments((prevComment) => [{
@@ -170,6 +166,13 @@ export default function DetailedPostViewPage() {
 
     setNumberComments(numberOfComments+1);
     setInputValue("");
+    setShowComments(true);
+  };
+  const [showComments, setShowComments] = useState(true); // choose if user want to open or close the comment section
+
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate("/home");      // Go back to home
   };
 
   return (
@@ -210,8 +213,12 @@ export default function DetailedPostViewPage() {
             </div>
             {/* Comment, Like and Dislike Buttons */}
             <div className = "flex-row text-lg">
-              <button className="font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-                  >
+              <button className={`font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 
+                  ${ showComments === true 
+                    ? "bg-uConnectDark-accent border-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain rounded-full hover:bg-transparent hover:dark:text-uConnectDark-textMain hover:text-uConnectLight-textMain"
+                    : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                  }`}
+                  onClick={() => setShowComments(!showComments)}>
                     <MdOutlineInsertComment /> Comment
               </button>
               <button className={`${
@@ -241,12 +248,12 @@ export default function DetailedPostViewPage() {
                   value={inputValue}
                   placeholder="Comment here..."
                   onChange={(e) => setInputValue(e.target.value)}
-                  className="placeholder:italic px-3 text-xl bg-transparent mb-1.5 placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
+                  className="placeholder:italic cursor-text px-3 text-xl bg-transparent mb-1.5 placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
                   style={{
                     height: "30px"
                   }}
                 />
-                <hr class=" ml-3 w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
+                <hr class=" mx-auto w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
               </div>
               {/* Set the Emoji Picker */}
               <div className="Emoji_Picker">
@@ -256,9 +263,7 @@ export default function DetailedPostViewPage() {
                       <FaSmile />
                 </button>
                       {showEmojiPicker &&(
-                        <div className="rounded-lg absolute z-auto right-20 pt-1.5"
-                        
-                        >
+                        <div className="rounded-lg absolute z-auto right-20 pt-1.5">
                           <EmojiPicker onEmojiClick={onEmojiClick}
                           theme="auto"
                           />
@@ -279,6 +284,7 @@ export default function DetailedPostViewPage() {
               </button>
             </div>
             {/* Comment Section */}
+            {showComments &&(
             <div>
               {comments.map((user, index) => (
                 <div className="flex-col flex ">
@@ -321,6 +327,7 @@ export default function DetailedPostViewPage() {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </div> 
       </div>

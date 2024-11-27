@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SignupPage from "./components/pages/SignupPage";
@@ -13,7 +14,6 @@ import LoginPage from "./components/pages/LoginPage";
 import HomePage from "./components/pages/HomePage";
 import ChatPage from "./components/pages/ChatPage";
 import MyProfilePage from "./components/pages/profiles/MyProfilePage";
-//import EditProfilePage from "./components/pages/profiles/EditProfilePage";
 import AfterEditingProfilePage from "./components/pages/profiles/AfterEditingProfilePage";
 import NotificationsPage from "./components/pages/NotificationsPage";
 import CreatePostPage from "./components/pages/posts/CreatePostPage";
@@ -69,6 +69,10 @@ function App() {
     setIsLoggedIn(true);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Reset login state
+  };
+
   const handleProfileCreated = () => {
     setIsLoggedIn(true);
   };
@@ -83,7 +87,8 @@ function App() {
             {/* Sidebar for logged-in users */}
             <Sidebar
               activeItem={activeItem}
-              onSelectItem={setActiveItem} // Replace with actual logic
+              onSelectItem={setActiveItem}
+              onLogout={handleLogout} // Pass the logout handler
             />
             <main className="flex-1">
               <Routes>
