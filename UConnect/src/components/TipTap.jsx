@@ -9,6 +9,7 @@ import Underline from '@tiptap/extension-underline'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
+import TextAlign from '@tiptap/extension-text-align'
 import React, { useCallback } from 'react'
 import { RiBold,
         RiItalic,
@@ -20,12 +21,17 @@ import { RiBold,
 import { MdOutlineUndo,
         MdOutlineRedo,
         MdHorizontalRule,
+        MdFormatAlignCenter,
+        MdFormatAlignJustify,
+        MdFormatAlignLeft,
+        MdFormatAlignRight,
         } from "react-icons/md";
 import { BsListOl,
         BsListUl,
  } from "react-icons/bs";
 import { IoImagesSharp } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
+
 
 
 
@@ -140,6 +146,32 @@ const MenuBar = () => {
             <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
             <RiFormatClear />
             </button>
+
+            <button
+            onClick={() => editor.chain().focus().setTextAlign('left').run()}
+            className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}
+          >
+            <MdFormatAlignLeft />
+          </button>
+          <button
+            onClick={() => editor.chain().focus().setTextAlign('center').run()}
+            className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}
+          >
+            <MdFormatAlignCenter />
+          </button>
+          <button
+            onClick={() => editor.chain().focus().setTextAlign('right').run()}
+            className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}
+          >
+            <MdFormatAlignRight />
+          </button>
+          <button
+            onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+            className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}
+          >
+            <MdFormatAlignJustify />
+          </button>
+
             <button
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={editor.isActive('bulletList') ? 'is-active' : ''}
@@ -180,16 +212,19 @@ const MenuBar = () => {
             <MdOutlineRedo />
             </button>
             <input
+                id="colorPicker"
                 type="color"
                 onInput={event => editor.chain().focus().setColor(event.target.value).run()}
                 value={editor.getAttributes('textStyle').color}
-                data-testid="setColor"
+                data-testid="colorPickerButton"
+                className='absolute top-56 invisible'
             />
             <button
-            onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-            className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
-            >
-            <RiFontColor />
+                onClick={() => document.getElementById('colorPicker').click()}
+                >
+                {/* Icon or Preview */}
+                <RiFontColor style={{color: editor.getAttributes('textStyle').color}}/>
+                
             </button>
             <button onClick={addImage}>
                 <IoImagesSharp />
@@ -235,6 +270,9 @@ const extensions = [
         class: 'list-decimal pl-4 my-5 mr-4 ml-1.5'
       }
     },
+  }),
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
   }),
   Link.configure({
     openOnClick: true,
