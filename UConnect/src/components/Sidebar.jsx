@@ -166,7 +166,3 @@ function SidebarItem({ icon, label, active, onClick, badge }) {
     </div>
   );
 }
-
-    </div>
-  );
-}
