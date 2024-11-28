@@ -1,6 +1,7 @@
 // src/components/LoginForm.jsx
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import navigation
 import InputField from "../InputField";
 import Notification from "../PopupMessage";
 
@@ -10,12 +11,12 @@ export default function LoginPage({ onLogin }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Add navigate
 
   const togglePassword = () => setShowPassword(!showPassword);
 
   const handleLogin = () => {
-    // Clear previous error messages
-    setErrorMessage("");
+    setErrorMessage(""); // Reset error message
 
     // Check for empty fields
     if (!email.trim() || !password.trim()) {
@@ -31,8 +32,11 @@ export default function LoginPage({ onLogin }) {
       return;
     }
 
-    // If all validations pass, proceed with login
-    onLogin();
+    onLogin(); // Proceed with login
+  };
+
+  const handleForgotPassword = () => {
+    navigate("/forgot-password"); // Navigate to Forgot Password page
   };
 
   return (
@@ -73,6 +77,15 @@ export default function LoginPage({ onLogin }) {
       >
         LOGIN
       </button>
+      {/* Forgot Password Link */}
+      <div className="mt-4 text-sm">
+        <button
+          onClick={handleForgotPassword}
+          className="text-uConnectDark-accent hover:underline"
+        >
+          Forgot Password?
+        </button>
+      </div>
     </div>
   );
 }
