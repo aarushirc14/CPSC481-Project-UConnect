@@ -215,24 +215,24 @@ export default function DetailedPostViewPage() {
             <div className = "flex-row text-lg">
               <button className={`font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 
                   ${ showComments === true 
-                    ? "bg-uConnectDark-accent border-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain rounded-full hover:bg-transparent hover:dark:text-uConnectDark-textMain hover:text-uConnectLight-textMain"
-                    : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                    ? "bg-uConnectDark-accent border-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain rounded-full"
+                    : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full"
                   }`}
                   onClick={() => setShowComments(!showComments)}>
                     <MdOutlineInsertComment /> Comment
               </button>
               <button className={`${
                           likeStyle === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                         } mt-4 px-4 py-2 inline-flex items-center gap-2`}
                   onClick={likeChangeStyle}>
                     {likes} <BiLike />
               </button>
               <button className={`${
                           dislikeStyle === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                         } mt-4 px-4 py-2 inline-flex gap-2 items-center`}
                   onClick={dislikeChangeStyle}
                   >
@@ -309,16 +309,16 @@ export default function DetailedPostViewPage() {
                       </button>
                       <button className={`${
                           user.likeStatus === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                           } px-4 py-2 inline-flex items-center gap-2`}
                           onClick={() => handleCommentLike(user.id)}>
                             {user.likes} <BiLike />
                       </button>
                       <button className={`${
                           user.dislikeStatus === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                           } px-4 py-2 inline-flex items-center gap-2`}
                           onClick={() => handleCommentDislike(user.id)}>
                             {user.dislikes} <BiDislike />

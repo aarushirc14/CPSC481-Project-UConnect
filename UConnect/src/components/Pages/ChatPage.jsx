@@ -9,6 +9,7 @@ import {
   FaTimesCircle,
 } from "react-icons/fa";
 import MultiSelectDropdown from "../MultiSelectDropdown";
+import EmojiPicker from "emoji-picker-react";
 
 //profile pic imports
 import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";
@@ -491,6 +492,14 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
     setMessage("");
   };
 
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  {/* Update Comment Input to include Emoji */}
+  const onEmojiClick = (emojiData, event) => {
+    setMessage((prevInput) => prevInput + emojiData.emoji);
+    setShowEmojiPicker(false);
+  };
+
   return (
     <div className="flex fixed bottom-0 pb-10 w-screen dark:bg-uConnectDark-background bg-uConnectLight-background">
       <div className="flex flex-row justify-center items-center border-2 rounded-full text-lg pl-4 border-uConnectDark-accent ml-96 w-3/4 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
@@ -508,10 +517,19 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
           className="bg-transparent placeholder:text-lg placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2 m-3"
         />
         <div className="flex flex-row gap-5 mr-10">
-          <FaSmile className="text-uConnectLight-textSub dark:text-uConnectDark-layer3" />
-          <FaPaperclip className="text-uConnectLight-textSub dark:text-uConnectDark-layer3" />
+          <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>      
+            <FaSmile className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
+          </button>
+          {showEmojiPicker &&(
+            <div className="rounded-lg absolute z-auto right-20 pt-1.5 bottom-24">
+              <EmojiPicker onEmojiClick={onEmojiClick}
+              theme="auto"
+              />
+            </div>
+          )}
+          <FaPaperclip className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
           <FaPaperPlane
-            className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 cursor-pointer"
+            className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 cursor-pointer hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
             onClick={handleSendMessage}
           />
         </div>
