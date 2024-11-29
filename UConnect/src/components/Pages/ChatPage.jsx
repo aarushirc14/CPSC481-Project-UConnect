@@ -418,8 +418,6 @@ export default function ChatPage() {
         active={chatNameData[active].chatName}
         setIsActive={setIsActive}
         chatNameData={chatNameData}
-        setChatNameData={setChatNameData}
-        chatName={chatNameData[active].chatName}
       />
       <ChatHeader
         chatName={chatNameData[active].chatName}
@@ -427,9 +425,6 @@ export default function ChatPage() {
         search={search}
         message={message}
         setMessage={setMessage}
-        chatNameData={chatNameData}
-        setChatNameData={setChatNameData}
-        active={active}
       />
       <div className="flex justify-center">
         <div
@@ -496,7 +491,9 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
-  {/* Update Comment Input to include Emoji */}
+  {
+    /* Update Comment Input to include Emoji */
+  }
   const onEmojiClick = (emojiData, event) => {
     setMessage((prevInput) => prevInput + emojiData.emoji);
     setShowEmojiPicker(false);
@@ -519,14 +516,12 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
           className="bg-transparent placeholder:text-lg placeholder-uConnectLight-textSub transition   dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2 m-3"
         />
         <div className="flex flex-row gap-5 mr-10">
-          <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>      
+          <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
             <FaSmile className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
           </button>
-          {showEmojiPicker &&(
+          {showEmojiPicker && (
             <div className="rounded-lg absolute z-auto right-20 pt-1.5 bottom-24">
-              <EmojiPicker onEmojiClick={onEmojiClick}
-              theme="auto"
-              />
+              <EmojiPicker onEmojiClick={onEmojiClick} theme="auto" />
             </div>
           )}
           <FaPaperclip className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
@@ -578,7 +573,7 @@ function Conversation({
   return filteredConversations.length > 0 || !search ? (
     filteredConversations.map((conversation, index) => {
       return (
-        <div className="pt-10">
+        <div className="pt-5">
           <div
             className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
               search
@@ -616,16 +611,7 @@ function Conversation({
   );
 }
 
-function ChatHeader({
-  chatName,
-  setSearch,
-  search,
-  message,
-  setMessage,
-  chatNameData,
-  setChatNameData,
-  active,
-}) {
+function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
   const handleSearchMessage = () => {
     if (message.trim() === "") return; // Prevent empty messages
     setSearch(message);
@@ -675,36 +661,20 @@ function ChatHeader({
   );
 }
 
-function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData, chatName }) {
+function ChatSideBar({ active, setIsActive, chatNameData }) {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
   return (
     <div className="fixed ml-20 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-56 z-10">
-      <div className="flex border-2 rounded-full border-uConnectDark-accent m-5">
-
-          <MultiSelectDropdown
-            className="p-4"
-            options={chatNameData.filter((chat) => chat.chatName !== chatName)}
-            label="Add Members"
-            existingSelectedOptions={null}
-          />
-          <button
-            className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 w-10 items-center"
-            onClick={() => {
-              const newEntry = {
-                chatName: "CPSC 481",
-                label: "CPSC 481",
-                value: "cpsc_481",
-                image: [tracySmith, alexJones],
-                memberCount: 4,
-                conversationData: [],
-              };
-
-              // Update the chatNameData state with the new entry
-              setChatNameData((prevData) => [...prevData, newEntry]);
-            }}
-          >
-            <FaPlusCircle className="text-uConnectDark-accent" />{" "}
-          </button>
-      </div>{" "}
+      <div className="flex border-2 rounded-full border-uConnectDark-accent m-5 justify-center items-center">
+        <button
+          onClick={() => setPopupVisible(true)}
+          className=" flex flex-row justify-evenly items-center bg-transparent text-uConnectLight-accent transition dark:text-uConnectDark-layer3 outline-none w-full m-2"
+        >
+          New Message
+          <FaPlusCircle className="text-uConnectDark-accent h-5 w-5" />
+        </button>
+      </div>
       <div className="flex flex-col">
         {chatNameData.map((chat, index) => (
           <button onClick={() => setIsActive(index)}>
@@ -718,8 +688,124 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData, chatN
           </button>
         ))}
       </div>
+      <AccountPopup
+        isVisible={isPopupVisible}
+        setIsVisible={setPopupVisible}
+        accounts={chatNameData}
+      />
     </div>
   );
+}
+
+function AccountPopup({ isVisible, setIsVisible, accounts }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const popupRef = useRef(null); // Reference to the popup container
+
+  // Filter accounts based on search term
+  const filteredAccounts = accounts.filter((account) =>
+    account.chatName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Close the popup if clicked outside
+  useEffect(() => {
+    if (isVisible) {
+      const handleClickOutside = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          setIsVisible(false); // Close popup if clicked outside
+        }
+      };
+
+      // Add event listener on mount
+      document.addEventListener("mousedown", handleClickOutside);
+
+      // Cleanup event listener on unmount
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isVisible, setIsVisible]);
+
+  if (!isVisible) return null; // Don't render the popup if it's not visible
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+      <div
+        ref={popupRef} // Attach ref to the popup container
+        className="bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-96 w-96 p-5 shadow-lg"
+      >
+        <button
+          onClick={() => setIsVisible(false)}
+          className="absolute top-4 right-4 text-uConnectDark-accent dark:text-uConnectLight-accent"
+        >
+          X
+        </button>
+        <div className="pb-5">New Message</div>
+        <div className="flex items-center border-b-2 border-uConnectLight-accent pb-3 mb-4">
+          <div className="pr-2">To: </div>
+          <input
+            type="text"
+            placeholder="Search accounts"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full bg-transparent outline-none dark:text-uConnectDark-textMain text-uConnectLight-textMain"
+          />
+        </div>
+        <div className="max-h-64 overflow-y-auto">
+          {filteredAccounts.length > 0 ? (
+            filteredAccounts.map(
+              (account, index) =>
+                !account.memberCount && (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 px-3 hover:bg-uConnectLight-layer1Primary dark:hover:bg-uConnectDark-layer1Primary rounded-lg cursor-pointer"
+                  >
+                    <div className="flex relative items-center gap-4">
+                      <img
+                        src={account.image}
+                        alt={`${account.chatName}`}
+                        className="w-12 h-12 rounded-full border-2 border-[#131313] object-cover"
+                      />
+                      <div>
+                        <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMain font-semibold">
+                          {account.chatName}
+                        </p>
+                      </div>
+                    </div>
+                    <button className="text-uConnectDark-accent dark:text-uConnectLight-accent">
+                      Add
+                    </button>
+                  </div>
+                )
+            )
+          ) : (
+            <p className="text-center text-uConnectDark-accent dark:text-uConnectLight-accent">
+              No results found
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* <button
+          className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 w-10 items-center"
+          onClick={() => {
+            const newEntry = {
+              chatName: "CPSC 481",
+              label: "CPSC 481",
+              value: "cpsc_481",
+              image: [tracySmith, alexJones],
+              memberCount: 4,
+              conversationData: [],
+            };
+
+            // Update the chatNameData state with the new entry
+            setChatNameData((prevData) => [...prevData, newEntry]);
+          }}
+        >
+          <FaPlusCircle className="text-uConnectDark-accent" />{" "}
+        </button> */
 }
 
 function Chat({ Name, Profile, Members, Notification, Active }) {
