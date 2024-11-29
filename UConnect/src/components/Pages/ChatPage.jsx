@@ -412,11 +412,13 @@ export default function ChatPage() {
   const [message, setMessage] = useState("");
 
   return (
-    <div className="block min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+    <div className="block min-h-screen bg-uConnectLight-background transition   dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       <ChatSideBar
         active={chatNameData[active].chatName}
         setIsActive={setIsActive}
         chatNameData={chatNameData}
+        setChatNameData={setChatNameData}
+        chatName={chatNameData[active].chatName}
       />
       <ChatHeader
         chatName={chatNameData[active].chatName}
@@ -492,8 +494,8 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   };
 
   return (
-    <div className="flex fixed bottom-0 pb-10 w-screen dark:bg-uConnectDark-background bg-uConnectLight-background">
-      <div className="flex flex-row justify-center items-center border-2 rounded-full text-lg pl-4 border-uConnectDark-accent ml-96 w-3/4 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
+    <div className="flex fixed bottom-0 pb-10 w-screen transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
+      <div className="flex flex-row justify-center items-center border-2 rounded-full text-lg pl-4 border-uConnectDark-accent ml-96 w-3/4 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary">
         <input
           type="text"
           placeholder="Type Message"
@@ -505,13 +507,13 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
               handleSendMessage();
             }
           }}
-          className="bg-transparent placeholder:text-lg placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2 m-3"
+          className="bg-transparent placeholder:text-lg placeholder-uConnectLight-textSub transition   dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2 m-3"
         />
         <div className="flex flex-row gap-5 mr-10">
-          <FaSmile className="text-uConnectLight-textSub dark:text-uConnectDark-layer3" />
-          <FaPaperclip className="text-uConnectLight-textSub dark:text-uConnectDark-layer3" />
+          <FaSmile className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3" />
+          <FaPaperclip className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3" />
           <FaPaperPlane
-            className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 cursor-pointer"
+            className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 cursor-pointer"
             onClick={handleSendMessage}
           />
         </div>
@@ -562,7 +564,7 @@ function Conversation({
           <div
             className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
               search
-                ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary"
+                ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary transition  "
                 : ""
             }`}
             onClick={() => {
@@ -578,7 +580,7 @@ function Conversation({
             <div className="flex flex-col justify-center">
               <span className="tracking-wider font-bold text-xl">
                 {conversation.name}
-                <span className="font-thin text-xs tracking-normal ml-5 dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                <span className="font-thin text-xs tracking-normal ml-5 transition   dark:text-uConnectDark-textSub text-uConnectLight-textSub">
                   {conversation.timestamp}
                 </span>
               </span>
@@ -612,9 +614,9 @@ function ChatHeader({
   };
 
   return (
-    <div className="pt-10 pb-5 text-center fixed w-full dark:bg-uConnectDark-background bg-uConnectLight-background ">
+    <div className="pt-10 pb-5 text-center fixed w-full transition   dark:bg-uConnectDark-background bg-uConnectLight-background ">
       <div className="flex flex-row justify-between">
-        <div className="flex border-2 rounded-full border-uConnectDark-accent ml-80 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
+        <div className="flex border-2 rounded-full border-uConnectDark-accent ml-80 transition   bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
           <div className="m-3 flex items-center gap-5">
             <FaSearch className="text-uConnectDark-accent" />{" "}
             {/* Search Icon */}
@@ -632,7 +634,7 @@ function ChatHeader({
                   handleSearchMessage();
                 }
               }}
-              className="bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2"
+              className="bg-transparent placeholder-uConnectLight-textSub transition   dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2"
             />
             {search ? (
               <FaTimesCircle
@@ -647,8 +649,19 @@ function ChatHeader({
             )}
           </div>
         </div>
-        <div className="flex border-2 rounded-full w-1/4 border-uConnectDark-accent mr-8 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
-          <div className="m-3 flex items-center "></div>
+      </div>
+      <div className="text-uConnectDark-accent text-2xl ml-72 font-bold tracking-wider">
+        {search ? 'Search Results for: "' + message + '"' : chatName}
+      </div>
+    </div>
+  );
+}
+
+function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData, chatName }) {
+  return (
+    <div className="fixed ml-20 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-56 z-10">
+      <div className="flex border-2 rounded-full border-uConnectDark-accent m-5">
+
           <MultiSelectDropdown
             className="p-4"
             options={chatNameData.filter((chat) => chat.chatName !== chatName)}
@@ -656,7 +669,7 @@ function ChatHeader({
             existingSelectedOptions={null}
           />
           <button
-            className="text-uConnectLight-textSub dark:text-uConnectDark-layer3 w-10 items-center"
+            className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 w-10 items-center"
             onClick={() => {
               const newEntry = {
                 chatName: "CPSC 481",
@@ -673,27 +686,6 @@ function ChatHeader({
           >
             <FaPlusCircle className="text-uConnectDark-accent" />{" "}
           </button>
-        </div>
-      </div>
-      <div className="text-uConnectDark-accent text-2xl ml-72 font-bold tracking-wider">
-        {search ? 'Search Results for: "' + message + '"' : chatName}
-      </div>
-    </div>
-  );
-}
-
-function ChatSideBar({ active, setIsActive, chatNameData }) {
-  return (
-    <div className="fixed ml-20 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary min-h-screen w-56 z-10">
-      <div className="flex border-2 rounded-full border-uConnectDark-accent m-5">
-        <div className="m-3 flex items-center ">
-          <FaSearch className="text-uConnectDark-accent" /> {/* Search Icon */}
-        </div>
-        <input
-          type="text"
-          placeholder="Find Conversation"
-          className="bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2"
-        />
       </div>{" "}
       <div className="flex flex-col">
         {chatNameData.map((chat, index) => (
@@ -715,19 +707,19 @@ function ChatSideBar({ active, setIsActive, chatNameData }) {
 function Chat({ Name, Profile, Members, Notification, Active }) {
   const nameColor = Notification
     ? "text-uConnectDark-accent"
-    : "dark:text-uConnectDark-textMain text-uConnectLight-textMain";
+    : "dark:text-uConnectDark-textMain text-uConnectLight-textMain transition  ";
 
   const borderActive = Active
-    ? "border-2 border-uConnectLight-accent bg-uConnectLight-layer2Secondary dark:bg-uConnectDark-layer2Secondary"
+    ? "border-2 border-uConnectLight-accent bg-uConnectLight-layer2Secondary transition   dark:bg-uConnectDark-layer2Secondary"
     : "";
   return (
     <div className={`${borderActive}`}>
       <div
-        className={`flex flex-row justify-start items-center border-b p-3 gap-4 border-uConnectLight-layer3 dark:border-uConnectDark-layer3 font-semibold ${nameColor}`}
+        className={`flex flex-row justify-start items-center border-b p-3 gap-4 border-uConnectLight-layer3 transition   dark:border-uConnectDark-layer3 font-semibold ${nameColor}`}
       >
         <div className="relative w-12 h-12">
           {Notification && (
-            <span className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-uConnectLight-accent text-xs text-uConnectLight-layer1 dark:text-uConnectDark-layer1 rounded-full px-2">
+            <span className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-uConnectLight-accent text-xs text-uConnectLight-layer1 transition   dark:text-uConnectDark-layer1 rounded-full px-2">
               {Notification}
             </span>
           )}
@@ -756,7 +748,7 @@ function Chat({ Name, Profile, Members, Notification, Active }) {
         <div className="flex flex-col items-start">
           {Name}
           {Members && (
-            <span className="text-xs text-uConnectLight-textSub dark:text-uConnectDark-textSub">
+            <span className="text-xs text-uConnectLight-textSub transition dark:text-uConnectDark-textSub">
               {Members} Members
             </span>
           )}
