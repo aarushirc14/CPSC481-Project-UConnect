@@ -692,19 +692,25 @@ function ChatSideBar({ active, setIsActive, chatNameData }) {
         isVisible={isPopupVisible}
         setIsVisible={setPopupVisible}
         accounts={chatNameData}
+        setIsActive={setIsActive}
       />
     </div>
   );
 }
 
-function AccountPopup({ isVisible, setIsVisible, accounts }) {
+function AccountPopup({ isVisible, setIsVisible, accounts, setIsActive }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const popupRef = useRef(null); // Reference to the popup container
 
   // Filter accounts based on search term
-  const filteredAccounts = accounts.filter((account) =>
-    account.chatName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredAccounts = accounts.filter((account) => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return (
+      account.chatName.toLowerCase().includes(lowerSearchTerm) &&
+      !selectedOptions.some((option) => option.label === account.chatName) // Avoid showing already selected accounts
+    );
+  });
 
   // Close the popup if clicked outside
   useEffect(() => {
@@ -724,32 +730,69 @@ function AccountPopup({ isVisible, setIsVisible, accounts }) {
     }
   }, [isVisible, setIsVisible]);
 
+  const handleAddAccount = (account) => {
+    setSelectedOptions((prev) => [
+      ...prev,
+      { value: account.chatName, label: account.chatName },
+    ]);
+    setSearchTerm(""); // Reset the search term when adding a tag
+  };
+
+  const renderTags = () => {
+    if (selectedOptions.length <= 0) return null;
+    return selectedOptions.map((option) => (
+      <span
+        key={option.value}
+        className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full inline-flex justify-between items-center overflow-hidden whitespace-nowrap"
+      >
+        {option.label}
+        <button
+          type="button"
+          className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+          onClick={() => removeOption(option)}
+        >
+          &#x2715;
+        </button>
+      </span>
+    ));
+  };
+
+  // Remove selected option (tag)
+  const removeOption = (option) => {
+    setSelectedOptions((prevSelected) =>
+      prevSelected.filter((item) => item.value !== option.value)
+    );
+  };
+
   if (!isVisible) return null; // Don't render the popup if it's not visible
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
       <div
         ref={popupRef} // Attach ref to the popup container
-        className="bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-96 w-96 p-5 shadow-lg"
+        className="flex flex-col bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-1/2 w-1/4 p-5 shadow-lg"
       >
         <button
           onClick={() => setIsVisible(false)}
           className="absolute top-4 right-4 text-uConnectDark-accent dark:text-uConnectLight-accent"
         >
-          X
+          &#x2715;
         </button>
         <div className="pb-5">New Message</div>
         <div className="flex items-center border-b-2 border-uConnectLight-accent pb-3 mb-4">
           <div className="pr-2">To: </div>
-          <input
-            type="text"
-            placeholder="Search accounts"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-transparent outline-none dark:text-uConnectDark-textMain text-uConnectLight-textMain"
-          />
+          <div className="grid grid-cols-2 gap-2">
+            {renderTags()}
+            <input
+              type="text"
+              placeholder="Search accounts"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-transparent outline-none dark:text-uConnectDark-textMain text-uConnectLight-textMain"
+            />
+          </div>
         </div>
-        <div className="max-h-64 overflow-y-auto">
+        <div className="max-h-full overflow-y-auto">
           {filteredAccounts.length > 0 ? (
             filteredAccounts.map(
               (account, index) =>
@@ -770,7 +813,10 @@ function AccountPopup({ isVisible, setIsVisible, accounts }) {
                         </p>
                       </div>
                     </div>
-                    <button className="text-uConnectDark-accent dark:text-uConnectLight-accent">
+                    <button
+                      onClick={() => handleAddAccount(account)}
+                      className="text-uConnectDark-accent dark:text-uConnectLight-accent"
+                    >
                       Add
                     </button>
                   </div>
@@ -781,6 +827,29 @@ function AccountPopup({ isVisible, setIsVisible, accounts }) {
               No results found
             </p>
           )}
+        </div>
+        <div>
+          <button
+            onClick={() => {
+              setIsVisible(false);
+              if (selectedOptions.length == 1) {
+                const selectedAccount = selectedOptions[0];
+
+                const index = accounts.findIndex(
+                  (account) => account.chatName === selectedAccount.label
+                );
+
+                if (index !== -1) {
+                  setIsActive(index);
+                }
+              }
+
+              setIsVisible(false); // Close the popup
+            }}
+            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+          >
+            Chat
+          </button>
         </div>
       </div>
     </div>
