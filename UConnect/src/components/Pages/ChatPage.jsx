@@ -440,6 +440,7 @@ export default function ChatPage() {
                   search={search}
                   setSearch={setSearch}
                   setMessage={setMessage}
+                  active={active}
                 />
               )}
             </div>
@@ -533,6 +534,14 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
     setShowEmojiPicker(false);
   };
 
+  const updateSendText = (e) => {
+    const updatedChatData = [...chatNameData];
+    updatedChatData[activeChat].notification = null; // Reset notification for selected chat
+
+    setChatNameData(updatedChatData); // Update the state with the new data
+    setMessage(e.target.value);
+  };
+
   return (
     <div className="flex flex-col gap-2 fixed bottom-0 pb-10 w-screen transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
       {attachment && (
@@ -552,7 +561,7 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
           type="text"
           placeholder="Type Message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => updateSendText(e)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -599,6 +608,7 @@ function Conversation({
   search,
   setSearch,
   setMessage,
+  active,
 }) {
   const endOfMessagesRef = useRef(null);
 
@@ -628,53 +638,121 @@ function Conversation({
     conversation.message.toLowerCase().includes(search.toLowerCase())
   );
 
-  return filteredConversations.length > 0 || !search ? (
-    filteredConversations.map((conversation, index) => {
-      return (
-        <div className="pt-5">
-          <div
-            className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
-              search
-                ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary transition  "
-                : ""
-            }`}
-            onClick={() => {
-              setSearch("");
-              setMessage("");
-            }}
-          >
-            <img
-              src={conversation.profile}
-              alt={`${conversation.name}`}
-              className={`w-16 h-16 rounded-full border-2 border-[#131313] object-cover`}
-            />
-            <div className="flex flex-col justify-center">
-              <span className="tracking-wider font-bold text-xl">
-                {conversation.name}
-                <span className="font-thin text-xs tracking-normal ml-5 transition   dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                  {conversation.timestamp}
+  const hasNewMessages = chatNameData[active].notification > 0;
+  const notificationCount = chatNameData[active].notification; // Get the notification count for the active chat
+
+  // Split the conversation data into old and new messages based on the notification count
+  const oldMessages = filteredConversations.slice(
+    0,
+    filteredConversations.length - notificationCount
+  ); // The old messages are the ones before the new messages
+  const newMessages = filteredConversations.slice(
+    filteredConversations.length - notificationCount
+  ); // The new messages are the last 'notificationCount' messages
+
+  return (
+    <>
+      {oldMessages.length > 0 &&
+        oldMessages.map((conversation, index) => (
+          <div key={index} className="pt-5">
+            <div
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
+                search
+                  ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary transition"
+                  : ""
+              }`}
+              onClick={() => {
+                setSearch("");
+                setMessage("");
+              }}
+            >
+              <img
+                src={conversation.profile}
+                alt={conversation.name}
+                className="w-16 h-16 rounded-full border-2 border-[#131313] object-cover"
+              />
+              <div className="flex flex-col justify-center">
+                <span className="tracking-wider font-bold text-xl">
+                  {conversation.name}
+                  <span className="font-thin text-xs tracking-normal ml-5 transition dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                    {conversation.timestamp}
+                  </span>
                 </span>
-              </span>
-              {conversation.attachment && (
-                <a
-                  href={conversation.attachmentUrl} // URL created from the file object
-                  download={conversation.attachment} // This will trigger the file download
-                  className="underline text-uConnectDark-accent"
-                >
-                  {conversation.attachment} {/* Only render the file name */}
-                </a>
-              )}
-              <span>{highlightSearchTerm(conversation.message, search)}</span>
+                {conversation.attachment && (
+                  <a
+                    href={conversation.attachmentUrl} // URL created from the file object
+                    download={conversation.attachment} // This will trigger the file download
+                    className="underline text-uConnectDark-accent"
+                  >
+                    {conversation.attachment} {/* Only render the file name */}
+                  </a>
+                )}
+                <span>{highlightSearchTerm(conversation.message, search)}</span>
+              </div>
             </div>
+            <div ref={endOfMessagesRef} />
           </div>
-          <div ref={endOfMessagesRef} />
+        ))}
+      {/* Conditionally render the "New Messages" bar */}
+      {notificationCount > 0 && (
+        <div className="relative py-2 my-4">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex-grow border-t border-uConnectDark-accent dark:border-uConnectLight-accent"></div>
+            <span className="mx-4 text-uConnectDark-accent dark:text-uConnectLight-accent font-semibold text-sm">
+              New Messages
+            </span>
+            <div className="flex-grow border-t border-uConnectDark-accent dark:border-uConnectLight-accent"></div>
+          </div>
         </div>
-      );
-    })
-  ) : (
-    <div className="text-uConnectDark-accent text-2xl ml-72 text-center font-bold tracking-wider pt-10">
-      No results found
-    </div>
+      )}
+      {/* Render new messages */}
+      {newMessages.length > 0 &&
+        newMessages.map((conversation, index) => (
+          <div key={index} className="pt-5">
+            <div
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
+                search
+                  ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary transition"
+                  : ""
+              }`}
+              onClick={() => {
+                setSearch("");
+                setMessage("");
+              }}
+            >
+              <img
+                src={conversation.profile}
+                alt={conversation.name}
+                className="w-16 h-16 rounded-full border-2 border-[#131313] object-cover"
+              />
+              <div className="flex flex-col justify-center">
+                <span className="tracking-wider font-bold text-xl">
+                  {conversation.name}
+                  <span className="font-thin text-xs tracking-normal ml-5 transition dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                    {conversation.timestamp}
+                  </span>
+                </span>
+                {conversation.attachment && (
+                  <a
+                    href={conversation.attachmentUrl} // URL created from the file object
+                    download={conversation.attachment} // This will trigger the file download
+                    className="underline text-uConnectDark-accent"
+                  >
+                    {conversation.attachment} {/* Only render the file name */}
+                  </a>
+                )}
+                <span>{highlightSearchTerm(conversation.message, search)}</span>
+              </div>
+            </div>
+            <div ref={endOfMessagesRef} />
+          </div>
+        ))}
+      {filteredConversations.length === 0 && (
+        <div className="text-uConnectDark-accent text-2xl ml-72 text-center font-bold tracking-wider pt-10">
+          No results found
+        </div>
+      )}
+    </>
   );
 }
 
@@ -731,6 +809,18 @@ function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
 function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
+  const handleChatClick = (index) => {
+    // Before setting the new chat as active, reset the notification count of the currently active chat
+    if (active !== null) {
+      const updatedChatData = [...chatNameData];
+      updatedChatData[active].notification = null;
+      setChatNameData(updatedChatData); // Update chat data with the reset notification
+    }
+
+    // Set the selected chat as active
+    setIsActive(index);
+  };
+
   return (
     <div className="fixed ml-20 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-56 z-10">
       <div className="flex border-2 rounded-full border-uConnectDark-accent m-5 justify-center items-center">
@@ -744,7 +834,7 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
       </div>
       <div className="flex flex-col">
         {chatNameData.map((chat, index) => (
-          <button onClick={() => setIsActive(index)}>
+          <button onClick={() => handleChatClick(index)}>
             <Chat
               Name={chat.chatName}
               Profile={chat.image}
