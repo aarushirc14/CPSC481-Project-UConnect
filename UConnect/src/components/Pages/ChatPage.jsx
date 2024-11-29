@@ -429,7 +429,7 @@ export default function ChatPage() {
           />
           <div className="flex justify-center">
             <div
-              className={`pb-32 pt-28 flex min-h-screen flex-col w-1/2 ${
+              className={`pb-40 pt-28 flex min-h-screen flex-col w-1/2 ${
                 !search ? "justify-end" : ""
               }`}
             >
@@ -481,10 +481,9 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   const [message, setMessage] = useState(""); // Track the message input
 
   const handleSendMessage = () => {
-    if (message.trim() === "") return; // Prevent empty messages
+    if (message.trim() === "" && !attachment) return; // Prevent empty messages or messages without attachments
 
     const date = new Date();
-
     const timeOptions = {
       hour: "numeric",
       minute: "numeric",
@@ -496,11 +495,14 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
       .replace(" AM", "am")
       .replace(" PM", "pm");
 
+    // Create the message object
     const newMessage = {
       name: "You",
       message: message,
       profile: sofiaMartinez,
       timestamp: "Today at " + formattedTime,
+      attachment: attachment ? attachment.name : null, // Attach the file name if present
+      attachmentUrl: attachment ? URL.createObjectURL(attachment) : null,
     };
 
     // Update the chat data for the active chat
@@ -508,11 +510,20 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
     updatedChatData[activeChat].conversationData.push(newMessage);
     setChatNameData(updatedChatData);
 
-    // Clear the input field
+    // Clear the input field and attachment
     setMessage("");
+    setAttachment(null);
   };
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [attachment, setAttachment] = useState(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; // Get the selected file
+    if (file) {
+      setAttachment(file); // Save the file to state
+    }
+  };
 
   {
     /* Update Comment Input to include Emoji */
@@ -523,7 +534,19 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   };
 
   return (
-    <div className="flex fixed bottom-0 pb-10 w-screen transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
+    <div className="flex flex-col gap-2 fixed bottom-0 pb-10 w-screen transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
+      {attachment && (
+        <span className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full mt-2 text-sm ml-96 w-fit p-3">
+          {attachment.name}
+          <button
+            type="button"
+            className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+            onClick={() => setAttachment(null)}
+          >
+            &#x2715;
+          </button>
+        </span>
+      )}
       <div className="flex flex-row justify-center items-center border-2 rounded-full text-lg pl-4 border-uConnectDark-accent ml-96 w-3/4 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary">
         <input
           type="text"
@@ -547,7 +570,19 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
               <EmojiPicker onEmojiClick={onEmojiClick} theme="auto" />
             </div>
           )}
-          <FaPaperclip className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
+          {/* Paperclip Button - triggers file input */}
+          <label htmlFor="file-input" className="cursor-pointer">
+            <FaPaperclip className="text-uConnectLight-textSub transition dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
+          </label>
+
+          {/* Hidden file input */}
+          <input
+            id="file-input"
+            type="file"
+            accept="image/*,application/pdf,video/*" // You can specify accepted file types here
+            className="hidden"
+            onChange={handleFileChange}
+          />
           <FaPaperPlane
             className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 cursor-pointer hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
             onClick={handleSendMessage}
@@ -620,6 +655,15 @@ function Conversation({
                   {conversation.timestamp}
                 </span>
               </span>
+              {conversation.attachment && (
+                <a
+                  href={conversation.attachmentUrl} // URL created from the file object
+                  download={conversation.attachment} // This will trigger the file download
+                  className="underline text-uConnectDark-accent"
+                >
+                  {conversation.attachment} {/* Only render the file name */}
+                </a>
+              )}
               <span>{highlightSearchTerm(conversation.message, search)}</span>
             </div>
           </div>
@@ -903,6 +947,7 @@ function AccountPopup({
                   memberCount: selectedOptions.length, // The member count is the length of selectedOptions
                   conversationData: [], // Empty array to store conversation data
                 };
+                setIsActive(accounts.length);
 
                 // Update the chatNameData state with the new group entry
                 setChatNameData((prevData) => [...prevData, newEntry]);
