@@ -726,6 +726,7 @@ function AccountPopup({
       const handleClickOutside = (event) => {
         if (popupRef.current && !popupRef.current.contains(event.target)) {
           setIsVisible(false); // Close popup if clicked outside
+          setSelectedOptions([]);
         }
       };
 
@@ -838,8 +839,10 @@ function AccountPopup({
         </div>
         <div>
           <button
+            disabled={selectedOptions.length == 0}
             onClick={() => {
               setIsVisible(false);
+              setSelectedOptions([]);
               if (selectedOptions.length == 1) {
                 const selectedAccount = selectedOptions[0];
 
@@ -882,7 +885,9 @@ function AccountPopup({
                 setChatNameData((prevData) => [...prevData, newEntry]);
               }
             }}
-            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
+            hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain disabled:hover:bg-transparent
+            disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:border-uConnectLight-layer3 disabled:text-uConnectLight-textSub"
           >
             Chat
           </button>
