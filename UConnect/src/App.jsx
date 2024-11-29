@@ -65,6 +65,8 @@ function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [chatNotificationCount, setChatNotificationCount] = useState(3);
+
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
@@ -89,17 +91,31 @@ function App() {
               activeItem={activeItem}
               onSelectItem={setActiveItem}
               onLogout={handleLogout} // Pass the logout handler
+              chatNotificationCount={chatNotificationCount}
             />
             <main className="flex-1">
               <Routes>
                 <Route path="/home" element={<HomePage />} />
-                <Route path="/chats" element={<ChatPage />} />
+                <Route
+                  path="/chats"
+                  element={
+                    <ChatPage
+                      setChatNotificationCount={setChatNotificationCount}
+                    />
+                  }
+                />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
                 <Route path="/search-results" element={<SearchResultsPage />} />
-                <Route path="/search-results-posts" element={<SearchResultsPostsPage />} />
-                <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
+                <Route
+                  path="/search-results-posts"
+                  element={<SearchResultsPostsPage />}
+                />
+                <Route
+                  path="/sent-viewresult"
+                  element={<DetailedPostViewPageNewpost />}
+                />
                 <Route
                   path="/edit-profile"
                   element={
@@ -189,13 +205,10 @@ function App() {
                   <CreateProfile onProfileCreated={handleProfileCreated} />
                 }
               />
-              <Route 
-                path="/search-results" 
-                element={<SearchResultsPage/>}
-              />
-              <Route 
-                path="/search-results-posts" 
-                element={<SearchResultsPostsPage/>}
+              <Route path="/search-results" element={<SearchResultsPage />} />
+              <Route
+                path="/search-results-posts"
+                element={<SearchResultsPostsPage />}
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

@@ -21,7 +21,7 @@ import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
 
-export default function ChatPage() {
+export default function ChatPage({ setChatNotificationCount }) {
   const [active, setIsActive] = useState(-1);
 
   // Define featured users array
@@ -409,6 +409,17 @@ export default function ChatPage() {
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
   const [isPopupVisible, setPopupVisible] = useState(false);
+
+  // Update the parent component with the total notification count
+  useEffect(() => {
+    const chatNotificationCount = chatNameData.reduce(
+      (total, chat) => total + (Number(chat.notification) || 0),
+      0
+    );
+    setChatNotificationCount(
+      chatNotificationCount > 0 ? chatNotificationCount : null
+    );
+  }, [chatNameData, setChatNotificationCount]);
 
   return (
     <div className="block min-h-screen bg-uConnectLight-background transition   dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
@@ -811,7 +822,7 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
 
   const handleChatClick = (index) => {
     // Before setting the new chat as active, reset the notification count of the currently active chat
-    if (active !== null) {
+    if (active !== -1) {
       const updatedChatData = [...chatNameData];
       updatedChatData[active].notification = null;
       setChatNameData(updatedChatData); // Update chat data with the reset notification
