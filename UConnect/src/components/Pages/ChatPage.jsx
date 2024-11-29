@@ -8,7 +8,6 @@ import {
   FaPaperPlane,
   FaTimesCircle,
 } from "react-icons/fa";
-import MultiSelectDropdown from "../MultiSelectDropdown";
 import EmojiPicker from "emoji-picker-react";
 
 //profile pic imports
@@ -20,12 +19,10 @@ import tracySmith from "../../assets/profilePics/tracySmith.jpeg";
 import shirleyLee from "../../assets/profilePics/shirleyLee.webp";
 import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
-
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
-import { majorOptions } from "../../data/dropdownOptions";
 
 export default function ChatPage() {
-  const [active, setIsActive] = useState(0);
+  const [active, setIsActive] = useState(-1);
 
   // Define featured users array
   const [chatNameData, setChatNameData] = useState([
@@ -411,45 +408,70 @@ export default function ChatPage() {
 
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   return (
     <div className="block min-h-screen bg-uConnectLight-background transition   dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       <ChatSideBar
-        active={chatNameData[active].chatName}
+        active={active}
         setIsActive={setIsActive}
         chatNameData={chatNameData}
         setChatNameData={setChatNameData}
       />
-      <ChatHeader
-        chatName={chatNameData[active].chatName}
-        setSearch={setSearch}
-        search={search}
-        message={message}
-        setMessage={setMessage}
-      />
-      <div className="flex justify-center">
-        <div
-          className={`pb-32 pt-28 flex min-h-screen flex-col w-1/2 ${
-            !search ? "justify-end" : ""
-          }`}
-        >
-          {chatNameData[active].conversationData && (
-            <Conversation
-              conversationData={chatNameData[active].conversationData}
+      {active > -1 ? (
+        <>
+          <ChatHeader
+            chatName={chatNameData[active].chatName}
+            setSearch={setSearch}
+            search={search}
+            message={message}
+            setMessage={setMessage}
+          />
+          <div className="flex justify-center">
+            <div
+              className={`pb-32 pt-28 flex min-h-screen flex-col w-1/2 ${
+                !search ? "justify-end" : ""
+              }`}
+            >
+              {chatNameData[active].conversationData && (
+                <Conversation
+                  conversationData={chatNameData[active].conversationData}
+                  chatNameData={chatNameData}
+                  search={search}
+                  setSearch={setSearch}
+                  setMessage={setMessage}
+                />
+              )}
+            </div>
+          </div>
+          {chatNameData[active].conversationData && !search && (
+            <SendText
               chatNameData={chatNameData}
-              search={search}
-              setSearch={setSearch}
-              setMessage={setMessage}
+              setChatNameData={setChatNameData}
+              activeChat={active}
             />
           )}
+        </>
+      ) : (
+        <div className="flex justify-center items-center h-screen ml-28 flex-col">
+          Send a Message to Start a Chat
+          <div className="flex border-2 rounded-full border-uConnectDark-accent m-5 w-52 justify-center items-center">
+            <button
+              onClick={() => setPopupVisible(true)}
+              className=" flex flex-row justify-evenly items-center bg-transparent text-uConnectLight-accent transition dark:text-uConnectDark-layer3 outline-none w-full m-2"
+            >
+              New Message
+              <FaPlusCircle className="text-uConnectDark-accent h-5 w-5" />
+            </button>
+          </div>
+          <AccountPopup
+            isVisible={isPopupVisible}
+            setIsVisible={setPopupVisible}
+            accounts={chatNameData}
+            setIsActive={setIsActive}
+            setChatNameData={setChatNameData}
+          />
         </div>
-      </div>
-      {chatNameData[active].conversationData && !search && (
-        <SendText
-          chatNameData={chatNameData}
-          setChatNameData={setChatNameData}
-          activeChat={active}
-        />
       )}
     </div>
   );
@@ -684,7 +706,8 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
               Profile={chat.image}
               Members={chat.memberCount}
               Notification={chat.notification}
-              Active={active == chat.chatName}
+              Active={active}
+              accounts={chatNameData}
             />
           </button>
         ))}
@@ -897,14 +920,19 @@ function AccountPopup({
   );
 }
 
-function Chat({ Name, Profile, Members, Notification, Active }) {
+function Chat({ Name, Profile, Members, Notification, Active, accounts }) {
   const nameColor = Notification
     ? "text-uConnectDark-accent"
     : "dark:text-uConnectDark-textMain text-uConnectLight-textMain transition  ";
 
-  const borderActive = Active
-    ? "border-2 border-uConnectLight-accent bg-uConnectLight-layer2Secondary transition   dark:bg-uConnectDark-layer2Secondary"
-    : "";
+  const activeIndex = accounts.findIndex(
+    (account) => account.chatName === Name
+  );
+
+  const borderActive =
+    activeIndex === Active
+      ? "border-2 border-uConnectLight-accent bg-uConnectLight-layer2Secondary transition   dark:bg-uConnectDark-layer2Secondary"
+      : "";
   return (
     <div className={`${borderActive}`}>
       <div
