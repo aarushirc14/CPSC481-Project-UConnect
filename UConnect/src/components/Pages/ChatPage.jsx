@@ -648,8 +648,6 @@ function Conversation({
   const filteredConversations = conversationData.filter((conversation) =>
     conversation.message.toLowerCase().includes(search.toLowerCase())
   );
-
-  const hasNewMessages = chatNameData[active].notification > 0;
   const notificationCount = chatNameData[active].notification; // Get the notification count for the active chat
 
   // Split the conversation data into old and new messages based on the notification count
@@ -663,6 +661,10 @@ function Conversation({
 
   return (
     <>
+      <div className="pt-10 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+        Welcome to the beggining of your conversation with{" "}
+        {chatNameData[active].chatName}
+      </div>
       {oldMessages.length > 0 &&
         oldMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
@@ -758,7 +760,7 @@ function Conversation({
             <div ref={endOfMessagesRef} />
           </div>
         ))}
-      {filteredConversations.length === 0 && (
+      {filteredConversations.length === 0 && search && (
         <div className="text-uConnectDark-accent text-2xl ml-72 text-center font-bold tracking-wider pt-10">
           No results found
         </div>
