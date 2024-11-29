@@ -418,6 +418,7 @@ export default function ChatPage() {
         active={chatNameData[active].chatName}
         setIsActive={setIsActive}
         chatNameData={chatNameData}
+        setChatNameData={setChatNameData}
       />
       <ChatHeader
         chatName={chatNameData[active].chatName}
@@ -661,7 +662,7 @@ function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
   );
 }
 
-function ChatSideBar({ active, setIsActive, chatNameData }) {
+function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   return (
@@ -693,12 +694,19 @@ function ChatSideBar({ active, setIsActive, chatNameData }) {
         setIsVisible={setPopupVisible}
         accounts={chatNameData}
         setIsActive={setIsActive}
+        setChatNameData={setChatNameData}
       />
     </div>
   );
 }
 
-function AccountPopup({ isVisible, setIsVisible, accounts, setIsActive }) {
+function AccountPopup({
+  isVisible,
+  setIsVisible,
+  accounts,
+  setIsActive,
+  setChatNameData,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const popupRef = useRef(null); // Reference to the popup container
@@ -843,8 +851,36 @@ function AccountPopup({ isVisible, setIsVisible, accounts, setIsActive }) {
                   setIsActive(index);
                 }
               }
+              if (selectedOptions.length > 1) {
+                // For multiple selections, gather images based on selected accounts from the accounts array
+                const selectedImages = selectedOptions
+                  .map((option) => {
+                    // Find the account in the accounts array that matches the selected option's chatName
+                    const account = accounts.find(
+                      (acc) => acc.chatName === option.label
+                    );
+                    return account ? account.image : null; // Return the image or null if not found
+                  })
+                  .filter((image) => image !== null); // Remove any null values in case an account wasn't found
 
-              setIsVisible(false); // Close the popup
+                const newEntry = {
+                  chatName: selectedOptions
+                    .map((option) => option.label)
+                    .join(", "), // Join the names by commas
+                  label: selectedOptions
+                    .map((option) => option.label)
+                    .join(", "), // Use the same name for label
+                  value: `group_${selectedOptions
+                    .map((option) => option.value)
+                    .join("_")}`, // Unique value based on selected options
+                  image: selectedImages, // Use the gathered images for the group
+                  memberCount: selectedOptions.length, // The member count is the length of selectedOptions
+                  conversationData: [], // Empty array to store conversation data
+                };
+
+                // Update the chatNameData state with the new group entry
+                setChatNameData((prevData) => [...prevData, newEntry]);
+              }
             }}
             className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
           >
@@ -854,27 +890,6 @@ function AccountPopup({ isVisible, setIsVisible, accounts, setIsActive }) {
       </div>
     </div>
   );
-}
-
-{
-  /* <button
-          className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 w-10 items-center"
-          onClick={() => {
-            const newEntry = {
-              chatName: "CPSC 481",
-              label: "CPSC 481",
-              value: "cpsc_481",
-              image: [tracySmith, alexJones],
-              memberCount: 4,
-              conversationData: [],
-            };
-
-            // Update the chatNameData state with the new entry
-            setChatNameData((prevData) => [...prevData, newEntry]);
-          }}
-        >
-          <FaPlusCircle className="text-uConnectDark-accent" />{" "}
-        </button> */
 }
 
 function Chat({ Name, Profile, Members, Notification, Active }) {
@@ -897,7 +912,7 @@ function Chat({ Name, Profile, Members, Notification, Active }) {
             </span>
           )}
           {Members &&
-            Profile.map((profileImg, index) => (
+            Profile.slice(0, 2).map((profileImg, index) => (
               <img
                 key={index}
                 src={profileImg}
@@ -919,7 +934,9 @@ function Chat({ Name, Profile, Members, Notification, Active }) {
           )}
         </div>
         <div className="flex flex-col items-start">
-          {Name}
+          {/* Limit the Name to 15 characters and append '...' if longer */}
+          <span>{Name.length > 15 ? `${Name.slice(0, 15)}...` : Name}</span>
+
           {Members && (
             <span className="text-xs text-uConnectLight-textSub transition dark:text-uConnectDark-textSub">
               {Members} Members
