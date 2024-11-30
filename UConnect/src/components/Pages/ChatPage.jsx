@@ -944,9 +944,17 @@ function ChatMemberListBar({
 }) {
   const [warning, setWarning] = useState("");
   const [action, setAction] = useState(() => () => {});
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [newChatName, setNewChatName] = useState(chatNameData[active].chatName); // Store the new name
+  const [originalChatName, setOriginalChatName] = useState(
+    chatNameData[active].chatName
+  );
+  useEffect(() => {
+    setIsEditing(false);
+    setNewChatName(chatNameData[active].chatName);
+    setOriginalChatName(chatNameData[active].chatName)
+  }, [active]);
   const leaveChat = () => {
-    console.log("Hi");
     setIsActive(-1);
     const chatToDelete = chatNameData[active].chatName;
     setChatNameData((prevData) =>
@@ -973,11 +981,67 @@ function ChatMemberListBar({
       });
     });
   };
+
+  const handleEditClick = () => {
+    setIsEditing(true); // Enable editing mode
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false); // Exit editing mode
+    setNewChatName(originalChatName); // Revert back to the original chat name
+  };
+
+  const handleSave = () => {
+    setIsEditing(false); // Exit editing mode
+    if (newChatName !== originalChatName) {
+      // Update the chat name in the chatNameData state
+      setChatNameData((prevData) =>
+        prevData.map((chat, index) => {
+          if (index === active) {
+            return {
+              ...chat,
+              chatName: newChatName,
+            };
+          }
+          return chat;
+        })
+      );
+      setOriginalChatName(newChatName); // Update the original chat name
+    }
+  };
+
+  const handleChange = (e) => {
+    setNewChatName(e.target.value); // Update the chat name as the user types
+  };
   return (
     <div className="flex flex-col justify-between fixed right-0 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-80 z-10">
       <div>
-        <div className="p-7 border-b w-full flex flex-row items-center gap-5">
-          {chatNameData[active].chatName} <FaPen />
+        <div className="p-7 h-24 border-b w-full flex flex-row items-center gap-5">
+          {isEditing ? (
+            <div className="flex gap-2 items-center justify-center w-full flex-col">
+              <input
+                type="text"
+                value={newChatName}
+                onChange={handleChange}
+                className="bg-uConnectLight-layer2Primary focus:outline-none dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent focus:border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full flex justify-between items-center"
+                autoFocus
+              />
+              <div className="flex flex-row gap-5 text-sm text-uConnectDark-accent underline">
+                <button onClick={handleCancel}>Cancel</button>
+                <button onClick={handleSave}>Save</button>
+              </div>
+            </div>
+          ) : (
+            <>
+              {chatNameData[active].chatName}{" "}
+              <span
+                className="hover:text-uConnectDark-accent cursor-pointer"
+                onClick={handleEditClick}
+              >
+                <FaPen />
+              </span>
+            </>
+          )}
         </div>
         <div className="flex m-5 justify-center items-center">
           <div className="font-bold flex flex-row justify-between items-center bg-transparent text-uConnectLight-textMain transition dark:text-uConnectDark-textMain outline-none w-full m-2">
