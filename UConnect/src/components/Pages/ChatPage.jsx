@@ -903,7 +903,7 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
       <div className="flex border-2 rounded-full border-uConnectDark-accent m-5 justify-center items-center">
         <button
           onClick={() => setPopupVisible(true)}
-          className=" flex flex-row justify-evenly items-center bg-transparent text-uConnectLight-accent transition dark:text-uConnectDark-layer3 outline-none w-full m-2"
+          className=" flex flex-row justify-evenly items-center bg-transparent text-uConnectLight-textMain transition dark:text-uConnectDark-textMain outline-none w-full m-2"
         >
           New Message
           <FaPlusCircle className="text-uConnectDark-accent h-5 w-5" />
@@ -949,10 +949,11 @@ function ChatMemberListBar({
   const [originalChatName, setOriginalChatName] = useState(
     chatNameData[active].chatName
   );
+  const [isAddVisible, setAddVisible] = useState(false);
   useEffect(() => {
     setIsEditing(false);
     setNewChatName(chatNameData[active].chatName);
-    setOriginalChatName(chatNameData[active].chatName)
+    setOriginalChatName(chatNameData[active].chatName);
   }, [active]);
   const leaveChat = () => {
     setIsActive(-1);
@@ -1047,9 +1048,12 @@ function ChatMemberListBar({
           <div className="font-bold flex flex-row justify-between items-center bg-transparent text-uConnectLight-textMain transition dark:text-uConnectDark-textMain outline-none w-full m-2">
             Members List
             {chatNameData[active].memberCount > 0 && (
-              <span className="text-uConnectDark-accent underline font-normal">
-                Add People
-              </span>
+              <button
+                onClick={() => setAddVisible(true)}
+                className="text-uConnectDark-accent underline font-normal"
+              >
+                Add Members
+              </button>
             )}
           </div>
         </div>
@@ -1082,7 +1086,7 @@ function ChatMemberListBar({
                     </span>
                     {accountName === "You" &&
                       chatNameData[active].memberCount && (
-                        <span
+                        <button
                           className="mr-5 hover:text-uConnectDark-accent"
                           onClick={() => {
                             setAction(() => leaveChat);
@@ -1091,11 +1095,11 @@ function ChatMemberListBar({
                           }}
                         >
                           Leave Chat
-                        </span>
+                        </button>
                       )}
                     {accountName !== "You" &&
                       chatNameData[active].memberCount && (
-                        <span
+                        <button
                           onClick={() => {
                             setAction(() => () => kickMember(accountName));
                             setWarningVisible(true);
@@ -1104,7 +1108,7 @@ function ChatMemberListBar({
                           className="mr-5 hover:text-uConnectDark-accent"
                         >
                           <FaTrash />
-                        </span>
+                        </button>
                       )}
                   </div>
                 </div>
@@ -1113,7 +1117,7 @@ function ChatMemberListBar({
         </div>
       </div>
       <div className=" border-t flex flex-col gap-4 p-5">
-        <span
+        <button
           className="hover:text-uConnectDark-accent"
           onClick={() => {
             setAction(() => leaveChat);
@@ -1122,7 +1126,7 @@ function ChatMemberListBar({
           }}
         >
           Delete Chat
-        </span>
+        </button>
       </div>
       {isWarningVisible && (
         <WarningPopup
@@ -1132,6 +1136,14 @@ function ChatMemberListBar({
           warning={warning}
         />
       )}
+      <AddMembers
+        isVisible={isAddVisible}
+        setIsVisible={setAddVisible}
+        accounts={chatNameData}
+        setIsActive={setIsActive}
+        setChatNameData={setChatNameData}
+        active={active}
+      />
     </div>
   );
 }
@@ -1395,6 +1407,196 @@ function AccountPopup({
             disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:border-uConnectLight-layer3 disabled:text-uConnectLight-textSub"
           >
             Chat
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AddMembers({
+  isVisible,
+  setIsVisible,
+  accounts,
+  setIsActive,
+  setChatNameData,
+  active,
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const popupRef = useRef(null); // Reference to the popup container
+
+  // Filter accounts based on search term
+  const filteredAccounts = accounts.filter((account) => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return (
+      account.chatName.toLowerCase().includes(lowerSearchTerm) &&
+      !selectedOptions.some((option) => option.label === account.chatName) && // Avoid showing already selected accounts
+      !accounts[active].members.some(
+        (member) => member.name === account.chatName
+      )
+    );
+  });
+
+  // Close the popup if clicked outside
+  useEffect(() => {
+    if (isVisible) {
+      const handleClickOutside = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          setIsVisible(false); // Close popup if clicked outside
+          setSelectedOptions([]);
+        }
+      };
+
+      // Add event listener on mount
+      document.addEventListener("mousedown", handleClickOutside);
+
+      // Cleanup event listener on unmount
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isVisible, setIsVisible]);
+
+  const handleAddAccount = (account) => {
+    setSelectedOptions((prev) => [
+      ...prev,
+      { value: account.chatName, label: account.chatName },
+    ]);
+    setSearchTerm(""); // Reset the search term when adding a tag
+  };
+
+  const renderTags = () => {
+    if (selectedOptions.length <= 0) return null;
+    return selectedOptions.map((option) => (
+      <span
+        key={option.value}
+        className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full inline-flex justify-between items-center overflow-hidden whitespace-nowrap"
+      >
+        {option.label}
+        <button
+          type="button"
+          className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+          onClick={() => removeOption(option)}
+        >
+          &#x2715;
+        </button>
+      </span>
+    ));
+  };
+
+  // Remove selected option (tag)
+  const removeOption = (option) => {
+    setSelectedOptions((prevSelected) =>
+      prevSelected.filter((item) => item.value !== option.value)
+    );
+  };
+
+  if (!isVisible) return null; // Don't render the popup if it's not visible
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+      <div
+        ref={popupRef} // Attach ref to the popup container
+        className="flex flex-col bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-1/2 w-1/4 p-5 shadow-lg"
+      >
+        <button
+          onClick={() => setIsVisible(false)}
+          className="absolute top-4 right-4 text-uConnectDark-accent dark:text-uConnectLight-accent"
+        >
+          &#x2715;
+        </button>
+        <div className="pb-5">Add Member</div>
+        <div className="flex items-center border-b-2 border-uConnectLight-accent pb-3 mb-4">
+          <div className="pr-2">Adding: </div>
+          <div className="grid grid-cols-2 gap-2">
+            {renderTags()}
+            <input
+              type="text"
+              placeholder="Search accounts"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-transparent outline-none dark:text-uConnectDark-textMain text-uConnectLight-textMain"
+            />
+          </div>
+        </div>
+        <div className="max-h-full overflow-y-auto">
+          {filteredAccounts.length > 0 ? (
+            filteredAccounts.map(
+              (account, index) =>
+                !account.memberCount && (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 px-3 hover:bg-uConnectLight-layer1Primary dark:hover:bg-uConnectDark-layer1Primary rounded-lg cursor-pointer"
+                  >
+                    <div className="flex relative items-center gap-4">
+                      <img
+                        src={account.image}
+                        alt={`${account.chatName}`}
+                        className="w-12 h-12 rounded-full border-2 border-[#131313] object-cover"
+                      />
+                      <div>
+                        <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMain font-semibold">
+                          {account.chatName}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleAddAccount(account)}
+                      className="text-uConnectDark-accent dark:text-uConnectLight-accent"
+                    >
+                      Add
+                    </button>
+                  </div>
+                )
+            )
+          ) : (
+            <p className="text-center text-uConnectDark-accent dark:text-uConnectLight-accent">
+              No results found
+            </p>
+          )}
+        </div>
+        <div>
+          <button
+            disabled={selectedOptions.length == 0}
+            onClick={() => {
+              setIsVisible(false);
+              setSelectedOptions([]);
+
+              // For multiple selections, gather images based on selected accounts from the accounts array
+              const selectedImages = selectedOptions
+                .map((option) => {
+                  // Find the account in the accounts array that matches the selected option's chatName
+                  const account = accounts.find(
+                    (acc) => acc.chatName === option.label
+                  );
+                  return account
+                    ? { name: option.label, profile: account.image }
+                    : null; // Return the image or null if not found
+                })
+                .filter((image) => image !== null); // Remove any null values in case an account wasn't found
+
+              accounts[active].members = [
+                ...accounts[active].members,
+                ...selectedImages,
+              ];
+              // Update the chatNameData state with the new group entry
+              setChatNameData((prevData) =>
+                prevData.map((group) =>
+                  group.label === accounts[active].label // Match the group to update
+                    ? {
+                        ...group,
+                        members: accounts[active].members, // Update the members array with new members
+                        memberCount: accounts[active].members.length, // Update member count
+                      }
+                    : group
+                )
+              );
+            }}
+            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
+            hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain disabled:hover:bg-transparent
+            disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:border-uConnectLight-layer3 disabled:text-uConnectLight-textSub"
+          >
+            Add To Chat
           </button>
         </div>
       </div>
