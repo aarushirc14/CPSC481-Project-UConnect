@@ -34,6 +34,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       value: "rashida_williams",
       image: rashidaWilliams,
       notification: 2,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Rashida Williams", profile: rashidaWilliams },
+      ],
       conversationData: [
         {
           name: "You",
@@ -75,6 +79,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       value: "saul_alvarez",
       image: saulAlvarez,
       notification: 1,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Saul Alvarez", profile: saulAlvarez },
+      ],
       conversationData: [
         {
           name: "Saul Alvarez",
@@ -118,6 +126,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Aaron Patel",
       value: "aaron_patel",
       image: aaronPatel,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Aaron Patel", profile: aaronPatel },
+      ],
       conversationData: [
         {
           name: "You",
@@ -251,6 +263,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "David Singh",
       value: "david_singh",
       image: davidSingh,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "David Singh", profile: davidSingh },
+      ],
       conversationData: [
         {
           name: "David Singh",
@@ -277,6 +293,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Tracy Smith",
       value: "tracy_smith",
       image: tracySmith,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Tracy Smith", profile: tracySmith },
+      ],
       conversationData: [
         {
           name: "Tracy Smith",
@@ -306,6 +326,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Alex Jones",
       value: "alex_jones",
       image: alexJones,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Alex Jones", profile: alexJones },
+      ],
       conversationData: [
         {
           name: "Alex Jones",
@@ -338,6 +362,10 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Landon Stone",
       value: "landon_stone",
       image: landonStone,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Landon Stone", profile: landonStone },
+      ],
       conversationData: [
         {
           name: "Landon Stone",
@@ -372,6 +400,11 @@ export default function ChatPage({ setChatNotificationCount }) {
       value: "bio_101_students",
       image: [shirleyLee, landonStone],
       memberCount: 3,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Shirley Lee", profile: shirleyLee },
+        { name: "Landon Stone", profile: landonStone },
+      ],
       conversationData: [
         {
           name: "Shirley Lee",
@@ -411,6 +444,7 @@ export default function ChatPage({ setChatNotificationCount }) {
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isWarningVisible, setWarningVisible] = useState(false);
 
   // Update the parent component with the total notification count
   useEffect(() => {
@@ -439,6 +473,8 @@ export default function ChatPage({ setChatNotificationCount }) {
             setIsActive={setIsActive}
             chatNameData={chatNameData}
             setChatNameData={setChatNameData}
+            isWarningVisible={isWarningVisible}
+            setWarningVisible={setWarningVisible}
           />
           <ChatHeader
             chatName={chatNameData[active].chatName}
@@ -595,7 +631,7 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
             <FaSmile className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
           </button>
           {showEmojiPicker && (
-            <div className="rounded-lg absolute z-auto right-20 pt-1.5 bottom-24">
+            <div className="rounded-lg absolute right-96 pt-1.5 bottom-24">
               <EmojiPicker onEmojiClick={onEmojiClick} theme="auto" />
             </div>
           )}
@@ -670,10 +706,12 @@ function Conversation({
 
   return (
     <>
-      <div className="pt-10 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-        Welcome to the beggining of your conversation with{" "}
-        {chatNameData[active].chatName}
-      </div>
+      {!search && (
+        <div className="pt-10 border-b pb-4 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+          Welcome to the beggining of your conversation with{" "}
+          {chatNameData[active].chatName}
+        </div>
+      )}
       {oldMessages.length > 0 &&
         oldMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
@@ -787,7 +825,7 @@ function Conversation({
           </div>
         ))}
       {filteredConversations.length === 0 && search && (
-        <div className="text-uConnectDark-accent text-2xl ml-72 text-center font-bold tracking-wider pt-10">
+        <div className="text-uConnectDark-accent text-2xl text-center font-bold tracking-wider pt-10">
           No results found
         </div>
       )}
@@ -901,53 +939,196 @@ function ChatMemberListBar({
   setIsActive,
   chatNameData,
   setChatNameData,
+  isWarningVisible,
+  setWarningVisible,
 }) {
+  const [warning, setWarning] = useState("");
+  const [action, setAction] = useState(() => () => {});
+
+  const leaveChat = () => {
+    console.log("Hi");
+    setIsActive(-1);
+    const chatToDelete = chatNameData[active].chatName;
+    setChatNameData((prevData) =>
+      prevData.filter((chat) => chat.chatName !== chatToDelete)
+    );
+  };
+
+  const kickMember = (member) => {
+    setChatNameData((prevData) => {
+      return prevData.map((chat) => {
+        if (chat.chatName === chatNameData[active].chatName) {
+          // Filter out the member to be kicked
+          const updatedMembers = chat.members.filter(
+            (memberName) => memberName.name !== member
+          );
+
+          console.log(updatedMembers + " hey"); // Check members after filtering
+          return {
+            ...chat,
+            members: updatedMembers, // Update the members list
+          };
+        }
+        return chat; // Return the chat as is if it's not the one to be updated
+      });
+    });
+  };
   return (
-    <div className="fixed right-0 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-80 z-10">
-      <div className="flex m-5 justify-center items-center">
-        <div className="font-bold flex flex-row justify-evenly items-center bg-transparent text-uConnectLight-textMain transition dark:text-uConnectDark-textMain outline-none w-full m-2">
-          Members List
+    <div className="flex flex-col justify-between fixed right-0 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-80 z-10">
+      <div>
+        <div className="p-7 border-b w-full flex flex-row items-center gap-5">
+          {chatNameData[active].chatName} <FaPen />
+        </div>
+        <div className="flex m-5 justify-center items-center">
+          <div className="font-bold flex flex-row justify-between items-center bg-transparent text-uConnectLight-textMain transition dark:text-uConnectDark-textMain outline-none w-full m-2">
+            Members List
+            {chatNameData[active].memberCount > 0 && (
+              <span className="text-uConnectDark-accent underline font-normal">
+                Add People
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          {chatNameData[active].members
+            .sort((a, b) => {
+              if (a === "You") return -1; // "You" comes first
+              if (b === "You") return 1; // If b is "You", move it after a
+              return 0; // Otherwise, leave the order unchanged
+            })
+            .map((name) => {
+              const profile = name === "You" ? sofiaMartinez : name.profile;
+
+              const accountName = name === "You" ? "You" : name.name;
+              return (
+                <div
+                  key={accountName}
+                  className="flex flex-row justify-start gap-3 items-center"
+                >
+                  <img
+                    src={profile}
+                    alt={accountName}
+                    className="w-12 h-12 ml-5 rounded-full border-2 border-[#131313] object-cover"
+                  />
+                  <div className="flex flex-row justify-between w-full items-start">
+                    <span>
+                      {accountName.length > 30
+                        ? `${accountName.slice(0, 30)}...`
+                        : accountName}
+                    </span>
+                    {accountName === "You" &&
+                      chatNameData[active].memberCount && (
+                        <span
+                          className="mr-5 hover:text-uConnectDark-accent"
+                          onClick={() => {
+                            setAction(() => leaveChat);
+                            setWarningVisible(true);
+                            setWarning("Leave Chat");
+                          }}
+                        >
+                          Leave Chat
+                        </span>
+                      )}
+                    {accountName !== "You" &&
+                      chatNameData[active].memberCount && (
+                        <span
+                          onClick={() => {
+                            setAction(() => () => kickMember(accountName));
+                            setWarningVisible(true);
+                            setWarning("Kick " + accountName);
+                          }}
+                          className="mr-5 hover:text-uConnectDark-accent"
+                        >
+                          <FaTrash />
+                        </span>
+                      )}
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
-      <div className="flex flex-col gap-4">
-        {[
-          ...new Set(
-            chatNameData[active].conversationData.map(
-              (conversation) => conversation.name
-            )
-          ),
-        ]
-          .sort((a, b) => {
-            if (a === "You") return -1; // "You" comes first
-            if (b === "You") return 1; // If b is "You", move it after a
-            return 0; // Otherwise, leave the order unchanged
-          })
-          .map((name) => {
-            const uniqueConversation = chatNameData[
-              active
-            ].conversationData.find(
-              (conversation) => conversation.name === name
-            );
-            return (
-              <div
-                key={name}
-                className="flex flex-row justify-start gap-3 items-center"
-              >
-                <img
-                  src={uniqueConversation.profile}
-                  alt={uniqueConversation.name}
-                  className="w-12 h-12 ml-5 rounded-full border-2 border-[#131313] object-cover"
-                />
-                <div className="flex flex-col items-start">
-                  <span>
-                    {uniqueConversation.name.length > 15
-                      ? `${uniqueConversation.name.slice(0, 15)}...`
-                      : uniqueConversation.name}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+      <div className=" border-t flex flex-col gap-4 p-5">
+        <span
+          className="hover:text-uConnectDark-accent"
+          onClick={() => {
+            setAction(() => leaveChat);
+            setWarningVisible(true);
+            setWarning("Delete Chat");
+          }}
+        >
+          Delete Chat
+        </span>
+      </div>
+      {isWarningVisible && (
+        <WarningPopup
+          isVisible={isWarningVisible}
+          setIsVisible={setWarningVisible}
+          action={action}
+          warning={warning}
+        />
+      )}
+    </div>
+  );
+}
+
+function WarningPopup({ isVisible, setIsVisible, action, warning }) {
+  const popupRef = useRef(null); // Reference to the popup container
+  // Close the popup if clicked outside
+  useEffect(() => {
+    if (isVisible) {
+      const handleClickOutside = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          setIsVisible(false); // Close popup if clicked outside
+        }
+      };
+
+      // Add event listener on mount
+      document.addEventListener("mousedown", handleClickOutside);
+
+      // Cleanup event listener on unmount
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isVisible, setIsVisible]);
+
+  if (!isVisible) return null; // Don't render the popup if it's not visible
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+      <div
+        ref={popupRef} // Attach ref to the popup container
+        className="flex flex-col bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-1/5 w-1/3 p-10 shadow-lg"
+      >
+        <button
+          onClick={() => setIsVisible(false)}
+          className="absolute top-4 right-4 text-uConnectDark-accent dark:text-uConnectLight-accent"
+        >
+          &#x2715;
+        </button>
+        <div className="pb-5 text-xl">Are You Sure You Want to {warning}?</div>
+
+        <div className="flex flex-row gap-5">
+          <button
+            onClick={() => {
+              setIsVisible(false);
+            }}
+            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
+            hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              setIsVisible(false);
+              action();
+            }}
+            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
+            hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+          >
+            {warning}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -1115,7 +1296,9 @@ function AccountPopup({
                     const account = accounts.find(
                       (acc) => acc.chatName === option.label
                     );
-                    return account ? account.image : null; // Return the image or null if not found
+                    return account
+                      ? { name: option.label, profile: account.image }
+                      : null; // Return the image or null if not found
                   })
                   .filter((image) => image !== null); // Remove any null values in case an account wasn't found
 
@@ -1129,8 +1312,12 @@ function AccountPopup({
                   value: `group_${selectedOptions
                     .map((option) => option.value)
                     .join("_")}`, // Unique value based on selected options
-                  image: selectedImages, // Use the gathered images for the group
-                  memberCount: selectedOptions.length, // The member count is the length of selectedOptions
+                  image: selectedImages.map((member) => member.profile), // Use the gathered images for the group
+                  memberCount: selectedOptions.length + 1, // The member count is the length of selectedOptions
+                  members: selectedImages.concat({
+                    name: "You",
+                    profile: sofiaMartinez,
+                  }),
                   conversationData: [], // Empty array to store conversation data
                 };
                 setIsActive(accounts.length);
