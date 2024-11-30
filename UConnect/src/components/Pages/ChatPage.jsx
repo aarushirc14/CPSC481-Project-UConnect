@@ -7,6 +7,8 @@ import {
   FaPaperclip,
   FaPaperPlane,
   FaTimesCircle,
+  FaPen,
+  FaTrash,
 } from "react-icons/fa";
 import EmojiPicker from "emoji-picker-react";
 
@@ -82,7 +84,7 @@ export default function ChatPage({ setChatNotificationCount }) {
           timestamp: "Yesterday at 9:30pm",
         },
         {
-          name: "Sofia Martinez",
+          name: "You",
           message:
             "It’s going alright, but I’m still figuring out how to implement the loop.",
           profile: sofiaMartinez,
@@ -96,7 +98,7 @@ export default function ChatPage({ setChatNotificationCount }) {
           timestamp: "Yesterday at 9:40pm",
         },
         {
-          name: "Sofia Martinez",
+          name: "You",
           message:
             "Thanks, I’ll look at it. Are you free tomorrow? We could work together.",
           profile: sofiaMartinez,
@@ -429,8 +431,15 @@ export default function ChatPage({ setChatNotificationCount }) {
         chatNameData={chatNameData}
         setChatNameData={setChatNameData}
       />
+
       {active > -1 ? (
         <>
+          <ChatMemberListBar
+            active={active}
+            setIsActive={setIsActive}
+            chatNameData={chatNameData}
+            setChatNameData={setChatNameData}
+          />
           <ChatHeader
             chatName={chatNameData[active].chatName}
             setSearch={setSearch}
@@ -554,7 +563,7 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   };
 
   return (
-    <div className="flex flex-col gap-2 fixed bottom-0 pb-10 w-screen transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
+    <div className="flex flex-col gap-2 fixed bottom-0 pb-10 w-full transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
       {attachment && (
         <span className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full mt-2 text-sm ml-96 w-fit p-3">
           {attachment.name}
@@ -567,7 +576,7 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
           </button>
         </span>
       )}
-      <div className="flex flex-row justify-center items-center border-2 rounded-full text-lg pl-4 border-uConnectDark-accent ml-96 w-3/4 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary">
+      <div className="flex flex-row justify-center items-center border-2 rounded-full text-lg pl-4 border-uConnectDark-accent ml-96 w-3/5 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary">
         <input
           type="text"
           placeholder="Type Message"
@@ -669,11 +678,7 @@ function Conversation({
         oldMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
             <div
-              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
-                search
-                  ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary transition"
-                  : ""
-              }`}
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group`}
               onClick={() => {
                 setSearch("");
                 setMessage("");
@@ -684,13 +689,26 @@ function Conversation({
                 alt={conversation.name}
                 className="w-16 h-16 rounded-full border-2 border-[#131313] object-cover"
               />
-              <div className="flex flex-col justify-center">
-                <span className="tracking-wider font-bold text-xl">
-                  {conversation.name}
-                  <span className="font-thin text-xs tracking-normal ml-5 transition dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                    {conversation.timestamp}
+
+              <div className="flex flex-col justify-center w-full">
+                <div className="flex flex-row justify-between">
+                  <span className="tracking-wider font-bold text-xl">
+                    {conversation.name}
+                    <span className="font-thin text-xs tracking-normal ml-5 transition dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                      {conversation.timestamp}
+                    </span>
                   </span>
-                </span>
+                  {conversation.name === "You" && (
+                    <span className="flex flex-row gap-3 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="hover:text-uConnectDark-accent">
+                        <FaPen />
+                      </span>
+                      <span className="hover:text-uConnectDark-accent">
+                        <FaTrash />
+                      </span>
+                    </span>
+                  )}
+                </div>
                 {conversation.attachment && (
                   <a
                     href={conversation.attachmentUrl} // URL created from the file object
@@ -723,11 +741,7 @@ function Conversation({
         newMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
             <div
-              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 ${
-                search
-                  ? "hover:dark:bg-uConnectDark-layer2Primary hover:bg-uConnectLight-layer2Primary transition"
-                  : ""
-              }`}
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group`}
               onClick={() => {
                 setSearch("");
                 setMessage("");
@@ -738,13 +752,25 @@ function Conversation({
                 alt={conversation.name}
                 className="w-16 h-16 rounded-full border-2 border-[#131313] object-cover"
               />
-              <div className="flex flex-col justify-center">
-                <span className="tracking-wider font-bold text-xl">
-                  {conversation.name}
-                  <span className="font-thin text-xs tracking-normal ml-5 transition dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-                    {conversation.timestamp}
+              <div className="flex flex-col justify-center w-full">
+                <div className="flex flex-row justify-between">
+                  <span className="tracking-wider font-bold text-xl">
+                    {conversation.name}
+                    <span className="font-thin text-xs tracking-normal ml-5 transition dark:text-uConnectDark-textSub text-uConnectLight-textSub">
+                      {conversation.timestamp}
+                    </span>
                   </span>
-                </span>
+                  {conversation.name === "You" && (
+                    <span className="flex flex-row gap-3 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="hover:text-uConnectDark-accent">
+                        <FaPen />
+                      </span>
+                      <span className="hover:text-uConnectDark-accent">
+                        <FaTrash />
+                      </span>
+                    </span>
+                  )}
+                </div>
                 {conversation.attachment && (
                   <a
                     href={conversation.attachmentUrl} // URL created from the file object
@@ -812,7 +838,7 @@ function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
           </div>
         </div>
       </div>
-      <div className="text-uConnectDark-accent text-2xl ml-72 font-bold tracking-wider">
+      <div className="text-uConnectDark-accent text-2xl font-bold tracking-wider">
         {search ? 'Search Results for: "' + message + '"' : chatName}
       </div>
     </div>
@@ -866,6 +892,63 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
         setIsActive={setIsActive}
         setChatNameData={setChatNameData}
       />
+    </div>
+  );
+}
+
+function ChatMemberListBar({
+  active,
+  setIsActive,
+  chatNameData,
+  setChatNameData,
+}) {
+  return (
+    <div className="fixed right-0 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-80 z-10">
+      <div className="flex m-5 justify-center items-center">
+        <div className="font-bold flex flex-row justify-evenly items-center bg-transparent text-uConnectLight-textMain transition dark:text-uConnectDark-textMain outline-none w-full m-2">
+          Members List
+        </div>
+      </div>
+      <div className="flex flex-col gap-4">
+        {[
+          ...new Set(
+            chatNameData[active].conversationData.map(
+              (conversation) => conversation.name
+            )
+          ),
+        ]
+          .sort((a, b) => {
+            if (a === "You") return -1; // "You" comes first
+            if (b === "You") return 1; // If b is "You", move it after a
+            return 0; // Otherwise, leave the order unchanged
+          })
+          .map((name) => {
+            const uniqueConversation = chatNameData[
+              active
+            ].conversationData.find(
+              (conversation) => conversation.name === name
+            );
+            return (
+              <div
+                key={name}
+                className="flex flex-row justify-start gap-3 items-center"
+              >
+                <img
+                  src={uniqueConversation.profile}
+                  alt={uniqueConversation.name}
+                  className="w-12 h-12 ml-5 rounded-full border-2 border-[#131313] object-cover"
+                />
+                <div className="flex flex-col items-start">
+                  <span>
+                    {uniqueConversation.name.length > 15
+                      ? `${uniqueConversation.name.slice(0, 15)}...`
+                      : uniqueConversation.name}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
