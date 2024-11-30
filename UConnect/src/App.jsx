@@ -20,10 +20,15 @@ import CreatePostPage from "./components/pages/posts/CreatePostPage";
 import OtherUserProfilePage from "./components/pages/profiles/OtherUserProfilePage";
 import DetailedPostViewPage from "./components/pages/posts/DetailedPostViewPage";
 import DetailedPostViewPageNewpost from "./components/pages/posts/DetailedPostViewPageNewpost";
+import DetailedPostViewFromSearchPage from "./components/Pages/posts/DetailedPostViewFromSearchPage";
 import CreateProfile from "./components/pages/profiles/CreateProfilePage";
 import uconnectFullLogo from "./assets/logo/uconnectFullLogo.webp";
 import SearchResultsPage from "./components/Pages/SearchResultsPage";
 import SearchResultsPostsPage from "./components/Pages/SearchResultsPostsPage";
+import SearchResultsPeoplePage from "./components/Pages/SearchResultsPeoplePage";
+import SearchResultsMajorNPeoplePage from "./components/Pages/SearchResultsMajorNPeoplePage";
+import SearchResultsInterestsMajorPeoplePage from "./components/Pages/SearchResultsInterestsMajorPeoplePage";
+
 
 import sofiaMartinez from "../src/assets/profilePics/sofiaMartinez.jpg";
 
@@ -94,6 +99,9 @@ function App() {
                 <Route path="/my-profile" element={<MyProfilePage />} />
                 <Route path="/search-results" element={<SearchResultsPage />} />
                 <Route path="/search-results-posts" element={<SearchResultsPostsPage />} />
+                <Route path="/search-results-people" element={<SearchResultsPeoplePage />} />
+                <Route path="/search-results-major-and-people" element={<SearchResultsMajorNPeoplePage />} />
+                <Route path="/search-results-interests-major-people" element={<SearchResultsInterestsMajorPeoplePage />} />
                 <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
                 <Route
                   path="/edit-profile"
@@ -143,6 +151,10 @@ function App() {
                   element={<DetailedPostViewPage />}
                 />
                 <Route
+                  path="/detailed-post-from-search/:postId"
+                  element={<DetailedPostViewFromSearchPage/>}
+                />
+                <Route
                   path="/create-profile"
                   element={
                     <CreateProfile
@@ -189,8 +201,20 @@ function App() {
                 element={<SearchResultsPage/>}
               />
               <Route 
+                path="/search-results-people" 
+                element={<SearchResultsPeoplePage/>}
+              />
+              <Route 
                 path="/search-results-posts" 
                 element={<SearchResultsPostsPage/>}
+              />
+              <Route 
+                path="/search-results-major-and-people" 
+                element={<SearchResultsMajorNPeoplePage/>}
+              />
+              <Route 
+                path="/search-results-interests-major-people" 
+                element={<SearchResultsInterestsMajorPeoplePage/>}
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
