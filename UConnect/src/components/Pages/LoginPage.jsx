@@ -50,7 +50,7 @@ export default function LoginPage({ onLogin }) {
         />
       )}
 
-      <div className="text-left">
+      <div className="text-left mb-6">
         <InputField
           label="Email"
           type="email"
@@ -70,22 +70,19 @@ export default function LoginPage({ onLogin }) {
           }}
           togglePassword={togglePassword}
         />
+        {/* Forgot Password Link */}
+        <div className=" text-sm">
+          <button
+            onClick={handleForgotPassword}
+            className="text-uConnectDark-accent hover:underline"
+          >
+            Forgot Password?
+          </button>
+        </div>
       </div>
-      <button
-        onClick={handleLogin}
-        className="login_signup_button w-full mt-6"
-      >
+      <button onClick={handleLogin} className="login_signup_button w-full mt-6">
         LOGIN
       </button>
-      {/* Forgot Password Link */}
-      <div className="mt-4 text-sm">
-        <button
-          onClick={handleForgotPassword}
-          className="text-uConnectDark-accent hover:underline"
-        >
-          Forgot Password?
-        </button>
-      </div>
     </div>
   );
 }
