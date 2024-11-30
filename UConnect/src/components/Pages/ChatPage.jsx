@@ -34,6 +34,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       value: "rashida_williams",
       image: rashidaWilliams,
       notification: 2,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Rashida Williams", profile: rashidaWilliams },
@@ -79,6 +80,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       value: "saul_alvarez",
       image: saulAlvarez,
       notification: 1,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Saul Alvarez", profile: saulAlvarez },
@@ -126,6 +128,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Aaron Patel",
       value: "aaron_patel",
       image: aaronPatel,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Aaron Patel", profile: aaronPatel },
@@ -263,6 +266,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "David Singh",
       value: "david_singh",
       image: davidSingh,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "David Singh", profile: davidSingh },
@@ -293,6 +297,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Tracy Smith",
       value: "tracy_smith",
       image: tracySmith,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Tracy Smith", profile: tracySmith },
@@ -326,6 +331,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Alex Jones",
       value: "alex_jones",
       image: alexJones,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Alex Jones", profile: alexJones },
@@ -362,6 +368,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Landon Stone",
       value: "landon_stone",
       image: landonStone,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Landon Stone", profile: landonStone },
@@ -400,6 +407,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       value: "bio_101_students",
       image: [shirleyLee, landonStone],
       memberCount: 3,
+      sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
         { name: "Shirley Lee", profile: shirleyLee },
@@ -477,7 +485,8 @@ export default function ChatPage({ setChatNotificationCount }) {
             setWarningVisible={setWarningVisible}
           />
           <ChatHeader
-            chatName={chatNameData[active].chatName}
+            active={active}
+            chatNameData={chatNameData}
             setSearch={setSearch}
             search={search}
             message={message}
@@ -491,7 +500,6 @@ export default function ChatPage({ setChatNotificationCount }) {
             >
               {chatNameData[active].conversationData && (
                 <Conversation
-                  conversationData={chatNameData[active].conversationData}
                   chatNameData={chatNameData}
                   search={search}
                   setSearch={setSearch}
@@ -506,6 +514,7 @@ export default function ChatPage({ setChatNotificationCount }) {
               chatNameData={chatNameData}
               setChatNameData={setChatNameData}
               activeChat={active}
+              setIsActive={setIsActive}
             />
           )}
         </>
@@ -534,8 +543,14 @@ export default function ChatPage({ setChatNotificationCount }) {
   );
 }
 
-function SendText({ chatNameData, setChatNameData, activeChat }) {
+function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
   const [message, setMessage] = useState(""); // Track the message input
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // Step 3: Focus the input field when the component mounts
+    inputRef.current?.focus();
+  }, []);
 
   const handleSendMessage = () => {
     if (message.trim() === "" && !attachment) return; // Prevent empty messages or messages without attachments
@@ -565,7 +580,10 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
     // Update the chat data for the active chat
     const updatedChatData = [...chatNameData];
     updatedChatData[activeChat].conversationData.push(newMessage);
+    const highestSortValue = Math.max(...chatNameData.map((chat) => chat.sort));
+    updatedChatData[activeChat].sort = highestSortValue + 1;
     setChatNameData(updatedChatData);
+    setIsActive(0);
 
     // Clear the input field and attachment
     setMessage("");
@@ -624,6 +642,7 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
               handleSendMessage();
             }
           }}
+          ref={inputRef}
           className="bg-transparent placeholder:text-lg placeholder-uConnectLight-textSub transition   dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2 m-3"
         />
         <div className="flex flex-row gap-5 mr-10">
@@ -658,15 +677,10 @@ function SendText({ chatNameData, setChatNameData, activeChat }) {
   );
 }
 
-function Conversation({
-  conversationData,
-  chatNameData,
-  search,
-  setSearch,
-  setMessage,
-  active,
-}) {
+function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
   const endOfMessagesRef = useRef(null);
+
+  const conversationData = chatNameData[active].conversationData;
 
   useEffect(() => {
     // Scroll to the bottom of the messages
@@ -833,11 +847,20 @@ function Conversation({
   );
 }
 
-function ChatHeader({ chatName, setSearch, search, message, setMessage }) {
+function ChatHeader({
+  active,
+  chatNameData,
+  setSearch,
+  search,
+  message,
+  setMessage,
+}) {
   const handleSearchMessage = () => {
     if (message.trim() === "") return; // Prevent empty messages
     setSearch(message);
   };
+
+  const chatName = chatNameData[active].chatName;
 
   return (
     <div className="pt-10 pb-5 text-center fixed w-full transition   dark:bg-uConnectDark-background bg-uConnectLight-background ">
@@ -910,18 +933,20 @@ function ChatSideBar({ active, setIsActive, chatNameData, setChatNameData }) {
         </button>
       </div>
       <div className="flex flex-col">
-        {chatNameData.map((chat, index) => (
-          <button onClick={() => handleChatClick(index)}>
-            <Chat
-              Name={chat.chatName}
-              Profile={chat.image}
-              Members={chat.memberCount}
-              Notification={chat.notification}
-              Active={active}
-              accounts={chatNameData}
-            />
-          </button>
-        ))}
+        {chatNameData
+          .sort((a, b) => b.sort - a.sort)
+          .map((chat, index) => (
+            <button onClick={() => handleChatClick(index)}>
+              <Chat
+                Name={chat.chatName}
+                Profile={chat.image}
+                Members={chat.memberCount}
+                Notification={chat.notification}
+                Active={active}
+                accounts={chatNameData}
+              />
+            </button>
+          ))}
       </div>
       <AccountPopup
         isVisible={isPopupVisible}
