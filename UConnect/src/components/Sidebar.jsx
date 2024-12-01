@@ -127,12 +127,14 @@ export default function Sidebar({ onLogout, chatNotificationCount }) {
           </div>
 
           {/* Logout Button */}
-          <SidebarItem
-            icon={<FaSignOutAlt />} // Correct logout icon
-            label="Logout"
-            onClick={handleLogout}
-            active={false} // Logout should not be active
-          />
+          <div className="mt-5">
+            <SidebarItem 
+              icon={<FaSignOutAlt />} // Correct logout icon
+              label="Logout"
+              onClick={handleLogout}
+              active={false} // Logout should not be active
+            />
+          </div>
         </div>
       </div>
     </div>

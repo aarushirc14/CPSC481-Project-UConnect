@@ -722,7 +722,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
     <>
       {!search && (
         <div className="pt-10 border-b pb-4 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-          Welcome to the beggining of your conversation with{" "}
+          Welcome to the beginning of your conversation with{" "}
           {chatNameData[active].chatName}
         </div>
       )}
