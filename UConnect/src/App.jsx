@@ -231,7 +231,11 @@ function App() {
               <Route 
                 path="/search-results-posts" 
                 element={<SearchResultsPostsPage/>}
-              <Route path="/search-results" element={<SearchResultsPage />} />
+              />
+              <Route 
+                path="/search-results" 
+                element={<SearchResultsPage />} 
+                />
               <Route
                 path="/search-results-posts"
                 element={<SearchResultsPostsPage />}
