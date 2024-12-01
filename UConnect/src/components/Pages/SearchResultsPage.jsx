@@ -30,7 +30,7 @@ const users = [
   {
     image: jaredAllen,
     name: "Jared Allen",
-    majorAndYear: "Enviornmental Science, 4th Year",
+    majorAndYear: "Environmental Science, 4th Year",
     interests: "Art, Drawing, Creative writing, Music"
   },
   {
