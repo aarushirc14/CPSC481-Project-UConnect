@@ -10,7 +10,6 @@ import EmojiPicker from "emoji-picker-react";
 import {
   FaSmile,
   FaPaperPlane,
-  FaSort,
 } from "react-icons/fa";
 
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
@@ -135,9 +134,9 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
-  const [numberOfComments, setNumberComments] = useState(2);
-  const [inputValue, setInputValue] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [numberOfComments, setNumberComments] = useState(2);      // show the number of comments from the post
+  const [inputValue, setInputValue] = useState("");               // record the text input from the user
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);  // record the current state of visibility of the emoji picker
 
   {/* Update Comment Input to include Emoji */}
   const onEmojiClick = (emojiData, event) => {
@@ -161,7 +160,7 @@ export default function DetailedPostViewPage() {
       reply: []
       } , ...prevComment.map((comment) => ({
         ...comment,
-        id: comment.id + 1, // Increment IDs of all existing comments
+        id: comment.id + 1, // Increment IDs of all existing replies
       })),
     ]);
 
@@ -401,8 +400,8 @@ export default function DetailedPostViewPage() {
                                   <FaSmile />
                             </button>
                                   {showEmojiPickerComment &&(
-                                    <div className="rounded-lg absolute z-auto right-20 pb-9" // Use bottom instead of padding-top
-                                    style={{ transform: "translateY(-100%)" }} // Optional: Move it completely above the trigger element
+                                    <div className="rounded-lg absolute z-auto right-20 pb-9"
+                                    style={{ transform: "translateY(-100%)" }} 
                                   >
                                       <EmojiPicker onEmojiClick={onEmojiClickComment}
                                       theme="auto"

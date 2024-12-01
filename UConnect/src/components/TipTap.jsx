@@ -339,21 +339,21 @@ const extensions = [
 
 const content = `
         <p>
-          <b>Several new Summer Tech Internships has open for 2025! Companies offering these internships are listed below:</b>
+          <b>I found several internships for 2025, related to environment/research/engineering:</b>
         </p>
         <ul>
-          <li>Apple - software and hardware engineering</li>
-          <li>Microsoft - software engineering, data science, and cloud computing roles</li>
-          <li>Goldman Sachs - Summer Analyst</li>
-          <li>NVIDIA - AI research, autonomous vehicle development, and gaming technology</li>
-          <li>JPMorgan - quantitative analysis and fintech development</li>
-          <li>Cenovus Energy - Process Data Operations, OT Integrity and Integration and Automation Support</li>
-          <li>Lockheed Martin Corporation - Software Development Intern, work primarily in C++</li>
-          <li>Propra - Operations Intern</li>
-          <li>liTAQA - IT Service Delivery Summer Student</li>
+          <li>Trace Associates - Environmental Project Planning Intern</li>
+          <li>Stantec - Materials Engineering Intern</li>
+          <li>ECO Canada  - Summer Research Analyst</li>
+          <li>S&P Global - Emissions Researcher</li>
+          <li>Planet Alpha - Environment Strategy Intern</li>
+          <li>Cenovus Energy - Facilties Engineering Intern  </li>
+          <li>Raw Earth Foundation - Marketing Intern</li>
+          <li>Greenify - Operations Intern</li>
+          <li>TerraLogix Solutions - Carbon Capture Planning Summer Student</li>
         </ul>
         <p>
-          Good Luck!
+          Hope you guys found these helpful and good luck with your apps!
         </p>
         `
 
