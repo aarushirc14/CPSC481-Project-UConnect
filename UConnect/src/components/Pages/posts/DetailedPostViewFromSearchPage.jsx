@@ -27,7 +27,7 @@ const poster = {
         <p className="mb-6">
             Hey everyone! I am a new student at UofC and I am currently looking for other students who are interested in joining a study group for CPSC 481.
         </p>
-        <img src="/src/assets/leoCarterPost.png" alt="Person wearing a VR headset"></img>
+        <img src="/src/assets/profilePics/leoCarterPost.png" alt="Person wearing a VR headset"></img>
       </div>
   ),
     image: leoCarter,
@@ -217,7 +217,7 @@ export default function DetailedPostViewPage() {
   const [showComments, setShowComments] = useState(true); // choose if user want to open or close the comment section
   const navigate = useNavigate();
   const handleBackClick = () => {
-    navigate("/home");      // Go back to home
+    navigate(-1);      // Go back to the previous page
   };
 
   //const [showReplyInput, setShowReplyInput] = useState(false);
@@ -453,6 +453,3 @@ export default function DetailedPostViewPage() {
     </div>
   );
 }
-
-
-
