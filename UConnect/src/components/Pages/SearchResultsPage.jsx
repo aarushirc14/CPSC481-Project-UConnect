@@ -96,6 +96,7 @@ export default function SearchResultsPage() {
   
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+
       {/* Sidebar */}
       <Sidebar />
 

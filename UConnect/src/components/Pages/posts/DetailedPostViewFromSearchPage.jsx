@@ -70,7 +70,7 @@ const commentedusers = [
 ];
 
 export default function DetailedPostViewPage() {
-  {/* Update Likes and Dislikes From each Comments */}
+  {/* Update Likes and Dislikes from each Comments */}
   const [comments, setComments] = useState(commentedusers);
 
   const handleCommentLike = (id) => {
@@ -135,21 +135,17 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate("/home");      // After posting go straight to Post view
-  };
-
   const [numberOfComments, setNumberComments] = useState(2);
   const [inputValue, setInputValue] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  {/* Update Comment Input to include Emoji */}
   const onEmojiClick = (emojiData, event) => {
     setInputValue((prevInput) => prevInput + emojiData.emoji);
     setShowEmojiPicker(false);
   };
 
+  {/* Update the comment Section after submitting a post */}
   const onSubmitComment = () => {
     if (!inputValue.trim()) return; // Prevent submitting empty comments
     setComments((prevComment) => [{
@@ -162,6 +158,7 @@ export default function DetailedPostViewPage() {
       likes: 0,
       dislikeStatus: "inactive",
       dislikes: 0,
+      reply: []
       } , ...prevComment.map((comment) => ({
         ...comment,
         id: comment.id + 1, // Increment IDs of all existing comments
@@ -170,7 +167,63 @@ export default function DetailedPostViewPage() {
 
     setNumberComments(numberOfComments+1);
     setInputValue("");
+    setShowComments(true);
   };
+
+
+
+  const [replyValue, setReplyValue] = useState("");
+
+  const [showEmojiPickerComment, setShowEmojiPickerComment] = useState(false);
+
+  {/* Update Comment Input to include Emoji */}
+  const onEmojiClickComment = (emojiData, event) => {
+    setReplyValue((prevInput) => prevInput + emojiData.emoji);
+    setShowEmojiPickerComment(false);
+  };
+
+  {/* Update the comment Section after submitting a post */}
+  const onReplyComment = (id) => {
+    if (!replyValue.trim()) return; // Prevent submitting empty comments
+
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === id
+          ? {
+              ...comment,
+              reply: [
+                ...(comment.reply || []),
+                {
+                  id: `${id}-${Date.now()}`,
+                  name: currentUser.name,
+                  comment: replyValue,
+                  image: currentUser.image,
+                  time: "now",
+                  likeStatus: "inactive",
+                  likes: 0,
+                  dislikeStatus: "inactive",
+                  dislikes: 0,
+                },
+              ],
+            }
+          : comment
+      )
+    );
+
+    setNumberComments(numberOfComments+1);
+    setReplyValue("");
+    setReplyingTo(false);
+  };
+
+  const [showComments, setShowComments] = useState(true); // choose if user want to open or close the comment section
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate("/home");      // Go back to home
+  };
+
+  //const [showReplyInput, setShowReplyInput] = useState(false);
+  const [replyingTo, setReplyingTo] = useState(null);
+
 
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition">
@@ -210,22 +263,26 @@ export default function DetailedPostViewPage() {
             </div>
             {/* Comment, Like and Dislike Buttons */}
             <div className = "flex-row text-lg">
-              <button className="font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-                  >
+              <button className={`font-semibold mt-4 px-4 py-2 border inline-flex items-center gap-2 
+                  ${ showComments === true 
+                    ? "bg-uConnectDark-accent border-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain rounded-full"
+                    : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full"
+                  }`}
+                  onClick={() => setShowComments(!showComments)}>
                     <MdOutlineInsertComment /> Comment
               </button>
               <button className={`${
                           likeStyle === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                         } mt-4 px-4 py-2 inline-flex items-center gap-2`}
                   onClick={likeChangeStyle}>
                     {likes} <BiLike />
               </button>
               <button className={`${
                           dislikeStyle === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                         } mt-4 px-4 py-2 inline-flex gap-2 items-center`}
                   onClick={dislikeChangeStyle}
                   >
@@ -241,7 +298,7 @@ export default function DetailedPostViewPage() {
                   value={inputValue}
                   placeholder="Comment here..."
                   onChange={(e) => setInputValue(e.target.value)}
-                  className="placeholder:italic cursor-text px-3 text-xl bg-transparent mb-1.5 placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
+                  className="placeholder:italic px-3 text-xl bg-transparent mb-1.5 placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
                   style={{
                     height: "30px"
                   }}
@@ -256,9 +313,7 @@ export default function DetailedPostViewPage() {
                       <FaSmile />
                 </button>
                       {showEmojiPicker &&(
-                        <div className="rounded-lg absolute z-auto right-20 pt-1.5"
-                        
-                        >
+                        <div className="rounded-lg absolute z-auto right-20 pt-1.5">
                           <EmojiPicker onEmojiClick={onEmojiClick}
                           theme="auto"
                           />
@@ -274,11 +329,9 @@ export default function DetailedPostViewPage() {
             {/* Show number of people have commented counter */}
             <div className="flex mx-20 my-4 text-uConnectLight-textSub dark:text-uConnectDark-layer3 place-content-between">
               {numberOfComments} People Have Commented
-              <button className="flex items-center gap-1">
-                <FaSort className="text-2xl"/> Sort By
-              </button>
             </div>
             {/* Comment Section */}
+            {showComments &&(
             <div>
               {comments.map((user, index) => (
                 <div className="flex-col flex ">
@@ -297,35 +350,110 @@ export default function DetailedPostViewPage() {
                   </div>
                     <span className="ml-36 mb-1 mr-24 dark:text-uConnectDark-textMain text-uConnectLight-textMain whitespace-pre-wrap break-normal">{user.comment}</span>
                     <div className = "flex-row text-lg mb-4 ml-36">
-                      <button className="font-semibold px-4 py-2 inline-flex items-center gap-2 rounded-xl border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-                          >
+                      <button className={`font-semibold px-4 py-2 inline-flex items-center gap-2 rounded-xl 
+                      ${ replyingTo === user.id 
+                        ? " bg-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain"
+                        : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+                        }`}
+                          onClick={() => {setReplyingTo(replyingTo === user.id ? null : user.id)
+                            setReplyValue(null);
+                          }}>
                             <MdOutlineInsertComment /> Reply
                       </button>
+                      
                       <button className={`${
                           user.likeStatus === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                           } px-4 py-2 inline-flex items-center gap-2`}
                           onClick={() => handleCommentLike(user.id)}>
                             {user.likes} <BiLike />
                       </button>
                       <button className={`${
                           user.dislikeStatus === "inactive" 
-                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:text-uConnectDark-accent hover:dark:text-uConnectLight-accent"
-                          : "text-uConnectLight-accent dark:text-uConnectDark-accent hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain" 
+                          ? "text-uConnectLight-textMain dark:text-uConnectDark-textMain"
+                          : "text-uConnectLight-accent dark:text-uConnectDark-accent" 
                           } px-4 py-2 inline-flex items-center gap-2`}
                           onClick={() => handleCommentDislike(user.id)}>
                             {user.dislikes} <BiDislike />
                       </button>
-                    </div>
+                      {replyingTo === user.id &&(
+                        <div className="flex my-4 items-center">
+                          <img src={currentUser.image} alt={`${currentUser.name}`} class=" w-14 h-14 rounded-full border-2 border-[#131313] object-cover" />
+                          <div className=" flex-col top-0 left-0 py-1 flex w-full mt-4 lg:mt-0  text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+                            <textarea
+                              type="text"
+                              value={replyValue}
+                              placeholder="Comment here..."
+                              onChange={(e) => setReplyValue(e.target.value)}
+                              className="placeholder:italic px-3 text-xl bg-transparent mb-1.5 placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none"
+                              style={{
+                                height: "30px"
+                              }}
+                            />
+                            <hr class=" mx-auto w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
+                          </div>
+                          {/* Set the Emoji Picker */}
+                          <div className="Emoji_Picker">
+                            <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
+                                onClick={() => setShowEmojiPickerComment(!showEmojiPickerComment)}
+                                >
+                                  <FaSmile />
+                            </button>
+                                  {showEmojiPickerComment &&(
+                                    <div className="rounded-lg absolute z-auto right-20 pb-9" // Use bottom instead of padding-top
+                                    style={{ transform: "translateY(-100%)" }} // Optional: Move it completely above the trigger element
+                                  >
+                                      <EmojiPicker onEmojiClick={onEmojiClickComment}
+                                      theme="auto"
+                                      />
+                                    </div>
+                                  )}
+                        </div>
+                        {/* Set the Submit Button */}
+                        <button onClick={() => {
+                          onReplyComment(user.id)
+                          setReplyingTo(null);
+                        }} className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
+                            >
+                              <FaPaperPlane />
+                        </button>
+                      </div>
+                    )}
+                    {/* Replies */}
+                    {user.reply && user.reply.length > 0 && (
+                      <div>
+                        {user.reply.map((reply) => (
+                        <div className="flex-col flex ">
+                          <div className="flex items-center space-x-4">
+                            {/* User Image */}
+                            <img
+                              src={reply.image}
+                              alt={`${reply.name}`}
+                              className="w-14 h-14 rounded-full border-2 border-[#131313] object-cover"
+                            /> 
+                            {/* Username is linked to their profile */}
+                            <Link to={`/profile/${reply.id}`}>
+                              <span className="tracking-wider font-bold text-xl text-uConnectDark-accent"> {reply.name} </span>
+                            </Link>
+                            <span className="tracking-wider font-thin italic text-sm dark:text-uConnectDark-textSub text-uConnectLight-textSub"> {reply.time} </span> 
+                          </div>
+                            <span className="ml-16 mb-1 mr-24 dark:text-uConnectDark-textMain text-uConnectLight-textMain whitespace-pre-wrap break-normal">{reply.comment}</span>
+                        </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
+            )}
           </div>
         </div> 
       </div>
     </div>
   );
 }
+
 
 

@@ -332,3 +332,7 @@ button.is-active{
   margin: 0 auto;
 
 }
+
+.sidebar {
+  transition: width 0.3s ease, transform 0.3s ease;
+}

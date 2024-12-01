@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import SignupPage from "./components/pages/SignupPage";
@@ -13,7 +14,6 @@ import LoginPage from "./components/pages/LoginPage";
 import HomePage from "./components/pages/HomePage";
 import ChatPage from "./components/pages/ChatPage";
 import MyProfilePage from "./components/pages/profiles/MyProfilePage";
-//import EditProfilePage from "./components/pages/profiles/EditProfilePage";
 import AfterEditingProfilePage from "./components/pages/profiles/AfterEditingProfilePage";
 import NotificationsPage from "./components/pages/NotificationsPage";
 import CreatePostPage from "./components/pages/posts/CreatePostPage";
@@ -70,8 +70,14 @@ function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [chatNotificationCount, setChatNotificationCount] = useState(3);
+
   const handleLogin = () => {
     setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Reset login state
   };
 
   const handleProfileCreated = () => {
@@ -88,21 +94,39 @@ function App() {
             {/* Sidebar for logged-in users */}
             <Sidebar
               activeItem={activeItem}
-              onSelectItem={setActiveItem} // Replace with actual logic
+              onSelectItem={setActiveItem}
+              onLogout={handleLogout} // Pass the logout handler
+              chatNotificationCount={chatNotificationCount}
             />
             <main className="flex-1">
               <Routes>
                 <Route path="/home" element={<HomePage />} />
-                <Route path="/chats" element={<ChatPage />} />
+                <Route
+                  path="/chats"
+                  element={
+                    <ChatPage
+                      setChatNotificationCount={setChatNotificationCount}
+                    />
+                  }
+                />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
                 <Route path="/search-results" element={<SearchResultsPage />} />
+
                 <Route path="/search-results-posts" element={<SearchResultsPostsPage />} />
                 <Route path="/search-results-people" element={<SearchResultsPeoplePage />} />
                 <Route path="/search-results-major-and-people" element={<SearchResultsMajorNPeoplePage />} />
                 <Route path="/search-results-interests-major-people" element={<SearchResultsInterestsMajorPeoplePage />} />
                 <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
+                <Route
+                  path="/search-results-posts"
+                  element={<SearchResultsPostsPage />}
+                />
+                <Route
+                  path="/sent-viewresult"
+                  element={<DetailedPostViewPageNewpost />}
+                />
                 <Route
                   path="/edit-profile"
                   element={
@@ -207,6 +231,10 @@ function App() {
               <Route 
                 path="/search-results-posts" 
                 element={<SearchResultsPostsPage/>}
+              <Route path="/search-results" element={<SearchResultsPage />} />
+              <Route
+                path="/search-results-posts"
+                element={<SearchResultsPostsPage />}
               />
               <Route 
                 path="/search-results-major-and-people" 

@@ -120,7 +120,9 @@ export default function HomePage() {
         <div className="sticky top-0 z-10 mb-6">
           <SearchBar />
         </div>
-
+        <div className="mb-4 text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+          Recommended People
+        </div>
         {/* Featured Users */}
         <div className="grid grid-cols-4 gap-6 mb-8">
           {featuredUsers.map((user) => (
@@ -159,6 +161,9 @@ export default function HomePage() {
           ))}
         </div>
         {/* Featured Posts */}
+        <div className="mb-4 text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+          Featured Posts
+        </div>
         <div className="grid grid-cols-2 gap-6">
           {featuredPosts.map((post, index) => (
             <Link
