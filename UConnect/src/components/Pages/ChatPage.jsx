@@ -580,7 +580,11 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
     // Update the chat data for the active chat
     const updatedChatData = [...chatNameData];
     updatedChatData[activeChat].conversationData.push(newMessage);
-    const highestSortValue = Math.max(...chatNameData.map((chat) => chat.sort));
+    const highestSortValue = Math.max(
+      ...chatNameData
+        .map((chat) => chat.sort)
+        .filter((val) => typeof val === "number")
+    );
     updatedChatData[activeChat].sort = highestSortValue + 1;
     setChatNameData(updatedChatData);
     setIsActive(0);
@@ -755,7 +759,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                       <span className="hover:text-uConnectDark-accent">
                         <FaPen />
                       </span>
-                      <span className="hover:text-uConnectDark-accent">
+                      <span className="hover:text-red-500">
                         <FaTrash />
                       </span>
                     </span>
@@ -996,8 +1000,6 @@ function ChatMemberListBar({
           const updatedMembers = chat.members.filter(
             (memberName) => memberName.name !== member
           );
-
-          console.log(updatedMembers + " hey"); // Check members after filtering
           return {
             ...chat,
             members: updatedMembers, // Update the members list
@@ -1052,9 +1054,19 @@ function ChatMemberListBar({
                 className="bg-uConnectLight-layer2Primary focus:outline-none dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent focus:border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full flex justify-between items-center"
                 autoFocus
               />
-              <div className="flex flex-row gap-5 text-sm text-uConnectDark-accent underline">
-                <button onClick={handleCancel}>Cancel</button>
-                <button onClick={handleSave}>Save</button>
+              <div className="flex flex-row gap-10 text-sm">
+                <button
+                  className="hover:text-red-500 hover:underline "
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="hover:text-uConnectDark-accent hover:underline"
+                  onClick={handleSave}
+                >
+                  Save
+                </button>
               </div>
             </div>
           ) : (
@@ -1112,7 +1124,7 @@ function ChatMemberListBar({
                     {accountName === "You" &&
                       chatNameData[active].memberCount && (
                         <button
-                          className="mr-5 hover:text-uConnectDark-accent"
+                          className="mr-5 hover:text-red-500"
                           onClick={() => {
                             setAction(() => leaveChat);
                             setWarningVisible(true);
@@ -1130,7 +1142,7 @@ function ChatMemberListBar({
                             setWarningVisible(true);
                             setWarning("Kick " + accountName);
                           }}
-                          className="mr-5 hover:text-uConnectDark-accent"
+                          className="mr-5 hover:text-red-500"
                         >
                           <FaTrash />
                         </button>
@@ -1143,7 +1155,7 @@ function ChatMemberListBar({
       </div>
       <div className=" border-t flex flex-col gap-4 p-5">
         <button
-          className="hover:text-uConnectDark-accent"
+          className="hover:text-red-500"
           onClick={() => {
             setAction(() => leaveChat);
             setWarningVisible(true);
@@ -1201,12 +1213,6 @@ function WarningPopup({ isVisible, setIsVisible, action, warning }) {
         ref={popupRef} // Attach ref to the popup container
         className="flex flex-col bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-1/5 w-1/3 p-10 shadow-lg"
       >
-        <button
-          onClick={() => setIsVisible(false)}
-          className="absolute top-4 right-4 text-uConnectDark-accent dark:text-uConnectLight-accent"
-        >
-          &#x2715;
-        </button>
         <div className="pb-5 text-xl">Are You Sure You Want to {warning}?</div>
 
         <div className="flex flex-row gap-5">
@@ -1224,8 +1230,8 @@ function WarningPopup({ isVisible, setIsVisible, action, warning }) {
               setIsVisible(false);
               action();
             }}
-            className="mt-4 w-full px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
-            hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+            className="mt-4 w-full px-4 py-2 border border-red-500 text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
+            hover:bg-red-500 hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
           >
             {warning}
           </button>
@@ -1336,7 +1342,7 @@ function AccountPopup({
             />
           </div>
         </div>
-        <div className="max-h-full overflow-y-auto">
+        <div className="max-h-full overflow-y-auto flex-grow">
           {filteredAccounts.length > 0 ? (
             filteredAccounts.map(
               (account, index) =>
@@ -1359,7 +1365,7 @@ function AccountPopup({
                     </div>
                     <button
                       onClick={() => handleAddAccount(account)}
-                      className="text-uConnectDark-accent dark:text-uConnectLight-accent"
+                      className="text-uConnectDark-accent dark:text-uConnectLight-accent hover:underline"
                     >
                       Add
                     </button>
@@ -1544,7 +1550,7 @@ function AddMembers({
             />
           </div>
         </div>
-        <div className="max-h-full overflow-y-auto">
+        <div className="max-h-full overflow-y-auto flex-grow">
           {filteredAccounts.length > 0 ? (
             filteredAccounts.map(
               (account, index) =>
@@ -1567,7 +1573,7 @@ function AddMembers({
                     </div>
                     <button
                       onClick={() => handleAddAccount(account)}
-                      className="text-uConnectDark-accent dark:text-uConnectLight-accent"
+                      className="text-uConnectDark-accent dark:text-uConnectLight-accent hover:underline"
                     >
                       Add
                     </button>
