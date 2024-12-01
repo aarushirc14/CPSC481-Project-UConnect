@@ -347,7 +347,7 @@ const content = `
           <li>ECO Canada  - Summer Research Analyst</li>
           <li>S&P Global - Emissions Researcher</li>
           <li>Planet Alpha - Environment Strategy Intern</li>
-          <li>Cenovus Energy - Facilties Engineering Intern  </li>
+          <li>Cenovus Energy - Facilities Engineering Intern  </li>
           <li>Raw Earth Foundation - Marketing Intern</li>
           <li>Greenify - Operations Intern</li>
           <li>TerraLogix Solutions - Carbon Capture Planning Summer Student</li>

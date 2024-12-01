@@ -15,8 +15,9 @@ export default function CreatePostPage() {
   const [inputValue, setInputValue] = useState("SUMMER INTERNSHIPS AVAILABLE");
   
     return (
-      <div className="flex-1 p-6 mt-10 ml-40">
-        <div className=" dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain m-auto max-w-5xl transition">
+      <div className="flex-1 p-6 mt-10 ml-40 transition">
+          <p className="m-auto text-center font-extrabold text-3xl dark:text-uConnectDark-textSub text-uConnectLight-textMain">CREATE POST</p>
+        <div className=" dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain m-auto max-w-5xl">
           <div className="TextEditor">
             {/* Input Title */}
             <div className="top-0 left-0 px-4 py-1 flex items-center w-full mt-4 lg:mt-0 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
