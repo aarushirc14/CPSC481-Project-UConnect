@@ -10,44 +10,51 @@ import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
 import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";
 import kyraCosta from "../../assets/profilePics/kyraCosta.jpg";
 import lucaConnors from "../../assets/profilePics/lucaConnors.jpg";
+import imaniBates from "../../assets/profilePics/imaniBates.jpg";
+import kaiSon from "../../assets/profilePics/kaiSon.jpg";
+import harrisonYang from "../../assets/profilePics/harrisonYang.jpg";
+import jamesBraun from "../../assets/profilePics/jamesBraun.jpg";
+import kenzieSmith from "../../assets/profilePics/kenzieSmith.jpg";
+
 
 const users = [
-  {
-    image: kaylaWilkerson,
-    name: "Kayla Wilkerson",
-    majorAndYear: "Economics, 3rd Year",
-    interests: "Backpacking, Hiking, Photography, Adventures"
-  },
-  {
-    image: simonMann,
-    name: "Simon Mann",
-    majorAndYear: "Environmental Science, 4th Year",
-    interests: "Cooking, Sports, Fitness, Traveling"
-  },
-  {
-    image: jaredAllen,
-    name: "Jared Allen",
-    majorAndYear: "Environmental Science, 4th Year",
-    interests: "Art, Drawing, Creative writing, Music"
-  },
   {
     image: tenzinLopez,
     name: "Tenzin Lopez",
     majorAndYear: "Environmental Science, 3rd Year",
-    interests: "Astrology, Comedy, Skiing, Videography"
+    interests: "Astrology, Drawing, Comedy, Skiing, Videography"
   },
   {
-    image: kyraCosta,
-    name: "Kyra Costa",
-    majorAndYear: "Mathematics, 2nd Year",
-    interests: "Hiking, Karaoke, Podcasting, Running"
+    image: kaiSon,
+    name: "Kai Son",
+    majorAndYear: "Environmental Science, 2nd Year",
+    interests: "3D Printing, Drawing, Comedy, Skiing, Videography"
   },
   {
-    image: lucaConnors,
-    name: "Luca Connors",
-    majorAndYear: "Computer Science, 2nd Year",
-    interests: "Board games, Dancing, Debating, E-Sports"
-  }
+    image: imaniBates,
+    name: "Imani Bates",
+    majorAndYear: "Environmental Science, 3rd Year",
+    interests: "Cycling, Drawing, Martial Arts, Movie Club, Skiing"
+  },
+  {
+    image: harrisonYang,
+    name: "Harrison Yang",
+    majorAndYear: "Environmental Science, 2nd Year",
+    interests: "Cycling, Drawing, Baking, Skiing"
+  },
+  {
+    image: jamesBraun,
+    name: "James Braun",
+    majorAndYear: "Environmental Science, 4th Year",
+    interests: "Cooking, Drawing, Gardening, Movie Club, Skiing"
+  },
+  {
+    image: kenzieSmith,
+    name: "Kenzie Smith",
+    majorAndYear: "Environmental Science, 1st Year",
+    interests: "Gaming, Drawing, Community Service, Skiing"
+  },
+
 ];
 
 export default function SearchResultsInterestsMajorPeoplePage() {
