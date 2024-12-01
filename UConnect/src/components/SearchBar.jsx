@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchBar() {
+export default function SearchBar({ placeholder = "Search" }) {
   const [query, setQuery] = useState("");  // State to store the search query
   const navigate = useNavigate();  // Hook to navigate to the search results page
 
@@ -20,7 +20,7 @@ export default function SearchBar() {
       <form onSubmit={handleSearch} className="flex w-full">
         <input
           type="text"
-          placeholder="Search"
+          placeholder={placeholder}
           className="bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
           value={query}  // Controlled input
           onChange={(e) => setQuery(e.target.value)}  // Update the query state on input change

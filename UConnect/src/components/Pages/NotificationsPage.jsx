@@ -1,7 +1,7 @@
 // src/components/pages/NotificationsPage.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+import SearchBar from "../SearchBar";
 import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";
 import aaronPatel from "../../assets/profilePics/aaronPatel.jpg";
 import jordanLi from "../../assets/profilePics/shirleyLee.webp";
@@ -91,6 +91,8 @@ const notificationsData = [
 ];
 
 export default function NotificationsPage() {
+
+
   const navigate = useNavigate();
 
   const handleNotificationClick = (route) => {
@@ -106,14 +108,10 @@ export default function NotificationsPage() {
       {/* Content Offset to Avoid Sidebar Overlap */}
       <div className="ml-64 w-full">
         {/* Search Bar */}
-        <div className="flex items-center border-2 rounded-full border-uConnectDark-accent m-10 mx-20 p-3 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary">
-          <FaSearch className="text-uConnectDark-accent mr-3" />
-          <input
-            type="text"
-            placeholder="Search Notifications"
-            className="bg-transparent outline-none w-full placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-textSub"
-          />
+        <div className="sticky top-0 z-10 mb-20">
+          <SearchBar placeholder="Search Notifications"/>
         </div>
+   
 
         {/* Notifications Content */}
         <div className="px-20">

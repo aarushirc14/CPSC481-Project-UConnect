@@ -1128,7 +1128,7 @@ function ChatMemberListBar({
                           onClick={() => {
                             setAction(() => () => kickMember(accountName));
                             setWarningVisible(true);
-                            setWarning("Kick " + accountName);
+                            setWarning("Remove " + accountName);
                           }}
                           className="mr-5 hover:text-uConnectDark-accent"
                         >
