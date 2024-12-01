@@ -85,7 +85,7 @@ export default function SearchResultsPeoplePage() {
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-0">
-          <SearchBar />
+        <SearchBar placeholder={"Math 211"} />
         </div>
 
         {/* Filter Section */}

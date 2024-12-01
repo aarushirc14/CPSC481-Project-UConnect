@@ -86,12 +86,14 @@ export default function SearchResultsPage() {
   };
   const handleTagRemove = (tagType, tag) => {
     if (tagType === "interest") {
-      setSelectedInterests(selectedInterests.filter(i => i !== tag));
+      const newInterests = selectedInterests.filter(i => i.value !== tag.value);
+      setSelectedInterests(newInterests);
     } else if (tagType === "major") {
-      setSelectedMajors(selectedMajors.filter(m => m !== tag));
+      const newMajors = selectedMajors.filter(m => m.value !== tag.value);
+      setSelectedMajors(newMajors);
     }
   };
-
+  
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       {/* Sidebar */}
@@ -101,7 +103,7 @@ export default function SearchResultsPage() {
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-0">
-          <SearchBar />
+          <SearchBar placeholder={"Math 211"} />
         </div>
 
         {/* Filter Section */}
@@ -138,8 +140,7 @@ export default function SearchResultsPage() {
               <button
                 type="button"
                 className="ml-2 text-red-500"
-                onClick={() => handleTagRemove("interest", interest)}
-
+                onClick={() => handleTagRemove("major", major)}
               >
                 &#x2715;
               </button>
