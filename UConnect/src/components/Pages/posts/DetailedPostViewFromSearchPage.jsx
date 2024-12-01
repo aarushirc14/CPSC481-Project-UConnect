@@ -16,7 +16,7 @@ import {
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
-import leoCarter from "../../../assets/profilePics/leoCarter.png";
+import leoCarter from "../../../assets/profilePics/leoCarter.jpg";
 
 
 // Define the Poster
