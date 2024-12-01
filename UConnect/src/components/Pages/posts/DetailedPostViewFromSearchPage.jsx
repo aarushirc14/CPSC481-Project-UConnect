@@ -10,13 +10,12 @@ import EmojiPicker from "emoji-picker-react";
 import {
   FaSmile,
   FaPaperPlane,
-  FaSort,
 } from "react-icons/fa";
 
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
-import leoCarter from "../../../assets/profilePics/leoCarter.png";
+import leoCarter from "../../../assets/profilePics/leoCarter.jpg";
 
 
 // Define the Poster
@@ -28,7 +27,7 @@ const poster = {
         <p className="mb-6">
             Hey everyone! I am a new student at UofC and I am currently looking for other students who are interested in joining a study group for CPSC 481.
         </p>
-        <img src="/src/assets/leoCarterPost.png" alt="Person wearing a VR headset"></img>
+        <img src="/src/assets/profilePics/leoCarterPost.png" alt="Person wearing a VR headset"></img>
       </div>
   ),
     image: leoCarter,
@@ -135,9 +134,9 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
-  const [numberOfComments, setNumberComments] = useState(2);
-  const [inputValue, setInputValue] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [numberOfComments, setNumberComments] = useState(2);      // show the number of comments from the post
+  const [inputValue, setInputValue] = useState("");               // record the text input from the user
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);  // record the current state of visibility of the emoji picker
 
   {/* Update Comment Input to include Emoji */}
   const onEmojiClick = (emojiData, event) => {
@@ -161,7 +160,7 @@ export default function DetailedPostViewPage() {
       reply: []
       } , ...prevComment.map((comment) => ({
         ...comment,
-        id: comment.id + 1, // Increment IDs of all existing comments
+        id: comment.id + 1, // Increment IDs of all existing replies
       })),
     ]);
 
@@ -218,7 +217,7 @@ export default function DetailedPostViewPage() {
   const [showComments, setShowComments] = useState(true); // choose if user want to open or close the comment section
   const navigate = useNavigate();
   const handleBackClick = () => {
-    navigate("/home");      // Go back to home
+    navigate(-1);      // Go back to the previous page
   };
 
   //const [showReplyInput, setShowReplyInput] = useState(false);
@@ -401,8 +400,8 @@ export default function DetailedPostViewPage() {
                                   <FaSmile />
                             </button>
                                   {showEmojiPickerComment &&(
-                                    <div className="rounded-lg absolute z-auto right-20 pb-9" // Use bottom instead of padding-top
-                                    style={{ transform: "translateY(-100%)" }} // Optional: Move it completely above the trigger element
+                                    <div className="rounded-lg absolute z-auto right-20 pb-9"
+                                    style={{ transform: "translateY(-100%)" }} 
                                   >
                                       <EmojiPicker onEmojiClick={onEmojiClickComment}
                                       theme="auto"
@@ -454,6 +453,3 @@ export default function DetailedPostViewPage() {
     </div>
   );
 }
-
-
-

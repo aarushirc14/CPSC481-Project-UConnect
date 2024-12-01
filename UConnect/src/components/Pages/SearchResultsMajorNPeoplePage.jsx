@@ -1,26 +1,18 @@
-//SearchResultsPage.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar"; // Import Sidebar component
 import SearchBar from "../SearchBar";
 import MultiSelectDropdownFilter from "../MultiSelectDropdownFilter";
-import {majorOptions, interestOptions,} from "../../data/dropdownOptions";
+import { majorOptions, interestOptions } from "../../data/dropdownOptions";
 import kaylaWilkerson from "../../assets/profilePics/kaylaWilkerson.jpg";
 import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
 import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";
-import leoCarter from "../../assets/profilePics/leoCarter.jpg";
-import leoCarterPost from "../../assets/profilePics/leoCarterPost.png";
-import emmaLang from "../../assets/profilePics/emmaLang.jpg";
-import emmaLangPost from "../../assets/profilePics/emmaLangPost.jpg";
+import kaiSon from "../../assets/profilePics/kaiSon.jpg";
+import kendraLamar from "../../assets/profilePics/kendraLamar.jpg";
+import imaniBates from "../../assets/profilePics/imaniBates.jpg";
 
 const users = [
-  {
-    image: kaylaWilkerson,
-    name: "Kayla Wilkerson",
-    majorAndYear: "Economics, 3rd Year",
-    interests: "Backpacking, Hiking, Photography, Adventures"
-  },
   {
     image: simonMann,
     name: "Simon Mann",
@@ -37,41 +29,41 @@ const users = [
     image: tenzinLopez,
     name: "Tenzin Lopez",
     majorAndYear: "Environmental Science, 3rd Year",
-    interests: "Astrology, Comedy, Skiing, Videography"
-
-  }
-];
-const posts = [
-  {
-    image: leoCarter,
-    postImage: leoCarterPost,
-    name: "Leo Carter",
-    majorAndYear: "Environmental Science, 4th Year",
-    time: "Today at 2:59PM",
-    description: "Hey eveyone I am a new student at UofC I am curently looking for other students who are interested in joining a study group for MATH 211. Message me if you're interested in joining!"
+    interests: "Astrology, Drawing, Comedy, Skiing, Videography"
   },
   {
-    image: emmaLang,
-    postImage: emmaLangPost,
-    name: "Emma Lang",
-    majorAndYear: "Mathematics, 2nd Year",
-    time: "Today at 11:11AM",
-    description: "Hey everyone! I was talking to a few people today in MATH 211 about a ski trip that my club was planning over this Christmas break! Message me know if you wanted to come join us for a weekend of skiing! Skiing trip will be from December 19-21."
-
+    image: kaiSon,
+    name: "Kai Son",
+    majorAndYear: "Environmental Science, 2nd Year",
+    interests: "3D Printing, Drawing, Comedy, Skiing, Videography"
+  },
+  {
+    image: kendraLamar,
+    name: "Kendra Lamar",
+    majorAndYear: "Environmental Science, 2nd Year",
+    interests: "Fashion, E-Sports, Music, Photograpghy"
+  },
+  {
+    image: imaniBates,
+    name: "Imani Bates",
+    majorAndYear: "Environmental Science, 3rd Year",
+    interests: "Cycling, Drawing, Martial Arts, Movie Club, Skiing"
   }
+
 ];
 
-
-export default function SearchResultsPage() {
-  const [searchResults, setSearchResults] = useState([]);
+export default function SearchResultsMajorNPeoplePage() {
   const [selectedInterests, setSelectedInterests] = useState([]);
-  const [selectedMajors, setSelectedMajors] = useState([]);
+  // Ensure the selectedMajors state has the correct format for the default selected value
+  const [selectedMajors, setSelectedMajors] = useState([{ value: "environmental_science", label: "Environmental Science" }]);
   const navigate = useNavigate();
 
   const handleClickPosts = () => { navigate("/search-results-posts"); };
+  const handleClicksPeople = () => { navigate("/search-results"); };
   const handleClickChat = () => { navigate("/chats"); };
-  const handleClicksPeople = () => { navigate("/search-results-people"); };
   const handleClicksReset = () => { navigate("/search-results"); };
+  const handleClicksApplyFilters =() => {navigate("/search-results-interests-major-people");};
+
 
   const handleInterestChange = (selectedOptions) => {
     setSelectedInterests(selectedOptions);
@@ -80,23 +72,23 @@ export default function SearchResultsPage() {
   const handleMajorChange = (selectedOptions) => {
     setSelectedMajors(selectedOptions);
   };
+
   const resetFilters = () => {
-    setSelectedInterests([]); r
-    setSelectedMajors([]); 
+    setSelectedInterests([]);
+    setSelectedMajors([{ value: "environmental_science", label: "Environmental Science" }]);  // Reset to default major
   };
-  const handleTagRemove = (tagType, tag) => {
-    if (tagType === "interest") {
-      const newInterests = selectedInterests.filter(i => i.value !== tag.value);
-      setSelectedInterests(newInterests);
-    } else if (tagType === "major") {
-      const newMajors = selectedMajors.filter(m => m.value !== tag.value);
-      setSelectedMajors(newMajors);
-    }
+
+  const majorDropdownStyles = {
+    backgroundColor: '#e0f7fa',
+    color: '#00796b',
+    padding: '10px',
+    borderRadius: '8px',
+    labelBackgroundColor: '#F99F28',  // Background color for the label
+    label: '#131313',
   };
-  
+
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-
       {/* Sidebar */}
       <Sidebar />
 
@@ -130,7 +122,7 @@ export default function SearchResultsPage() {
               </button>
             </div>
           ))}
-          
+
           {/* Display selected majors */}
           {selectedMajors.map((major) => (
             <div
@@ -141,7 +133,9 @@ export default function SearchResultsPage() {
               <button
                 type="button"
                 className="ml-2 text-red-500"
-                onClick={() => handleTagRemove("major", major)}
+                onClick={() =>
+                  setSelectedMajors(selectedMajors.filter(m => m !== major))
+                }
               >
                 &#x2715;
               </button>
@@ -165,7 +159,7 @@ export default function SearchResultsPage() {
               e.stopPropagation();
               handleClicksPeople();
             }}
-            className="mt-4 px-4 py-2 border bg-[#C6C3C3] dark:bg-uConnectDark-background hover:dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+            className="mt-4 px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent hover:dark:bg-uConnectDark-background border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectDark-background rounded-full hover:bg-[#C6C3C3] hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain"
           >
             People
           </button>
@@ -182,23 +176,26 @@ export default function SearchResultsPage() {
             label="Majors"
             existingSelectedOptions={selectedMajors}
             onChange={handleMajorChange}
+            style={majorDropdownStyles}
           />
         </div>
 
         {/* Apply Filters Button */}
         <div className="mb-8 flex justify-end mt-8">
           <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClicksApplyFilters();
+            }}
             className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
           >
             Apply Filters
           </button>
           <button
             onClick={(e) => {
-              window.location.reload();
               e.stopPropagation();
               handleClicksReset();
             }}
-            
             className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-uConnectDark-accent rounded-full hover:opacity-80 dark:hover:opacity-80"
           >
             Reset Filters
@@ -243,40 +240,6 @@ export default function SearchResultsPage() {
           ))}
         </div>
 
-        {/* Grid for Posts */}
-        <div className="grid grid-cols-1 gap-6 mb-8">
-          {posts.map((post, index) => (
-            <div
-              key={index}
-              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-6 rounded-lg text-left transition relative flex items-start w-full cursor-pointer"
-            >
-              <Link to={`/detailed-post-from-search/${post.index}`} className="flex">
-                <img
-                  src={post.image}
-                  alt={`${post.name}`}
-                  className="w-28 h-28 rounded-full border-2 border-[#131313] object-cover mr-6"
-                />
-                <div className="flex flex-col">
-                  <div className="flex items-center">
-                    <h3 className="text-xl font-semibold text-uConnectDark-accent">{post.name}</h3>
-                    <p className="text-uConnectLight-textSub dark:text-uConnectDark-textSub break-words ml-5 text-xs">{post.time}</p>
-                  </div>
-                  <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMaintext-uConnectLight-textSub dark:text-uConnectDark-textSub mb-2">
-                    {post.majorAndYear}
-                  </p>
-                  <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-4">
-                    {post.description}
-                  </p>
-                  <img
-                    src={post.postImage}
-                    alt={`${post.name}`}
-                    className="max-w-3xl"
-                  />
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
       </main>
     </div>
   );

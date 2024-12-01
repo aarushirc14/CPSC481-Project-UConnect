@@ -12,7 +12,7 @@ export default function CreatePostPage() {
     navigate("/sent-viewresult");      // After posting either return to home or go straight to Post view, for now it's home
   };
 
-  const [inputValue, setInputValue] = useState("SUMMER TECH INTERNSHIPS AVAILABLE");
+  const [inputValue, setInputValue] = useState("SUMMER INTERNSHIPS AVAILABLE");
   
     return (
       <div className="flex-1 p-6 mt-10 ml-40">

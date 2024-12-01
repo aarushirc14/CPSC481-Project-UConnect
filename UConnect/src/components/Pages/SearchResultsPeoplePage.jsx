@@ -1,4 +1,4 @@
-//SearchResultsPage.jsx
+//SearchResultsPeoplePage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar"; // Import Sidebar component
@@ -9,10 +9,8 @@ import kaylaWilkerson from "../../assets/profilePics/kaylaWilkerson.jpg";
 import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
 import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";
-import leoCarter from "../../assets/profilePics/leoCarter.jpg";
-import leoCarterPost from "../../assets/profilePics/leoCarterPost.png";
-import emmaLang from "../../assets/profilePics/emmaLang.jpg";
-import emmaLangPost from "../../assets/profilePics/emmaLangPost.jpg";
+import kyraCosta from "../../assets/profilePics/kyraCosta.jpg";
+import lucaConnors from "../../assets/profilePics/lucaConnors.jpg";
 
 const users = [
   {
@@ -36,41 +34,34 @@ const users = [
   {
     image: tenzinLopez,
     name: "Tenzin Lopez",
-    majorAndYear: "Environmental Science, 3rd Year",
+    majorAndYear: "Business, 3rd Year",
     interests: "Astrology, Comedy, Skiing, Videography"
-
-  }
-];
-const posts = [
-  {
-    image: leoCarter,
-    postImage: leoCarterPost,
-    name: "Leo Carter",
-    majorAndYear: "Environmental Science, 4th Year",
-    time: "Today at 2:59PM",
-    description: "Hey eveyone I am a new student at UofC I am curently looking for other students who are interested in joining a study group for MATH 211. Message me if you're interested in joining!"
   },
   {
-    image: emmaLang,
-    postImage: emmaLangPost,
-    name: "Emma Lang",
+    image: kyraCosta,
+    name: "Kyra Costa",
     majorAndYear: "Mathematics, 2nd Year",
-    time: "Today at 11:11AM",
-    description: "Hey everyone! I was talking to a few people today in MATH 211 about a ski trip that my club was planning over this Christmas break! Message me know if you wanted to come join us for a weekend of skiing! Skiing trip will be from December 19-21."
-
+    interests: "Hiking, Karaoke, Podcasting, Running"
+  },
+  {
+    image: lucaConnors,
+    name: "Luca Connors",
+    majorAndYear: "Computer Science, 2nd Year",
+    interests: "Board games, Dancing, Debating, E-Sports"
   }
 ];
 
 
-export default function SearchResultsPage() {
+export default function SearchResultsPeoplePage() {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [selectedMajors, setSelectedMajors] = useState([]);
   const navigate = useNavigate();
 
-  const handleClickPosts = () => { navigate("/search-results-posts"); };
-  const handleClickChat = () => { navigate("/chats"); };
-  const handleClicksPeople = () => { navigate("/search-results-people"); };
+  const handleClickPosts = () => {navigate("/search-results-posts");};
+  const handleClicksPeople = () => {navigate("/search-results");};
+  const handleClickChat = () => {navigate("/chats");};
+  const handleClicksApplyFilters =() => {navigate("/search-results-major-and-people");};
   const handleClicksReset = () => { navigate("/search-results"); };
 
   const handleInterestChange = (selectedOptions) => {
@@ -84,19 +75,9 @@ export default function SearchResultsPage() {
     setSelectedInterests([]); r
     setSelectedMajors([]); 
   };
-  const handleTagRemove = (tagType, tag) => {
-    if (tagType === "interest") {
-      const newInterests = selectedInterests.filter(i => i.value !== tag.value);
-      setSelectedInterests(newInterests);
-    } else if (tagType === "major") {
-      const newMajors = selectedMajors.filter(m => m.value !== tag.value);
-      setSelectedMajors(newMajors);
-    }
-  };
-  
+
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-
       {/* Sidebar */}
       <Sidebar />
 
@@ -104,7 +85,7 @@ export default function SearchResultsPage() {
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-0">
-          <SearchBar placeholder={"Math 211"} />
+        <SearchBar placeholder={"Math 211"} />
         </div>
 
         {/* Filter Section */}
@@ -141,7 +122,9 @@ export default function SearchResultsPage() {
               <button
                 type="button"
                 className="ml-2 text-red-500"
-                onClick={() => handleTagRemove("major", major)}
+                onClick={() =>
+                  setSelectedMajors(selectedMajors.filter(m => m !== major))
+                }
               >
                 &#x2715;
               </button>
@@ -165,8 +148,7 @@ export default function SearchResultsPage() {
               e.stopPropagation();
               handleClicksPeople();
             }}
-            className="mt-4 px-4 py-2 border bg-[#C6C3C3] dark:bg-uConnectDark-background hover:dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-          >
+            className="mt-4 px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent hover:dark:bg-uConnectDark-background border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectDark-background rounded-full hover:bg-[#C6C3C3] hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain">
             People
           </button>
 
@@ -188,13 +170,16 @@ export default function SearchResultsPage() {
         {/* Apply Filters Button */}
         <div className="mb-8 flex justify-end mt-8">
           <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClicksApplyFilters();
+            }}
             className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
           >
             Apply Filters
           </button>
           <button
             onClick={(e) => {
-              window.location.reload();
               e.stopPropagation();
               handleClicksReset();
             }}
@@ -243,40 +228,6 @@ export default function SearchResultsPage() {
           ))}
         </div>
 
-        {/* Grid for Posts */}
-        <div className="grid grid-cols-1 gap-6 mb-8">
-          {posts.map((post, index) => (
-            <div
-              key={index}
-              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-6 rounded-lg text-left transition relative flex items-start w-full cursor-pointer"
-            >
-              <Link to={`/detailed-post-from-search/${post.index}`} className="flex">
-                <img
-                  src={post.image}
-                  alt={`${post.name}`}
-                  className="w-28 h-28 rounded-full border-2 border-[#131313] object-cover mr-6"
-                />
-                <div className="flex flex-col">
-                  <div className="flex items-center">
-                    <h3 className="text-xl font-semibold text-uConnectDark-accent">{post.name}</h3>
-                    <p className="text-uConnectLight-textSub dark:text-uConnectDark-textSub break-words ml-5 text-xs">{post.time}</p>
-                  </div>
-                  <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMaintext-uConnectLight-textSub dark:text-uConnectDark-textSub mb-2">
-                    {post.majorAndYear}
-                  </p>
-                  <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-4">
-                    {post.description}
-                  </p>
-                  <img
-                    src={post.postImage}
-                    alt={`${post.name}`}
-                    className="max-w-3xl"
-                  />
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
       </main>
     </div>
   );

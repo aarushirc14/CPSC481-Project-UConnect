@@ -10,7 +10,6 @@ import EmojiPicker from "emoji-picker-react";
 import {
   FaSmile,
   FaPaperPlane,
-  FaSort,
 } from "react-icons/fa";
 
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
@@ -117,7 +116,7 @@ export default function DetailedPostViewPage() {
       if (dislikeStyle === "inactive") {
         setDislikeStyle("active")
         setDislikes((prevDislikes) => prevDislikes + 1); // Increment dislikes by 1
-        if (likes > 0 && likes > poster.likes) setLikes(likes - 1); // Decrement likes if there are any
+        if (likes > 0 && likes > poster.likes) setLikes(likes - 1); // Decrement likes if there it is still active (User clicked it)
       } else if ( dislikeStyle !== "inactive") {
           setDislikeStyle("inactive")
           if (dislikes > 0) setDislikes((prevDislikes) => prevDislikes - 1); // subract dislikes by 1
@@ -129,7 +128,7 @@ export default function DetailedPostViewPage() {
     if (likeStyle === "inactive") {
       setLikeStyle("active")
       setLikes((prevLikes) => prevLikes + 1); // Increment likes by 1
-      if (dislikes > 0 && dislikes > poster.dislike) setDislikes(dislikes - 1); // Decrement dislikes if there are any
+      if (dislikes > 0 && dislikes > poster.dislike) setDislikes(dislikes - 1); // Decrement dislikes if there it is still active (User clicked it)
     } else if ( likeStyle !== "inactive") {
         setLikeStyle("inactive")
         if (likes > 0) setLikes((prevLikes) => prevLikes - 1); // subract likes by 1
@@ -137,9 +136,9 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
-  const [numberOfComments, setNumberComments] = useState(2);
-  const [inputValue, setInputValue] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [numberOfComments, setNumberComments] = useState(2);      // show the number of comments from the post
+  const [inputValue, setInputValue] = useState("");               // record the text input from the user
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);  // record the current state of visibility of the emoji picker
 
   {/* Update Comment Input to include Emoji */}
   const onEmojiClick = (emojiData, event) => {
@@ -186,7 +185,7 @@ export default function DetailedPostViewPage() {
 
   {/* Update the comment Section after submitting a post */}
   const onReplyComment = (id) => {
-    if (!replyValue.trim()) return; // Prevent submitting empty comments
+    if (!replyValue.trim()) return; // Prevent submitting empty replies
 
     setComments((prevComments) =>
       prevComments.map((comment) =>
@@ -403,8 +402,8 @@ export default function DetailedPostViewPage() {
                                   <FaSmile />
                             </button>
                                   {showEmojiPickerComment &&(
-                                    <div className="rounded-lg absolute z-auto right-20 pb-9" // Use bottom instead of padding-top
-                                    style={{ transform: "translateY(-100%)" }} // Optional: Move it completely above the trigger element
+                                    <div className="rounded-lg absolute z-auto right-20 pb-9" 
+                                    style={{ transform: "translateY(-100%)" }} 
                                   >
                                       <EmojiPicker onEmojiClick={onEmojiClickComment}
                                       theme="auto"
