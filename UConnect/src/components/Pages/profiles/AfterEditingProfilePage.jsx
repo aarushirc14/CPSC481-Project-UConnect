@@ -36,7 +36,7 @@ export default function AfterEditingProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex">
+    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition">
       {/* Show Notification on Page Load */}
       {showNotification && (
         <Notification

@@ -104,7 +104,7 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain transition">
       {/* Content Offset to Avoid Sidebar Overlap */}
       <div className="ml-64 w-full">
         {/* Search Bar */}

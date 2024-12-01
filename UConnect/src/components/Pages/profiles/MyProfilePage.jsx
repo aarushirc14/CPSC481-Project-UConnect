@@ -30,7 +30,7 @@ export default function MyProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex">
+    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition">
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
