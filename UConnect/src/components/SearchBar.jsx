@@ -6,9 +6,6 @@ import { useNavigate } from "react-router-dom";
 export default function SearchBar({placeholder="Search"}) {
   const [query, setQuery] = useState("");  
   const navigate = useNavigate();  
-export default function SearchBar({ placeholder = "Search" }) {
-  const [query, setQuery] = useState("");  // State to store the search query
-  const navigate = useNavigate();  // Hook to navigate to the search results page
 
   const handleSearch = (e) => {
     e.preventDefault(); 
