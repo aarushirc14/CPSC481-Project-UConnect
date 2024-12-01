@@ -22,20 +22,20 @@ const poster = {
     content: (
       <div className="mt-2.5">
           <p>
-              <b>Several new Summer Tech Internships are open for 2025! Companies offering these internships are listed below:</b>
+              <b>I found several internships for 2025, related to environment/research/engineering:</b>
           </p>
           <ul className="list-disc pl-4 my-5 mr-4 ml-1.5">
-              <li className="mt-2.5">Apple - software and hardware engineering</li>
-              <li className="mt-2.5">Microsoft - software engineering, data science, and cloud computing roles</li>
-              <li className="mt-2.5">Goldman Sachs - Summer Analyst</li>
-              <li className="mt-2.5">NVIDIA - AI research, autonomous vehicle development, and gaming technology</li>
-              <li className="mt-2.5">JPMorgan - quantitative analysis and fintech development</li>
-              <li className="mt-2.5">Cenovus Energy - Process Data Operations, OT Integrity and Integration and Automation Support</li>
-              <li className="mt-2.5">Lockheed Martin Corporation - Software Development Intern, work primarily in C++</li>
-              <li className="mt-2.5">Propra - Operations Intern</li>
-              <li className="mt-2.5">liTAQA - IT Service Delivery Summer Student</li>
+              <li className="mt-2.5">Trace Associates - Environmental Project Planning Intern</li>
+              <li className="mt-2.5">Stantec - Materials Engineering Intern</li>
+              <li className="mt-2.5">ECO Canada  - Summer Research Analyst</li>
+              <li className="mt-2.5">S&P Global - Emissions Researcher</li>
+              <li className="mt-2.5">Planet Alpha - Environment Strategy Intern</li>
+              <li className="mt-2.5">Cenovus Energy - Facilties Engineering Intern  </li>
+              <li className="mt-2.5">Raw Earth Foundation - Marketing Intern</li>
+              <li className="mt-2.5">Greenify - Operations Intern</li>
+              <li className="mt-2.5">TerraLogix Solutions - Carbon Capture Planning Summer Student</li>
           </ul>
-          <p>Good Luck!</p>
+          <p>Hope you guys found these helpful and good luck with your apps!</p>
       </div>
   ),
     image: sofiaMartinez,
