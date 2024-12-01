@@ -14,8 +14,11 @@ import {
 
 import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
-import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
+import jaredAllen from "../../../assets/profilePics/jaredAllen.jpg";
 import leoCarter from "../../../assets/profilePics/leoCarter.jpg";
+import simonMann from "../../../assets/profilePics/simonMann.jpg";
+import saulAlvarez from "../../../assets/profilePics/saulAlvarez.jpg";
+import davidSingh from "../../../assets/profilePics/davidSingh.jpg";
 
 
 // Define the Poster
@@ -47,7 +50,13 @@ const commentedusers = [
   {
     id: 1,
     name: "Rashida Williams",
-    comment: "Hi Tracy! I'm a photography enthusiast too! I'd love to join you for some campus shots this weekend. What time were you thinking of meeting up?",
+    comment: (
+      <div>
+        <p>
+        Hi Leo, welcome to UofC! I’m interested in joining the study group. </p>
+        <p>Are you focusing on specific topics or just general study sessions?</p>
+      </div>
+      ),
     image: rashidaWilliams,
     time: "15 mins ago",
     likeStatus: "inactive",
@@ -57,10 +66,49 @@ const commentedusers = [
   },
   {
     id: 2,
-    name: "Shirley Lee",
-    comment: "Hey there! I'm into photography as well. I’ve been wanting to capture some sunrise or golden hour shots around campus.",
-    image: shirleyLee,
+    name: "Jared Allen",
+    comment: "Hi Leo! I’m currently taking the course too, and I’d be happy to join the group. Do you prefer meeting online or on campus?",
+    image: jaredAllen,
     time: "30 mins ago",
+    likeStatus: "inactive",
+    likes: 0,
+    dislikeStatus: "inactive",
+    dislikes: 0,
+  },
+  {
+    id: 3,
+    name: "Simon Mann",
+    comment:(
+        <div>
+        <p>
+        Welcome Leo! I see that we share the same major! I’ve taken that course before and would be happy to help out. </p>
+        <p>Feel free to reach out if you need tips or resources for the course or your major in general! </p>
+        </div>
+      ),
+    image: simonMann,
+    time: "47 mins ago",
+    likeStatus: "inactive",
+    likes: 8,
+    dislikeStatus: "inactive",
+    dislikes: 2,
+  },
+  {
+    id: 4,
+    name: "Saul Alvarez",
+    comment: "I'm in that course too and would be interested to join a study group for it. Message me if you found a group and want me in!",
+    image: saulAlvarez,
+    time: "2 hours ago",
+    likeStatus: "inactive",
+    likes: 1,
+    dislikeStatus: "inactive",
+    dislikes: 0,
+  },
+  {
+    id: 5,
+    name: "David Singh",
+    comment: "I know a friend who's currently taking that course and wants to join a study group but she has a tight schedule this semester. What time are available and would you mind sharing your schedule?",
+    image: davidSingh,
+    time: "2 hours and 10 mins ago",
     likeStatus: "inactive",
     likes: 0,
     dislikeStatus: "inactive",
@@ -177,7 +225,7 @@ export default function DetailedPostViewPage() {
 
   {/* Update Comment Input to include Emoji */}
   const onEmojiClickComment = (emojiData, event) => {
-    setReplyValue((prevInput) => prevInput + emojiData.emoji);
+    setReplyValue((prevInput) => (prevInput || "") + emojiData.emoji);
     setShowEmojiPickerComment(false);
   };
 
@@ -355,7 +403,7 @@ export default function DetailedPostViewPage() {
                         : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
                         }`}
                           onClick={() => {setReplyingTo(replyingTo === user.id ? null : user.id)
-                            setReplyValue(null);
+                            setReplyValue("");
                           }}>
                             <MdOutlineInsertComment /> Reply
                       </button>
@@ -393,15 +441,15 @@ export default function DetailedPostViewPage() {
                             <hr class=" mx-auto w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
                           </div>
                           {/* Set the Emoji Picker */}
-                          <div className="Emoji_Picker">
+                          <div className="Emoji_Picker relative">
                             <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
                                 onClick={() => setShowEmojiPickerComment(!showEmojiPickerComment)}
                                 >
                                   <FaSmile />
                             </button>
                                   {showEmojiPickerComment &&(
-                                    <div className="rounded-lg absolute z-auto right-20 pb-9"
-                                    style={{ transform: "translateY(-100%)" }} 
+                                    <div className="rounded-lg absolute z-auto right-0"
+                                      style={{ bottom: "100%", transform: "translateY(10px)"}}
                                   >
                                       <EmojiPicker onEmojiClick={onEmojiClickComment}
                                       theme="auto"

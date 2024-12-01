@@ -179,7 +179,7 @@ export default function DetailedPostViewPage() {
 
   {/* Update Comment Input to include Emoji */}
   const onEmojiClickComment = (emojiData, event) => {
-    setReplyValue((prevInput) => prevInput + emojiData.emoji);
+    setReplyValue((prevInput) => (prevInput || "") + emojiData.emoji);
     setShowEmojiPickerComment(false);
   };
 
@@ -357,7 +357,7 @@ export default function DetailedPostViewPage() {
                         : "border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
                         }`}
                           onClick={() => {setReplyingTo(replyingTo === user.id ? null : user.id)
-                            setReplyValue(null);
+                            setReplyValue("");
                           }}>
                             <MdOutlineInsertComment /> Reply
                       </button>
@@ -395,15 +395,15 @@ export default function DetailedPostViewPage() {
                             <hr class=" mx-auto w-full border-uConnectLight-textMain dark:border-uConnectDark-textMain border-1"></hr>
                           </div>
                           {/* Set the Emoji Picker */}
-                          <div className="Emoji_Picker">
+                          <div className="Emoji_Picker relative">
                             <button className="mt-4 px-4 py-2 text-uConnectLight-textSub dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
                                 onClick={() => setShowEmojiPickerComment(!showEmojiPickerComment)}
                                 >
                                   <FaSmile />
                             </button>
                                   {showEmojiPickerComment &&(
-                                    <div className="rounded-lg absolute z-auto right-20 pb-9" 
-                                    style={{ transform: "translateY(-100%)" }} 
+                                    <div className="rounded-lg absolute z-auto right-0"
+                                    style={{ bottom: "100%", transform: "translateY(10px)"}}
                                   >
                                       <EmojiPicker onEmojiClick={onEmojiClickComment}
                                       theme="auto"
