@@ -12,12 +12,14 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo/uconnectSmallLogo.png";
 
-export default function Sidebar({ onLogout }) {
+export default function Sidebar({ onLogout, chatNotificationCount }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [notificationCount, setNotificationCount] = useState(4); // Example initial count
   const disableLabel = window.location.pathname === "/chats";
+
+  console.log(chatNotificationCount);
 
   // Sync dark mode state with the document
   useEffect(() => {
@@ -43,7 +45,12 @@ export default function Sidebar({ onLogout }) {
 
   const routes = [
     { path: "/home", label: "Home", icon: <FaHome /> },
-    { path: "/chats", label: "Chats", icon: <FaComments />, badge: "3" },
+    {
+      path: "/chats",
+      label: "Chats",
+      icon: <FaComments />,
+      badge: chatNotificationCount,
+    },
     {
       path: "/notifications",
       label: "Notifications",
@@ -65,11 +72,7 @@ export default function Sidebar({ onLogout }) {
         className="flex items-center mb-8 min-h-20 cursor-pointer"
         onClick={() => navigate("/home")}
       >
-        <img
-          src={logo}
-          alt="UConnect Logo"
-          className={`w-7 h-7 ${iconSize}`}
-        />
+        <img src={logo} alt="UConnect Logo" className={`w-7 h-7 ${iconSize}`} />
       </div>
 
       {/* Navigation Links */}

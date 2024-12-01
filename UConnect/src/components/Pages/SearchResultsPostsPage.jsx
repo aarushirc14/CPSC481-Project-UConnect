@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar"; // Import Sidebar component
 import SearchBar from "../SearchBar";
 import MultiSelectDropdownFilter from "../MultiSelectDropdownFilter";
-import {majorOptions, interestOptions,} from "../../data/dropdownOptions";
+import { majorOptions, interestOptions } from "../../data/dropdownOptions";
 import kaylaWilkerson from "../../assets/profilePics/kaylaWilkerson.jpg";
 import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
@@ -17,27 +17,26 @@ const users = [
     image: kaylaWilkerson,
     name: "Kayla Wilkerson",
     majorAndYear: "Environmental Science, 3rd Year",
-    interests: "Backpacking, Hiking, Photography, Adventures"
+    interests: "Backpacking, Hiking, Photography, Adventures",
   },
   {
     image: simonMann,
     name: "Simon Mann",
     majorAndYear: "Environmental Science, 4th Year",
-    interests: "Cooking, Sports, Fitness, Traveling"
+    interests: "Cooking, Sports, Fitness, Traveling",
   },
   {
     image: jaredAllen,
     name: "Jared Allen",
     majorAndYear: "Enviornmental Science, 4th Year",
-    interests: "Art, Drawing, Creative writing, Music"
+    interests: "Art, Drawing, Creative writing, Music",
   },
   {
     image: tenzinLopez,
     name: "Tenzin Lopez",
     majorAndYear: "Environmental Science, 3rd Year",
-    interests: "Astrology, Comedy, Skiing, Videography"
-
-  }
+    interests: "Astrology, Comedy, Skiing, Videography",
+  },
 ];
 const posts = [
   {
@@ -46,8 +45,9 @@ const posts = [
     name: "Leo Carter",
     majorAndYear: "Environmental Science, 4th Year",
     time: "Today at 2:59PM",
-    description: "Hey eveyone I am a new student at UofC I am curently looking for other students who are interested in joining a study group for MATH 211. Message me if you're interested in joining!"
-  }
+    description:
+      "Hey eveyone I am a new student at UofC I am curently looking for other students who are interested in joining a study group for MATH 211. Message me if you're interested in joining!",
+  },
 ];
 
 export default function SearchResultsPage() {
@@ -56,7 +56,6 @@ export default function SearchResultsPage() {
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       {/* Sidebar*/}
-      <Sidebar/>
       {/* Main content area */}
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
@@ -70,15 +69,12 @@ export default function SearchResultsPage() {
           </button>
           <button className="mt-4 px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain">
             People
-          </button> 
+          </button>
           <MultiSelectDropdownFilter
             options={interestOptions}
             label="Interests"
           />
-          <MultiSelectDropdownFilter
-            options={majorOptions}
-            label="Majors"
-          />
+          <MultiSelectDropdownFilter options={majorOptions} label="Majors" />
         </div>
         {/*Grid placement of profiles*/}
         <div className="grid grid-cols-2 gap-6 mb-8">
@@ -94,9 +90,15 @@ export default function SearchResultsPage() {
                 className="w-28 h-28 rounded-full border-2 border-[#131313] object-cover mr-6"
               />
               <div className="flex flex-col">
-                <h3 className="text-xl font-semibold text-uConnectDark-accent">{user.name}</h3>
-                <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMaintext-uConnectLight-textSub dark:text-uConnectDark-textSub mb-2">{user.majorAndYear}</p>
-                <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMain break-words">{"Interests: " + user.interests}</p>
+                <h3 className="text-xl font-semibold text-uConnectDark-accent">
+                  {user.name}
+                </h3>
+                <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMaintext-uConnectLight-textSub dark:text-uConnectDark-textSub mb-2">
+                  {user.majorAndYear}
+                </p>
+                <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMain break-words">
+                  {"Interests: " + user.interests}
+                </p>
               </div>
               <div className="ml-auto">
                 <button className="mt-4 px-4 py-2 border border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain">
@@ -106,7 +108,6 @@ export default function SearchResultsPage() {
             </div>
           ))}
         </div>
-        
       </main>
     </div>
   );
