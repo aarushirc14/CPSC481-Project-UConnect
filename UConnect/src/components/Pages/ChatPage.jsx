@@ -665,7 +665,9 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
           </button>
           {showEmojiPicker && (
             <div className="rounded-lg absolute right-96 pt-1.5 bottom-24">
-              <EmojiPicker onEmojiClick={onEmojiClick} theme="auto" />
+              <Suspense fallback={<div>Loading...</div>}>
+                <EmojiPicker onEmojiClick={onEmojiClick} theme="auto" />
+              </Suspense>
             </div>
           )}
           {/* Paperclip Button - triggers file input */}

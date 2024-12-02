@@ -33,7 +33,9 @@ export default function CreatePostPage() {
             </div>
             <hr class="w-11/12 mx-auto bg-white border-1"></hr>
             {/* Input Content, The Text Editor */}
-            <TipTap />
+            <Suspense fallback={<div>Loading...</div>}>
+              <TipTap />
+            </Suspense>
             {/* Post Button */}
             <button
               onClick={(e) => {

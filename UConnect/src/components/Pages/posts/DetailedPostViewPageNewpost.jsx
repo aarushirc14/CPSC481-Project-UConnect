@@ -316,9 +316,12 @@ export default function DetailedPostViewPage() {
                 </button>
                       {showEmojiPicker &&(
                         <div className="rounded-lg absolute z-auto right-20 pt-1.5">
-                          <EmojiPicker onEmojiClick={onEmojiClick}
-                          theme="auto"
-                          />
+                           <Suspense fallback={<div>Loading...</div>}>
+                            <EmojiPicker onEmojiClick={onEmojiClick}
+                            theme="auto"
+                            />
+                           </Suspense>
+                          
                         </div>
                       )}
               </div>
