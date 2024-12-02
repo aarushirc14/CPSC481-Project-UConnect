@@ -101,7 +101,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain m-auto max-w-7xl">
       {/* Sidebar */}
       {/* <Sidebar /> */}
 
@@ -113,6 +113,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
         </div>
 
         {/* Filter Section */}
+        <div className="max-w-4xl m-auto">
         <div className="mt-5 ml-4 font-bold">Filter By..</div>
 
         {/* Selected filters (tags) */}
@@ -216,6 +217,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
             Reset Filters
           </button>
         </div>
+        </div>
 
         {/* Grid of Profiles */}
         <div className="grid grid-cols-2 gap-6 mb-8">
@@ -228,7 +230,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
                 <img
                   src={user.image}
                   alt={`${user.name}`}
-                  className="w-28 h-28 rounded-full border-2 border-[#131313] object-cover mr-6"
+                  className="w-24 h-24 rounded-full border-2 border-[#131313] object-cover mr-6"
                 />
                 <div className="flex flex-col">
                   <h3 className="text-xl font-semibold text-uConnectDark-accent">
