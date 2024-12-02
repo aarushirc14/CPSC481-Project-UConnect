@@ -36,7 +36,7 @@ export default function AfterEditingProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition">
+    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition m-auto max-w-7xl ">
       {/* Show Notification on Page Load */}
       {showNotification && (
         <Notification
@@ -101,7 +101,7 @@ export default function AfterEditingProfilePage() {
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Courses
               </h2>
-              <div className="grid grid-cols-5 gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-2">
                 {user.courses.map((course, index) => (
                   <span
                     key={index}

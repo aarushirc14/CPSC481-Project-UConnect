@@ -111,7 +111,7 @@ export default function HomePage({ setIsActive }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain m-auto max-w-7xl">
       {/* Sidebar
       <Sidebar activeItem={activeItem} onSelectItem={setActiveItem} /> */}
 
@@ -125,7 +125,7 @@ export default function HomePage({ setIsActive }) {
           Recommended People
         </div>
         {/* Featured Users */}
-        <div className="grid grid-cols-4 gap-7 mb-8">
+        <div className="grid grid-cols-4 gap-8 mb-8">
           {featuredUsers.map((user) => (
             <div
               key={user.id}
@@ -165,7 +165,7 @@ export default function HomePage({ setIsActive }) {
         <div className="mb-4 text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
           Featured Posts
         </div>
-        <div className="grid grid-cols-2 gap-7">
+        <div className="grid grid-cols-2 gap-8">
           {featuredPosts.map((post, index) => (
             <Link
               to={`/post/${post.id}`}

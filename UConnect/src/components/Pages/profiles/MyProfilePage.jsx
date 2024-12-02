@@ -30,7 +30,7 @@ export default function MyProfilePage() {
   };
 
   return (
-    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition ">
+    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition m-auto max-w-7xl">
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
@@ -88,7 +88,7 @@ export default function MyProfilePage() {
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Courses
               </h2>
-              <div className="grid grid-cols-5 gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-2">
                 {user.courses.map((course, index) => (
                   <span
                     key={index}
