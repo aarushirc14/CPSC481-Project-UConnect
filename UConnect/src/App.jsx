@@ -71,6 +71,7 @@ function App() {
 
   const [chatNotificationCount, setChatNotificationCount] = useState(3);
   const [activeChat, setActiveChat] = useState(-1);
+  const [notificationCount, setNotificationCount] = useState(4);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -98,6 +99,8 @@ function App() {
               onLogout={handleLogout} // Pass the logout handler
               chatNotificationCount={chatNotificationCount}
               setIsActive={setActiveChat}
+              setNotificationCount={setNotificationCount}
+              notificationCount={notificationCount}
             />
             <main className="flex-1">
               <Routes>

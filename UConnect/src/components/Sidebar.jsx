@@ -16,11 +16,13 @@ export default function Sidebar({
   onLogout,
   chatNotificationCount,
   setIsActive,
+  setNotificationCount,
+  notificationCount,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(4); // Example initial count
+
   const disableLabel = window.location.pathname === "/chats";
 
   // Sync dark mode state with the document
@@ -32,6 +34,7 @@ export default function Sidebar({
 
   useEffect(() => {
     if (location.pathname !== "/chats") setIsActive(-1);
+    if (location.pathname === "/notifications") setNotificationCount(null);
   }, [location.pathname]);
 
   const toggleDarkMode = () => {
