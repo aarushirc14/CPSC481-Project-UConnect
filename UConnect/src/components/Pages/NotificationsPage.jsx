@@ -43,7 +43,7 @@ const notificationsData = [
         profilePic: aaronPatel,
         message: "Liked Your Post",
         time: "7h ago",
-        route: `/posts/123`, // Post route
+        route: `/sent-viewresult`, // Post route
       },
     ],
   },
