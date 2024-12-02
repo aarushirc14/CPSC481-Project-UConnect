@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Suspense,useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { MdOutlineInsertComment } from "react-icons/md";

@@ -1,5 +1,5 @@
 // src/components/pages/ChatPage.jsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { Suspense,useState, useRef, useEffect } from "react";
 import {
   FaSearch,
   FaPlusCircle,

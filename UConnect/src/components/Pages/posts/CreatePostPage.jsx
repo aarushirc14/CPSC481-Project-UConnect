@@ -1,6 +1,6 @@
 // src/components/pages/posts/CreatePostPage.jsx
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import TipTap from "../../TipTap";
 const TipTap = React.lazy(() => import("../../TipTap")); //chunk larger imports for build
