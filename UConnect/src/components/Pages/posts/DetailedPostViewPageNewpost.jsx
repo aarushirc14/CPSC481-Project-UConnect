@@ -228,7 +228,7 @@ export default function DetailedPostViewPage() {
   const [replyingTo, setReplyingTo] = useState(null);
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition m-auto max-w-7xl">
       <div className = "flex-1 p-6 mt-10 ml-40">
         <div className="flex">
           {/* Back Button */}

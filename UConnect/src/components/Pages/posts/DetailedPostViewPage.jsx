@@ -17,6 +17,7 @@ import sofiaMartinez from "../../../assets/profilePics/sofiaMartinez.jpg";
 import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 import shirleyLee from "../../../assets/profilePics/shirleyLee.webp";
 import tracySmith from "../../../assets/profilePics/tracySmith.jpeg";
+import calgaryPhotography from "../../..//assets/calgaryPhotography.jpg";
 
 
 // Define the Poster
@@ -28,7 +29,9 @@ const poster = {
         <p className="mb-6">
           Any photography enthusiasts here? Would love to connect with fellow photographers for some campus shots this weekend.
         </p>
-        <img src="/src/assets/calgaryPhotography.jpg" alt="Calgary"></img>
+        <div className="flex items-center justify-center">
+          <img src={calgaryPhotography} className="max-w-xl"></img>
+        </div>
       </div>
   ),
     image: tracySmith,
@@ -228,7 +231,7 @@ export default function DetailedPostViewPage() {
 
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition m-auto max-w-7xl">
       <div className = "flex-1 p-6 mt-10 ml-40">
         <div className="flex">
           {/* Back Button */}

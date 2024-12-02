@@ -17,7 +17,6 @@ export default function CreatePostPage() {
     <div className="m-auto max-w-7xl">
       <div className="flex-1 p-6 mt-10 ml-40 transition ">
         <p className="text-center text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-          Create Post
         </p>
         <div className=" dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textSub text-uConnectLight-textMain m-auto max-w-5xl">
           <div className="TextEditor">

@@ -1,7 +1,7 @@
 //SearchResultsPage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from "../Sidebar"; // Import Sidebar component
+//import Sidebar from "../Sidebar"; // Import Sidebar component
 import SearchBar from "../SearchBar";
 import MultiSelectDropdownFilter from "../MultiSelectDropdownFilter";
 import {majorOptions, interestOptions,} from "../../data/dropdownOptions";
@@ -10,7 +10,7 @@ import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
 import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";
 import leoCarter from "../../assets/profilePics/leoCarter.jpg";
-import leoCarterPost from "../../assets/profilePics/leoCarterPost.png";
+import leoCarterPost from "../../assets/profilePics/leoCarterPost.webp";
 import emmaLang from "../../assets/profilePics/emmaLang.jpg";
 import emmaLangPost from "../../assets/profilePics/emmaLangPost.jpg";
 

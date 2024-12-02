@@ -39,7 +39,6 @@ export default function MyProfilePage() {
         </div>
         {/* Top Section */}
         <p className="text-center text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain pb-10">
-          My Profile
         </p>
         <div className="flex flex-wrap w-full max-w-7xl gap-6">
           {/* Left Section */}

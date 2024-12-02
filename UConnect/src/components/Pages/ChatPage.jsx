@@ -631,7 +631,7 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
   };
 
   return (
-    <div className="flex flex-col gap-2 fixed bottom-0 pb-10 w-full transition   dark:bg-uConnectDark-background bg-uConnectLight-background">
+    <div className="flex flex-col gap-2 fixed bottom-0 pb-10 w-full transition dark:bg-uConnectDark-background bg-uConnectLight-background">
       {attachment && (
         <span className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full mt-2 text-sm ml-96 w-fit p-3">
           {attachment.name}

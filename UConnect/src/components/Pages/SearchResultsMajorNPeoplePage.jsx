@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from "../Sidebar"; // Import Sidebar component
+//import Sidebar from "../Sidebar"; // Import Sidebar component
 import SearchBar from "../SearchBar";
 import MultiSelectDropdownFilter from "../MultiSelectDropdownFilter";
 import { majorOptions, interestOptions } from "../../data/dropdownOptions";
-import kaylaWilkerson from "../../assets/profilePics/kaylaWilkerson.jpg";
+//import kaylaWilkerson from "../../assets/profilePics/kaylaWilkerson.jpg";
 import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
 import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";

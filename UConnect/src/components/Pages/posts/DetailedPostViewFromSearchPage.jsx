@@ -20,6 +20,7 @@ import leoCarter from "../../../assets/profilePics/leoCarter.jpg";
 import simonMann from "../../../assets/profilePics/simonMann.jpg";
 import saulAlvarez from "../../../assets/profilePics/saulAlvarez.jpg";
 import davidSingh from "../../../assets/profilePics/davidSingh.jpg";
+import leoCarterPost from "../../../assets/profilePics/leoCarterPost.webp";
 
 
 // Define the Poster
@@ -31,7 +32,9 @@ const poster = {
         <p className="mb-6">
             Hey everyone! I am a new student at UofC and I am currently looking for other students who are interested in joining a study group for CPSC 481.
         </p>
-        <img src="/src/assets/profilePics/leoCarterPost.png" alt="Person wearing a VR headset"></img>
+        <div className="flex items-center justify-center">
+          <img src={leoCarterPost} className="max-w-xl"></img>
+        </div>
       </div>
   ),
     image: leoCarter,
@@ -274,7 +277,7 @@ export default function DetailedPostViewPage() {
 
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background transition m-auto max-w-7xl">
       <div className = "flex-1 p-6 mt-10 ml-40">
         <div className="flex">
           {/* Back Button */}
