@@ -90,7 +90,7 @@ export default function SearchResultsMajorNPeoplePage() {
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       {/* Sidebar */}
-      <Sidebar />
+      {/* <Sidebar /> */}
 
       {/* Main content area */}
       <main className="flex-1 p-6 mt-10 ml-40">

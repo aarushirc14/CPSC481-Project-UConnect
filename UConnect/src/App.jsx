@@ -29,7 +29,6 @@ import SearchResultsPeoplePage from "./components/Pages/SearchResultsPeoplePage"
 import SearchResultsMajorNPeoplePage from "./components/Pages/SearchResultsMajorNPeoplePage";
 import SearchResultsInterestsMajorPeoplePage from "./components/Pages/SearchResultsInterestsMajorPeoplePage";
 
-
 import sofiaMartinez from "../src/assets/profilePics/sofiaMartinez.jpg";
 
 function AuthPage({ isLogin, setIsLogin, handleLogin }) {
@@ -71,6 +70,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [chatNotificationCount, setChatNotificationCount] = useState(3);
+  const [activeChat, setActiveChat] = useState(-1);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -97,15 +97,21 @@ function App() {
               onSelectItem={setActiveItem}
               onLogout={handleLogout} // Pass the logout handler
               chatNotificationCount={chatNotificationCount}
+              setIsActive={setActiveChat}
             />
             <main className="flex-1">
               <Routes>
-                <Route path="/home" element={<HomePage />} />
+                <Route
+                  path="/home"
+                  element={<HomePage setIsActive={setActiveChat} />}
+                />
                 <Route
                   path="/chats"
                   element={
                     <ChatPage
                       setChatNotificationCount={setChatNotificationCount}
+                      active={activeChat}
+                      setIsActive={setActiveChat}
                     />
                   }
                 />
@@ -114,11 +120,26 @@ function App() {
                 <Route path="/my-profile" element={<MyProfilePage />} />
                 <Route path="/search-results" element={<SearchResultsPage />} />
 
-                <Route path="/search-results-posts" element={<SearchResultsPostsPage />} />
-                <Route path="/search-results-people" element={<SearchResultsPeoplePage />} />
-                <Route path="/search-results-major-and-people" element={<SearchResultsMajorNPeoplePage />} />
-                <Route path="/search-results-interests-major-people" element={<SearchResultsInterestsMajorPeoplePage />} />
-                <Route path="/sent-viewresult" element={<DetailedPostViewPageNewpost />} />
+                <Route
+                  path="/search-results-posts"
+                  element={<SearchResultsPostsPage />}
+                />
+                <Route
+                  path="/search-results-people"
+                  element={<SearchResultsPeoplePage />}
+                />
+                <Route
+                  path="/search-results-major-and-people"
+                  element={<SearchResultsMajorNPeoplePage />}
+                />
+                <Route
+                  path="/search-results-interests-major-people"
+                  element={<SearchResultsInterestsMajorPeoplePage />}
+                />
+                <Route
+                  path="/sent-viewresult"
+                  element={<DetailedPostViewPageNewpost />}
+                />
                 <Route
                   path="/search-results-posts"
                   element={<SearchResultsPostsPage />}
@@ -176,7 +197,7 @@ function App() {
                 />
                 <Route
                   path="/detailed-post-from-search/:postId"
-                  element={<DetailedPostViewFromSearchPage/>}
+                  element={<DetailedPostViewFromSearchPage />}
                 />
                 <Route
                   path="/create-profile"
@@ -220,33 +241,27 @@ function App() {
                   <CreateProfile onProfileCreated={handleProfileCreated} />
                 }
               />
-              <Route 
-                path="/search-results" 
-                element={<SearchResultsPage/>}
+              <Route path="/search-results" element={<SearchResultsPage />} />
+              <Route
+                path="/search-results-people"
+                element={<SearchResultsPeoplePage />}
               />
-              <Route 
-                path="/search-results-people" 
-                element={<SearchResultsPeoplePage/>}
-              />
-              <Route 
-                path="/search-results-posts" 
-                element={<SearchResultsPostsPage/>}
-              />
-              <Route 
-                path="/search-results" 
-                element={<SearchResultsPage />} 
-                />
               <Route
                 path="/search-results-posts"
                 element={<SearchResultsPostsPage />}
               />
-              <Route 
-                path="/search-results-major-and-people" 
-                element={<SearchResultsMajorNPeoplePage/>}
+              <Route path="/search-results" element={<SearchResultsPage />} />
+              <Route
+                path="/search-results-posts"
+                element={<SearchResultsPostsPage />}
               />
-              <Route 
-                path="/search-results-interests-major-people" 
-                element={<SearchResultsInterestsMajorPeoplePage/>}
+              <Route
+                path="/search-results-major-and-people"
+                element={<SearchResultsMajorNPeoplePage />}
+              />
+              <Route
+                path="/search-results-interests-major-people"
+                element={<SearchResultsInterestsMajorPeoplePage />}
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

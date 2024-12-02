@@ -12,14 +12,16 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo/uconnectSmallLogo.png";
 
-export default function Sidebar({ onLogout, chatNotificationCount }) {
+export default function Sidebar({
+  onLogout,
+  chatNotificationCount,
+  setIsActive,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [notificationCount, setNotificationCount] = useState(4); // Example initial count
   const disableLabel = window.location.pathname === "/chats";
-
-  console.log(chatNotificationCount);
 
   // Sync dark mode state with the document
   useEffect(() => {
@@ -27,6 +29,10 @@ export default function Sidebar({ onLogout, chatNotificationCount }) {
       setIsDarkMode(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (location.pathname !== "/chats") setIsActive(-1);
+  }, [location.pathname]);
 
   const toggleDarkMode = () => {
     if (isDarkMode) {
@@ -128,7 +134,7 @@ export default function Sidebar({ onLogout, chatNotificationCount }) {
 
           {/* Logout Button */}
           <div className="mt-5">
-            <SidebarItem 
+            <SidebarItem
               icon={<FaSignOutAlt />} // Correct logout icon
               label="Logout"
               onClick={handleLogout}

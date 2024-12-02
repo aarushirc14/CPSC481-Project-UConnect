@@ -101,12 +101,13 @@ const featuredPosts = [
   },
 ];
 
-export default function HomePage() {
+export default function HomePage({ setIsActive }) {
   const [activeItem, setActiveItem] = useState("home"); // State to track the active sidebar item
   const navigate = useNavigate();
 
   const handleChatClick = () => {
     navigate("/chats");
+    setIsActive(3);
   };
 
   return (

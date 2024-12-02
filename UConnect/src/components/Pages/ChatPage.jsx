@@ -23,57 +23,13 @@ import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
 
-export default function ChatPage({ setChatNotificationCount }) {
-  const [active, setIsActive] = useState(-1);
-
+export default function ChatPage({
+  setChatNotificationCount,
+  active,
+  setIsActive,
+}) {
   // Define featured users array
   const [chatNameData, setChatNameData] = useState([
-    {
-      chatName: "Rashida Williams",
-      label: "Rashida Williams",
-      value: "rashida_williams",
-      image: rashidaWilliams,
-      notification: 2,
-      sort: 0,
-      members: [
-        { name: "You", profile: sofiaMartinez },
-        { name: "Rashida Williams", profile: rashidaWilliams },
-      ],
-      conversationData: [
-        {
-          name: "You",
-          message: "Hello!",
-          profile: sofiaMartinez,
-          timestamp: "Today at 5:58pm",
-        },
-        {
-          name: "Rashida Williams",
-          message: "Hi! How are you doing?",
-          profile: rashidaWilliams,
-          timestamp: "Today at 6:00pm",
-        },
-        {
-          name: "You",
-          message: "I’m doing well, just been busy with exams. How about you?",
-          profile: sofiaMartinez,
-          timestamp: "Today at 6:05pm",
-        },
-        {
-          name: "Rashida Williams",
-          message:
-            "I’m good! Just trying to get through finals week. Have you studied for the math exam?",
-          profile: rashidaWilliams,
-          timestamp: "Today at 6:10pm",
-        },
-        {
-          name: "You",
-          message:
-            "I haven’t had the time yet, but I plan to start tonight. Want to study together later?",
-          profile: sofiaMartinez,
-          timestamp: "Today at 6:15pm",
-        },
-      ],
-    },
     {
       chatName: "Saul Alvarez",
       label: "Saul Alvarez",
@@ -128,6 +84,7 @@ export default function ChatPage({ setChatNotificationCount }) {
       label: "Aaron Patel",
       value: "aaron_patel",
       image: aaronPatel,
+      notification: 2,
       sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },
@@ -246,16 +203,9 @@ export default function ChatPage({ setChatNotificationCount }) {
           timestamp: "Today at 7:15pm",
         },
         {
-          name: "You",
-          message:
-            "Haha, true! I’ll try to relax a little before we meet. Thanks again for offering to help, I really appreciate it!",
-          profile: sofiaMartinez,
-          timestamp: "Today at 7:20pm",
-        },
-        {
           name: "Aaron Patel",
           message:
-            "No problem, happy to help! Don’t stress too much. We’ll get through it together!",
+            "Don’t stress too much. We’ll get through it together! 😀😀😀😀😀😀",
           profile: aaronPatel,
           timestamp: "Today at 7:25pm",
         },
@@ -289,6 +239,51 @@ export default function ChatPage({ setChatNotificationCount }) {
           message: "Yeah, that works! I’ll see you then.",
           profile: davidSingh,
           timestamp: "Today at 8:10am",
+        },
+      ],
+    },
+    {
+      chatName: "Rashida Williams",
+      label: "Rashida Williams",
+      value: "rashida_williams",
+      image: rashidaWilliams,
+      sort: 0,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Rashida Williams", profile: rashidaWilliams },
+      ],
+      conversationData: [
+        {
+          name: "You",
+          message: "Hello!",
+          profile: sofiaMartinez,
+          timestamp: "Today at 5:58pm",
+        },
+        {
+          name: "Rashida Williams",
+          message: "Hi! How are you doing?",
+          profile: rashidaWilliams,
+          timestamp: "Today at 6:00pm",
+        },
+        {
+          name: "You",
+          message: "I’m doing well, just been busy with exams. How about you?",
+          profile: sofiaMartinez,
+          timestamp: "Today at 6:05pm",
+        },
+        {
+          name: "Rashida Williams",
+          message:
+            "I’m good! Just trying to get through finals week. Have you studied for the math exam?",
+          profile: rashidaWilliams,
+          timestamp: "Today at 6:10pm",
+        },
+        {
+          name: "You",
+          message:
+            "I haven’t had the time yet, but I plan to start tonight. Want to study together later?",
+          profile: sofiaMartinez,
+          timestamp: "Today at 6:15pm",
         },
       ],
     },
@@ -821,7 +816,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                       <span className="hover:text-uConnectDark-accent">
                         <FaPen />
                       </span>
-                      <span className="hover:text-uConnectDark-accent">
+                      <span className="hover:text-red-500">
                         <FaTrash />
                       </span>
                     </span>
@@ -1087,7 +1082,7 @@ function ChatMemberListBar({
             {chatNameData[active].memberCount > 0 && (
               <button
                 onClick={() => setAddVisible(true)}
-                className="text-uConnectDark-accent underline font-normal"
+                className="text-uConnectDark-accent hover:underline font-normal"
               >
                 Add Members
               </button>

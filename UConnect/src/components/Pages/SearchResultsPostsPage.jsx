@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar"; // Import Sidebar component
 import SearchBar from "../SearchBar";
 import MultiSelectDropdownFilter from "../MultiSelectDropdownFilter";
-import {majorOptions, interestOptions,} from "../../data/dropdownOptions";
+import { majorOptions, interestOptions } from "../../data/dropdownOptions";
 import kaylaWilkerson from "../../assets/profilePics/kaylaWilkerson.jpg";
 import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
@@ -19,27 +19,26 @@ const users = [
     image: kaylaWilkerson,
     name: "Kayla Wilkerson",
     majorAndYear: "Economics, 3rd Year",
-    interests: "Backpacking, Hiking, Photography, Adventures"
+    interests: "Backpacking, Hiking, Photography, Adventures",
   },
   {
     image: simonMann,
     name: "Simon Mann",
     majorAndYear: "Environmental Science, 4th Year",
-    interests: "Cooking, Sports, Fitness, Traveling"
+    interests: "Cooking, Sports, Fitness, Traveling",
   },
   {
     image: jaredAllen,
     name: "Jared Allen",
     majorAndYear: "Environmental Science, 4th Year",
-    interests: "Art, Drawing, Creative writing, Music"
+    interests: "Art, Drawing, Creative writing, Music",
   },
   {
     image: tenzinLopez,
     name: "Tenzin Lopez",
     majorAndYear: "Business, 3rd Year",
-    interests: "Astrology, Comedy, Skiing, Videography"
-
-  }
+    interests: "Astrology, Comedy, Skiing, Videography",
+  },
 ];
 const posts = [
   {
@@ -48,7 +47,8 @@ const posts = [
     name: "Leo Carter",
     majorAndYear: "Environmental Science, 4th Year",
     time: "Today at 2:59PM",
-    description: "Hey eveyone I am a new student at UofC I am curently looking for other students who are interested in joining a study group for MATH 211. Message me if you're interested in joining!"
+    description:
+      "Hey eveyone I am a new student at UofC I am curently looking for other students who are interested in joining a study group for MATH 211. Message me if you're interested in joining!",
   },
   {
     image: emmaLang,
@@ -56,11 +56,10 @@ const posts = [
     name: "Emma Lang",
     majorAndYear: "Mathematics, 2nd Year",
     time: "Today at 11:11AM",
-    description: "Hey everyone! I was talking to a few people today in MATH 211 about a ski trip that my club was planning over this Christmas break! Message me know if you wanted to come join us for a weekend of skiing! Skiing trip will be from December 19-21."
-
-  }
+    description:
+      "Hey everyone! I was talking to a few people today in MATH 211 about a ski trip that my club was planning over this Christmas break! Message me know if you wanted to come join us for a weekend of skiing! Skiing trip will be from December 19-21.",
+  },
 ];
-
 
 export default function SearchResultsPostPage() {
   const [searchResults, setSearchResults] = useState([]);
@@ -68,9 +67,15 @@ export default function SearchResultsPostPage() {
   const [selectedMajors, setSelectedMajors] = useState([]);
   const navigate = useNavigate();
 
-  const handleClickPosts = () => {navigate("/search-results");};
-  const handleClicksPeople = ()=>{navigate("/search-results-people")}
-  const handleClicksReset = () => { navigate("/search-results"); };
+  const handleClickPosts = () => {
+    navigate("/search-results");
+  };
+  const handleClicksPeople = () => {
+    navigate("/search-results-people");
+  };
+  const handleClicksReset = () => {
+    navigate("/search-results");
+  };
 
   const handleInterestChange = (selectedOptions) => {
     setSelectedInterests(selectedOptions);
@@ -80,20 +85,21 @@ export default function SearchResultsPostPage() {
     setSelectedMajors(selectedOptions);
   };
   const resetFilters = () => {
-    setSelectedInterests([]); r
-    setSelectedMajors([]); 
+    setSelectedInterests([]);
+    r;
+    setSelectedMajors([]);
   };
 
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
       {/* Sidebar */}
-      <Sidebar />
+      {/* <Sidebar /> */}
 
       {/* Main content area */}
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-0">
-        <SearchBar placeholder={"Math 211"} />
+          <SearchBar placeholder={"Math 211"} />
         </div>
 
         {/* Filter Section */}
@@ -112,14 +118,16 @@ export default function SearchResultsPostPage() {
                 type="button"
                 className="ml-2 text-red-500"
                 onClick={() =>
-                  setSelectedInterests(selectedInterests.filter(i => i !== interest))
+                  setSelectedInterests(
+                    selectedInterests.filter((i) => i !== interest)
+                  )
                 }
               >
                 &#x2715;
               </button>
             </div>
           ))}
-          
+
           {/* Display selected majors */}
           {selectedMajors.map((major) => (
             <div
@@ -131,7 +139,7 @@ export default function SearchResultsPostPage() {
                 type="button"
                 className="ml-2 text-red-500"
                 onClick={() =>
-                  setSelectedMajors(selectedMajors.filter(m => m !== major))
+                  setSelectedMajors(selectedMajors.filter((m) => m !== major))
                 }
               >
                 &#x2715;
@@ -147,7 +155,8 @@ export default function SearchResultsPostPage() {
               e.stopPropagation();
               handleClickPosts();
             }}
-            className="mt-4 px-4 py-2 border  border-uConnectDark-accent text-uConnectDark-textMain dark:bg-uConnectDark-accent dark:text-uConnectLight-textMain rounded-full hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain hover:dark:bg-uConnectDark-background bg-uConnectDark-accent hover:bg-[#C6C3C3] ">
+            className="mt-4 px-4 py-2 border  border-uConnectDark-accent text-uConnectDark-textMain dark:bg-uConnectDark-accent dark:text-uConnectLight-textMain rounded-full hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain hover:dark:bg-uConnectDark-background bg-uConnectDark-accent hover:bg-[#C6C3C3] "
+          >
             Posts
           </button>
           <button
@@ -177,9 +186,7 @@ export default function SearchResultsPostPage() {
 
         {/* Apply Filters Button */}
         <div className="mb-8 flex justify-end mt-8">
-          <button
-            className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
-          >
+          <button className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80">
             Apply Filters
           </button>
           <button
@@ -187,7 +194,6 @@ export default function SearchResultsPostPage() {
               e.stopPropagation();
               handleClicksReset();
             }}
-            
             className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-uConnectDark-accent rounded-full hover:opacity-80 dark:hover:opacity-80"
           >
             Reset Filters
@@ -201,7 +207,10 @@ export default function SearchResultsPostPage() {
               key={index}
               className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-6 rounded-lg text-left transition relative flex items-start w-full cursor-pointer"
             >
-              <Link to={`/detailed-post-from-search/${post.index}`} className="flex">
+              <Link
+                to={`/detailed-post-from-search/${post.index}`}
+                className="flex"
+              >
                 <img
                   src={post.image}
                   alt={`${post.name}`}
@@ -209,8 +218,12 @@ export default function SearchResultsPostPage() {
                 />
                 <div className="flex flex-col">
                   <div className="flex items-center">
-                    <h3 className="text-xl font-semibold text-uConnectDark-accent">{post.name}</h3>
-                    <p className="text-uConnectLight-textSub dark:text-uConnectDark-textSub break-words ml-5 text-xs">{post.time}</p>
+                    <h3 className="text-xl font-semibold text-uConnectDark-accent">
+                      {post.name}
+                    </h3>
+                    <p className="text-uConnectLight-textSub dark:text-uConnectDark-textSub break-words ml-5 text-xs">
+                      {post.time}
+                    </p>
                   </div>
                   <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMaintext-uConnectLight-textSub dark:text-uConnectDark-textSub mb-2">
                     {post.majorAndYear}
