@@ -6,6 +6,7 @@ import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";
 import aaronPatel from "../../assets/profilePics/aaronPatel.jpg";
 import jordanLi from "../../assets/profilePics/shirleyLee.webp";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
+import saulAlvarez from "../../assets/profilePics/saulAlvarez.jpg";
 
 // Notifications Data
 const notificationsData = [
@@ -22,11 +23,11 @@ const notificationsData = [
       },
       {
         id: 2,
-        name: "Rashida Williams",
-        profilePic: rashidaWilliams,
+        name: "Saul Alvarez",
+        profilePic: saulAlvarez,
         message: "Sent You a Message in Private",
         time: "2h ago",
-        route: `/chats/rashida-williams`, // Chat route
+        route: `/chats`, // Chat route
       },
       {
         id: 3,
@@ -90,13 +91,12 @@ const notificationsData = [
   },
 ];
 
-export default function NotificationsPage() {
-
-
+export default function NotificationsPage({ setIsActive }) {
   const navigate = useNavigate();
 
   const handleNotificationClick = (route) => {
     if (route) {
+      setIsActive(1);
       navigate(route); // Navigate to the specific route
     } else {
       console.log("No route defined for this notification.");
@@ -109,16 +109,15 @@ export default function NotificationsPage() {
       <div className="ml-64 w-full">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-20">
-          <SearchBar placeholder="Search Notifications"/>
+          <SearchBar placeholder="Search Notifications" />
         </div>
-   
 
         {/* Notifications Content */}
         <div className="px-20">
           {notificationsData.map((section) => (
             <div key={section.category} className="mb-12">
               {/* Section Header */}
-              <h2 className="text-lg font-semibold mb-4 dark:text-uConnectDark-accent text-uConnectLight-accent">
+              <h2 className="text-lg font-semibold mb-4 dark:text-uConnectDark-textMain text-uConnectLight-textMain">
                 {section.category}
               </h2>
 
@@ -139,8 +138,10 @@ export default function NotificationsPage() {
                     {/* Notification Details */}
                     <div>
                       <p>
-                        <span className="font-bold">{item.name}</span>{" "}
-                        <span className="text-uConnectDark-accent dark:text-uConnectLight-accent">
+                        <span className="font-bold text-uConnectDark-accent">
+                          {item.name}
+                        </span>{" "}
+                        <span className="dark:text-uConnectDark-textMain text-uConnectLight-textMain">
                           {item.message}
                         </span>
                       </p>

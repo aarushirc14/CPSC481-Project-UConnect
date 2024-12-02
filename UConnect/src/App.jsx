@@ -115,7 +115,10 @@ function App() {
                     />
                   }
                 />
-                <Route path="/notifications" element={<NotificationsPage />} />
+                <Route
+                  path="/notifications"
+                  element={<NotificationsPage setIsActive={setActiveChat} />}
+                />
                 <Route path="/create-post" element={<CreatePostPage />} />
                 <Route path="/my-profile" element={<MyProfilePage />} />
                 <Route path="/search-results" element={<SearchResultsPage />} />
