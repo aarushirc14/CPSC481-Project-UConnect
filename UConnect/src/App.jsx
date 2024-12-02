@@ -199,7 +199,7 @@ function App() {
                 />
                 <Route
                   path="/profile/:userId"
-                  element={<OtherUserProfilePage />}
+                  element={<OtherUserProfilePage setIsActive={setActiveChat} />}
                 />
                 <Route
                   path="/post/:postId"

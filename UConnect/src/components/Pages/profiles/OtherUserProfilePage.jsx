@@ -6,7 +6,7 @@ import Notification from "../../PopupMessage";
 import SearchBar from "../../SearchBar";
 import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 
-export default function OtherUserProfilePage() {
+export default function OtherUserProfilePage({ setIsActive }) {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [follow, setFollowing] = useState(false);
@@ -51,6 +51,7 @@ export default function OtherUserProfilePage() {
 
   const handleChatClick = () => {
     navigate("/chats");
+    setIsActive(4);
   };
 
   const handleFollowClick = () => {
