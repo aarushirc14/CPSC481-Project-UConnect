@@ -71,7 +71,7 @@ export default function OtherUserProfilePage({ setIsActive }) {
     ? "bg-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain"
     : "";
   return (
-    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex">
+    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition m-auto max-w-7xl">
       {/* Notification */}
       {showNotification && (
         <Notification
@@ -87,6 +87,8 @@ export default function OtherUserProfilePage({ setIsActive }) {
           <SearchBar />
         </div>
         {/* Top Section */}
+        <p className="text-center text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain pb-10">
+        </p>
         <div className="flex flex-wrap w-full max-w-7xl gap-6">
           {/* Left Section */}
           <div className="flex-[2] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-8 flex flex-col items-center">
@@ -142,7 +144,7 @@ export default function OtherUserProfilePage({ setIsActive }) {
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Courses
               </h2>
-              <div className="grid grid-cols-5 gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-2">
                 {user.courses.map((course, index) => (
                   <span
                     key={index}
