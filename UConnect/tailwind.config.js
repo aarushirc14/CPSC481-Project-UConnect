@@ -16,7 +16,7 @@ module.exports = {
           textSub: "#C6C3C3",
           accent: "#FC9D04",
           background: "#131313",
-          textBox: "#3F3F3F"
+          textBox: "#3F3F3F",
         },
         uConnectLight: {
           layer1: "#FFFFFF",
@@ -27,10 +27,22 @@ module.exports = {
           textSub: "#6B7280",
           accent: "#FC9D04",
           background: "#F9FAFB",
-          textBox: "#a1a1aa"
+          textBox: "#a1a1aa",
+        },
+      },
+      animation: {
+        flicker: "flicker 3.5s ease-in", // Apply the flicker animation
+      },
+      keyframes: {
+        flicker: {
+          "0%": { backgroundColor: "#131313" }, // Initial dark color
+          "20%": { backgroundColor: "#1D1C1C" }, // Light flicker color
+          "50%": { backgroundColor: "#1D1C1C" }, // Stay in the lighter color
+          "80%": { backgroundColor: "#1D1C1C" }, // Longer duration in dark color
+          "100%": { backgroundColor: "#131313" }, // Final return to the dark color
         },
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'),],
+  plugins: [require("@tailwindcss/typography")],
 };

@@ -45,6 +45,14 @@ const notificationsData = [
         time: "7h ago",
         route: `/sent-viewresult`, // Post route
       },
+      {
+        id: 9,
+        name: "Aaron Patel",
+        profilePic: aaronPatel,
+        message: "Sent You 2 Messages in Private",
+        time: "9h ago",
+        route: `/chats`, // Chat route
+      },
     ],
   },
   {

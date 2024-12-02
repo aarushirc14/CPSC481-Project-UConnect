@@ -127,9 +127,10 @@ export default function ChatPage({
         {
           name: "Aaron Patel",
           message:
-            "I totally get that. Math exams are always stressful. Have you started reviewing the practice problems?",
+            "I totally get that. Math exams are always stressful. Have you started reviewing the practice problems #5 and #6.1?",
           profile: aaronPatel,
           timestamp: "Today at 6:15pm",
+          highlight: true,
         },
         {
           name: "You",
@@ -680,7 +681,7 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
             onChange={handleFileChange}
           />
           <FaPaperPlane
-            className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 cursor-pointer hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
+            className="text-uConnectLight-textSub transition dark:text-uConnectDark-layer3 cursor-pointer hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
             onClick={handleSendMessage}
           />
         </div>
@@ -742,7 +743,11 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
         oldMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
             <div
-              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group`}
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-3 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group ${
+                oldMessages[index].highlight && !search
+                  ? " animate-flicker"
+                  : ""
+              }`}
               onClick={() => {
                 setSearch("");
                 setMessage("");
@@ -762,7 +767,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                       {conversation.timestamp}
                     </span>
                   </span>
-                  {conversation.name === "You" && (
+                  {conversation.name === "You" && !search && (
                     <span className="flex flex-row gap-3 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="hover:text-uConnectDark-accent">
                         <FaPen />
@@ -789,7 +794,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
           </div>
         ))}
       {/* Conditionally render the "New Messages" bar */}
-      {notificationCount > 0 && (
+      {notificationCount > 0 && !search && (
         <div className="relative py-2 my-4">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex-grow border-t border-uConnectDark-accent dark:border-uConnectLight-accent"></div>
@@ -824,7 +829,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                       {conversation.timestamp}
                     </span>
                   </span>
-                  {conversation.name === "You" && (
+                  {conversation.name === "You" && !search && (
                     <span className="flex flex-row gap-3 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="hover:text-uConnectDark-accent">
                         <FaPen />
