@@ -37,7 +37,7 @@ export default function ChatPage({
       chatName: "Tenzin Lopez",
       label: "Tenzin Lopez",
       value: "tenzin_lopez",
-      image: simonMann,
+      image: tenzinLopez,
       sort: 0,
       members: [
         { name: "You", profile: sofiaMartinez },

@@ -8,7 +8,7 @@ export default defineConfig({
     
 
   ],
-  base: "/UConnect/", // Replace "UConnect" with your GitHub repository name
+  base: "/UConnect/", // GitHub repository name
   build: {
     rollupOptions: {
       output: {
