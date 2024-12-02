@@ -122,7 +122,7 @@ export default function HomePage({ setIsActive }) {
           <SearchBar />
         </div>
         <div className="mb-4 text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-          Recommended People
+          Suggested People
         </div>
         {/* Featured Users */}
         <div className="grid grid-cols-4 gap-8 mb-8">
@@ -163,7 +163,7 @@ export default function HomePage({ setIsActive }) {
         </div>
         {/* Featured Posts */}
         <div className="mb-4 text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
-          Featured Posts
+         Suggested Posts
         </div>
         <div className="grid grid-cols-2 gap-8">
           {featuredPosts.map((post, index) => (
