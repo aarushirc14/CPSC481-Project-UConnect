@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar";
 import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";
 import aaronPatel from "../../assets/profilePics/aaronPatel.jpg";
-import jordanLi from "../../assets/profilePics/shirleyLee.webp";
-import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
+import shirleyLee from "../../assets/profilePics/shirleyLee.webp";
+import kaiSon from "../../assets/profilePics/kaiSon.jpg";
 import saulAlvarez from "../../assets/profilePics/saulAlvarez.jpg";
 
 // Notifications Data
@@ -60,8 +60,8 @@ const notificationsData = [
     items: [
       {
         id: 5,
-        name: "Jordan Li",
-        profilePic: jordanLi,
+        name: "Shirley Lee",
+        profilePic: shirleyLee,
         message: "Followed You",
         time: "4:32 PM",
         route: `/profile/jordan-li`, // Profile route
@@ -81,8 +81,8 @@ const notificationsData = [
     items: [
       {
         id: 7,
-        name: "Sofia Martinez",
-        profilePic: sofiaMartinez,
+        name: "Kai Son",
+        profilePic: kaiSon,
         message: "Followed You",
         time: "9/15/2024",
         route: `/profile/sofia-martinez`, // Profile route
