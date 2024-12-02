@@ -24,6 +24,7 @@ import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
 import simonMann from "../../assets/profilePics/simonMann.jpg";
+import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";
 
 export default function ChatPage({
   setChatNotificationCount,
@@ -32,6 +33,18 @@ export default function ChatPage({
 }) {
   // Define featured users array
   const [chatNameData, setChatNameData] = useState([
+    {
+      chatName: "Tenzin Lopez",
+      label: "Tenzin Lopez",
+      value: "tenzin_lopez",
+      image: simonMann,
+      sort: 0,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Tenzin Lopez", profile: tenzinLopez },
+      ],
+      conversationData: [],
+    },
     {
       chatName: "Simon Mann",
       label: "Simon Mann",

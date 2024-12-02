@@ -66,7 +66,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
     navigate("/search-results");
   };
   const handleClickChat = () => {
-    setIsActive(0);
+    setIsActive(1);
     navigate("/chats");
   };
   const handleClicksReset = () => {

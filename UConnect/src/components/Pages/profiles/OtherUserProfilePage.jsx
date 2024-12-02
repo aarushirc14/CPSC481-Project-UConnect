@@ -51,7 +51,7 @@ export default function OtherUserProfilePage({ setIsActive }) {
 
   const handleChatClick = () => {
     navigate("/chats");
-    setIsActive(4);
+    setIsActive(5);
   };
 
   const handleFollowClick = () => {

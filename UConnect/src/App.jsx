@@ -144,7 +144,8 @@ function App() {
                 />
                 <Route
                   path="/search-results-interests-major-people"
-                  element={<SearchResultsInterestsMajorPeoplePage />}
+                  element={<SearchResultsInterestsMajorPeoplePage 
+                    setIsActive={setActiveChat}/>}
                 />
                 <Route
                   path="/sent-viewresult"

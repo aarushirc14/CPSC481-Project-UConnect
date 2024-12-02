@@ -57,7 +57,7 @@ const users = [
 
 ];
 
-export default function SearchResultsInterestsMajorPeoplePage() {
+export default function SearchResultsInterestsMajorPeoplePage({ setIsActive }) {
   const [selectedInterests, setSelectedInterests] = useState([{ value: "skiing", label: "Skiing" },{ value: "drawing", label: "Drawing" }]);
   // Ensure the selectedMajors state has the correct format for the default selected value
   const [selectedMajors, setSelectedMajors] = useState([{ value: "environmental_science", label: "Environmental Science" }]);
@@ -65,7 +65,7 @@ export default function SearchResultsInterestsMajorPeoplePage() {
 
   const handleClickPosts = () => { navigate("/search-results-posts"); };
   const handleClicksPeople = () => { navigate("/search-results"); };
-  const handleClickChat = () => { navigate("/chats"); };
+  const handleClickChat = () => { setIsActive(0); navigate("/chats"); };
   const handleClicksReset = () => { navigate("/search-results"); };
 
   const handleInterestChange = (selectedOptions) => {
