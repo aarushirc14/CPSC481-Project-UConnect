@@ -1,46 +1,42 @@
-// The text Editor for 
+// The text Editor for
 
-import { Color } from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import TextStyle from '@tiptap/extension-text-style'
-import { EditorProvider, useCurrentEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import Underline from '@tiptap/extension-underline'
-import Image from '@tiptap/extension-image'
-import Link from '@tiptap/extension-link'
-import Placeholder from '@tiptap/extension-placeholder'
-import TextAlign from '@tiptap/extension-text-align'
-import React, { useCallback } from 'react'
-import { RiBold,
-        RiItalic,
-        RiStrikethrough,
-        RiUnderline,
-        RiFormatClear,
-        RiFontColor,
-        } from "react-icons/ri";
-import { MdOutlineUndo,
-        MdOutlineRedo,
-        MdHorizontalRule,
-        MdFormatAlignCenter,
-        MdFormatAlignJustify,
-        MdFormatAlignLeft,
-        MdFormatAlignRight,
-        } from "react-icons/md";
-import { BsListOl,
-        BsListUl,
- } from "react-icons/bs";
+import { Color } from "@tiptap/extension-color";
+import ListItem from "@tiptap/extension-list-item";
+import TextStyle from "@tiptap/extension-text-style";
+import { EditorProvider, useCurrentEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import Image from "@tiptap/extension-image";
+import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
+import TextAlign from "@tiptap/extension-text-align";
+import React, { useCallback } from "react";
+import {
+  RiBold,
+  RiItalic,
+  RiStrikethrough,
+  RiUnderline,
+  RiFormatClear,
+  RiFontColor,
+} from "react-icons/ri";
+import {
+  MdOutlineUndo,
+  MdOutlineRedo,
+  MdHorizontalRule,
+  MdFormatAlignCenter,
+  MdFormatAlignJustify,
+  MdFormatAlignLeft,
+  MdFormatAlignRight,
+} from "react-icons/md";
+import { BsListOl, BsListUl } from "react-icons/bs";
 import { IoImagesSharp } from "react-icons/io5";
 import { IoMdLink } from "react-icons/io";
 
-
-
-
-
 const MenuBar = () => {
-  const { editor } = useCurrentEditor()
+  const { editor } = useCurrentEditor();
 
   if (!editor) {
-    return null
+    return null;
   }
 
   const addImage = useCallback(() => {
@@ -64,188 +60,166 @@ const MenuBar = () => {
     fileInput.click();
   }, [editor]);
 
-
   const setLink = useCallback(() => {
-    const previousUrl = editor.getAttributes('link').href
-    const url = window.prompt('URL', previousUrl)
+    const previousUrl = editor.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
 
     // cancelled
     if (url === null) {
-      return
+      return;
     }
 
     // empty
-    if (url === '') {
-      editor.chain().focus().extendMarkRange('link').unsetLink()
-        .run()
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
 
-      return
+      return;
     }
 
     // update link
-    editor.chain().focus().extendMarkRange('link').setLink({ href: url })
-      .run()
-  }, [editor])
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  }, [editor]);
 
   if (!editor) {
-    return null
+    return null;
   }
 
   if (!editor) {
-    return null
+    return null;
   }
 
   return (
     <div className="p-2 flex items-center justify-center">
-        <div className="button-group dark:text-uConnectDark-textSub text-uConnectLight-textSub transition">
-            <button
-            onClick={() => editor.chain().focus().toggleBold().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .toggleBold()
-                .run()
-            }
-            className={editor.isActive('bold') ? 'is-active' : ''}
-            >
-            <RiBold />
-            </button>
-            <button
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .toggleItalic()
-                .run()
-            }
-            className={editor.isActive('italic') ? 'is-active' : ''}
-            >
-            <RiItalic />
-            </button>
-            <button
-                onClick={() => editor.chain().focus().toggleUnderline().run()}
-                className={editor.isActive('underline') ? 'is-active' : ''}
-            >
-                <RiUnderline />
-            </button>
-            <button
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .toggleStrike()
-                .run()
-            }
-            className={editor.isActive('strike') ? 'is-active' : ''}
-            >
-            <RiStrikethrough />
-            </button>
-            <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-            <RiFormatClear />
-            </button>
+      <div className="button-group dark:text-uConnectDark-textSub text-uConnectLight-textSub transition">
+        <button
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          disabled={!editor.can().chain().focus().toggleBold().run()}
+          className={editor.isActive("bold") ? "is-active" : ""}
+        >
+          <RiBold />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          disabled={!editor.can().chain().focus().toggleItalic().run()}
+          className={editor.isActive("italic") ? "is-active" : ""}
+        >
+          <RiItalic />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          className={editor.isActive("underline") ? "is-active" : ""}
+        >
+          <RiUnderline />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+          disabled={!editor.can().chain().focus().toggleStrike().run()}
+          className={editor.isActive("strike") ? "is-active" : ""}
+        >
+          <RiStrikethrough />
+        </button>
+        <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
+          <RiFormatClear />
+        </button>
 
-            <button
-            onClick={() => editor.chain().focus().setTextAlign('left').run()}
-            className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}
-          >
-            <MdFormatAlignLeft />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('center').run()}
-            className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}
-          >
-            <MdFormatAlignCenter />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('right').run()}
-            className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}
-          >
-            <MdFormatAlignRight />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('justify').run()}
-            className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}
-          >
-            <MdFormatAlignJustify />
-          </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
+        >
+          <MdFormatAlignLeft />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          className={
+            editor.isActive({ textAlign: "center" }) ? "is-active" : ""
+          }
+        >
+          <MdFormatAlignCenter />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          className={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
+        >
+          <MdFormatAlignRight />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+          className={
+            editor.isActive({ textAlign: "justify" }) ? "is-active" : ""
+          }
+        >
+          <MdFormatAlignJustify />
+        </button>
 
-            <button
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={editor.isActive('bulletList') ? 'is-active' : ''}
-            >
-            <BsListUl />
-            </button>
-            <button
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={editor.isActive('orderedList') ? 'is-active' : ''}
-            >
-            <BsListOl />
-            </button>
-            <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-            <MdHorizontalRule />
-            </button>
-            <button
-            onClick={() => editor.chain().focus().undo().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .undo()
-                .run()
-            }
-            >
-            <MdOutlineUndo />
-            </button>
-            <button
-            onClick={() => editor.chain().focus().redo().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .redo()
-                .run()
-            }
-            >
-            <MdOutlineRedo />
-            </button>
-            <input
-                id="colorPicker"
-                type="color"
-                onInput={event => editor.chain().focus().setColor(event.target.value).run()}
-                value={editor.getAttributes('textStyle').color}
-                data-testid="colorPickerButton"
-                className='absolute top-56 invisible'
-            />
-            <button
-                onClick={() => document.getElementById('colorPicker').click()}
-                >
-                {/* Icon or Preview */}
-                <RiFontColor style={{color: editor.getAttributes('textStyle').color}}/>
-                
-            </button>
-            <button onClick={addImage}>
-                <IoImagesSharp />
-            </button>
-            <button onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''}>
-            <IoMdLink/>
-            </button>
-        </div>
+        <button
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={editor.isActive("bulletList") ? "is-active" : ""}
+        >
+          <BsListUl />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={editor.isActive("orderedList") ? "is-active" : ""}
+        >
+          <BsListOl />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        >
+          <MdHorizontalRule />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().undo().run()}
+          disabled={!editor.can().chain().focus().undo().run()}
+        >
+          <MdOutlineUndo />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().redo().run()}
+          disabled={!editor.can().chain().focus().redo().run()}
+        >
+          <MdOutlineRedo />
+        </button>
+        <input
+          id="colorPicker"
+          type="color"
+          onInput={(event) =>
+            editor.chain().focus().setColor(event.target.value).run()
+          }
+          value={editor.getAttributes("textStyle").color}
+          data-testid="colorPickerButton"
+          className="absolute top-56 invisible"
+        />
+        <button onClick={() => document.getElementById("colorPicker").click()}>
+          {/* Icon or Preview */}
+          <RiFontColor
+            style={{ color: editor.getAttributes("textStyle").color }}
+          />
+        </button>
+        <button onClick={addImage}>
+          <IoImagesSharp />
+        </button>
+        <button
+          onClick={setLink}
+          className={editor.isActive("link") ? "is-active" : ""}
+        >
+          <IoMdLink />
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
   Underline,
   TextStyle.configure({ types: [ListItem.name] }),
-  Image.configure({inline: true,}),
+  Image.configure({ inline: true }),
   Placeholder.configure({
     // Use a placeholder:
-    emptyEditorClass: "before:content-[attr(data-placeholder)] before:float-left text-uConnectLight-textSub dark:text-uConnectDark-layer3 before:h-0 before:pointer-events-none",
-    placeholder: 'Content...',
+    emptyEditorClass:
+      "before:content-[attr(data-placeholder)] before:float-left text-uConnectLight-textSub dark:text-uConnectDark-layer3 before:h-0 before:pointer-events-none",
+    placeholder: "Content...",
     // Use different placeholders depending on the node type:
     // placeholder: ({ node }) => {
     //   if (node.type.name === 'heading') {
@@ -260,109 +234,113 @@ const extensions = [
       keepMarks: true,
       keepAttributes: true, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
       HTMLAttributes: {
-        class: 'list-disc pl-4 my-5 mr-4 ml-1.5'
-      }
+        class: "list-disc pl-4 my-5 mr-4 ml-1.5",
+      },
     },
     orderedList: {
       keepMarks: true,
       keepAttributes: true, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
       HTMLAttributes: {
-        class: 'list-decimal pl-4 my-5 mr-4 ml-1.5'
-      }
+        class: "list-decimal pl-4 my-5 mr-4 ml-1.5",
+      },
     },
   }),
   TextAlign.configure({
-    types: ['heading', 'paragraph'],
+    types: ["heading", "paragraph"],
   }),
   Link.configure({
     openOnClick: true,
     autolink: true,
     linkOnPaste: true,
-    defaultProtocol: 'https',
-    protocols: ['http', 'https'],
+    defaultProtocol: "https",
+    protocols: ["http", "https"],
     isAllowedUri: (url, ctx) => {
       try {
         // construct URL
-        const parsedUrl = url.includes(':') ? new URL(url) : new URL(`${ctx.defaultProtocol}://${url}`)
+        const parsedUrl = url.includes(":")
+          ? new URL(url)
+          : new URL(`${ctx.defaultProtocol}://${url}`);
 
         // use default validation
         if (!ctx.defaultValidate(parsedUrl.href)) {
-          return false
+          return false;
         }
 
         // disallowed protocols
-        const disallowedProtocols = ['ftp', 'file', 'mailto']
-        const protocol = parsedUrl.protocol.replace(':', '')
+        const disallowedProtocols = ["ftp", "file", "mailto"];
+        const protocol = parsedUrl.protocol.replace(":", "");
 
         if (disallowedProtocols.includes(protocol)) {
-          return false
+          return false;
         }
 
         // only allow protocols specified in ctx.protocols
-        const allowedProtocols = ctx.protocols.map(p => (typeof p === 'string' ? p : p.scheme))
+        const allowedProtocols = ctx.protocols.map((p) =>
+          typeof p === "string" ? p : p.scheme
+        );
 
         if (!allowedProtocols.includes(protocol)) {
-          return false
+          return false;
         }
 
         // disallowed domains
-        const disallowedDomains = ['example-phishing.com', 'malicious-site.net']
-        const domain = parsedUrl.hostname
+        const disallowedDomains = [
+          "example-phishing.com",
+          "malicious-site.net",
+        ];
+        const domain = parsedUrl.hostname;
 
         if (disallowedDomains.includes(domain)) {
-          return false
+          return false;
         }
 
         // all checks have passed
-        return true
+        return true;
       } catch (error) {
-        return false
+        return false;
       }
     },
-    shouldAutoLink: url => {
+    shouldAutoLink: (url) => {
       try {
         // construct URL
-        const parsedUrl = url.includes(':') ? new URL(url) : new URL(`https://${url}`)
+        const parsedUrl = url.includes(":")
+          ? new URL(url)
+          : new URL(`https://${url}`);
 
         // only auto-link if the domain is not in the disallowed list
-        const disallowedDomains = ['example-no-autolink.com', 'another-no-autolink.com']
-        const domain = parsedUrl.hostname
+        const disallowedDomains = [
+          "example-no-autolink.com",
+          "another-no-autolink.com",
+        ];
+        const domain = parsedUrl.hostname;
 
-        return !disallowedDomains.includes(domain)
+        return !disallowedDomains.includes(domain);
       } catch (error) {
-        return false
+        return false;
       }
     },
-
   }),
-]
+];
 
 const content = `
-        <p>
-          <b>I found several internships for 2025, related to environment/research/engineering:</b>
-        </p>
-        <ul>
-          <li>Trace Associates - Environmental Project Planning Intern</li>
-          <li>Stantec - Materials Engineering Intern</li>
-          <li>ECO Canada  - Summer Research Analyst</li>
-          <li>S&P Global - Emissions Researcher</li>
-          <li>Planet Alpha - Environment Strategy Intern</li>
-          <li>Cenovus Energy - Facilities Engineering Intern  </li>
-          <li>Raw Earth Foundation - Marketing Intern</li>
-          <li>Greenify - Operations Intern</li>
-          <li>TerraLogix Solutions - Carbon Capture Planning Summer Student</li>
-        </ul>
-        <p>
-          Hope you guys found these helpful and good luck with your apps!
-        </p>
-        `
-
-
+        
+        `;
 
 export default function TipTap() {
   return (
-    <div className = "dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textMain text-uConnectLight-textMain transition">
-        <EditorProvider slotBefore={<div><MenuBar /><hr class="w-9/12 mx-auto bg-white border-1" /></div>} extensions={extensions} content={content}> </EditorProvider>
+    <div className="dark:bg-uConnectDark-textBox  bg-uConnectLight-layer3 rounded-md dark:text-uConnectDark-textMain text-uConnectLight-textMain transition">
+      <EditorProvider
+        slotBefore={
+          <div>
+            <MenuBar />
+            <hr class="w-9/12 mx-auto bg-white border-1" />
+          </div>
+        }
+        extensions={extensions}
+        content={content}
+      >
+        {" "}
+      </EditorProvider>
     </div>
-  )
+  );
 }

@@ -64,7 +64,6 @@ export default function CreateProfile({
 
     const isFirstNameEmpty = !profileData.firstName.trim(); // no first name
     const isLastNameEmpty = !profileData.lastName.trim(); // no last name
-    const isBioEmpty = !profileData.bio.trim(); // no bio
     const isYearNotSelected = !profileData.year; // no year
     const isProfileImageMissing = !profileData.profileImage; // no pfp
     const isMajorEmpty = profileData.major.length <= 0; // empty major
@@ -74,7 +73,6 @@ export default function CreateProfile({
     if (
       isFirstNameEmpty ||
       isLastNameEmpty ||
-      isBioEmpty ||
       isYearNotSelected ||
       isProfileImageMissing ||
       isMajorEmpty ||
@@ -98,13 +96,13 @@ export default function CreateProfile({
     <div className="flex w-full justify-center items-center min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background px-4 m-auto max-w-7xl ">
       {/* Outer Gray Box */}
       <div className="w-full max-w-5xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-12 rounded-lg mt-8 mb-8">
-        <h2 className="text-3xl font-semibold text-center text-uConnectLight-layer2 dark:text-uConnectDark-layer3 mb-6">
+        <h2 className="text-3xl font-semibold text-center text-uConnectLight-textMain dark:text-uConnectDark-textMain mb-6">
           {editing ? "Edit Your Profile" : "Create Your Profile"}
         </h2>
         {/* Notification Popup */}
         {showNotification && (
           <Notification
-            message="Please fill out all fields!"
+            message="Please fill out all required fields!"
             type="error"
             onClose={() => setShowNotification(false)}
           />
@@ -198,9 +196,6 @@ export default function CreateProfile({
                 resize: "none", // Dont allow resizing?
               }}
             />
-            <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
-              Required*
-            </span>
           </div>
 
           {/* Dropdown Fields */}

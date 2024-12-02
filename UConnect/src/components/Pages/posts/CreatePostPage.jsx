@@ -11,7 +11,7 @@ export default function CreatePostPage() {
     navigate("/sent-viewresult"); // After posting either return to home or go straight to Post view, for now it's home
   };
 
-  const [inputValue, setInputValue] = useState("SUMMER INTERNSHIPS AVAILABLE");
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <div className="m-auto max-w-7xl">
@@ -40,9 +40,9 @@ export default function CreatePostPage() {
                 e.stopPropagation(); // Prevent the click from propagating to the parent Link
                 handlePostClick();
               }}
-              className="post_button mt-5 px-10 py-2 bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
+              className="post_button font-semibold text-xl py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full inline-flex items-center justify-center gap-2 hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition"
             >
-              Post
+              Create Post
             </button>
           </div>
         </div>

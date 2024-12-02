@@ -203,13 +203,12 @@ label {
 }
 
 /* TipTap css */
-.TextEditor { 
+.TextEditor {
   padding-top: 10px;
   margin: 3rem auto;
   margin-bottom: 90px;
   display: flexbox; /* fix/check later*/
 }
-
 
 .control-group {
   padding-bottom: 5px;
@@ -235,7 +234,7 @@ label {
   pointer-events: none;
 }
 
-button.is-active{
+button.is-active {
   color: orange;
 }
 
@@ -247,11 +246,11 @@ button.is-active{
   min-height: 480px;
 
   border-radius: 0 0 5px 5px;
-    :first-child {
-      margin-top: 10px;
-    }
+  :first-child {
+    margin-top: 10px;
+  }
 
-    /* Link styles */
+  /* Link styles */
   a {
     color: salmon;
     cursor: pointer;
@@ -260,76 +259,74 @@ button.is-active{
       color: var(--purple-contrast);
     }
   }
-  
-    /* List styles */
-    .tiptap  ul, 
-    .tiptap  ol {
-      padding: 0 1rem;
-      margin: 1.25rem 1rem 1.25rem 0.4rem;
-      
-      li p {
-        margin-top: 0.25em;
-        margin-bottom: 0.25em;
-      }
-    }
-  
-    /* Heading styles */
-    .tiptap h1, 
-    .tiptap h2, 
-    .tiptap h3, 
-    .tiptap h4, 
-    .tiptap h5, 
-    .tiptap h6 {
-      line-height: 1.1;
-      margin-top: 2.5rem;
-      text-wrap: pretty;
-    }
-  
-    .tiptap h1, 
-    .tiptap h2 {
-      margin-top: 3.5rem;
-      margin-bottom: 1.5rem;
-    }
-  
-    .tiptap h1 { 
-      font-size: 1.4rem; 
-    }
-  
-    .tiptap h2 { 
-      font-size: 1.2rem; 
-    }
-  
-    .tiptap h3 { 
-      font-size: 1.1rem; 
-    }
-  
-    .tiptap h4, 
-    .tiptap h5, 
-    .tiptap h6 { 
-      font-size: 1rem; 
-    }
-  
-    /* Code and preformatted text styles */  
-  
-    .tiptap hr {
-      border: none;
-      border-top: 1px solid floralwhite;
-      margin: 2rem 0;
+
+  /* List styles */
+  .tiptap ul,
+  .tiptap ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+
+    li p {
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
     }
   }
-  .post_button {
-    float: left;
-    position: relative;
-    margin-top: 50px;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+
+  /* Heading styles */
+  .tiptap h1,
+  .tiptap h2,
+  .tiptap h3,
+  .tiptap h4,
+  .tiptap h5,
+  .tiptap h6 {
+    line-height: 1.1;
+    margin-top: 2.5rem;
+    text-wrap: pretty;
+  }
+
+  .tiptap h1,
+  .tiptap h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tiptap h1 {
+    font-size: 1.4rem;
+  }
+
+  .tiptap h2 {
+    font-size: 1.2rem;
+  }
+
+  .tiptap h3 {
+    font-size: 1.1rem;
+  }
+
+  .tiptap h4,
+  .tiptap h5,
+  .tiptap h6 {
+    font-size: 1rem;
+  }
+
+  /* Code and preformatted text styles */
+
+  .tiptap hr {
+    border: none;
+    border-top: 1px solid floralwhite;
+    margin: 2rem 0;
+  }
+}
+.post_button {
+  float: right; /* Move to the right */
+  position: relative;
+  margin-top: 50px;
+  right: 25px; /* Align to the right side */
+  transform: translate(0, -50%); /* Center vertically (adjust if necessary) */
 }
 
 .detail_page {
   width: 90%;
   margin: 0 auto;
-
 }
 
 .sidebar {
