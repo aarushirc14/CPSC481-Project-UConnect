@@ -22,6 +22,7 @@ import shirleyLee from "../../assets/profilePics/shirleyLee.webp";
 import davidSingh from "../../assets/profilePics/davidSingh.jpg";
 import landonStone from "../../assets/profilePics/landonStone.jpg";
 import sofiaMartinez from "../../assets/profilePics/sofiaMartinez.jpg";
+import simonMann from "../../assets/profilePics/simonMann.jpg";
 
 export default function ChatPage({
   setChatNotificationCount,
@@ -30,6 +31,18 @@ export default function ChatPage({
 }) {
   // Define featured users array
   const [chatNameData, setChatNameData] = useState([
+    {
+      chatName: "Simon Mann",
+      label: "Simon Mann",
+      value: "simon_mann",
+      image: simonMann,
+      sort: 0,
+      members: [
+        { name: "You", profile: sofiaMartinez },
+        { name: "Simon Mann", profile: simonMann },
+      ],
+      conversationData: [],
+    },
     {
       chatName: "Saul Alvarez",
       label: "Saul Alvarez",

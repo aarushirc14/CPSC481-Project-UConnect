@@ -130,7 +130,11 @@ function App() {
                 />
                 <Route
                   path="/search-results-major-and-people"
-                  element={<SearchResultsMajorNPeoplePage />}
+                  element={
+                    <SearchResultsMajorNPeoplePage
+                      setIsActive={setActiveChat}
+                    />
+                  }
                 />
                 <Route
                   path="/search-results-interests-major-people"

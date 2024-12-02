@@ -17,53 +17,64 @@ const users = [
     image: simonMann,
     name: "Simon Mann",
     majorAndYear: "Environmental Science, 4th Year",
-    interests: "Cooking, Sports, Fitness, Traveling"
+    interests: "Cooking, Sports, Fitness, Traveling",
   },
   {
     image: jaredAllen,
     name: "Jared Allen",
     majorAndYear: "Environmental Science, 4th Year",
-    interests: "Art, Drawing, Creative writing, Music"
+    interests: "Art, Drawing, Creative writing, Music",
   },
   {
     image: tenzinLopez,
     name: "Tenzin Lopez",
     majorAndYear: "Environmental Science, 3rd Year",
-    interests: "Astrology, Drawing, Comedy, Skiing, Videography"
+    interests: "Astrology, Drawing, Comedy, Skiing, Videography",
   },
   {
     image: kaiSon,
     name: "Kai Son",
     majorAndYear: "Environmental Science, 2nd Year",
-    interests: "3D Printing, Drawing, Comedy, Skiing, Videography"
+    interests: "3D Printing, Drawing, Comedy, Skiing, Videography",
   },
   {
     image: kendraLamar,
     name: "Kendra Lamar",
     majorAndYear: "Environmental Science, 2nd Year",
-    interests: "Fashion, E-Sports, Music, Photograpghy"
+    interests: "Fashion, E-Sports, Music, Photograpghy",
   },
   {
     image: imaniBates,
     name: "Imani Bates",
     majorAndYear: "Environmental Science, 3rd Year",
-    interests: "Cycling, Drawing, Martial Arts, Movie Club, Skiing"
-  }
-
+    interests: "Cycling, Drawing, Martial Arts, Movie Club, Skiing",
+  },
 ];
 
-export default function SearchResultsMajorNPeoplePage() {
+export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
   const [selectedInterests, setSelectedInterests] = useState([]);
   // Ensure the selectedMajors state has the correct format for the default selected value
-  const [selectedMajors, setSelectedMajors] = useState([{ value: "environmental_science", label: "Environmental Science" }]);
+  const [selectedMajors, setSelectedMajors] = useState([
+    { value: "environmental_science", label: "Environmental Science" },
+  ]);
   const navigate = useNavigate();
 
-  const handleClickPosts = () => { navigate("/search-results-posts"); };
-  const handleClicksPeople = () => { navigate("/search-results"); };
-  const handleClickChat = () => { navigate("/chats"); };
-  const handleClicksReset = () => { navigate("/search-results"); };
-  const handleClicksApplyFilters =() => {navigate("/search-results-interests-major-people");};
-
+  const handleClickPosts = () => {
+    navigate("/search-results-posts");
+  };
+  const handleClicksPeople = () => {
+    navigate("/search-results");
+  };
+  const handleClickChat = () => {
+    setIsActive(0);
+    navigate("/chats");
+  };
+  const handleClicksReset = () => {
+    navigate("/search-results");
+  };
+  const handleClicksApplyFilters = () => {
+    navigate("/search-results-interests-major-people");
+  };
 
   const handleInterestChange = (selectedOptions) => {
     setSelectedInterests(selectedOptions);
@@ -75,16 +86,18 @@ export default function SearchResultsMajorNPeoplePage() {
 
   const resetFilters = () => {
     setSelectedInterests([]);
-    setSelectedMajors([{ value: "environmental_science", label: "Environmental Science" }]);  // Reset to default major
+    setSelectedMajors([
+      { value: "environmental_science", label: "Environmental Science" },
+    ]); // Reset to default major
   };
 
   const majorDropdownStyles = {
-    backgroundColor: '#e0f7fa',
-    color: '#00796b',
-    padding: '10px',
-    borderRadius: '8px',
-    labelBackgroundColor: '#F99F28',  // Background color for the label
-    label: '#131313',
+    backgroundColor: "#e0f7fa",
+    color: "#00796b",
+    padding: "10px",
+    borderRadius: "8px",
+    labelBackgroundColor: "#F99F28", // Background color for the label
+    label: "#131313",
   };
 
   return (
@@ -115,7 +128,9 @@ export default function SearchResultsMajorNPeoplePage() {
                 type="button"
                 className="ml-2 text-red-500"
                 onClick={() =>
-                  setSelectedInterests(selectedInterests.filter(i => i !== interest))
+                  setSelectedInterests(
+                    selectedInterests.filter((i) => i !== interest)
+                  )
                 }
               >
                 &#x2715;
@@ -134,7 +149,7 @@ export default function SearchResultsMajorNPeoplePage() {
                 type="button"
                 className="ml-2 text-red-500"
                 onClick={() =>
-                  setSelectedMajors(selectedMajors.filter(m => m !== major))
+                  setSelectedMajors(selectedMajors.filter((m) => m !== major))
                 }
               >
                 &#x2715;
@@ -216,7 +231,9 @@ export default function SearchResultsMajorNPeoplePage() {
                   className="w-28 h-28 rounded-full border-2 border-[#131313] object-cover mr-6"
                 />
                 <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-uConnectDark-accent">{user.name}</h3>
+                  <h3 className="text-xl font-semibold text-uConnectDark-accent">
+                    {user.name}
+                  </h3>
                   <p className="text-uConnectLight-textMain dark:text-uConnectDark-textMaintext-uConnectLight-textSub dark:text-uConnectDark-textSub mb-2">
                     {user.majorAndYear}
                   </p>
@@ -239,7 +256,6 @@ export default function SearchResultsMajorNPeoplePage() {
             </div>
           ))}
         </div>
-
       </main>
     </div>
   );

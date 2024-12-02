@@ -107,7 +107,7 @@ export default function HomePage({ setIsActive }) {
 
   const handleChatClick = () => {
     navigate("/chats");
-    setIsActive(3);
+    setIsActive(4);
   };
 
   return (
