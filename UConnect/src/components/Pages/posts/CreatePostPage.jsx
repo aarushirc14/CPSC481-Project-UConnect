@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TipTap from "../../TipTap";
-
+//import TipTap from "../../TipTap";
+const TipTap = React.lazy(() => import("../../TipTap")); //chunk larger imports for build
 export default function CreatePostPage() {
   const navigate = useNavigate();
 

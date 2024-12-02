@@ -10,7 +10,8 @@ import {
   FaPen,
   FaTrash,
 } from "react-icons/fa";
-import EmojiPicker from "emoji-picker-react";
+const EmojiPicker = React.lazy(() => import("emoji-picker-react")); //chunk larger imports for build
+//import EmojiPicker from "emoji-picker-react";
 
 //profile pic imports
 import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";

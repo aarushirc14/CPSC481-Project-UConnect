@@ -6,7 +6,8 @@ import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { MdOutlineInsertComment } from "react-icons/md";
-import EmojiPicker from "emoji-picker-react";
+const EmojiPicker = React.lazy(() => import("emoji-picker-react")); //chunk larger imports for build
+//import EmojiPicker from "emoji-picker-react";
 import {
   FaSmile,
   FaPaperPlane,
