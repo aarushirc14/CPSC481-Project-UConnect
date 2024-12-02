@@ -182,7 +182,7 @@ export default function DetailedPostViewPage() {
     setDislikeStyle("inactive")
   };
 
-  const [numberOfComments, setNumberComments] = useState(2);      // show the number of comments from the post
+  const [numberOfComments, setNumberComments] = useState(5);      // show the number of comments from the post
   const [inputValue, setInputValue] = useState("");               // record the text input from the user
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);  // record the current state of visibility of the emoji picker
 
