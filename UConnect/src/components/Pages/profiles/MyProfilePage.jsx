@@ -30,7 +30,7 @@ export default function MyProfilePage() {
   };
 
   return (
-    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition m-auto max-w-7xl ">
+    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition ">
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
@@ -74,7 +74,7 @@ export default function MyProfilePage() {
           </div>
 
           {/* Right Section */}
-          <div className="flex-[4] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
+          <div className="flex-[3] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
             {/* Bio Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">

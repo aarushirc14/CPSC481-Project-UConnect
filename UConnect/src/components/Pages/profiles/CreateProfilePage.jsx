@@ -102,7 +102,7 @@ export default function CreateProfile({
         {/* Notification Popup */}
         {showNotification && (
           <Notification
-            message="Please fill out all required fields!"
+            message="Please fill out all fields!"
             type="error"
             onClose={() => setShowNotification(false)}
           />

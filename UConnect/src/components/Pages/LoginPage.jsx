@@ -71,7 +71,7 @@ export default function LoginPage({ onLogin }) {
           togglePassword={togglePassword}
         />
         {/* Forgot Password Link */}
-        <div className="text-end text-sm">
+        <div className="text-left text-sm">
           <button
             onClick={handleForgotPassword}
             className="text-uConnectDark-accent hover:underline"
