@@ -73,7 +73,9 @@ export default function MultiSelectDropdown({
         onClick={() => setIsOpen(!isOpen)}
         role="button"
       >
-        <span className="flex flex-wrap gap-2">{renderTags() || label}</span>
+        <span className="flex flex-wrap gap-2 text-gray-500">
+          {renderTags() || label}
+        </span>
         <span
           className={`caret self-end ${isOpen ? "caret-open" : "caret-closed"}`}
         >

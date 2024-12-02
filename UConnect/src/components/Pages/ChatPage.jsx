@@ -503,7 +503,7 @@ export default function ChatPage({
           />
           <div className="flex justify-center">
             <div
-              className={`pb-40 pt-28 flex min-h-screen flex-col w-1/2 ${
+              className={`pb-40 pt-28 flex min-h-screen flex-col w-7/12 ${
                 !search ? "justify-end" : ""
               }`}
             >
@@ -734,7 +734,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
   return (
     <>
       {!search && (
-        <div className="pt-10 border-b pb-4 text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+        <div className="pt-10 border-b pb-4 text-uConnectLight-textMain dark:text-uConnectDark-textMain ">
           Welcome to the beginning of your conversation with{" "}
           {chatNameData[active].chatName}
         </div>
@@ -768,7 +768,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                     </span>
                   </span>
                   {conversation.name === "You" && !search && (
-                    <span className="flex flex-row gap-3 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="flex flex-row gap-5 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="hover:text-uConnectDark-accent">
                         <FaPen />
                       </span>
@@ -830,7 +830,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                     </span>
                   </span>
                   {conversation.name === "You" && !search && (
-                    <span className="flex flex-row gap-3 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="flex flex-row gap-5 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="hover:text-uConnectDark-accent">
                         <FaPen />
                       </span>

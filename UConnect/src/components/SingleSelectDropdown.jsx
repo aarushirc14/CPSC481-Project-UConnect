@@ -19,11 +19,19 @@ export default function SingleSelectDropdown({
     <div className="single-select-dropdown w-full">
       {/* Selected option */}
       <div
-        className="dropdown-label rounded"
+        className="dropdown-label rounded "
         onClick={() => setIsOpen(!isOpen)}
         role="button"
       >
-        <span>{selectedOption ? selectedOption.label : label}</span>
+        <span
+          className={`text-gray-500 ${
+            selectedOption
+              ? " dark:text-uConnectLight-textMain"
+              : ""
+          }`}
+        >
+          {selectedOption ? selectedOption.label : label}
+        </span>
         <span className={`caret ${isOpen ? "caret-open" : "caret-closed"}`}>
           &#9662;
         </span>

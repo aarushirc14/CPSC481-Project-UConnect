@@ -112,9 +112,9 @@ export default function NotificationsPage({ setIsActive }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain transition">
+    <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain transition m-auto max-w-7xl">
       {/* Content Offset to Avoid Sidebar Overlap */}
-      <div className="ml-64 w-full">
+      <div className="ml-40 w-full">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-20">
           <SearchBar placeholder="Search Notifications" />

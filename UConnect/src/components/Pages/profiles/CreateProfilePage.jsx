@@ -13,8 +13,10 @@ import {
 } from "../../../data/dropdownOptions";
 import Notification from "../../PopupMessage";
 
-export default function CreateProfile({ onProfileCreated, existingProfileData,}) 
-{
+export default function CreateProfile({
+  onProfileCreated,
+  existingProfileData,
+}) {
   const navigate = useNavigate();
 
   const editing = existingProfileData;
@@ -86,14 +88,14 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
     onProfileCreated();
 
     // If all validations pass, navigate to AfterEditingProfilePage (if editing) or HomePage (if creating profile)
-   
-    {editing ? navigate("/edited-profile") : navigate("/home")}
+
+    {
+      editing ? navigate("/edited-profile") : navigate("/home");
+    }
   };
 
-  
-
   return (
-    <div className="flex w-full justify-center items-center min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background px-4">
+    <div className="flex w-full justify-center items-center min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background px-4 m-auto max-w-7xl ">
       {/* Outer Gray Box */}
       <div className="w-full max-w-5xl bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary p-12 rounded-lg mt-8 mb-8">
         <h2 className="text-3xl font-semibold text-center text-uConnectLight-layer2 dark:text-uConnectDark-layer3 mb-6">
@@ -143,7 +145,9 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
           {/* Name Input */}
           <div className="flex gap-4">
             <div className="flex flex-col w-full">
-              <span className="text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+              <span
+                className={`text-uConnectLight-textMain dark:text-uConnectDark-textMain `}
+              >
                 First Name:
               </span>
               <input
@@ -152,7 +156,9 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                 value={profileData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+                className={`flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textSub dark:placeholder:text-uConnectLight-textSub ${
+                  showNotification ? "outline-red-500" : ""
+                } `}
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
                 Required*
@@ -168,7 +174,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
                 value={profileData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+                className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textSub dark:placeholder:text-uConnectLight-textSub"
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
                 Required*
@@ -186,7 +192,7 @@ export default function CreateProfile({ onProfileCreated, existingProfileData,})
               value={profileData.bio}
               onChange={handleChange}
               placeholder="Bio"
-              className="p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textMain dark:placeholder:text-uConnectLight-textMain"
+              className="p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none resize placeholder:text-uConnectDark-textSub dark:placeholder:text-uConnectLight-textSub"
               rows="4"
               style={{
                 resize: "none", // Dont allow resizing?

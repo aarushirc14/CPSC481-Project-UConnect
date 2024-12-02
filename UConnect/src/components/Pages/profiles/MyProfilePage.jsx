@@ -30,7 +30,7 @@ export default function MyProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition">
+    <div className="min-h-screen text-uConnectLight-textMain dark:text-uConnectDark-textMain flex transition m-auto max-w-7xl ">
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pl-[10rem] pr-6">
         {/* Sticky Search Bar */}
@@ -38,6 +38,9 @@ export default function MyProfilePage() {
           <SearchBar />
         </div>
         {/* Top Section */}
+        <p className="text-center text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain pb-10">
+          My Profile
+        </p>
         <div className="flex flex-wrap w-full max-w-7xl gap-6">
           {/* Left Section */}
           <div className="flex-[2] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-8 flex flex-col items-center">
@@ -66,13 +69,12 @@ export default function MyProfilePage() {
               onClick={handleEditProfileClick}
               className="mt-6 py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full inline-flex items-center justify-center gap-2 hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition"
             >
-              
               Edit Profile
             </button>
           </div>
 
           {/* Right Section */}
-          <div className="flex-[3] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
+          <div className="flex-[4] bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary rounded-lg p-6">
             {/* Bio Section */}
             <div className="bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 rounded-lg p-6 mb-6">
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">
