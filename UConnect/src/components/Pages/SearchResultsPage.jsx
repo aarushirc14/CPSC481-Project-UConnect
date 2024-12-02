@@ -194,7 +194,6 @@ export default function SearchResultsPage() {
           </button>
           <button
             onClick={(e) => {
-              window.location.reload();
               e.stopPropagation();
               handleClicksReset();
             }}

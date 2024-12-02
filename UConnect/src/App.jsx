@@ -218,6 +218,28 @@ function App() {
                     />
                   }
                 />
+                <Route path="/search-results" element={<SearchResultsPage />} />
+                <Route
+                  path="/search-results-people"
+                  element={<SearchResultsPeoplePage />}
+                />
+                <Route
+                  path="/search-results-posts"
+                  element={<SearchResultsPostsPage />}
+                />
+                <Route path="/search-results" element={<SearchResultsPage />} />
+                <Route
+                  path="/search-results-posts"
+                  element={<SearchResultsPostsPage />}
+                />
+                <Route
+                  path="/search-results-major-and-people"
+                  element={<SearchResultsMajorNPeoplePage />}
+                />
+                <Route
+                  path="/search-results-interests-major-people"
+                  element={<SearchResultsInterestsMajorPeoplePage />}
+                />
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
             </main>
@@ -250,28 +272,6 @@ function App() {
                 element={
                   <CreateProfile onProfileCreated={handleProfileCreated} />
                 }
-              />
-              <Route path="/search-results" element={<SearchResultsPage />} />
-              <Route
-                path="/search-results-people"
-                element={<SearchResultsPeoplePage />}
-              />
-              <Route
-                path="/search-results-posts"
-                element={<SearchResultsPostsPage />}
-              />
-              <Route path="/search-results" element={<SearchResultsPage />} />
-              <Route
-                path="/search-results-posts"
-                element={<SearchResultsPostsPage />}
-              />
-              <Route
-                path="/search-results-major-and-people"
-                element={<SearchResultsMajorNPeoplePage />}
-              />
-              <Route
-                path="/search-results-interests-major-people"
-                element={<SearchResultsInterestsMajorPeoplePage />}
               />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
