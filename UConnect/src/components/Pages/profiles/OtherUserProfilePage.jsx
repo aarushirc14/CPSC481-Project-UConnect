@@ -9,6 +9,7 @@ import rashidaWilliams from "../../../assets/profilePics/rashidaWilliams.jpeg";
 export default function OtherUserProfilePage() {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const [follow, setFollowing] = useState(false);
   const navigate = useNavigate();
 
   const user = {
@@ -53,11 +54,21 @@ export default function OtherUserProfilePage() {
   };
 
   const handleFollowClick = () => {
-    setNotificationMessage(`You are now following ${user.firstName}!`);
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 3000);
+    if (!follow) {
+      setFollowing(true);
+      setNotificationMessage(`You are now following ${user.firstName}!`);
+    }
+    if (follow) {
+      setFollowing(false);
+      setNotificationMessage(`You are no longer following ${user.firstName}!`);
+    }
   };
 
+  const followingClass = follow
+    ? "bg-uConnectDark-accent dark:text-uConnectLight-textMain text-uConnectDark-textMain"
+    : "";
   return (
     <div className="min-h-screen bg-uConnectDark-textMain dark:bg-uConnectLight-textMain text-uConnectLight-textMain dark:text-uConnectDark-textMain flex">
       {/* Notification */}
@@ -108,9 +119,9 @@ export default function OtherUserProfilePage() {
               </button>
               <button
                 onClick={handleFollowClick}
-                className="py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition text-center w-[100px]"
+                className={`py-1 px-4 bg-transparent border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain transition text-center w-[100px] ${followingClass}`}
               >
-                Follow
+                {follow ? "Unfollow" : "Follow"}
               </button>
             </div>
           </div>
@@ -122,9 +133,7 @@ export default function OtherUserProfilePage() {
               <h2 className="text-lg font-semibold text-uConnectLight-textMain">
                 Bio
               </h2>
-              <p className="text-uConnectLight-textMain mt-2">
-                {user.bio}
-              </p>
+              <p className="text-uConnectLight-textMain mt-2">{user.bio}</p>
             </div>
 
             {/* Courses Section */}
