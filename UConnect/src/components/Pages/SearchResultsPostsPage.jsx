@@ -193,13 +193,23 @@ export default function SearchResultsPostPage() {
           </div>
 
           {/* Apply Filters Button */}
-          <div className="mb-8 flex justify-start mt-4">
+          <div className=" flex justify-start">
+          <div className="mb-8 flex justify-start mt-4 group relative">
+
             <button
               disabled={!isFiltersApplied}
               className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Apply Filters
             </button>
+            {!isFiltersApplied && (
+                <div className="absolute transform bottom-full mb-3 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10 hidden group-hover:block">
+                  No interests or majors applied!
+                </div>
+              )}
+            </div>
+            <div className="mb-8 flex justify-start mt-4 group relative">
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -209,6 +219,7 @@ export default function SearchResultsPostPage() {
             >
               Reset Filters
             </button>
+            </div>
           </div>
         </div>
 
