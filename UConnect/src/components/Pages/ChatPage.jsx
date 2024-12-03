@@ -1168,13 +1168,13 @@ function ChatMemberListBar({
               </div>
             </div>
           ) : (
-            <div className="flex flex-col">
-              <div className="flex flex-row gap-10 items-center">
+            <div className="flex flex-col w-full justify-between">
+              <div className="flex flex-row gap-10 items-center justify-between">
                 {chatNameData[active].chatName}{" "}
                 <div className="relative group/trash">
                   <span
                     onClick={handleEditClick}
-                    className="hover:text-uConnectDark-accent"
+                    className="hover:text-uConnectDark-accent "
                   >
                     <FaPen />
                   </span>

@@ -50,18 +50,26 @@ export default function CreateProfile({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setChanges(true);
     setProfileData({ ...profileData, [name]: value });
+
+    setChanges(true);
   };
   const handleMajorChange = (selectedMajors) => {
+    if (editing !== profileData && editing) setChanges(true);
     setProfileData({ ...profileData, major: selectedMajors });
   };
-  const handleYearChange = (selectedYear) =>
+  const handleYearChange = (selectedYear) => {
+    if (editing !== profileData && editing) setChanges(true);
     setProfileData({ ...profileData, year: selectedYear });
-  const handleCoursesChange = (selectedCourses) =>
+  };
+  const handleCoursesChange = (selectedCourses) => {
+    if (editing !== profileData && editing) setChanges(true);
     setProfileData({ ...profileData, courses: selectedCourses });
-  const handleInterestsChange = (selectedInterests) =>
+  };
+  const handleInterestsChange = (selectedInterests) => {
+    if (editing !== profileData && editing) setChanges(true);
     setProfileData({ ...profileData, interests: selectedInterests });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -123,7 +131,13 @@ export default function CreateProfile({
               htmlFor="profileImage"
               className="cursor-pointer w-full flex justify-center flex-col items-center"
             >
-              <div className="w-40 h-40 rounded-full bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 flex justify-center items-center overflow-hidden relative border-2 border-black">
+              <div
+                className={`w-40 h-40 rounded-full bg-uConnectLight-layer3 dark:bg-uConnectDark-layer3 flex justify-center items-center overflow-hidden relative border-2 border-black ${
+                  showNotification && !profileData.profileImage
+                    ? "border-red-500 border-4"
+                    : ""
+                }`}
+              >
                 {profileData.profileImage ? (
                   <img
                     src={profileData.profileImage}
@@ -163,7 +177,9 @@ export default function CreateProfile({
                 onChange={handleChange}
                 placeholder="First Name"
                 className={`flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textSub dark:placeholder:text-uConnectLight-textSub ${
-                  showNotification ? "outline-red-500" : ""
+                  showNotification && !profileData.firstName.trim()
+                    ? "outline-red-500"
+                    : ""
                 } `}
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
@@ -180,7 +196,11 @@ export default function CreateProfile({
                 value={profileData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textSub dark:placeholder:text-uConnectLight-textSub"
+                className={`flex-1 p-3 rounded bg-[#c6c3c3] dark:bg-uConnectDark-layer3 text-uConnectLight-textMain outline-none placeholder:text-uConnectDark-textSub dark:placeholder:text-uConnectLight-textSub ${
+                  showNotification && !profileData.lastName.trim()
+                    ? "outline-red-500"
+                    : ""
+                }`}
               />
               <span className="text-end text-xs italic dark:text-uConnectDark-textSub text-uConnectLight-textSub">
                 Required*
