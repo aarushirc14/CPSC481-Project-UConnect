@@ -319,7 +319,7 @@ button.is-active {
 .post_button {
   float: right; /* Move to the right */
   position: relative;
-  margin-top: 50px;
+  margin-top: 80px;
   right: 25px; /* Align to the right side */
   transform: translate(0, -50%); /* Center vertically (adjust if necessary) */
 }
