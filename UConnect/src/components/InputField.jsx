@@ -11,7 +11,7 @@ export default function InputField({ label, type, name, value, onChange }) {
   };
 
   return (
-    <div className="mb-6">
+    <div className="mb-2">
       <label className="login_signup_form_label block text-sm mb-2">
         {label.toUpperCase()}
       </label>
