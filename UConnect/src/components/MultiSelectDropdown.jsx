@@ -1,6 +1,6 @@
 // src/components/MultiSelectDropdown.jsx
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaSearch, FaPlusCircle } from "react-icons/fa";
 
 export default function MultiSelectDropdown({
@@ -14,6 +14,7 @@ export default function MultiSelectDropdown({
     existingSelectedOptions || []
   );
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Notify the parent component when selectedOptions changes
   useEffect(() => {
@@ -34,6 +35,19 @@ export default function MultiSelectDropdown({
     );
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const removeOption = (option) => {
     setSelectedOptions((prevSelected) =>
       prevSelected.filter((item) => item !== option)
@@ -51,7 +65,10 @@ export default function MultiSelectDropdown({
         <button
           type="button"
           className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
-          onClick={() => removeOption(option)}
+          onClick={(e) => {
+            e.stopPropagation();
+            removeOption(option);
+          }}
         >
           &#x2715;
         </button>
@@ -60,16 +77,12 @@ export default function MultiSelectDropdown({
   };
 
   return (
-    <div className="multi-select-dropdown w-full">
+    <div ref={dropdownRef} className="multi-select-dropdown w-full">
       {/* Selected tags */}
 
       {/* Dropdown label */}
       <div // this is VERY hardcoded lol...
-        className={`dropdown-label flex rounded ${
-          label === "Add Members"
-            ? "dark:text-uConnectDark-textSub text-uConnectLight-textSub !bg-transparent"
-            : ""
-        }`}
+        className={`dropdown-label flex rounded`}
         onClick={() => setIsOpen(!isOpen)}
         role="button"
       >

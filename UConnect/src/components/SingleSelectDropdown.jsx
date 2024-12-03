@@ -1,6 +1,6 @@
 // src/components/SingleSelectDropdown.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function SingleSelectDropdown({
   options,
@@ -9,14 +9,28 @@ export default function SingleSelectDropdown({
   onChange,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleOptionChange = (option) => {
     onChange(option);
     setIsOpen(false); // Close the dropdown after selection
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="single-select-dropdown w-full">
+    <div ref={dropdownRef} className="single-select-dropdown w-full">
       {/* Selected option */}
       <div
         className="dropdown-label rounded "
@@ -25,9 +39,7 @@ export default function SingleSelectDropdown({
       >
         <span
           className={`text-gray-500 ${
-            selectedOption
-              ? " dark:text-uConnectLight-textMain"
-              : ""
+            selectedOption ? " dark:text-uConnectLight-textMain" : ""
           }`}
         >
           {selectedOption ? selectedOption.label : label}
