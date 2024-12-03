@@ -204,7 +204,7 @@ export default function SearchResultsPage() {
           <div className="mb-8 flex justify-start mt-4">
             <button
               disabled={!isFiltersApplied}
-              className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+              className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Apply Filters
             </button>
@@ -214,7 +214,7 @@ export default function SearchResultsPage() {
                 handleClicksReset();
               }}
               disabled={!isFiltersApplied}
-              className="flex ml-4 px-4 py-2 disabled:border disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:bg-transparent bg-red-500 text-white rounded-full hover:opacity-80 dark:hover:opacity-80"
+              className="flex ml-4 px-4 py-2 disabled:border disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:bg-transparent bg-red-500 text-white rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Reset Filters
             </button>

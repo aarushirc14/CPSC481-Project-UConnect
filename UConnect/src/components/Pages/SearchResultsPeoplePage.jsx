@@ -192,7 +192,7 @@ export default function SearchResultsPeoplePage() {
                 handleClicksApplyFilters();
               }}
               disabled={!isFiltersApplied}
-              className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+              className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Apply Filters
             </button>
@@ -201,7 +201,7 @@ export default function SearchResultsPeoplePage() {
                 e.stopPropagation();
                 handleClicksReset();
               }}
-              className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-none rounded-full hover:opacity-80 dark:hover:opacity-80"
+              className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-none rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Reset Filters
             </button>

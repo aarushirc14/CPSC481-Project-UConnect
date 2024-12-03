@@ -203,7 +203,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
                 e.stopPropagation();
                 handleClicksApplyFilters();
               }}
-              className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+              className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Apply Filters
             </button>
@@ -212,7 +212,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
                 e.stopPropagation();
                 handleClicksReset();
               }}
-              className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-none rounded-full hover:opacity-80 dark:hover:opacity-80"
+              className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-none rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Reset Filters
             </button>
