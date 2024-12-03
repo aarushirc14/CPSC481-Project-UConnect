@@ -91,6 +91,11 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
     ]); // Reset to default major
   };
 
+  const isEnvironmentalScienceSelected =
+    selectedMajors.length === 1 &&
+    selectedMajors[0].value === "environmental_science" &&
+    selectedInterests.length === 0;
+
   const majorDropdownStyles = {
     backgroundColor: "#e0f7fa",
     color: "#00796b",
@@ -201,16 +206,25 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
           </div>
 
           {/* Apply Filters Button */}
-          <div className="mb-8 flex justify-start mt-4">
+          <div className="flex justify-start">
+          <div className="mb-8 flex justify-start mt-4 group relative">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleClicksApplyFilters();
               }}
-              className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-xl hover:opacity-80 dark:hover:opacity-80"
+              disabled={isEnvironmentalScienceSelected}  
+              className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-xl hover:opacity-80 dark:hover:opacity-80"
             >
               Apply Filters
             </button>
+            {isEnvironmentalScienceSelected && (
+                <div className="absolute transform bottom-full mb-3 bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10 hidden group-hover:block">
+                  You have already applied these filters!
+                </div>
+              )}
+          </div>
+          <div className="mb-8 flex justify-start mt-4 group relative">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -220,6 +234,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
             >
               Reset Filters
             </button>
+            </div>
           </div>
         </div>
 

@@ -77,14 +77,16 @@ export default function MultiSelectDropdownFilter({
           <ul className="dropdown-options mt-2">
             {filteredOptions.map((option) => (
               <li key={option.value} className="dropdown-option">
-                <label>
+                  <div className="option-grid grid grid-cols-[auto,1fr] gap-2 items-center">
                   <input
                     type="checkbox"
                     checked={isSelected(option)}
                     onChange={() => toggleOption(option)}
                   />
+                <label>
                   {option.label}
                 </label>
+                </div>
               </li>
             ))}
           </ul>
