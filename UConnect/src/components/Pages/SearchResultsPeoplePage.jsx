@@ -103,7 +103,11 @@ export default function SearchResultsPeoplePage() {
 
         {/* Filter Section */}
         <div className="max-w-4xl m-auto">
-          <div className="mt-5 font-bold">Filter By..</div>
+          <div className="mb-4 text-3xl font-bold text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+            Search Results For "
+            <span className="text-uConnectDark-accent">Math 211</span>"
+          </div>
+          <div className="mt-5 font-bold">Filter By:</div>
 
           {/* Selected filters (tags) */}
           <div className="flex flex-wrap gap-2 mt-3 mb-4 min-h-8">
