@@ -6,7 +6,7 @@ export default function MultiSelectDropdownFilter({
   label,
   existingSelectedOptions,
   onChange,
-  style
+  style,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   // Check if dropdown is open
@@ -14,7 +14,9 @@ export default function MultiSelectDropdownFilter({
 
   // Check if an item is selected
   const isSelected = (option) => {
-    return !!existingSelectedOptions.find((selected) => selected.value === option.value);
+    return !!existingSelectedOptions.find(
+      (selected) => selected.value === option.value
+    );
   };
 
   const toggleOption = (option) => {
@@ -37,28 +39,33 @@ export default function MultiSelectDropdownFilter({
         onClick={() => setIsOpen(!isOpen)}
         role="button"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
-          height: '5px',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          position: 'relative',
-          backgroundColor: style?.labelBackgroundColor || '',
-          color: style?.label || '',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          height: "5px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          position: "relative",
+          backgroundColor: style?.labelBackgroundColor || "",
+          color: style?.label || "",
         }}
       >
-        <div className="flex-grow flex justify-center gap-2" style={{ flexWrap: 'nowrap', overflow: 'hidden' }}>
+        <div
+          className="flex-grow flex justify-center gap-2"
+          style={{ flexWrap: "nowrap", overflow: "hidden" }}
+        >
           {label}
         </div>
         {/* Caret Icon */}
-        <div className={`caret self-end ${isOpen ? "caret-open" : "caret-closed"}`}>
+        <div
+          className={`caret self-end ${isOpen ? "caret-open" : "caret-closed"}`}
+        >
           &#9662;
         </div>
       </div>
-        {/* Checking if dropdown is open and display dropdown menu */}
+      {/* Checking if dropdown is open and display dropdown menu */}
       {isOpen && (
         <div className="dropdown-menu">
           {/* Search bar inside menu */}
@@ -73,20 +80,19 @@ export default function MultiSelectDropdownFilter({
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-        {/* List for filtered options */}
+          {/* List for filtered options */}
           <ul className="dropdown-options mt-2">
             {filteredOptions.map((option) => (
               <li key={option.value} className="dropdown-option">
-                  <div className="option-grid grid grid-cols-[auto,1fr] gap-2 items-center">
+                <label>
                   <input
                     type="checkbox"
                     checked={isSelected(option)}
                     onChange={() => toggleOption(option)}
                   />
-                <label>
+
                   {option.label}
                 </label>
-                </div>
               </li>
             ))}
           </ul>
