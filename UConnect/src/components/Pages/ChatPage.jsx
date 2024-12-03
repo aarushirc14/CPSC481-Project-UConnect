@@ -1350,8 +1350,8 @@ export function WarningPopup({ isVisible, setIsVisible, action, warning }) {
               setIsVisible(false);
               action();
             }}
-            className="mt-4 w-full px-4 py-2 border border-red-500 text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full 
-            hover:bg-red-500 hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
+            className="mt-4 w-full px-4 py-2 border border-red-500 dark:text-uConnectDarj-textMain text-uConnectDark-textMain rounded-full 
+            hover:bg-red-500 hover:dark:text-uConnectDark-textMain hover:text-uConnectLight-textMain"
           >
             {warning}
           </button>

@@ -90,8 +90,8 @@ export default function SearchResultsPostPage() {
     setSelectedMajors([]);
   };
 
-  const isFiltersApplied = selectedInterests.length > 0 || selectedMajors.length > 0;
-
+  const isFiltersApplied =
+    selectedInterests.length > 0 || selectedMajors.length > 0;
 
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain m-auto max-w-7xl">
@@ -102,110 +102,110 @@ export default function SearchResultsPostPage() {
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-0">
-          <SearchBar placeholder={"Math 211"} />
+          <SearchBar searched={"Math 211"} />
         </div>
 
         {/* Filter Section */}
         <div className="max-w-4xl m-auto">
-        <div className="mt-5 ml-4 font-bold">Filter By..</div>
+          <div className="mt-5 font-bold">Filter By..</div>
 
-        {/* Selected filters (tags) */}
-        <div className="flex flex-wrap gap-2 mt-3 mb-4">
-          {/* Display selected interests */}
-          {selectedInterests.map((interest) => (
-            <div
-              key={interest.value}
-              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
-            >
-              {interest.label}
-              <button
-                type="button"
-                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
-                onClick={() =>
-                  setSelectedInterests(
-                    selectedInterests.filter((i) => i !== interest)
-                  )
-                }
+          {/* Selected filters (tags) */}
+          <div className="flex flex-wrap gap-2 mt-3 mb-4 min-h-8">
+            {/* Display selected interests */}
+            {selectedInterests.map((interest) => (
+              <div
+                key={interest.value}
+                className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
               >
-                &#x2715;
-              </button>
-            </div>
-          ))}
+                {interest.label}
+                <button
+                  type="button"
+                  className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+                  onClick={() =>
+                    setSelectedInterests(
+                      selectedInterests.filter((i) => i !== interest)
+                    )
+                  }
+                >
+                  &#x2715;
+                </button>
+              </div>
+            ))}
 
-          {/* Display selected majors */}
-          {selectedMajors.map((major) => (
-            <div
-              key={major.value}
-              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
-            >
-              {major.label}
-              <button
-                type="button"
-                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
-                onClick={() =>
-                  setSelectedMajors(selectedMajors.filter((m) => m !== major))
-                }
+            {/* Display selected majors */}
+            {selectedMajors.map((major) => (
+              <div
+                key={major.value}
+                className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
               >
-                &#x2715;
-              </button>
-            </div>
-          ))}
-        </div>
+                {major.label}
+                <button
+                  type="button"
+                  className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+                  onClick={() =>
+                    setSelectedMajors(selectedMajors.filter((m) => m !== major))
+                  }
+                >
+                  &#x2715;
+                </button>
+              </div>
+            ))}
+          </div>
 
-        {/* Filter buttons */}
-        <div className="grid grid-cols-4 gap-6 mb-1 h-16">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClickPosts();
-            }}
-            className="mt-4 px-4 py-2 border  border-uConnectDark-accent text-uConnectDark-textMain dark:bg-uConnectDark-accent dark:text-uConnectLight-textMain rounded-full hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain hover:dark:bg-uConnectDark-background bg-uConnectDark-accent hover:bg-[#C6C3C3] "
-          >
-            Posts
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClicksPeople();
-            }}
-            className="mt-4 px-4 py-2 border bg-[#C6C3C3] dark:bg-uConnectDark-background hover:dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-          >
-            People
-          </button>
-
-          {/* Dropdown Filters */}
-          <MultiSelectDropdownFilter
-            options={interestOptions}
-            label="Interests"
-            existingSelectedOptions={selectedInterests}
-            onChange={handleInterestChange}
-          />
-          <MultiSelectDropdownFilter
-            options={majorOptions}
-            label="Majors"
-            existingSelectedOptions={selectedMajors}
-            onChange={handleMajorChange}
-          />
-        </div>
-
-        {/* Apply Filters Button */}
-        <div className="mb-8 flex justify-start mt-8">
-          <button 
-            disabled={!isFiltersApplied}
-            className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+          {/* Filter buttons */}
+          <div className="grid grid-cols-4 gap-6 mb-1">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClickPosts();
+              }}
+              className="hover:underline h-12 px-4 py-2 border  border-uConnectDark-accent text-uConnectDark-textMain dark:bg-uConnectDark-accent dark:text-uConnectLight-textMain rounded-full  bg-uConnectDark-accent "
             >
-            Apply Filters
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClicksReset();
-            }}
-            className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-uConnectDark-accent rounded-full hover:opacity-80 dark:hover:opacity-80"
-          >
-            Reset Filters
-          </button>
-        </div>
+              Posts
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClicksPeople();
+              }}
+              className="hover:underline h-12 px-4 py-2 border bg-[#C6C3C3] dark:bg-uConnectDark-background  border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full "
+            >
+              People
+            </button>
+
+            {/* Dropdown Filters */}
+            <MultiSelectDropdownFilter
+              options={interestOptions}
+              label="Interests"
+              existingSelectedOptions={selectedInterests}
+              onChange={handleInterestChange}
+            />
+            <MultiSelectDropdownFilter
+              options={majorOptions}
+              label="Majors"
+              existingSelectedOptions={selectedMajors}
+              onChange={handleMajorChange}
+            />
+          </div>
+
+          {/* Apply Filters Button */}
+          <div className="mb-8 flex justify-start mt-4">
+            <button
+              disabled={!isFiltersApplied}
+              className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+            >
+              Apply Filters
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClicksReset();
+              }}
+              className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-none rounded-full hover:opacity-80 dark:hover:opacity-80"
+            >
+              Reset Filters
+            </button>
+          </div>
         </div>
 
         {/* Grid for Posts */}
@@ -240,11 +240,11 @@ export default function SearchResultsPostPage() {
                     {post.description}
                   </p>
                   <div className="flex items-center justify-center mr-28">
-                  <img
-                    src={post.postImage}
-                    alt={`${post.name}`}
-                    className="max-w-xl"
-                  />
+                    <img
+                      src={post.postImage}
+                      alt={`${post.name}`}
+                      className="max-w-xl"
+                    />
                   </div>
                 </div>
               </Link>

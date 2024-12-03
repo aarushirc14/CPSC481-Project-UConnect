@@ -3,12 +3,12 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 // Export with a placeholder that can be modified in each page
-export default function SearchBar({placeholder="Search"}) {
-  const [query, setQuery] = useState("");  
-  const navigate = useNavigate();  
+export default function SearchBar({ placeholder = "Search", searched }) {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (query.trim()) {
       navigate(`/search-results?query=${encodeURIComponent(query)}`);
     }
@@ -23,11 +23,13 @@ export default function SearchBar({placeholder="Search"}) {
           type="text"
           placeholder={placeholder}
           className="bg-transparent placeholder-uConnectLight-textSub dark:placeholder-uConnectDark-layer3 outline-none flex-1"
-          value={query} 
-          onChange={(e) => setQuery(e.target.value)}  
+          value={searched || query}
+          onChange={(e) => setQuery(e.target.value)}
         />
         {/* Submit Query */}
-        <button type="submit" className="hidden">Search</button> 
+        <button type="submit" className="hidden">
+          Search
+        </button>
       </form>
     </div>
   );

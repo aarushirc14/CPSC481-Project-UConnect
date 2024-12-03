@@ -109,114 +109,114 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
       <main className="flex-1 p-6 mt-10 ml-40">
         {/* Search Bar */}
         <div className="sticky top-0 z-10 mb-0">
-          <SearchBar placeholder={"Math 211"} />
+          <SearchBar searched={"Math 211"} />
         </div>
 
         {/* Filter Section */}
         <div className="max-w-4xl m-auto">
-        <div className="mt-5 ml-4 font-bold">Filter By..</div>
+          <div className="mt-5 font-bold">Filter By..</div>
 
-        {/* Selected filters (tags) */}
-        <div className="flex flex-wrap gap-2 mt-3 mb-4">
-          {/* Display selected interests */}
-          {selectedInterests.map((interest) => (
-            <div
-              key={interest.value}
-              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
-            >
-              {interest.label}
-              <button
-                type="button"
-                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
-                onClick={() =>
-                  setSelectedInterests(
-                    selectedInterests.filter((i) => i !== interest)
-                  )
-                }
+          {/* Selected filters (tags) */}
+          <div className="flex flex-wrap gap-2 mt-3 mb-4 min-h-8">
+            {/* Display selected interests */}
+            {selectedInterests.map((interest) => (
+              <div
+                key={interest.value}
+                className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
               >
-                &#x2715;
-              </button>
-            </div>
-          ))}
+                {interest.label}
+                <button
+                  type="button"
+                  className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+                  onClick={() =>
+                    setSelectedInterests(
+                      selectedInterests.filter((i) => i !== interest)
+                    )
+                  }
+                >
+                  &#x2715;
+                </button>
+              </div>
+            ))}
 
-          {/* Display selected majors */}
-          {selectedMajors.map((major) => (
-            <div
-              key={major.value}
-              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
-            >
-              {major.label}
-              <button
-                type="button"
-                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
-                onClick={() =>
-                  setSelectedMajors(selectedMajors.filter((m) => m !== major))
-                }
+            {/* Display selected majors */}
+            {selectedMajors.map((major) => (
+              <div
+                key={major.value}
+                className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
               >
-                &#x2715;
-              </button>
-            </div>
-          ))}
-        </div>
+                {major.label}
+                <button
+                  type="button"
+                  className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
+                  onClick={() =>
+                    setSelectedMajors(selectedMajors.filter((m) => m !== major))
+                  }
+                >
+                  &#x2715;
+                </button>
+              </div>
+            ))}
+          </div>
 
-        {/* Filter buttons */}
-        <div className="grid grid-cols-4 gap-6 mb-1 h-16">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClickPosts();
-            }}
-            className="mt-4 px-4 py-2 border bg-[#C6C3C3] dark:bg-uConnectDark-background hover:dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain"
-          >
-            Posts
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClicksPeople();
-            }}
-            className="mt-4 px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent hover:dark:bg-uConnectDark-background border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectDark-background rounded-full hover:bg-[#C6C3C3] hover:text-uConnectLight-textMain hover:dark:text-uConnectDark-textMain"
-          >
-            People
-          </button>
+          {/* Filter buttons */}
+          <div className="grid grid-cols-4 gap-6 mb-1">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClickPosts();
+              }}
+              className="hover:underline h-12 px-4 py-2 border bg-[#C6C3C3] dark:bg-uConnectDark-background border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain rounded-full"
+            >
+              Posts
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClicksPeople();
+              }}
+              className="hover:underline h-12 px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectDark-background rounded-full "
+            >
+              People
+            </button>
 
-          {/* Dropdown Filters */}
-          <MultiSelectDropdownFilter
-            options={interestOptions}
-            label="Interests"
-            existingSelectedOptions={selectedInterests}
-            onChange={handleInterestChange}
-          />
-          <MultiSelectDropdownFilter
-            options={majorOptions}
-            label="Majors"
-            existingSelectedOptions={selectedMajors}
-            onChange={handleMajorChange}
-            style={majorDropdownStyles}
-          />
-        </div>
+            {/* Dropdown Filters */}
+            <MultiSelectDropdownFilter
+              options={interestOptions}
+              label="Interests"
+              existingSelectedOptions={selectedInterests}
+              onChange={handleInterestChange}
+            />
+            <MultiSelectDropdownFilter
+              options={majorOptions}
+              label="Majors"
+              existingSelectedOptions={selectedMajors}
+              onChange={handleMajorChange}
+              style={majorDropdownStyles}
+            />
+          </div>
 
-        {/* Apply Filters Button */}
-        <div className="mb-8 flex justify-start mt-8">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClicksApplyFilters();
-            }}
-            className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
-          >
-            Apply Filters
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleClicksReset();
-            }}
-            className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-uConnectDark-accent rounded-full hover:opacity-80 dark:hover:opacity-80"
-          >
-            Reset Filters
-          </button>
-        </div>
+          {/* Apply Filters Button */}
+          <div className="mb-8 flex justify-start mt-4">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClicksApplyFilters();
+              }}
+              className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+            >
+              Apply Filters
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClicksReset();
+              }}
+              className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-none rounded-full hover:opacity-80 dark:hover:opacity-80"
+            >
+              Reset Filters
+            </button>
+          </div>
         </div>
 
         {/* Grid of Profiles */}

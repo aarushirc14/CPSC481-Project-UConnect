@@ -33,7 +33,7 @@ export default function MultiSelectDropdownFilter({
     <div className="multi-select-dropdown w-full">
       {/* Dropdown Label */}
       <div
-        className="dropdown-label justify-center items-center rounded-full border dark:bg-uConnectDark-background hover:dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain cursor-pointer mt-3"
+        className="dropdown-label justify-center items-center rounded-full border dark:bg-uConnectDark-background hover:dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain hover:bg-uConnectDark-accent hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
         role="button"
         style={{
@@ -41,7 +41,7 @@ export default function MultiSelectDropdownFilter({
           alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
-          height: '60px',
+          height: '5px',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
@@ -62,7 +62,7 @@ export default function MultiSelectDropdownFilter({
       {isOpen && (
         <div className="dropdown-menu">
           {/* Search bar inside menu */}
-          <div className="dropdown-search-wrapper flex items-center bg-[#E0E0E0] p-2 rounded mt-2">
+          <div className="dropdown-search-wrapper flex items-center bg-[#E0E0E0] rounded mt-2">
             <FaSearch className="text-gray-500" />
             {/* Setup for each option */}
             <input
