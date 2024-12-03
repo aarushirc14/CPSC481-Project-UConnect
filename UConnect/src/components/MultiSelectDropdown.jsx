@@ -23,16 +23,27 @@ export default function MultiSelectDropdown({
     }
   }, [selectedOptions, existingSelectedOptions]);
 
+  useEffect(() => {
+    if (existingSelectedOptions) {
+      setSelectedOptions(existingSelectedOptions);
+    }
+  }, [existingSelectedOptions]);
+
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const toggleOption = (option) => {
-    setSelectedOptions((prevSelected) =>
-      prevSelected.includes(option)
-        ? prevSelected.filter((item) => item !== option)
-        : [...prevSelected, option]
-    );
+    setSelectedOptions((prevSelected) => {
+      // Check if the option is already selected based on its value
+      if (prevSelected.some((selected) => selected.value === option.value)) {
+        // If it is selected, remove it
+        return prevSelected.filter((item) => item.value !== option.value);
+      } else {
+        // If it is not selected, add it
+        return [...prevSelected, option];
+      }
+    });
   };
 
   useEffect(() => {
@@ -111,18 +122,27 @@ export default function MultiSelectDropdown({
           </div>
 
           <ul className="dropdown-options">
-            {filteredOptions.map((option) => (
-              <li key={option.value} className="dropdown-option">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={selectedOptions.includes(option)}
-                    onChange={() => toggleOption(option)}
-                  />
-                  {option.label}
-                </label>
-              </li>
-            ))}
+            {filteredOptions.map((option) => {
+              // Log the current selectedOptions and the current option being mapped
+              console.log("Selected Options: ", selectedOptions);
+              console.log("Current Option: ", option);
+
+              return (
+                <li key={option.value} className="dropdown-option">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={selectedOptions.some(
+                        (selectedOption) =>
+                          selectedOption.value === option.value
+                      )}
+                      onChange={() => toggleOption(option)}
+                    />
+                    {option.label}
+                  </label>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

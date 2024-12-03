@@ -189,7 +189,6 @@ function App() {
                         ],
                         interests: [
                           { value: "camping", label: "Camping" },
-                          ,
                           { value: "hiking", label: "Hiking" },
                           { value: "photography", label: "Photography" },
                           { value: "reading", label: "Reading" },
