@@ -1,5 +1,5 @@
 // src/components/pages/ChatPage.jsx
-import React, { Suspense,useState, useRef, useEffect } from "react";
+import React, { Suspense, useState, useRef, useEffect } from "react";
 import {
   FaSearch,
   FaPlusCircle,
@@ -9,6 +9,7 @@ import {
   FaTimesCircle,
   FaPen,
   FaTrash,
+  FaUserTimes,
 } from "react-icons/fa";
 const EmojiPicker = React.lazy(() => import("emoji-picker-react")); //chunk larger imports for build
 //import EmojiPicker from "emoji-picker-react";
@@ -673,9 +674,15 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
           className="bg-transparent placeholder:text-lg placeholder-uConnectLight-textSub transition   dark:placeholder-uConnectDark-layer3 outline-none w-full pr-2 m-3"
         />
         <div className="flex flex-row gap-5 mr-10">
-          <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-            <FaSmile className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
-          </button>
+          <div className="group/trash relative">
+            <FaSmile
+              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              className="text-uConnectLight-textSub transition   dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
+            />
+            <div className="absolute -ml-7 transform bottom-full mb-4 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+              Insert Emoji
+            </div>
+          </div>
           {showEmojiPicker && (
             <div className="rounded-lg absolute right-96 pt-1.5 bottom-24">
               <Suspense fallback={<div>Loading...</div>}>
@@ -684,9 +691,14 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
             </div>
           )}
           {/* Paperclip Button - triggers file input */}
-          <label htmlFor="file-input" className="cursor-pointer">
-            <FaPaperclip className="text-uConnectLight-textSub transition dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
-          </label>
+          <div className="group/trash relative">
+            <label htmlFor="file-input" className="cursor-pointer">
+              <FaPaperclip className="text-uConnectLight-textSub transition dark:text-uConnectDark-layer3 hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent" />
+            </label>
+            <div className="absolute -ml-12 transform bottom-full mb-4 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+              Insert Attachment
+            </div>
+          </div>
 
           {/* Hidden file input */}
           <input
@@ -696,10 +708,15 @@ function SendText({ chatNameData, setChatNameData, activeChat, setIsActive }) {
             className="hidden"
             onChange={handleFileChange}
           />
-          <FaPaperPlane
-            className="text-uConnectLight-textSub transition dark:text-uConnectDark-layer3 cursor-pointer hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
-            onClick={handleSendMessage}
-          />
+          <div className="group/trash relative">
+            <FaPaperPlane
+              className="text-uConnectLight-textSub transition dark:text-uConnectDark-layer3 cursor-pointer hover:dark:text-uConnectDark-accent hover:text-uConnectLight-accent"
+              onClick={handleSendMessage}
+            />
+            <div className="absolute -ml-9 transform bottom-full mb-4 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+              Send Message
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -759,7 +776,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
         oldMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
             <div
-              className={`flex flex-row gap-5 max-w-7xl m-auto p-3 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group ${
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-3 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group/item ${
                 oldMessages[index].highlight && !search
                   ? " animate-flicker"
                   : ""
@@ -784,13 +801,23 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                     </span>
                   </span>
                   {conversation.name === "You" && !search && (
-                    <span className="flex flex-row gap-5 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="hover:text-uConnectDark-accent">
-                        <FaPen />
-                      </span>
-                      <span className="hover:text-red-500">
-                        <FaTrash />
-                      </span>
+                    <span className="flex flex-row gap-5 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover/item:opacity-100 transition-opacity">
+                      <div className="relative group/trash">
+                        <span className="hover:text-uConnectDark-accent">
+                          <FaPen />
+                        </span>
+                        <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                          Edit Message
+                        </div>
+                      </div>
+                      <div className="relative group/trash">
+                        <span className="hover:text-red-500">
+                          <FaTrash />
+                        </span>
+                        <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                          Delete Message
+                        </div>
+                      </div>
                     </span>
                   )}
                 </div>
@@ -826,7 +853,7 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
         newMessages.map((conversation, index) => (
           <div key={index} className="pt-5">
             <div
-              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group`}
+              className={`flex flex-row gap-5 max-w-7xl m-auto p-2 hover:dark:bg-uConnectDark-layer2Secondary hover:bg-uConnectLight-layer2Secondary transition group/item`}
               onClick={() => {
                 setSearch("");
                 setMessage("");
@@ -846,13 +873,23 @@ function Conversation({ chatNameData, search, setSearch, setMessage, active }) {
                     </span>
                   </span>
                   {conversation.name === "You" && !search && (
-                    <span className="flex flex-row gap-5 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="hover:text-uConnectDark-accent">
-                        <FaPen />
-                      </span>
-                      <span className="hover:text-red-500">
-                        <FaTrash />
-                      </span>
+                    <span className="flex flex-row gap-5 text-uConnectLight-textSub dark:text-uConnectDark-textSub text-sm opacity-0 group-hover/item:opacity-100 transition-opacity">
+                      <div className="relative group/trash">
+                        <span className="hover:text-uConnectDark-accent">
+                          <FaPen />
+                        </span>
+                        <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                          Edit Message
+                        </div>
+                      </div>
+                      <div className="relative group/trash">
+                        <span className="hover:text-red-500">
+                          <FaTrash />
+                        </span>
+                        <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                          Delete Message
+                        </div>
+                      </div>
                     </span>
                   )}
                 </div>
@@ -1029,8 +1066,10 @@ function ChatMemberListBar({
           const updatedMembers = chat.members.filter(
             (memberName) => memberName.name !== member
           );
+          const updatedMemberCount = chatNameData[active].memberCount - 1;
           return {
             ...chat,
+            memberCount: updatedMemberCount,
             members: updatedMembers, // Update the members list
           };
         }
@@ -1101,12 +1140,17 @@ function ChatMemberListBar({
           ) : (
             <>
               {chatNameData[active].chatName}{" "}
-              <span
-                className="hover:text-uConnectDark-accent cursor-pointer"
-                onClick={handleEditClick}
-              >
-                <FaPen />
-              </span>
+              <div className="relative group/trash">
+                <span
+                  onClick={handleEditClick}
+                  className="hover:text-uConnectDark-accent"
+                >
+                  <FaPen />
+                </span>
+                <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                  Edit Chat Name
+                </div>
+              </div>
             </>
           )}
         </div>
@@ -1116,14 +1160,14 @@ function ChatMemberListBar({
             {chatNameData[active].memberCount > 0 && (
               <button
                 onClick={() => setAddVisible(true)}
-                className="text-uConnectDark-accent hover:underline font-normal"
+                className="text-uConnectDark-accent hover:underline font-semibold"
               >
                 Add Members
               </button>
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
           {chatNameData[active].members
             .sort((a, b) => {
               if (a === "You") return -1; // "You" comes first
@@ -1137,14 +1181,14 @@ function ChatMemberListBar({
               return (
                 <div
                   key={accountName}
-                  className="flex flex-row justify-start gap-3 items-center"
+                  className="flex flex-row justify-start py-3 gap-3 items-center hover:dark:bg-[#585858] hover:bg-uConnectLight-textBox"
                 >
                   <img
                     src={profile}
                     alt={accountName}
                     className="w-12 h-12 ml-5 rounded-full border-2 border-[#131313] object-cover"
                   />
-                  <div className="flex flex-row justify-between w-full items-start">
+                  <div className="flex flex-row justify-between w-full items-center">
                     <span>
                       {accountName.length > 30
                         ? `${accountName.slice(0, 30)}...`
@@ -1165,16 +1209,21 @@ function ChatMemberListBar({
                       )}
                     {accountName !== "You" &&
                       chatNameData[active].memberCount && (
-                        <button
-                          onClick={() => {
-                            setAction(() => () => kickMember(accountName));
-                            setWarningVisible(true);
-                            setWarning("Remove " + accountName);
-                          }}
-                          className="mr-5 hover:text-red-500"
-                        >
-                          <FaTrash />
-                        </button>
+                        <div className="relative group w-3/12">
+                          <button
+                            onClick={() => {
+                              setAction(() => () => kickMember(accountName));
+                              setWarningVisible(true);
+                              setWarning("Remove " + accountName);
+                            }}
+                            className="mr-5 hover:text-red-500"
+                          >
+                            <FaUserTimes />
+                          </button>
+                          <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                            Remove User
+                          </div>
+                        </div>
                       )}
                   </div>
                 </div>

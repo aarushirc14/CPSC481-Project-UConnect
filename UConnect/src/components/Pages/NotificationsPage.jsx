@@ -104,7 +104,7 @@ export default function NotificationsPage({ setIsActive }) {
 
   const handleNotificationClick = (route) => {
     if (route) {
-      setIsActive(1);
+      setIsActive(2);
       navigate(route); // Navigate to the specific route
     } else {
       console.log("No route defined for this notification.");
