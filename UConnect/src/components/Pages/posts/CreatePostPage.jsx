@@ -45,9 +45,11 @@ export default function CreatePostPage() {
               className="post_button group/trash relative text-xl px-4 bg-transparent dark:text-uConnectLight-textMain inline-flex items-center justify-center gap-2 hover:text-uConnectDark-textMain hover:dark:text-uConnectLight-textMain disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub w-1/4 py-3 disabled:bg-transparent disabled:border-uConnectDark-textSub border border-uConnectDark-accent bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
             >
               <span>Create Post</span>
-              <div className="absolute transform bottom-full mb-3 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
-                Title is Required to Post!
-              </div>
+              {!inputValue && (
+                <div className="absolute transform bottom-full mb-3 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                  Title is Required to Post!
+                </div>
+              )}
             </button>
           </div>
         </div>

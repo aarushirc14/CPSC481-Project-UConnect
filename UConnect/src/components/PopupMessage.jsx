@@ -5,7 +5,7 @@ export default function Notification({ message, type, onClose }) {
     // Automatically dismiss the notification after 3 seconds
     const timer = setTimeout(() => {
       onClose();
-    }, 5000);
+    }, 4000);
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, [onClose]);
