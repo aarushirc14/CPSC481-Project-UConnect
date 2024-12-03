@@ -93,6 +93,8 @@ export default function SearchResultsPage() {
       setSelectedMajors(newMajors);
     }
   };
+
+  const isFiltersApplied = selectedInterests.length > 0 || selectedMajors.length > 0;
   
   return (
     <div className="flex min-h-screen bg-uConnectLight-background dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain m-auto max-w-7xl">
@@ -117,12 +119,12 @@ export default function SearchResultsPage() {
           {selectedInterests.map((interest) => (
             <div
               key={interest.value}
-              className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center"
+              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
             >
               {interest.label}
               <button
                 type="button"
-                className="ml-2 text-red-500"
+                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
                 onClick={() =>
                   setSelectedInterests(selectedInterests.filter(i => i !== interest))
                 }
@@ -136,12 +138,12 @@ export default function SearchResultsPage() {
           {selectedMajors.map((major) => (
             <div
               key={major.value}
-              className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center"
+              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
             >
               {major.label}
               <button
                 type="button"
-                className="ml-2 text-red-500"
+                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
                 onClick={() => handleTagRemove("major", major)}
               >
                 &#x2715;
@@ -187,9 +189,10 @@ export default function SearchResultsPage() {
         </div>
 
         {/* Apply Filters Button */}
-        <div className="mb-8 flex justify-end mt-8">
+        <div className="mb-8 flex justify-start mt-8">
           <button
-            className="flex px-4 py-2 border bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
+            disabled={!isFiltersApplied}
+            className="flex px-4 py-2 border disabled:bg-transparent disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:dark:bg-uConnectDark-background bg-uConnectDark-accent dark:bg-uConnectDark-accent border-uConnectDark-accent text-uConnectDark-textMain dark:text-uConnectLight-textMain rounded-full hover:opacity-80 dark:hover:opacity-80"
           >
             Apply Filters
           </button>
@@ -198,8 +201,8 @@ export default function SearchResultsPage() {
               e.stopPropagation();
               handleClicksReset();
             }}
-            
-            className="flex ml-4 px-4 py-2 border bg-red-500 text-white border-uConnectDark-accent rounded-full hover:opacity-80 dark:hover:opacity-80"
+            disabled={!isFiltersApplied}
+            className="flex ml-4 px-4 py-2 border disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub disabled:bg-transparent bg-red-500 text-white border-uConnectDark-accent rounded-full hover:opacity-80 dark:hover:opacity-80"
           >
             Reset Filters
           </button>

@@ -122,12 +122,12 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
           {selectedInterests.map((interest) => (
             <div
               key={interest.value}
-              className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center"
+              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
             >
               {interest.label}
               <button
                 type="button"
-                className="ml-2 text-red-500"
+                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
                 onClick={() =>
                   setSelectedInterests(
                     selectedInterests.filter((i) => i !== interest)
@@ -143,12 +143,12 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
           {selectedMajors.map((major) => (
             <div
               key={major.value}
-              className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center"
+              className="bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary border-2 border-uConnectDark-accent text-uConnectLight-textMain dark:text-uConnectDark-textMain px-4 rounded-full"
             >
               {major.label}
               <button
                 type="button"
-                className="ml-2 text-red-500"
+                className="text-uConnectLight-textMain dark:text-uConnectDark-textMain ml-4"
                 onClick={() =>
                   setSelectedMajors(selectedMajors.filter((m) => m !== major))
                 }
@@ -197,7 +197,7 @@ export default function SearchResultsMajorNPeoplePage({ setIsActive }) {
         </div>
 
         {/* Apply Filters Button */}
-        <div className="mb-8 flex justify-end mt-8">
+        <div className="mb-8 flex justify-start mt-8">
           <button
             onClick={(e) => {
               e.stopPropagation();
