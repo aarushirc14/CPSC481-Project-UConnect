@@ -1303,7 +1303,7 @@ function ChatMemberListBar({
   );
 }
 
-function WarningPopup({ isVisible, setIsVisible, action, warning }) {
+export function WarningPopup({ isVisible, setIsVisible, action, warning }) {
   const popupRef = useRef(null); // Reference to the popup container
   // Close the popup if clicked outside
   useEffect(() => {
@@ -1331,7 +1331,9 @@ function WarningPopup({ isVisible, setIsVisible, action, warning }) {
         ref={popupRef} // Attach ref to the popup container
         className="flex flex-col bg-white relative dark:bg-uConnectDark-layer2Primary rounded-lg h-1/5 w-1/3 p-10 shadow-lg"
       >
-        <div className="pb-5 text-xl">Are You Sure You Want to {warning}?</div>
+        <div className="pb-5 text-xl text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+          Are You Sure You Want to {warning}?
+        </div>
 
         <div className="flex flex-row gap-5">
           <button

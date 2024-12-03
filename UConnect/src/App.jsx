@@ -72,6 +72,7 @@ function App() {
   const [chatNotificationCount, setChatNotificationCount] = useState(3);
   const [activeChat, setActiveChat] = useState(-1);
   const [notificationCount, setNotificationCount] = useState(4);
+  const [changes, setChanges] = useState(false);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -101,6 +102,8 @@ function App() {
               setIsActive={setActiveChat}
               setNotificationCount={setNotificationCount}
               notificationCount={notificationCount}
+              changes={changes}
+              setChanges={setChanges}
             />
             <main className="flex-1">
               <Routes>
@@ -144,8 +147,11 @@ function App() {
                 />
                 <Route
                   path="/search-results-interests-major-people"
-                  element={<SearchResultsInterestsMajorPeoplePage 
-                    setIsActive={setActiveChat}/>}
+                  element={
+                    <SearchResultsInterestsMajorPeoplePage
+                      setIsActive={setActiveChat}
+                    />
+                  }
                 />
                 <Route
                   path="/sent-viewresult"
@@ -191,6 +197,8 @@ function App() {
                         bio: "I love field research, learning about climate change solutions, and volunteering in conservation efforts. In my free time, you’ll find me hiking, attending eco-workshops, or experimenting with DIY eco-friendly projects.",
                         profileImage: sofiaMartinez,
                       }}
+                      changes={changes}
+                      setChanges={setChanges}
                     />
                   }
                 />

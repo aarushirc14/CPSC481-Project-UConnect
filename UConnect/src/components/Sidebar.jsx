@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo/uconnectSmallLogo.png";
+import { WarningPopup } from "../components/pages/ChatPage";
 
 export default function Sidebar({
   onLogout,
@@ -18,10 +19,15 @@ export default function Sidebar({
   setIsActive,
   setNotificationCount,
   notificationCount,
+  changes,
+  setChanges,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isWarningVisible, setIsWarningVisible] = useState(false); // Manage popup visibility
+  const [routeToNavigate, setRouteToNavigate] = useState(""); // Store the route to navigate after confirmation
+  const [warningMessage, setWarningMessage] = useState("");
 
   const disableLabel = window.location.pathname === "/chats";
 
@@ -73,6 +79,8 @@ export default function Sidebar({
   const navBarSize = disableLabel ? "lg:w-20" : "lg:w-40";
   const iconSize = disableLabel ? "lg:w-7 lg:h-7" : "lg:w-20 lg:h-20";
 
+  const editingPage = location.pathname === "/edit-profile";
+
   return (
     <div
       className={`fixed top-0 left-0 bg-uConnectLight-layer2Secondary dark:bg-uConnectDark-layer2Secondary h-screen p-4 flex flex-col items-center ${navBarSize} w-16 z-10`}
@@ -94,7 +102,15 @@ export default function Sidebar({
               label={route.label}
               badge={route.badge}
               active={location.pathname === route.path}
-              onClick={() => navigate(route.path)}
+              onClick={() => {
+                if (editingPage && changes) {
+                  setWarningMessage(`Leave Without Saving`);
+                  setRouteToNavigate(route.path);
+                  setIsWarningVisible(true);
+                } else {
+                  navigate(route.path);
+                }
+              }}
               disableLabel={disableLabel}
             />
           ))}
@@ -144,6 +160,18 @@ export default function Sidebar({
               active={false} // Logout should not be active
             />
           </div>
+          {isWarningVisible && (
+            <WarningPopup
+              isVisible={isWarningVisible}
+              setIsVisible={setIsWarningVisible}
+              action={() => {
+                setIsWarningVisible(false);
+                navigate(routeToNavigate); // Navigate after confirmation
+                setChanges(false);
+              }}
+              warning={warningMessage}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -152,7 +180,6 @@ export default function Sidebar({
 
 function SidebarItem({ icon, label, active, onClick, badge }) {
   const disableLabel = window.location.pathname === "/chats";
-
   return (
     <div
       onClick={onClick}

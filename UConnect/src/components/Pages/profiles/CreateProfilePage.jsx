@@ -16,6 +16,8 @@ import Notification from "../../PopupMessage";
 export default function CreateProfile({
   onProfileCreated,
   existingProfileData,
+  changes,
+  setChanges,
 }) {
   const navigate = useNavigate();
 
@@ -48,6 +50,7 @@ export default function CreateProfile({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setChanges(true);
     setProfileData({ ...profileData, [name]: value });
   };
   const handleMajorChange = (selectedMajors) => {
@@ -90,6 +93,11 @@ export default function CreateProfile({
     {
       editing ? navigate("/edited-profile") : navigate("/home");
     }
+  };
+
+  const revertChanges = () => {
+    setProfileData(editing);
+    setChanges(false);
   };
 
   return (
@@ -275,7 +283,18 @@ export default function CreateProfile({
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-6 gap-16">
+            {editing && (
+              <button
+                type="button"
+                disabled={!changes}
+                className="disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub w-1/4 py-3 disabled:bg-transparent disabled:border-uConnectDark-textSub border border-uConnectDark-accent bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
+                onClick={revertChanges}
+              >
+                {" "}
+                Revert Changes
+              </button>
+            )}
             <button
               type="submit"
               className="w-1/4 py-3 bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
