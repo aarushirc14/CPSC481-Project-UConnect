@@ -23,12 +23,6 @@ export default function MultiSelectDropdown({
     }
   }, [selectedOptions, existingSelectedOptions]);
 
-  useEffect(() => {
-    if (existingSelectedOptions) {
-      setSelectedOptions(existingSelectedOptions);
-    }
-  }, [existingSelectedOptions]);
-
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
