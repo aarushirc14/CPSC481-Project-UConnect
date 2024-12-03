@@ -17,7 +17,9 @@ export default function LoginPage({ onLogin }) {
   const togglePassword = () => setShowPassword(!showPassword);
 
   // Handle login
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
+
     let isValid = true; // Track if the form is valid
 
     // Reset error messages
@@ -45,14 +47,9 @@ export default function LoginPage({ onLogin }) {
     }
   };
 
-  // Handle forgot password
-  const handleForgotPassword = () => {
-    navigate("/forgot-password"); // Navigate to Forgot Password page
-  };
-
   return (
     <div className="w-full max-w-md text-center">
-      <div className="text-left flex flex-col gap-5">
+      <form onSubmit={handleLogin} className="text-left flex flex-col gap-5">
         {/* Email Input */}
         <div>
           <InputField
@@ -91,20 +88,17 @@ export default function LoginPage({ onLogin }) {
 
           {/* Forgot Password Link */}
           <div className="text-left text-sm">
-            <button
-              onClick={handleForgotPassword}
-              className="text-uConnectDark-accent hover:underline"
-            >
+            <button className="text-uConnectDark-accent hover:underline">
               Forgot Password?
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Login Button */}
-      <button onClick={handleLogin} className="login_signup_button w-full mt-6">
-        LOGIN
-      </button>
+        {/* Login Button */}
+        <button type="submit" className="login_signup_button w-full mt-6">
+          LOGIN
+        </button>
+      </form>
     </div>
   );
 }
