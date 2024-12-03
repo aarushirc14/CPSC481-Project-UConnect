@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 const EmojiPicker = React.lazy(() => import("emoji-picker-react")); //chunk larger imports for build
 //import EmojiPicker from "emoji-picker-react";
+import Notification from "../PopupMessage";
 
 //profile pic imports
 import rashidaWilliams from "../../assets/profilePics/rashidaWilliams.jpeg";
@@ -477,6 +478,8 @@ export default function ChatPage({
   const [message, setMessage] = useState("");
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isWarningVisible, setWarningVisible] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Update the parent component with the total notification count
   useEffect(() => {
@@ -491,6 +494,13 @@ export default function ChatPage({
 
   return (
     <div className="block min-h-screen bg-uConnectLight-background transition   dark:bg-uConnectDark-background text-uConnectLight-textMain dark:text-uConnectDark-textMain">
+      {showNotification && errorMessage && (
+        <Notification
+          message={errorMessage}
+          type="success"
+          onClose={() => setShowNotification(false)}
+        />
+      )}
       <ChatSideBar
         active={active}
         setIsActive={setIsActive}
@@ -507,6 +517,8 @@ export default function ChatPage({
             setChatNameData={setChatNameData}
             isWarningVisible={isWarningVisible}
             setWarningVisible={setWarningVisible}
+            setShowNotification={setShowNotification}
+            setErrorMessage={setErrorMessage}
           />
           <ChatHeader
             active={active}
@@ -1036,6 +1048,8 @@ function ChatMemberListBar({
   setChatNameData,
   isWarningVisible,
   setWarningVisible,
+  setShowNotification,
+  setErrorMessage,
 }) {
   const [warning, setWarning] = useState("");
   const [action, setAction] = useState(() => () => {});
@@ -1044,13 +1058,23 @@ function ChatMemberListBar({
   const [originalChatName, setOriginalChatName] = useState(
     chatNameData[active].chatName
   );
+  const [saved, setSaved] = useState(false);
   const [isAddVisible, setAddVisible] = useState(false);
   useEffect(() => {
     setIsEditing(false);
     setNewChatName(chatNameData[active].chatName);
     setOriginalChatName(chatNameData[active].chatName);
   }, [active]);
-  const leaveChat = () => {
+  const leaveChat = (trueLeave) => {
+    if (trueLeave)
+      setErrorMessage(
+        "You Have Left Chat With " + chatNameData[active].chatName
+      );
+    else
+      setErrorMessage(
+        "You Have Deleted Chat With " + chatNameData[active].chatName
+      );
+    setShowNotification(true);
     setIsActive(-1);
     const chatToDelete = chatNameData[active].chatName;
     setChatNameData((prevData) =>
@@ -1089,6 +1113,12 @@ function ChatMemberListBar({
 
   const handleSave = () => {
     setIsEditing(false); // Exit editing mode
+    setSaved(true);
+
+    // Hide it after 3 seconds
+    setTimeout(() => {
+      setSaved(false);
+    }, 3000);
     if (newChatName !== originalChatName) {
       // Update the chat name in the chatNameData state
       setChatNameData((prevData) =>
@@ -1112,7 +1142,7 @@ function ChatMemberListBar({
   return (
     <div className="flex flex-col justify-between fixed right-0 bg-uConnectLight-layer2Primary transition   dark:bg-uConnectDark-layer2Primary min-h-screen w-80 z-10">
       <div>
-        <div className="p-7 h-24 border-b w-full flex flex-row items-center gap-5">
+        <div className="p-7 pb-4 h-24 border-b w-full flex flex-row items-center gap-5">
           {isEditing ? (
             <div className="flex gap-2 items-center justify-center w-full flex-col">
               <input
@@ -1138,20 +1168,30 @@ function ChatMemberListBar({
               </div>
             </div>
           ) : (
-            <>
-              {chatNameData[active].chatName}{" "}
-              <div className="relative group/trash">
-                <span
-                  onClick={handleEditClick}
-                  className="hover:text-uConnectDark-accent"
-                >
-                  <FaPen />
-                </span>
-                <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
-                  Edit Chat Name
+            <div className="flex flex-col">
+              <div className="flex flex-row gap-10 items-center">
+                {chatNameData[active].chatName}{" "}
+                <div className="relative group/trash">
+                  <span
+                    onClick={handleEditClick}
+                    className="hover:text-uConnectDark-accent"
+                  >
+                    <FaPen />
+                  </span>
+                  <div className="absolute -ml-9 transform bottom-full mb-2 hidden group-hover/trash:block bg-uConnectLight-layer2Primary dark:bg-uConnectDark-layer2Primary text-uConnectLight-textMain dark:text-uConnectDark-layer3 text-xs rounded-md px-2 py-1 whitespace-nowrap shadow-md z-10">
+                    Edit Chat Name
+                  </div>
                 </div>
               </div>
-            </>
+              <div
+                className={`text-xs text-uConnectDark-accent transition-opacity duration-300 ease-in-out ${
+                  saved ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ visibility: saved ? "visible" : "hidden" }}
+              >
+                Changes Saved!
+              </div>
+            </div>
           )}
         </div>
         <div className="flex m-5 justify-center items-center">
@@ -1199,7 +1239,7 @@ function ChatMemberListBar({
                         <button
                           className="mr-5 hover:text-red-500"
                           onClick={() => {
-                            setAction(() => leaveChat);
+                            setAction(() => () => leaveChat(true));
                             setWarningVisible(true);
                             setWarning("Leave Chat");
                           }}
@@ -1235,7 +1275,7 @@ function ChatMemberListBar({
         <button
           className="hover:text-red-500"
           onClick={() => {
-            setAction(() => leaveChat);
+            setAction(() => () => leaveChat(false));
             setWarningVisible(true);
             setWarning("Delete Chat");
           }}
