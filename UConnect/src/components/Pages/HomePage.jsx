@@ -88,7 +88,7 @@ const featuredPosts = [
     userImage: shirleyLee,
     postTitle: "Plant Swap and Care Tips!",
     postContent:
-      "I've got some thriving spider plants, pothos, and jade cuttings up for grabs. If you've got anything interesting to swap (succulents, ferns, or even propagation tips), let's connect🌿",
+      "I've got some thriving spider plants, pothos, and jade cuttings up for grabs. If you've got anything interesting to swap, let's connect🌿",
   },
 
   {
@@ -97,7 +97,7 @@ const featuredPosts = [
     userImage: davidSingh,
     postTitle: "Research Participants in Bioinformatics",
     postContent:
-      "I’m currently working on a bioinformatics research project exploring the genetic markers associated with sleep patterns. I’m looking for participants who are willing to fill out a short survey.",
+      "I’m working on a research project exploring the genetic markers for sleep patterns. Looking for participants to fill out a short survey.",
   },
 ];
 
