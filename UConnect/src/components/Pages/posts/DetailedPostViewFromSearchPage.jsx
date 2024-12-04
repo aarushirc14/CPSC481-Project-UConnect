@@ -26,11 +26,11 @@ import leoCarterPost from "../../../assets/profilePics/leoCarterPost.webp";
 // Define the Poster
 const poster = {
     name: "Leo Carter",
-    title: "Call For CPSC 481 Study Group ",
+    title: "Call For MATH 211 Study Group ",
     content: (
       <div className="mt-2.5">
         <p className="mb-6">
-            Hey everyone! I am a new student at UofC and I am currently looking for other students who are interested in joining a study group for CPSC 481.
+            Hey everyone! I am a new student at UofC and I am currently looking for other students who are interested in joining a study group for MATH 211.
         </p>
         <div className="flex items-center justify-center">
           <img src={leoCarterPost} className="max-w-xl"></img>

@@ -308,11 +308,11 @@ export default function CreateProfile({
               <button
                 type="button"
                 disabled={!changes}
-                className="disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub w-1/4 py-3 disabled:bg-transparent disabled:border-uConnectDark-textSub border border-uConnectDark-accent bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:bg-[#e08c03] transition"
+                className="disabled:cursor-not-allowed disabled:dark:border-uConnectDark-layer3 disabled:dark:text-uConnectDark-textSub disabled:text-uConnectLight-textSub w-1/4 py-3 disabled:bg-transparent disabled:border-uConnectDark-textSub border border-uConnectDark-accent bg-uConnectDark-accent text-uConnectLight-textMain font-semibold rounded-full hover:border-red-500 hover:bg-red-500 transition"
                 onClick={revertChanges}
               >
                 {" "}
-                Revert Changes
+                Undo Changes
               </button>
             )}
             <button
