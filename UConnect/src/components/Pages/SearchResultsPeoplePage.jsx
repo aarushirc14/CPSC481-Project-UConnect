@@ -10,7 +10,7 @@ import simonMann from "../../assets/profilePics/simonMann.jpg";
 import jaredAllen from "../../assets/profilePics/jaredAllen.jpg";
 import tenzinLopez from "../../assets/profilePics/tenzinLopez.jpg";
 import kyraCosta from "../../assets/profilePics/kyraCosta.jpg";
-import lucaConnors from "../../assets/profilePics/lucaConnors.jpg";
+import lucaConnors from "../../assets/profilePics/lucaConnors.jpeg";
 
 const users = [
   {

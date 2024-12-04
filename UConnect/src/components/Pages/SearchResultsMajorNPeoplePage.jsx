@@ -41,7 +41,7 @@ const users = [
     image: kendraLamar,
     name: "Kendra Lamar",
     majorAndYear: "Environmental Science, 2nd Year",
-    interests: "Fashion, E-Sports, Music, Photograpghy",
+    interests: "Fashion, E-Sports, Music, Photography",
   },
   {
     image: imaniBates,
