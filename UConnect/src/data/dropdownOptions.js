@@ -103,6 +103,7 @@ export const majorOptions = [
   { value: "veterinary_medicine", label: "Veterinary Medicine" },
   { value: "visual_studies", label: "Visual Studies" },
   { value: "zoology", label: "Zoology" },
+  { value: "other", label: "Other" }
 ];
 
 export const yearOptions = [
