@@ -115,8 +115,3 @@ NOTE: Clicking on any Profiles will show you Rashida’s profile as this is a ha
 6. ```npm install vite --save-dev``` to install vite
 -  ```npm run dev``` to run app on localhost
 - Copy localhost link and paste the link to a Web Browser to see and interact with the app
-- Note if you are running app after Darcy's TipTap component is added you may have to do these installs:
-    - ```npm install @tiptap/core @tiptap/react @tiptap/starter-kit```
-    - ```npm install @tiptap/extension-color @tiptap/extension-underline @tiptap/extension-image @tiptap/extension-link @tiptap/extension-placeholder @tiptap/extension-text-style @tiptap/extension-list-item @tailwindcss/typography```
-    - ```npm install react-icons```
-    - ```npm install typography```
