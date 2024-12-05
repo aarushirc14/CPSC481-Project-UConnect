@@ -1,4 +1,4 @@
-# Usage Instructions
+# User Guide
 
 #### DISCLAIMER:  As this course is focused on human computer interaction and prototyping, this website is front-end only and focuses on the user interface and usability. There is no backend or database, so your views will not update dynamically based on your user inputs. Some of the functionality is hard-coded. Use the sample data provided for best/most logical results. You can also enter any other inputs, if it meets the site's validation/error checking rules. However any inputs that are not listed below, will not dynamically appear on the site.
 
