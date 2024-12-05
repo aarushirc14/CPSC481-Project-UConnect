@@ -52,22 +52,45 @@ export default function CreateProfile({
     const { name, value } = e.target;
     setProfileData({ ...profileData, [name]: value });
 
-    setChanges(true);
+    if (editing !== profileData && editing) {
+      console.log("hi");
+      setChanges(true);
+    }
   };
   const handleMajorChange = (selectedMajors) => {
-    if (editing !== profileData && editing) setChanges(true);
+    if (
+      JSON.stringify(editing.major) !== JSON.stringify(profileData.major) &&
+      editing
+    ) {
+      setChanges(true);
+    }
     setProfileData({ ...profileData, major: selectedMajors });
   };
   const handleYearChange = (selectedYear) => {
-    if (editing !== profileData && editing) setChanges(true);
+    if (
+      JSON.stringify(editing.year) !== JSON.stringify(profileData.year) &&
+      editing
+    ) {
+      setChanges(true);
+    }
     setProfileData({ ...profileData, year: selectedYear });
   };
   const handleCoursesChange = (selectedCourses) => {
-    if (editing !== profileData && editing) setChanges(true);
+    if (
+      JSON.stringify(editing.courses) !== JSON.stringify(profileData.courses) &&
+      editing
+    ) {
+      setChanges(true);
+    }
     setProfileData({ ...profileData, courses: selectedCourses });
   };
   const handleInterestsChange = (selectedInterests) => {
-    if (editing !== profileData && editing) setChanges(true);
+    if (
+      JSON.stringify(editing.interests) !==
+        JSON.stringify(profileData.interests) &&
+      editing
+    )
+      setChanges(true);
     setProfileData({ ...profileData, interests: selectedInterests });
   };
   const handleSubmit = (e) => {
@@ -105,6 +128,8 @@ export default function CreateProfile({
 
   const revertChanges = () => {
     setProfileData(editing);
+
+    console.log(editing);
     setChanges(false);
   };
 
