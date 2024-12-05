@@ -53,7 +53,7 @@ export default function LoginPage({ onLogin }) {
         {/* Email Input */}
         <div>
           <InputField
-            label="Email"
+            label="UCalgary Email"
             type="email"
             value={email}
             onChange={(e) => {

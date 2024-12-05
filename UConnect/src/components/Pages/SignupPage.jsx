@@ -108,7 +108,7 @@ export default function SignupPage() {
       <form onSubmit={handleSignup} className="text-left flex flex-col gap-5">
         <div>
           <InputField
-            label="Email"
+            label="UCalgary Email"
             type="email"
             name="email"
             value={formData.email}
