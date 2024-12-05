@@ -59,8 +59,8 @@ export default function CreateProfile({
   };
   const handleMajorChange = (selectedMajors) => {
     if (
-      JSON.stringify(editing.major) !== JSON.stringify(profileData.major) &&
-      editing
+      editing &&
+      JSON.stringify(editing.major) !== JSON.stringify(profileData.major)
     ) {
       setChanges(true);
     }
@@ -68,8 +68,8 @@ export default function CreateProfile({
   };
   const handleYearChange = (selectedYear) => {
     if (
-      JSON.stringify(editing.year) !== JSON.stringify(profileData.year) &&
-      editing
+      editing &&
+      JSON.stringify(editing.year) !== JSON.stringify(profileData.year)
     ) {
       setChanges(true);
     }
@@ -77,8 +77,8 @@ export default function CreateProfile({
   };
   const handleCoursesChange = (selectedCourses) => {
     if (
-      JSON.stringify(editing.courses) !== JSON.stringify(profileData.courses) &&
-      editing
+      editing &&
+      JSON.stringify(editing.courses) !== JSON.stringify(profileData.courses)
     ) {
       setChanges(true);
     }
@@ -86,9 +86,9 @@ export default function CreateProfile({
   };
   const handleInterestsChange = (selectedInterests) => {
     if (
+      editing &&
       JSON.stringify(editing.interests) !==
-        JSON.stringify(profileData.interests) &&
-      editing
+        JSON.stringify(profileData.interests)
     )
       setChanges(true);
     setProfileData({ ...profileData, interests: selectedInterests });
