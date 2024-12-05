@@ -105,14 +105,14 @@ If the deployed site is not working, follow the steps [here](#How-to-Run-on-Loca
 NOTE: Clicking on any Profiles will show you Rashida’s profile as this is a hard coded page. Clicking on any Posts will show you Tracy’s post about Photography. There is no database, so these pages do not dynamically change, as it would on a normal website. The purpose here is to focus on the user interface and usability.
 
 ## How to Run on Localhost
-- create a project directory on your machine 
-- cd into project directory and ```git clone https://github.com/aarushirc14/CPSC481-Project-UConnect.git```
-- cd into UConnect root directory
-- install Node.js I have v20.18.0 (project currently runs on this version)
-- check installs:
+1. create a project directory on your machine 
+2. cd into project directory and ```git clone https://github.com/aarushirc14/UConnect.git```
+3. cd into UConnect root directory
+4. install Node.js, if you don't already have it. This project runs on v20.18.0. https://nodejs.org/en/download/package-manager
+5. check installs:
     - ```node -v```
     - ```npm -v``` if missing run ```npm install```
-- ```npm install vite --save-dev``` to install vite
+6. ```npm install vite --save-dev``` to install vite
 -  ```npm run dev``` to run app on localhost
 - Copy localhost link and paste the link to a Web Browser to see and interact with the app
 - Note if you are running app after Darcy's TipTap component is added you may have to do these installs:
