@@ -113,5 +113,5 @@ NOTE: Clicking on any Profiles will show you Rashida’s profile as this is a ha
     - ```node -v```
     - ```npm -v``` if missing run ```npm install```
 6. ```npm install vite --save-dev``` to install vite
--  ```npm run dev``` to run app on localhost
-- Copy localhost link and paste the link to a Web Browser to see and interact with the app
+7. ```npm run dev``` to run app on localhost
+8. Copy localhost link and paste the link to a Web Browser to see and interact with the app
