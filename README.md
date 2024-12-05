@@ -1,32 +1,19 @@
-# How to Run
-- create a project directory on your machine 
-- cd into project directory and ```git clone https://github.com/aarushirc14/CPSC481-Project-UConnect.git```
-- cd into UConnect root directory
-- install Node.js I have v20.18.0 (project currently runs on this version)
-- check installs:
-    - ```node -v```
-    - ```npm -v``` if missing run ```npm install```
-- ```npm install vite --save-dev``` to install vite
--  ```npm run dev``` to run app on localhost
-- Copy localhost link and paste the link to a Web Browser to see and interact with the app
-- Note if you are running app after Darcy's TipTap component is added you may have to do these installs:
-    - ```npm install @tiptap/core @tiptap/react @tiptap/starter-kit```
-    - ```npm install @tiptap/extension-color @tiptap/extension-underline @tiptap/extension-image @tiptap/extension-link @tiptap/extension-placeholder @tiptap/extension-text-style @tiptap/extension-list-item @tailwindcss/typography```
-    - ```npm install react-icons```
-    - ```npm install typography```
+# Usage Instructions
 
+#### DISCLAIMER:  As this course is focused on human computer interaction and prototyping, this website is front-end only and focuses on the user interface and usability. There is no backend or database, so your views will not update dynamically based on your user inputs. Some of the functionality is hard-coded. Use the sample data provided for best/most logical results. You can also enter any other inputs, if it meets the site's validation/error checking rules. However any inputs that are not listed below, will not dynamically appear on the site.
 
-DISCLAIMER:  This website is front-end only. There is no backend or database, so your views will not update dynamically based on your user inputs. Some of the functionality is hard-coded. Use the sample data provided for best/most logical results. You can also enter any other inputs, if it meets the site's validation/error checking rules. However any inputs that are not listed below, will not dynamically appear on the site.
+### The website is published here: https://aarushirc14.github.io/UConnect/
+If the deployed site is not working, follow the steps [here](#How-to-Run-on-Localhost) to run on localhost instead.
 
 1.  If you want to simply login enter:
 
-    -   Email: <sofia.martinez@ucalgary.ca>
+    -   Email: sofia.martinez@ucalgary.ca
 
     -   Password: P@ssword1
 
 2.  If you want to sign up (demonstrates account creation functionality) enter:
 
-    -   Email: <sofia.martinez@ucalgary.ca>
+    -   Email: sofia.martinez@ucalgary.ca
 
     -   Password: P@ssword1
 
@@ -110,8 +97,26 @@ DISCLAIMER:  This website is front-end only. There is no backend or database, so
 
 22.  Using the site's main side navigation bar, go to Notifications. The notifications are clickable. Click on Rashida's notification to view her profile.
 
-23.  Using the site's main side navigation bar, go to My Profile. 
+23.  Using the site's main side navigation bar, go to My Profile.
+    
+25.  Click the Edit Profile button. In the courses field remove ENSC 201 and PHYS 211. Add Chem 203. Click the Save Changes button.
 
-24.  Click the Edit Profile button. In the courses field remove ENSC 201 and PHYS 211. Add Chem 203. Click the Save Changes button.
+    
+NOTE: Clicking on any Profiles will show you Rashida’s profile as this is a hard coded page. Clicking on any Posts will show you Tracy’s post about Photography. There is no database, so these pages do not dynamically change, as it would on a normal website. The purpose here is to focus on the user interface and usability.
 
-NOTE: Clicking on any Profiles will show you Rashida's profile as this is a hard coded page. Clicking on any Posts will show you Tracy's post about Photography. There is no database, so these pages do not dynamically change, as it would on a normal website. The purpose here is to focus on the user interface and usability.
+## How to Run on Localhost
+- create a project directory on your machine 
+- cd into project directory and ```git clone https://github.com/aarushirc14/CPSC481-Project-UConnect.git```
+- cd into UConnect root directory
+- install Node.js I have v20.18.0 (project currently runs on this version)
+- check installs:
+    - ```node -v```
+    - ```npm -v``` if missing run ```npm install```
+- ```npm install vite --save-dev``` to install vite
+-  ```npm run dev``` to run app on localhost
+- Copy localhost link and paste the link to a Web Browser to see and interact with the app
+- Note if you are running app after Darcy's TipTap component is added you may have to do these installs:
+    - ```npm install @tiptap/core @tiptap/react @tiptap/starter-kit```
+    - ```npm install @tiptap/extension-color @tiptap/extension-underline @tiptap/extension-image @tiptap/extension-link @tiptap/extension-placeholder @tiptap/extension-text-style @tiptap/extension-list-item @tailwindcss/typography```
+    - ```npm install react-icons```
+    - ```npm install typography```
