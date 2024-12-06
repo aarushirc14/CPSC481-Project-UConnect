@@ -28,6 +28,7 @@ import SearchResultsPostsPage from "./components/Pages/SearchResultsPostsPage";
 import SearchResultsPeoplePage from "./components/Pages/SearchResultsPeoplePage";
 import SearchResultsMajorNPeoplePage from "./components/Pages/SearchResultsMajorNPeoplePage";
 import SearchResultsInterestsMajorPeoplePage from "./components/Pages/SearchResultsInterestsMajorPeoplePage";
+import SearchResultsNoResults from "./components/Pages/SearchResultsNoResults";
 
 import sofiaMartinez from "../src/assets/profilePics/sofiaMartinez.jpg";
 
@@ -152,6 +153,10 @@ function App() {
                       setIsActive={setActiveChat}
                     />
                   }
+                />
+                <Route
+                  path="/search-results-no-results"
+                  element={<SearchResultsNoResults />}
                 />
                 <Route
                   path="/sent-viewresult"
