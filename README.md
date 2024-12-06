@@ -2,6 +2,8 @@
 
 #### DISCLAIMER:  As this course is focused on human computer interaction and prototyping, this website is front-end only and focuses on the user interface and usability. There is no backend or database, so your views will not update dynamically based on your user inputs. Some of the functionality is hard-coded. Use the sample data provided for best/most logical results. You can also enter any other inputs, if it meets the site's validation/error checking rules. However any inputs that are not listed below, will not dynamically appear on the site.
 
+NOTE: This website looks best on widescreen resolution: 1920 pixels width x 1040 pixels height. While we have tried to make it responsive, a narrower screen like 1280 x 984 might have some minor impacts on the layout.
+
 ### The website is published here: https://aarushirc14.github.io/UConnect/
 If the deployed site is not working, follow the steps [here](#How-to-Run-on-Localhost) to run on localhost instead.
 
